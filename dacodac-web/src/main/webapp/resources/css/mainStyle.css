@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 31, 2017, 3:40:37 PM
+    Author     : kamowskn
+*/
+
+
+span {
+    background-color: red;
+}
+
+/*cette règle va s'appliquer aussi à tout les éléments <h:link/> */
+a {
+    background-color: green;
+}
+
