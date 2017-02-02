@@ -10,11 +10,14 @@ and open the template in the editor.
 
 
 span {
+    margin-top:5px;
     background-color: red;
 }
 
 /*cette règle va s'appliquer aussi à tout les éléments <h:link/> */
 a {
-    background-color: green;
+    
+    border: 3px solid greenyellow;
+    padding:3px;
 }
 
