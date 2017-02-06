@@ -8,6 +8,7 @@
 }
 
 #bottom {
+    display: none;
     position: relative;
     background-color: #c2dfef;
     padding: 5px;
@@ -15,6 +16,7 @@
 }
 
 #left {
+    display: none;
     float: left;
     background-color: #ece3a5;
     padding: 5px;
@@ -22,6 +24,7 @@
 }
 
 #right {
+    display: none;
     float: right;
     background-color: #ece3a5;
     padding: 5px;
