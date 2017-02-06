@@ -6,6 +6,7 @@
 package fr.ensimag.dacodac;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,15 +41,15 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }
     
-    public Utilisateur(int dakos, String nom, String prenom, int codePostal, int age, boolean estAdmin, List<Annonce> mesAnnonces, List<Commentaire> commentaires) {
+    public Utilisateur(int dakos, String nom, String prenom, int codePostal, int age, boolean estAdmin) {
         this.dakos = dakos;
         this.nom = nom;
         this.prenom = prenom;
         this.codePostal = codePostal;
         this.age = age;
         this.estAdmin = estAdmin;
-        this.mesAnnonces = mesAnnonces;
-        this.commentaires = commentaires;
+        this.mesAnnonces = new ArrayList<Annonce>();
+        this.commentaires = new ArrayList<Commentaire>();
     }
     
     public Long getId() {
