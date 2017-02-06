@@ -7,31 +7,27 @@
 
     <body>
 
-
         <ui:composition template="./mainTemplate.xhtml">
+
             <ui:define name="css">
-                <h:outputStylesheet name="css/connexion.css"/>
             </ui:define>
 
             <ui:define name="content">
-
-                <h1>Connexion</h1>
-
-                <h:panelGrid id="connexion_form" columns="2" cellpadding="5"> 
+                <h1>Création de compte</h1>
+                <h:panelGrid id="infosCompte" columns="2" cellpadding="5"> 
+                    <h:outputLabel for="email" value="Email: " />
+                    <p:inputText id="email" value="bean.email"/>
                     <h:outputLabel for="pseudo" value="Pseudo: " />
                     <p:inputText id="pseudo" value="bean.pseudo"/>
                     <h:outputLabel for="pwd" value="Mot de passe: " />
                     <p:password id="pwd" value="bean.mdp" label="Password" required="true" />
+                    <h:outputLabel for="conf" value="Confirmation mot de passe: " />
+                    <p:password id="conf" value="bean.mdp" label="Confirmation" match="pwd" required="true" />
+                    <h:outputLabel for="cp" value="Code postal: " />
+                    <p:inputText id="cp" value="bean.cp"/>
+                    <h:outputLabel for="date" value="Date de naissance: " />
+                    <p:selectManyMenu></p:selectManyMenu>
                 </h:panelGrid>
-                <div>
-                    <p:commandButton value="se connecter" icon="ui-icon-check" />
-                </div>
-
-                <div>
-                    <h:outputLabel for="newAccount" value="Si vous ne possédez pas de compte, créez-en un: " />
-                    <p:commandLink value="Creer un compte" action="creerCompte.xhtml"/>
-                </div>
-
             </ui:define>
 
         </ui:composition>
