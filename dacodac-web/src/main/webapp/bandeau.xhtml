@@ -5,29 +5,33 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
+    <head>
+        <outputStylesheet name="css/bandeau.css"/>
+    </head>
+    
     <body>
 
         <ui:composition template="./mainTemplate.xhtml">
 
             <ui:define name="top">
                 <p:tabMenu activeIndex="#{param.i}">
-                    <p:menuitem value="Accueil" outcome="/index.xhtml" icon="ui-icon-star">
+                    <p:menuitem value="Accueil" outcome="/index.xhtml" id="accueil" icon="ui-icon-home">
                         <f:param name="i" value="0" />
                     </p:menuitem>
-                    <p:menuitem value="Publier une annonce" outcome="/index.xhtml" icon="ui-icon-star">
-                        <f:param name="i" value="0" />
-                    </p:menuitem>
-                    <p:menuitem value="Offres" outcome="/index.xhtml" icon="ui-icon-search">
+                    <p:menuitem value="Publier une annonce" outcome="/index.xhtml" icon="ui-icon-document">
                         <f:param name="i" value="1" />
                     </p:menuitem>
-                    <p:menuitem value="Demandes" outcome="/index.xhtml" icon="ui-icon-document">
+                    <p:menuitem value="Offres" outcome="/index.xhtml" icon="ui-icon-search">
                         <f:param name="i" value="2" />
                     </p:menuitem>
-                    <p:menuitem value="Mon panier" outcome="/index.xhtml" icon="ui-icon-wrench">
+                    <p:menuitem value="Demandes" outcome="/index.xhtml" icon="ui-icon-search">
                         <f:param name="i" value="3" />
                     </p:menuitem>
-                    <p:menuitem value="Se connecter" outcome="/index.xhtml" icon="ui-icon-person">
+                    <p:menuitem value="Mon panier" outcome="/index.xhtml" icon="ui-icon-cart">
                         <f:param name="i" value="4" />
+                    </p:menuitem>
+                    <p:menuitem value="Se connecter" outcome="/index.xhtml" icon="ui-icon-person">
+                        <f:param name="i" value="5" />
                     </p:menuitem>
 
                 </p:tabMenu>
