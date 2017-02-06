@@ -1,5 +1,6 @@
-/user/8/duclaur/TP/3A/DAC/dacodac/dacodac-ejb/src/main/java/fr/ensimag/contacts/stateless/PersonFacadeLocal.java
-/user/8/duclaur/TP/3A/DAC/dacodac/dacodac-ejb/src/main/java/fr/ensimag/contacts/Person.java
-/user/8/duclaur/TP/3A/DAC/dacodac/dacodac-ejb/src/main/java/fr/ensimag/NewSessionBean.java
-/user/8/duclaur/TP/3A/DAC/dacodac/dacodac-ejb/src/main/java/fr/ensimag/contacts/stateless/PersonFacade.java
-/user/8/duclaur/TP/3A/DAC/dacodac/dacodac-ejb/src/main/java/fr/ensimag/contacts/stateless/AbstractFacade.java
+/user/8/duclaur/TP/3A/DAC/DAC/dacodac-ejb/src/main/java/fr/ensimag/NewSessionBean.java
+/user/8/duclaur/TP/3A/DAC/DAC/dacodac-ejb/src/main/java/fr/ensimag/contacts/stateless/AbstractFacade.java
+/user/8/duclaur/TP/3A/DAC/DAC/dacodac-ejb/src/main/java/fr/ensimag/contacts/Person.java
+/user/8/duclaur/TP/3A/DAC/DAC/dacodac-ejb/src/main/java/fr/ensimag/contacts/stateless/PersonFacadeLocal.java
+/user/8/duclaur/TP/3A/DAC/DAC/dacodac-ejb/src/main/java/fr/ensimag/contacts/stateless/PersonFacade.java
+/user/8/duclaur/TP/3A/DAC/DAC/dacodac-ejb/src/main/java/fr/ensimag/dacodac/Comment.java

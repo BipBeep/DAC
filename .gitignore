@@ -13,3 +13,4 @@ hs_err_pid*
 
 dacodac-web/target
 dacodac-ejb/target
+/dacodac-ear/target/
