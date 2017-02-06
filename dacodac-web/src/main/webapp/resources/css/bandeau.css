@@ -8,8 +8,6 @@ and open the template in the editor.
     Author     : mignotju
 */
 
-
-
 .ui-tabmenu 
 {
     background-image: none;
@@ -20,11 +18,6 @@ and open the template in the editor.
     background-color: #88421D;
     background-image: none;
 }
-
-/*:not(li.ui-tabmenuitem.ui-state-default.ui-state-active)
-{
-    background-color: #D19275;
-}*/
 
 .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a
 {
