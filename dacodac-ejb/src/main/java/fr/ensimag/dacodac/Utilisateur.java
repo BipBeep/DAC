@@ -35,12 +35,12 @@ public class Utilisateur implements Serializable {
     private List<Annonce> mesAnnonces;
     
     @OneToMany
-    private List<Commentaires> commentaires;
+    private List<Commentaire> commentaires;
 
     public Utilisateur() {
     }
     
-    public Utilisateur(int dakos, String nom, String prenom, int codePostal, int age, boolean estAdmin, List<Annonce> mesAnnonces, List<Commentaires> commentaires) {
+    public Utilisateur(int dakos, String nom, String prenom, int codePostal, int age, boolean estAdmin, List<Annonce> mesAnnonces, List<Commentaire> commentaires) {
         this.dakos = dakos;
         this.nom = nom;
         this.prenom = prenom;
@@ -115,11 +115,11 @@ public class Utilisateur implements Serializable {
         this.mesAnnonces = mesAnnonces;
     }
 
-    public List<Commentaires> getCommentaires() {
+    public List<Commentaire> getCommentaires() {
         return commentaires;
     }
 
-    public void setCommentaires(List<Commentaires> commentaires) {
+    public void setCommentaires(List<Commentaire> commentaires) {
         this.commentaires = commentaires;
     }
 

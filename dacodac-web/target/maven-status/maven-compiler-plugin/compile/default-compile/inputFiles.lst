@@ -1,2 +1,7 @@
+<<<<<<< HEAD
+/user/0/.base/weschlel/home/3A/DAC/projetDAC/dacodac-web/src/main/java/fr/ensimag/contacts/servlet/init.java
+/user/0/.base/weschlel/home/3A/DAC/projetDAC/dacodac-web/src/main/java/fr/ensimag/dacodac/controler/person/ListAll.java
+=======
 /user/8/duclaur/TP/3A/DAC/DAC/dacodac-web/src/main/java/fr/ensimag/dacodac/controler/person/ListAll.java
 /user/8/duclaur/TP/3A/DAC/DAC/dacodac-web/src/main/java/fr/ensimag/contacts/servlet/init.java
+>>>>>>> fe69791a89ceac5a9d693a8186fd99054fcad959
