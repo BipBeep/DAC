@@ -26,9 +26,9 @@ public class Annonce implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private int prix;    
+    private TypeAnnonce type;
 
-    private int prix;
-    
     @ManyToOne
     private Utilisateur auteur;
     
@@ -37,9 +37,40 @@ public class Annonce implements Serializable {
     
     private int codePostal;
     private String description;
-    
     private String titre;
 
+    public Annonce() {}
+
+    public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, List<Utilisateur> postulants, int codePostal, String description, String titre, LocalDateTime datePublication) {
+        this.prix = prix;
+        this.type = type;
+        this.auteur = auteur;
+        this.postulants = postulants;
+        this.codePostal = codePostal;
+        this.description = description;
+        this.titre = titre;
+        this.datePublication = datePublication;
+    }
+    
+    
+    /**
+     * Get the value of type
+     *
+     * @return the value of type
+     */
+    public TypeAnnonce getType() {
+        return type;
+    }
+
+    /**
+     * Set the value of type
+     *
+     * @param type new value of type
+     */
+    public void setType(TypeAnnonce type) {
+        this.type = type;
+    }
+    
     /**
      * Get the value of titre
      *
