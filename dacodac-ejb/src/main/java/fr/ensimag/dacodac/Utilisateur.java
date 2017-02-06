@@ -30,6 +30,8 @@ public class Utilisateur implements Serializable {
     private int codePostal;
     private int age;
     private boolean estAdmin;
+    
+    @OneToMany
     private List<Annonce> mesAnnonces;
     
     @OneToMany
