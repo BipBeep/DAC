@@ -32,9 +32,10 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
         super(Utilisateur.class);
     }
     
+    @Override
     public Utilisateur findByName(String nom)
     {
-        return (Utilisateur) getEntityManager().createNamedQuery("trouverUtilisateurAvecNom").setParameter("utilNom", nom).getResultList().get(0);
+        return (Utilisateur) getEntityManager().createQuery("SELECT u FROM Utilisateur u WHERE u.nom LIKE :nom").setParameter("nom", nom).getResultList().get(0);
     }
     
 }
