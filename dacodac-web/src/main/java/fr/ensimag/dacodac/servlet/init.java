@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.ensimag.contacts.servlet;
+package fr.ensimag.dacodac.servlet;
 
-import fr.ensimag.contacts.Person;
-import fr.ensimag.contacts.stateless.PersonFacadeLocal;
+import fr.ensimag.dacodac.Utilisateur;
+import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,14 +19,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author duclaur
+ * @author roussena
  */
 @WebServlet(name = "init", urlPatterns = {"/init"})
 public class init extends HttpServlet {
 
-    @EJB
-    private PersonFacadeLocal personFacade;
-    
+    @EJB(name = "utilisateurFacade")
+    private UtilisateurFacadeLocal utilisateurFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -65,12 +65,14 @@ public class init extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Person p;
-        p = new Person("Michel", "Jean");
-        personFacade.create(p);
-        p = new Person("Michel", "Kevin");
-        personFacade.create(p);
-        processRequest(request, response);  
+        Utilisateur utilisateur = new Utilisateur(1, "Donald", "Sanders", 2, 3, false);
+        utilisateurFacade.create(utilisateur);
+        utilisateur = new Utilisateur(4, "Michelle", "Clinton", 5, 6, true);
+        utilisateurFacade.create(utilisateur);
+        utilisateur = ((Utilisateur) utilisateurFacade.findAll().get(0));
+        utilisateur.setDakos(10);
+        utilisateurFacade.edit(utilisateur);
+        processRequest(request, response);
     }
 
     /**
