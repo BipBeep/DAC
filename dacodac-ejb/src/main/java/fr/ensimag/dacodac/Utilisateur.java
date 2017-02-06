@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 /**
@@ -18,6 +19,12 @@ import javax.persistence.OneToMany;
  * @author roussena
  */
 @Entity
+
+@NamedQuery(
+    name="trouverUtilisateurAvecNom",
+    query="SELECT u FROM Utilisateur u WHERE u.nom LIKE :utilNom"
+)
+
 public class Utilisateur implements Serializable {
 
     private static final long serialVersionUID = 1L;

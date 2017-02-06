@@ -7,6 +7,7 @@ package fr.ensimag.dacodac.stateless;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
 
 /**
  *
