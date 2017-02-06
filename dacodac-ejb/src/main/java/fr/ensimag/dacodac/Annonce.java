@@ -6,10 +6,14 @@
 package fr.ensimag.dacodac;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -25,7 +29,113 @@ public class Annonce implements Serializable {
 
     private int prix;
     
+    @ManyToOne
     private Utilisateur auteur;
+    
+    @ManyToMany
+    private List<Utilisateur> postulants;
+    
+    private int codePostal;
+    private String description;
+    
+    private String titre;
+
+    /**
+     * Get the value of titre
+     *
+     * @return the value of titre
+     */
+    public String getTitre() {
+        return titre;
+    }
+
+    /**
+     * Set the value of titre
+     *
+     * @param titre new value of titre
+     */
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+
+    /**
+     * Get the value of description
+     *
+     * @return the value of description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Set the value of description
+     *
+     * @param description new value of description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
+    /**
+     * Get the value of codePostal
+     *
+     * @return the value of codePostal
+     */
+    public int getCodePostal() {
+        return codePostal;
+    }
+
+    /**
+     * Set the value of codePostal
+     *
+     * @param codePostal new value of codePostal
+     */
+    public void setCodePostal(int codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    
+    private LocalDateTime datePublication;
+
+    /**
+     * Get the value of datePublication
+     *
+     * @return the value of datePublication
+     */
+    public LocalDateTime getDatePublication() {
+        return datePublication;
+    }
+
+    /**
+     * Set the value of datePublication
+     *
+     * @param datePublication new value of datePublication
+     */
+    public void setDatePublication(LocalDateTime datePublication) {
+        this.datePublication = datePublication;
+    }
+
+
+    /**
+     * Get the value of postulants
+     *
+     * @return the value of postulants
+     */
+    public List<Utilisateur> getPostulants() {
+        return postulants;
+    }
+
+    /**
+     * Set the value of postulants
+     *
+     * @param postulants new value of postulants
+     */
+    public void setPostulants(List<Utilisateur> postulants) {
+        this.postulants = postulants;
+    }
+
 
     /**
      * Get the value of auteur
