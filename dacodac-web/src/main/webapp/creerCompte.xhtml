@@ -10,11 +10,12 @@
         <ui:composition template="./mainTemplate.xhtml">
 
             <ui:define name="css">
+                <h:outputStylesheet name="css/connexion.css"/>
             </ui:define>
 
             <ui:define name="content">
                 <h1>Création de compte</h1>
-                <h:panelGrid id="infosCompte" columns="2" cellpadding="5"> 
+                <h:panelGrid class="connexion_form" columns="2" cellpadding="5"> 
                     <h:outputLabel for="email" value="Email: " />
                     <p:inputText id="email" value="bean.email"/>
                     <h:outputLabel for="pseudo" value="Pseudo: " />
@@ -26,10 +27,10 @@
                     <h:outputLabel for="cp" value="Code postal: " />
                     <p:inputText id="cp" value="bean.cp"/>
                     <h:outputLabel for="date" value="Date de naissance: " />
-                    <p:selectManyMenu></p:selectManyMenu>
+                    <p:calendar id="date"  value="#{calendarView.date5}" navigator="true" pattern="dd/MM/yyyy" yearRange="1900:2017" />
                 </h:panelGrid>
+                <p:commandButton value="Créer le compte" icon="ui-icon-circle-plus" />
             </ui:define>
-
         </ui:composition>
 
     </body>

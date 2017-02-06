@@ -17,19 +17,19 @@
 
                 <h1>Connexion</h1>
 
-                <h:panelGrid id="connexion_form" columns="2" cellpadding="5"> 
+                <h:panelGrid class="connexion_form" columns="2" cellpadding="5"> 
                     <h:outputLabel for="pseudo" value="Pseudo: " />
                     <p:inputText id="pseudo" value="bean.pseudo"/>
                     <h:outputLabel for="pwd" value="Mot de passe: " />
                     <p:password id="pwd" value="bean.mdp" label="Password" required="true" />
                 </h:panelGrid>
                 <div>
-                    <p:commandButton value="se connecter" icon="ui-icon-check" />
+                    <p:commandButton value="Se connecter" icon="ui-icon-check" />
                 </div>
 
                 <div>
                     <h:outputLabel for="newAccount" value="Si vous ne possédez pas de compte, créez-en un: " />
-                    <p:commandLink value="Creer un compte" action="creerCompte.xhtml"/>
+                    <h:link value="Creer un compte" outcome="creerCompte.xhtml"/>
                 </div>
 
             </ui:define>
