@@ -6,6 +6,9 @@
 package fr.ensimag.dacodac.stateless;
 
 import fr.ensimag.dacodac.Annonce;
+import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.Utilisateur;
+
 import java.util.List;
 import javax.ejb.Local;
 
@@ -21,6 +24,10 @@ public interface AnnonceFacadeLocal {
     void edit(Annonce annonce);
 
     void remove(Annonce annonce);
+    
+    void addCommentaire(Annonce annonce, Commentaire com);
+    
+    void addPostulant(Annonce annonce, Utilisateur utilisateur);
 
     Annonce find(Object id);
 

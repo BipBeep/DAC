@@ -7,6 +7,7 @@ package fr.ensimag.dacodac;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -35,21 +37,26 @@ public class Annonce implements Serializable {
     @ManyToMany
     private List<Utilisateur> postulants;
     
+    @OneToMany
+    private List<Commentaire> commentaires;
+    
     private int codePostal;
     private String description;
     private String titre;
 
     public Annonce() {}
 
-    public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, List<Utilisateur> postulants, int codePostal, String description, String titre, LocalDateTime datePublication) {
+    public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, int codePostal, String description, String titre, LocalDateTime datePublication) {
         this.prix = prix;
         this.type = type;
         this.auteur = auteur;
-        this.postulants = postulants;
         this.codePostal = codePostal;
         this.description = description;
         this.titre = titre;
         this.datePublication = datePublication;
+        
+        postulants = new ArrayList<>();
+        commentaires = new ArrayList<>();
     }
     
     
@@ -165,6 +172,24 @@ public class Annonce implements Serializable {
      */
     public void setPostulants(List<Utilisateur> postulants) {
         this.postulants = postulants;
+    }
+    
+    /**
+     * Get the value of commentaires
+     *
+     * @return the value of commentaires
+     */
+    public List<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    /**
+     * Set the value of commentaires
+     *
+     * @param commentaires new value of commentaires
+     */
+    public void setCommentaires(List<Commentaire> commentaires) {
+        this.commentaires = commentaires;
     }
 
 

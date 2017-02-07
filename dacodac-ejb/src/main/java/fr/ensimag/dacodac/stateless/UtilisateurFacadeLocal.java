@@ -25,6 +25,8 @@ public interface UtilisateurFacadeLocal {
     Utilisateur find(Object id);
     
     Utilisateur findByPseudo(String pseudo);
+    
+    void createUser(int dakos, String pseudo, String email, int codePostal, int age, boolean estAdmin);
 
     List<Utilisateur> findAll();
 
