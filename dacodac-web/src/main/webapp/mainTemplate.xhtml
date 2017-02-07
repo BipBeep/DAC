@@ -9,7 +9,9 @@
         <h:outputStylesheet name="css/default.css"/>
         <h:outputStylesheet name="css/cssLayout.css"/>
         <h:outputStylesheet name="css/bandeau.css"/>
-        <title>Facelets Template</title>
+        <ui:insert name="css">
+        </ui:insert>
+        <title>Accueil</title>
     </h:head>
 
     <h:body>
@@ -21,11 +23,11 @@
         </div>
         <div>
             <div id="left">
-                <ui:insert name="left">Left</ui:insert>
+                <ui:insert name="left"></ui:insert>
             </div>
             <div>
                 <div id="right">
-                    <ui:insert name="right">Right</ui:insert>
+                    <ui:insert name="right"></ui:insert>
                 </div>
                 <div id="content" class="right_content">
                     <ui:insert name="content">Content</ui:insert>
@@ -33,7 +35,7 @@
             </div>
         </div>
         <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
+            <ui:insert name="bottom">Contact: dacodac.support@gmail.com</ui:insert>
         </div>
 
     </h:body>

@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./mainTemplate.xhtml">
+
+            <ui:define name="css">
+                <h:outputStylesheet name="css/connexion.css"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <h1>Création de compte</h1>
+                <h:panelGrid class="connexion_form" columns="2" cellpadding="5"> 
+                    <h:outputLabel for="email" value="Email: " />
+                    <p:inputText id="email" value="bean.email"/>
+                    <h:outputLabel for="pseudo" value="Pseudo: " />
+                    <p:inputText id="pseudo" value="bean.pseudo"/>
+                    <h:outputLabel for="pwd" value="Mot de passe: " />
+                    <p:password id="pwd" value="bean.mdp" label="Password" required="true" />
+                    <h:outputLabel for="conf" value="Confirmation mot de passe: " />
+                    <p:password id="conf" value="bean.mdp" label="Confirmation" match="pwd" required="true" />
+                    <h:outputLabel for="cp" value="Code postal: " />
+                    <p:inputText id="cp" value="bean.cp"/>
+                    <h:outputLabel for="date" value="Date de naissance: " />
+                    <p:calendar id="date"  value="#{calendarView.date5}" navigator="true" pattern="dd/MM/yyyy" yearRange="1900:2017" />
+                </h:panelGrid>
+                <p:commandButton value="Créer le compte" icon="ui-icon-circle-plus" />
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
