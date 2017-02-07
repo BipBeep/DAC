@@ -12,15 +12,13 @@ and open the template in the editor.
     display: flex;
     justify-content: space-between;
     margin:10px 0px 10px 0px;
+    
 }
 
-.block_demandes {
+
+.block {
     width:45%;
 
-}
-
-.block_offres {
-    width:45%;
 }
 
 ul {
