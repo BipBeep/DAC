@@ -33,7 +33,11 @@ public class init extends HttpServlet {
 
     @EJB(name = "utilisateurFacade")
     private UtilisateurFacadeLocal utilisateurFacade;
+    
+    @EJB(name = "annonceFacade")
     private AnnonceFacadeLocal annonceFacade;
+    
+    @EJB(name = "commentaireFacade")
     private CommentaireFacadeLocal commentaireFacade;
     
     
