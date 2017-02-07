@@ -2,32 +2,52 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
-
         <ui:composition template="./mainTemplate.xhtml">
+
             <ui:define name="css">
                 <h:outputStylesheet name="css/monPanier.css"/>
             </ui:define>
+
             <ui:define name="content">
-                <h2> Mon Panier : </h2>
+                <h1> Mon Panier : </h1>
+                <div class="elements">
+                    <div class="block_offres">
+                        <h2> Offres </h2>
+                        <f:view>
+                            <p:dataTable value="#{Panier.offres}" var="offre">
+                                <p:column>
+                                    <h:outputText value="#{offre.titre}"/>
+                                    <h:outputText value="Prix = #{offre.prix}"/>
+                                    <h:commandButton/>
+                                </p:column>
+                            </p:dataTable>
+                        </f:view>
+                    </div>
 
-                <h3 style="float:left"> Offres </h3>
-                <div id="panierGauche" >
-                       <!-- Set Div As your requirement -->
-                    <p> offre1 </p>
-                    <p> offre2 </p>
+
+
+                    <div class="block_demandes">
+                        <h2> Demandes </h2>
+                        <f:view>
+                            <p:dataTable value="#{Panier.demandes}" var="demande">
+                                <p:column>
+                                    <h:outputText value="#{demande.titre}"/>
+                                    <h:outputText value="Prix = #{demande.prix}"/>
+                                    <h:commandButton/>
+                                </p:column>
+                            </p:dataTable>
+                        </f:view>
+                    </div>
                 </div>
-                
-                <h3 style="float:left"> Demandes </h3>
-                <div class="panierDroit">
-                      <!-- Set Div As your requirement -->
-                    <p> DE1 </p>
-                    <p> De2 </p>
+                <div class="total">
+                    <h:outputText value="Prix total des annonces: #{Panier.total} Dakos" />
+                    <h:commandButton value="Valider mon panier"></h:commandButton>
                 </div>
-
-
             </ui:define>
 
         </ui:composition>
