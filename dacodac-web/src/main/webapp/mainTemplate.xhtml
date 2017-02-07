@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -11,14 +12,24 @@
         <h:outputStylesheet name="css/bandeau.css"/>
         <ui:insert name="css">
         </ui:insert>
-        <title>Accueil</title>
+        <title>Dac'O'Dac</title>
     </h:head>
 
     <h:body>
 
         <div id="top">
-            <ui:insert name="top">
-                <ui:include src ="bandeau.xhtml" />
+            <ui:insert name="identification.identite!=null">
+                <c:if test="true">
+                    <ui:include src ="bandeau.xhtml" />
+                </c:if>
+                <c:if test="identification.identite==null">
+                    <c:if test="identification.identite.isAdmin==true">
+                        <ui:include src ="bandeauAdmin.xhtml" />
+                    </c:if>
+                    <c:if test="identification.identite.isAdmin==false">
+                        <ui:include src ="bandeauConnecte.xhtml" />
+                    </c:if>
+                </c:if>
             </ui:insert>
         </div>
         <div>
@@ -35,7 +46,7 @@
             </div>
         </div>
         <div id="bottom">
-            <ui:insert name="bottom">Contact: dacodac.support@gmail.com</ui:insert>
+            <ui:insert name="bottom">Contact: dacodac.support@gmail.com, #{identification.identite.pseudo}</ui:insert>
         </div>
 
     </h:body>

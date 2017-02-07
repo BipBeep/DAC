@@ -22,6 +22,7 @@ and open the template in the editor.
 {
     background-color: #88421D;
     background-image: none;
+    padding:0;
 }
 
 .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a{
