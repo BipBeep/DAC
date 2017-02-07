@@ -24,7 +24,7 @@ public interface UtilisateurFacadeLocal {
 
     Utilisateur find(Object id);
     
-    Utilisateur findByName(String name);
+    Utilisateur findByPseudo(String pseudo);
 
     List<Utilisateur> findAll();
 
