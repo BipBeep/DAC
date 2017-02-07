@@ -84,9 +84,9 @@ public class init extends HttpServlet {
         commentaireFacade.create(c);*/
         utilisateurFacade.create(utilisateur);
         utilisateur = utilisateurFacade.findByPseudo("Hillary");
-        utilisateurFacade.modifyUser();
+        //utilisateurFacade.modifyUser();
         utilisateur.setDakos(12);
-        //utilisateurFacade.edit(utilisateur);
+        utilisateurFacade.edit(utilisateur);
         processRequest(request, response);
     }
 
