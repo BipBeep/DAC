@@ -70,7 +70,7 @@ public class init extends HttpServlet {
         utilisateur = new Utilisateur(4, "Michelle", "Clinton", 5, 6, true);
         utilisateurFacade.create(utilisateur);
         utilisateur = utilisateurFacade.findByName("Michelle");
-        utilisateur.setDakos(10);
+        utilisateur.setDakos(15);
         utilisateurFacade.edit(utilisateur);
         processRequest(request, response);
     }
