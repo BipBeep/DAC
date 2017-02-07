@@ -8,26 +8,25 @@
 }
 
 #bottom {
-    display: none;
-    position: relative;
+    position: fixed;
+    bottom:0;
+    width: 95%;
     background-color: #c2dfef;
     padding: 5px;
-    margin: 10px 0px 0px 0px;
+    text-align: center;
 }
 
 #left {
     display: none;
     float: left;
-    background-color: #ece3a5;
-    padding: 5px;
+    background-color: #F0C300;
     width: 150px;
 }
 
 #right {
     display: none;
     float: right;
-    background-color: #ece3a5;
-    padding: 5px;
+    background-color: #F0C300;
     width: 150px;
 }
 
@@ -44,9 +43,10 @@
 }
 
 .right_content {
-    background-color: #dddddd;
+    background-color: #ffffff;
     padding: 5px;
-    margin: 0px 170px 0px 170px;
+    box-shadow: 3px 3px 5px #666666;
+    margin: 0px 200px 0px 200px;
 }
 
 #top a:link, #top a:visited {

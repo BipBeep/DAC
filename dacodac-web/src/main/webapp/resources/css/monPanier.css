@@ -1,0 +1,28 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 6, 2017, 11:35:13 AM
+    Author     : maubertj
+*/
+
+#panierGauche {
+    display: inline-block;
+    float:left; 
+    width:45%;
+    color: red;
+    border:1px solid black;
+    vertical-align: top;
+
+}
+
+.panierDroit {
+    display: inline-block;
+    float:right; 
+    width:45%;
+    color: black;
+    border:1px solid black;
+    vertical-align: top;
+}
