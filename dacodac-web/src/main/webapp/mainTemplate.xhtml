@@ -18,15 +18,15 @@
     <h:body>
 
         <div id="top">
-            <ui:insert name="identification.identite!=null">
-                <c:if test="true">
+            <ui:insert name="top">
+                <c:if test="#{identification.identite eq null}">
                     <ui:include src ="bandeau.xhtml" />
                 </c:if>
-                <c:if test="identification.identite==null">
-                    <c:if test="identification.identite.isAdmin==true">
+                <c:if test="#{not (identification.identite eq null)}">
+                    <c:if test="#{identification.identite.estAdmin eq true}">
                         <ui:include src ="bandeauAdmin.xhtml" />
                     </c:if>
-                    <c:if test="identification.identite.isAdmin==false">
+                    <c:if test="#{identification.identite.estAdmin eq false}">
                         <ui:include src ="bandeauConnecte.xhtml" />
                     </c:if>
                 </c:if>

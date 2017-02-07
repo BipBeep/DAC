@@ -25,27 +25,23 @@ public class Connecteur {
      * Creates a new instance of Connecteur
      */
     public Connecteur() {
-        System.err.println("hello");
+        System.err.println("DAMN");
     }
 
     public Utilisateur getUtilisateur() {
-        if (utilisateur==null){
-            utilisateur=new Utilisateur();
+        if (utilisateur == null) {
+            utilisateur = new Utilisateur();
         }
         return utilisateur;
     }
-    
-    public void lol(){
-        System.err.println("heeee");
-    }
 
     public String connect(Identification idBean) {
-        System.err.println("Inside connect");
         idBean.setIdentite(utilisateur.getPseudo(), utilisateur.getPassword());
         return "index.xhtml";
     }
 
     public String disconect(Identification idBean) {
+        System.err.println("HAAAAAAAAAAAA");
         idBean.clearIdentite();
         return "index.xhtml";
     }

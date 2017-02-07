@@ -14,23 +14,23 @@
             </ui:define>
 
             <ui:define name="content">
+                <h:form>
+                    <h1>Connexion</h1>
 
-                <h1>Connexion</h1>
-
-                <h:panelGrid class="connexion_form" columns="2" cellpadding="5">
-                    <h:outputLabel for="pseudo" value="Pseudo: " />
-                    <p:inputText id="pseudo" value="#{connecteur.utilisateur.pseudo}"/>
-                    <h:outputLabel for="pwd" value="Mot de passe: " />
-                    <p:password id="pwd" value="#{connecteur.utilisateur.password}" label="Password" required="true" />
-                </h:panelGrid>
-                <div>
-                    <p:commandButton value="Se connecter" actionListener="#{connecteur.lol()}" icon="ui-icon-check" />
-                </div>
-
-                <div>
-                    <h:outputLabel for="newAccount" value="Si vous ne possédez pas de compte, créez-en un: " />
-                    <h:link id="newAccount" value="Creer un compte" outcome="creerCompte.xhtml"/>
-                </div>
+                    <h:panelGrid class="connexion_form" columns="2" cellpadding="5">
+                        <h:outputLabel for="pseudo" value="Pseudo: " />
+                        <p:inputText id="pseudo" value="#{connecteur.utilisateur.pseudo}"/>
+                        <h:outputLabel for="pwd" value="Mot de passe: " />
+                        <p:password id="pwd" value="#{connecteur.utilisateur.password}" label="Password" required="true" />
+                    </h:panelGrid>
+                    <div>
+                        <p:commandButton value="Se connecter" action="#{connecteur.connect(identification)}" icon="ui-icon-check" ajax="false"/>
+                    </div>
+                    <div>
+                        <h:outputLabel for="newAccount" value="Si vous ne possédez pas de compte, créez-en un: " />
+                        <h:link id="newAccount" value="Creer un compte" outcome="creerCompte.xhtml"/>
+                    </div>
+                </h:form>
 
             </ui:define>
 

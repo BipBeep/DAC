@@ -15,12 +15,14 @@
 }
 
 #left {
+    display: none;
     float: left;
     background-color: #F0C300;
     width: 150px;
 }
 
 #right {
+    display: none;
     float: right;
     background-color: #F0C300;
     width: 150px;
