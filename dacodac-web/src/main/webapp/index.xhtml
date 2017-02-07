@@ -1,14 +1,59 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./mainTemplate.xhtml">
 
+            <ui:define name="css">
+                <h:outputStylesheet name="css/index.css"/>
+            </ui:define>
+
             <ui:define name="content">
-                page d'accueil.
+                <div class="elements">
+                    <div class="block_offres">
+                        <h2> Dernières offres </h2>
+                        <f:view>
+                            <p:dataTable value="#{Last.offres}" var="offre">
+                                <p:column>
+                                    <h:outputText value="#{offre.titre}"/>
+                                    <br />
+                                    <h:outputText value="#{offre.tags}"/>
+                                    <br />
+                                    <h:outputText value="#{offre.codePostal}"/>
+                                    <br />
+                                    <h:outputText value="Prix = #{offre.prix}"/>
+                                    <br />
+                                    <h:outputText value="Publié le #{offre.date}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </f:view>
+                    </div>
+
+                    <div class="block_demandes">
+                        <h2> Dernières demandes </h2>
+                        <f:view>
+                            <p:dataTable value="#{Last.demandes}" var="demande">
+                                <p:column>
+                                    <h:outputText value="#{demande.titre}"/>
+                                    <br />
+                                    <h:outputText value="#{demande.tags}"/>
+                                    <br />
+                                    <h:outputText value="#{demande.codePostal}"/>
+                                    <br />
+                                    <h:outputText value="Prix = #{demande.prix}"/>
+                                    <br />
+                                    <h:outputText value="Publié le #{demande.date}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </f:view>
+                    </div>
+                </div>
             </ui:define>
 
         </ui:composition>

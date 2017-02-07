@@ -4,8 +4,8 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : Feb 6, 2017, 11:35:13 AM
-    Author     : maubertj
+    Created on : Feb 6, 2017, 9:11:09 AM
+    Author     : weschlel
 */
 
 .elements {
@@ -29,14 +29,4 @@ ul {
 
 h2 {
     text-align: center;
-}
-
-input[type="submit"]{
-    margin:0px 0px 0px 50%;
-}
-
-.total {
-    width:auto;
-    display: flex;
-    justify-content: space-between;
 }
