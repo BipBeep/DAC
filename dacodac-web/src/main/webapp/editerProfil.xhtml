@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./mainTemplate.xhtml">
+            <ui:define name="css">
+                <h:outputStylesheet name="css/editerProfil.css"/>
+            </ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <p:panel header="Editer son profil" style = "text-align : center">
+
+
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel for="pseudo" value="Pseudonyme" />
+                            <p:inputText id="pseudo" value="Pseudonyme" required="true">
+                                <f:validateLength minimum="2" maximum="5" />
+                                <p:clientValidator />
+                            </p:inputText>
+                            <p:message for="pseudo" display="icon" />
+                            <h:outputText value="#{validationView.text}" />
+
+                            <h:outputLabel for="email" value="email" />
+                            <p:inputText id="email" value="adresse.mail@valide.com" required="true">
+                                <f:validateLength minimum="2" maximum="5" />
+                                <p:clientValidator />
+                            </p:inputText>
+                            <p:message for="email" display="icon" />
+                            <h:outputText value="#{validationView.text}" />
+
+
+                            <h:outputLabel id="mdp" for="motDePasse" value = "Mot de passe" style="vertical-align: text-top"/> 
+
+                            <h:panelGrid columns="2" cellpadding="5"> 
+
+                                <h:outputLabel for="ancienMotDePasse" value="Ancien mot de passe" />
+                                <p:inputText id="ancienMotDePasse" value="******" required="true">
+                                    <f:validateLength minimum="2" maximum="5" />
+                                    <p:clientValidator />
+                                </p:inputText>
+                                <p:message for="email" display="icon" />
+                                <h:outputText value="#{validationView.text}" />
+
+                                <h:outputLabel for="nouveauMotDePasse1" value="Nouveau mot de passe" />
+                                <p:inputText id="nouveauMotDePasse1" value="******" required="true">
+                                    <f:validateLength minimum="2" maximum="5" />
+                                    <p:clientValidator />
+                                </p:inputText>
+                                <p:message for="email" display="icon" />
+                                <h:outputText value="#{validationView.text}" />
+
+                                <h:outputLabel for="nouveauMotDePasse2" value="Répéter nouveau mot de passe" />
+                                <p:inputText id="nouveauMotDePasse2" value="******" required="true">
+                                    <f:validateLength minimum="2" maximum="5" />
+                                    <p:clientValidator />
+                                </p:inputText>
+
+
+                            </h:panelGrid>
+                            <p:message for="email" display="icon" />
+                            <h:outputText value="#{validationView.text}" />
+                            <h:outputLabel for="text" value="Description :" />
+                            <p:inputTextarea id="integer" value="#{validationView.integer}" rows = "6" cols ="33">
+                                <p:clientValidator event="keyup"/>
+                            </p:inputTextarea>
+                            <p:message for="integer" display="icon" />
+                            <h:outputText value="#{validationView.integer}" />
+                        </h:panelGrid>
+
+                        <p:commandButton value="Valider la modification de profil" ajax="false" validateClient="true" />
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
