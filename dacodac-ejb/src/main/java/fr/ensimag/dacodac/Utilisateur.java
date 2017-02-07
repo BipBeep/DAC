@@ -28,6 +28,7 @@ public class Utilisateur implements Serializable {
     private Long id;
     private int dakos;
     private String pseudo;
+    private String password;
     private String email;
     private int codePostal;
     private int age;
@@ -42,9 +43,10 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }
     
-    public Utilisateur(int dakos, String pseudo, String email, int codePostal, int age, boolean estAdmin) {
+    public Utilisateur(int dakos, String pseudo, String password, String email, int codePostal, int age, boolean estAdmin) {
         this.dakos = dakos;
         this.pseudo = pseudo;
+        this.password= password;
         this.email = email;
         this.codePostal = codePostal;
         this.age = age;
@@ -76,7 +78,15 @@ public class Utilisateur implements Serializable {
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
+    
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
     public String getEmail() {
         return email;
     }
