@@ -1,14 +1,38 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
         <ui:composition template="./mainTemplate.xhtml">
 
             <ui:define name="content">
-                Offres 
+                <h:form>
+                    <p:panel header="Recherche">
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <p:inputText style="margin-right:10px" placeholder="Search"/>
+                            <p:selectOneMenu value="Département">
+                                <f:selectItems id="item"
+                                               value="#{Offres.departements}" var="c"
+                                               itemLabel="#{c.numero - c.nom}" itemValue="#{Offres.departement}" />
+                            </p:selectOneMenu>
+
+                            <p:selectOneMenu id="tri" value="#{Offres.tri}">
+                                <f:selectItem itemLabel="Par prix croissants" itemValue="prix_croissants" />
+                                <f:selectItem itemLabel="Par prix décroissants" itemValue="prix_decroissants" />
+                                <f:selectItem itemLabel="Par dates (du plus récent au plus ancien)" itemValue="dates_croissantes" />
+                                <f:selectItem itemLabel="Par dates (du plus ancien au plus récent)" itemValue="dates_decroissantes" />
+                            </p:selectOneMenu>
+                            
+                            <p:commandButton value="OK" ajax="false" validateClient="true"/>
+                        </h:panelGrid>
+                        
+                    </p:panel>
+                </h:form>
             </ui:define>
 
         </ui:composition>
