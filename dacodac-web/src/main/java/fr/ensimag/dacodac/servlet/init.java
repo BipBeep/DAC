@@ -77,19 +77,19 @@ public class init extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Utilisateur utilisateur = new Utilisateur(1, "Donald", "donald.trump@maison-blanche.gouv", 2, 3, false);
+        Utilisateur utilisateur = new Utilisateur(1, "Donald", "A mort les sombrero", "donald.trump@maison-blanche.gouv", 2, 3, false);
         utilisateurFacade.create(utilisateur);
         utilisateur = utilisateurFacade.findByPseudo("Donald");
         Annonce a = new Annonce(10, TypeAnnonce.OFFRE, utilisateur, 38000, "description", "titre", LocalDateTime.now());
+        utilisateur = new Utilisateur(4, "Hillary", "J'aime pas les emails", "hillary.clinton@defaite.sanders", 5, 6, true);
         annonceFacade.create(a);
         /*Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
         commentaireFacade.create(c);*/
-        utilisateur = new Utilisateur(4, "Hillary", "hillary.clinton@defaite.sanders", 5, 6, true);
         utilisateurFacade.create(utilisateur);
-        utilisateur = utilisateurFacade.findByPseudo("Hillary"); 
-        //INSERT INTO utilisateur (dakos, pseudo, email, age, estAdmin, mesAnnonces, commentaires)\n" + " VALUES\n" + " (5, 'MLP', 'marie-laure.potet@tl.com', 50, false)");
+        utilisateur = utilisateurFacade.findByPseudo("Hillary");
+        utilisateurFacade.modifyUser();
         utilisateur.setDakos(12);
-        utilisateurFacade.edit(utilisateur);
+        //utilisateurFacade.edit(utilisateur);
         processRequest(request, response);
     }
 

@@ -8,11 +8,6 @@ and open the template in the editor.
     Author     : mignotju
 */
 
-#accueil {
-    color: #000;
-    background-color: #CCFF99;
-}
-
 .ui-tabmenu 
 {
     background-image: none;
@@ -24,13 +19,13 @@ and open the template in the editor.
     background-image: none;
 }
 
-.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a{
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a
+{
     background-color: #D19275;
 }
 
-.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a:active,
-.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a:hover
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a:hover,
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-default.ui-state-active a
 {
     background-color: #CCFF99;
-    
 }
