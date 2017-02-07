@@ -3,38 +3,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 
     <body> 
         <ui:composition>
-            <p:tabMenu activeIndex="#{param.i}">
-                <p:menuitem value="Accueil" outcome="/index.xhtml" id="accueil" icon="ui-icon-home">
-                    <f:param name="i" value="0" />
-                </p:menuitem>
-                <p:menuitem value="Publier une annonce" outcome="/index.xhtml" icon="ui-icon-document">
-                    <f:param name="i" value="1" />
-                </p:menuitem>
-                <p:menuitem value="Offres" outcome="/index.xhtml" icon="ui-icon-search">
-                    <f:param name="i" value="2" />
-                </p:menuitem>
-                <p:menuitem value="Demandes" outcome="/index.xhtml" icon="ui-icon-search">
-                    <f:param name="i" value="3" />
-                </p:menuitem>
-                <p:menuitem value="Mes annonces" outcome="/index.xhtml" icon="ui-icon-document">
-                    <f:param name="i" value="4" />
-                </p:menuitem>
-                <p:menuitem value="Mon panier" outcome="/index.xhtml" icon="ui-icon-cart">
-                    <f:param name="i" value="5" />
-                </p:menuitem>
-                <p:menuitem value="Mon profil" outcome="/index.xhtml" icon="ui-icon-person">
-                    <f:param name="i" value="6" />
-                </p:menuitem>
-                <p:menuitem value="Se déconnecter" outcome="/index.xhtml" action="#{connecteur.disconect(identification)}" icon="ui-icon-circle-close">
-                    <f:param name="i" value="7" />
-                </p:menuitem>
-
-            </p:tabMenu>
+            <h:form id="menuForm">
+                <p:tabMenu activeIndex="#{param.i}">
+                    <p:menuitem value="Accueil" outcome="/index.xhtml" id="accueil" icon="ui-icon-home">
+                        <f:param name="i" value="0" />
+                    </p:menuitem>
+                    <p:menuitem value="Publier une annonce" outcome="/index.xhtml" icon="ui-icon-document">
+                        <f:param name="i" value="1" />
+                    </p:menuitem>
+                    <p:menuitem value="Offres" outcome="/offres.xhtml" icon="ui-icon-search">
+                        <f:param name="i" value="2" />
+                    </p:menuitem>
+                    <p:menuitem value="Demandes" outcome="/demandes.xhtml" icon="ui-icon-search">
+                        <f:param name="i" value="3" />
+                    </p:menuitem>
+                    <p:menuitem value="Mes annonces" outcome="/index.xhtml" icon="ui-icon-document">
+                        <f:param name="i" value="4" />
+                    </p:menuitem>
+                    <p:menuitem value="Mon panier" outcome="/monPanier.xhtml" icon="ui-icon-cart">
+                        <f:param name="i" value="5" />
+                    </p:menuitem>
+                    <p:menuitem value="Mon profil" outcome="/index.xhtml" icon="ui-icon-person">
+                        <f:param name="i" value="6" />
+                    </p:menuitem>
+                    <p:menuitem value="Se déconnecter" action="#{connecteur.disconnect(identification)}" icon="ui-icon-circle-close">
+                        <f:param name="i" value="7" />
+                    </p:menuitem>
+                </p:tabMenu>
+            </h:form>
         </ui:composition>
     </body>
 </html>
