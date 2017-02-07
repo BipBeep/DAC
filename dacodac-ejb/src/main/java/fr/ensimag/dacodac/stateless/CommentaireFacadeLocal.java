@@ -5,6 +5,7 @@
  */
 package fr.ensimag.dacodac.stateless;
 
+import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
 import java.util.List;
 import javax.ejb.Local;
@@ -28,6 +29,8 @@ public interface CommentaireFacadeLocal {
 
     List<Commentaire> findRange(int[] range);
 
+    Commentaire findByAnnonce(Annonce annonce);
+    
     int count();
     
 }

@@ -17,7 +17,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.Date;
-import java.time.temporal;
 
 
 /**
@@ -34,8 +33,9 @@ public class Annonce implements Serializable {
     private int prix;    
     private TypeAnnonce type;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date datePublication;
+    //@Temporal(TemporalType.TIMESTAMP)
+    //NEED HELP
+    private LocalDateTime datePublication;
     
     @ManyToOne
     private Utilisateur auteur;
