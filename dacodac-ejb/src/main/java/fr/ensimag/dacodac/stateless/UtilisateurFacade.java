@@ -42,8 +42,8 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
     }
     
     @Override
-    public void createUser(int dakos, String pseudo, String email, int codePostal, int age, boolean estAdmin) {
-        
+    public void modifyUser() {
+        getEntityManager().createQuery("UPDATE Utilisateur SET dakos = 100 WHERE id = 2");
     }
 
     @Override

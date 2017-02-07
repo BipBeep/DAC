@@ -32,7 +32,7 @@ public interface UtilisateurFacadeLocal {
     
     Utilisateur findByPseudo(String pseudo);
     
-    void createUser(int dakos, String pseudo, String email, int codePostal, int age, boolean estAdmin);
+    void modifyUser();
 
     List<Utilisateur> findAll();
 
