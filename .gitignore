@@ -15,3 +15,4 @@ hs_err_pid*
 dacodac-web/target/*
 dacodac-ejb/target/*
 dacodac-ear/target/*
+dacodac-ejb/src/main/setup/glassfish-resources.xml
