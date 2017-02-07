@@ -9,10 +9,14 @@
     <body>
 
         <ui:composition template="./mainTemplate.xhtml">
+            <ui:define name="css">
+                <h:outputStylesheet name="css/publierAnnonce.css"/>
+            </ui:define>
 
             <ui:define name="content">
+                <h2 id="titre">Publier une annonce</h2>
                 <h:form>
-                    <p:panel header="Publier une annonce">
+                    <p:panel>
                         <h:panelGrid columns="4" cellpadding="5">
                             <h:outputLabel for="description" value="Description" />
                             <p:inputTextarea id="description" rows="5" cols="30" 
@@ -62,9 +66,10 @@
                         <p:commandButton value="Publier l'annonce" ajax="false" validateClient="true" />
                     </p:panel>
                 </h:form>
-                <p:button outcome="/index.xhtml" value="Annuler" icon="ui-icon-circle-close">
+                <p:button id="boutonAnnuler" outcome="/index.xhtml" value="Annuler" icon="ui-icon-circle-close">
                     <f:param name="annuler" value="10" />
                 </p:button>
+                
             </ui:define>
 
         </ui:composition>
