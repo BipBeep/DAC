@@ -30,7 +30,7 @@ public class init extends HttpServlet {
 
     @EJB(name = "annonceFacade")
     private AnnonceFacadeLocal annonceFacade;
-    
+
     @EJB(name = "commentaireFacade")
     private CommentaireFacadeLocal commentaireFacade;
 
@@ -72,38 +72,31 @@ public class init extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Utilisateur utilisateur = new Utilisateur(1, "Danald", "AMortLesSombreros", "donald.trump@maison-blanche.gouv", 28312, 60, false);
-        utilisateurFacade.create(utilisateur);
-        utilisateur = new Utilisateur(4, "Halliry", "JAimePasLesEmails", "hillary.clinton@defaite.lol", 52147, 55, true);
+        Utilisateur utilisateur1 = new Utilisateur(1000000000, "Donald", "AMortLesSombreros", "donald.trump@maison-blanche.gouv", 28312, 60, false);
+        Utilisateur utilisateur2 = new Utilisateur(100000, "Jonas", "secret", "jonas.maubert@j-aime-elle.com", 38190, 22, true);
+        Utilisateur utilisateur3 = new Utilisateur(100, "Leo", "secret", "leo@gmail.com", 28300, 22, false);
+        Utilisateur utilisateur4 = new Utilisateur(100, "Nico", "secret", "kamo@gmail.com", 28301, 22, false);
+        Utilisateur utilisateur5 = new Utilisateur(100, "Juju", "secret", "juju@pl-s.com", 28302, 22, false);
+        Utilisateur utilisateur6 = new Utilisateur(400000, "Hillary", "JAimePasLesEmails", "hillary.clinton@defaite.seum", 52147, 98, false);
+        utilisateurFacade.create(utilisateur1);
+        utilisateurFacade.create(utilisateur2);
+        utilisateurFacade.create(utilisateur3);
+        utilisateurFacade.create(utilisateur4);
+        utilisateurFacade.create(utilisateur5);
+        utilisateurFacade.create(utilisateur6);
+        
         /*Annonce a = new Annonce(10, TypeAnnonce.OFFRE, utilisateur, new ArrayList<Utilisateur>(), 38000, "description", "titre", LocalDateTime.now());
 
 
-        Utilisateur utilisateur = new Utilisateur(1, "Donald", "A mort les sombrero", "donald.trump@maison-blanche.gouv", 2, 3, false);
-        utilisateurFacade.create(utilisateur);
 
-        utilisateur = utilisateurFacade.findByPseudo("Donald");
         Annonce a = new Annonce(10, TypeAnnonce.OFFRE, utilisateur, 38000, "description", "Ceci est mon titre", LocalDateTime.now());
         annonceFacade.create(a);
-        System.out.println("---------------------------------------------------------------------------------------");
-        System.out.println(a.getAuteur().getId());
-        System.out.println(utilisateur);
-        System.out.println("---------------------------------------------------------------------------------------11111");
-        a = annonceFacade.findByUtilAndTitre(a.getAuteur(), a.getTitre());
-        System.out.println("---------------------------------------------------------------------------------------22222");
-
-        System.out.println(a.getTitre());
+        
         Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
         commentaireFacade.create(c);
         Commentaire retournes = commentaireFacade.findByAuteurAndAnnonce(utilisateur, a);
-        retournes.setDescription("NOUVELLE DESCRIPTION 245654222222");
-        commentaireFacade.edit(retournes);
-        utilisateur = new Utilisateur(4, "Hillary", "J'aime pas les emails", "hillary.clinton@defaite.sanders", 5, 6, true);
+        */
 
-        utilisateurFacade.create(utilisateur);
-        utilisateur = utilisateurFacade.findByPseudo("Halliry");
-        //utilisateurFacade.modifyUser(); */
-        utilisateur.setDakos(12);
-        utilisateurFacade.edit(utilisateur);
         processRequest(request, response);
     }
 
