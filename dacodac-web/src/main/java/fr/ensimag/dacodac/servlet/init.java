@@ -33,7 +33,9 @@ public class init extends HttpServlet {
 
     @EJB(name = "utilisateurFacade")
     private UtilisateurFacadeLocal utilisateurFacade;
+    @EJB(name = "annonceFacade")
     private AnnonceFacadeLocal annonceFacade;
+    @EJB(name = "commentaireFacade")
     private CommentaireFacadeLocal commentaireFacade;
     
     
@@ -77,9 +79,10 @@ public class init extends HttpServlet {
             throws ServletException, IOException {
         Utilisateur utilisateur = new Utilisateur(1, "Donald", "donald.trump@maison-blanche.gouv", 2, 3, false);
         utilisateurFacade.create(utilisateur);
-        /*Annonce a = new Annonce(10, TypeAnnonce.OFFRE, utilisateur, new ArrayList<Utilisateur>(), 38000, "description", "titre", LocalDateTime.now());
+        utilisateur = utilisateurFacade.findByPseudo("Donald");
+        Annonce a = new Annonce(10, TypeAnnonce.OFFRE, utilisateur, 38000, "description", "titre", LocalDateTime.now());
         annonceFacade.create(a);
-        Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
+        /*Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
         commentaireFacade.create(c);*/
         utilisateur = new Utilisateur(4, "Hillary", "hillary.clinton@defaite.sanders", 5, 6, true);
         utilisateurFacade.create(utilisateur);

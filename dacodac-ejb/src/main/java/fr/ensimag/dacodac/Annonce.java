@@ -16,6 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.util.Date;
+import java.time.temporal;
+
 
 /**
  *
@@ -31,6 +34,9 @@ public class Annonce implements Serializable {
     private int prix;    
     private TypeAnnonce type;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date datePublication;
+    
     @ManyToOne
     private Utilisateur auteur;
     
@@ -135,7 +141,6 @@ public class Annonce implements Serializable {
     }
 
     
-    private LocalDateTime datePublication;
 
     /**
      * Get the value of datePublication
