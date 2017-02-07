@@ -46,4 +46,11 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         postulants.add(utilisateur);
         annonce.setPostulants(postulants);
     }
+    
+    @Override
+    public Annonce findByUtilAndTitre(Utilisateur u, String titre)
+    {
+        return (Annonce) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.titre LIKE :titre and a.auteur = :auteur")
+                .setParameter("titre", titre).setParameter("auteur", u).getResultList().get(0);
+    }
 }

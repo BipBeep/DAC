@@ -33,14 +33,13 @@ public class init extends HttpServlet {
 
     @EJB(name = "utilisateurFacade")
     private UtilisateurFacadeLocal utilisateurFacade;
-    
+
     @EJB(name = "annonceFacade")
     private AnnonceFacadeLocal annonceFacade;
     
     @EJB(name = "commentaireFacade")
     private CommentaireFacadeLocal commentaireFacade;
-    
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -58,7 +57,7 @@ public class init extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet init</title>");            
+            out.println("<title>Servlet init</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet init at " + request.getContextPath() + "</h1>");
@@ -79,13 +78,29 @@ public class init extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Utilisateur utilisateur = new Utilisateur(1, "Donald", "secret", "donald.trump@maison-blanche.gouv", 2, 3, false);
+
+
+        Utilisateur utilisateur = new Utilisateur(1, "Donald", "A mort les sombrero", "donald.trump@maison-blanche.gouv", 2, 3, false);
         utilisateurFacade.create(utilisateur);
-        utilisateur = new Utilisateur(4, "Hillary", "secret", "hillary.clinton@defaite.sanders", 5, 6, true);
-        /*Annonce a = new Annonce(10, TypeAnnonce.OFFRE, utilisateur, new ArrayList<Utilisateur>(), 38000, "description", "titre", LocalDateTime.now());
+
+        utilisateur = utilisateurFacade.findByPseudo("Donald");
+        Annonce a = new Annonce(10, TypeAnnonce.OFFRE, utilisateur, 38000, "description", "Ceci est mon titre", LocalDateTime.now());
         annonceFacade.create(a);
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println(a.getAuteur().getId());
+        System.out.println(utilisateur);
+        System.out.println("---------------------------------------------------------------------------------------11111");
+        a = annonceFacade.findByUtilAndTitre(a.getAuteur(), a.getTitre());
+        System.out.println("---------------------------------------------------------------------------------------22222");
+
+        System.out.println(a.getTitre());
         Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
-        commentaireFacade.create(c);*/
+        commentaireFacade.create(c);
+        Commentaire retournes = commentaireFacade.findByAuteurAndAnnonce(utilisateur, a);
+        retournes.setDescription("NOUVELLE DESCRIPTION 245654222222");
+        commentaireFacade.edit(retournes);
+        utilisateur = new Utilisateur(4, "Hillary", "J'aime pas les emails", "hillary.clinton@defaite.sanders", 5, 6, true);
+
         utilisateurFacade.create(utilisateur);
         utilisateur = utilisateurFacade.findByPseudo("Hillary");
         utilisateurFacade.modifyUser();
