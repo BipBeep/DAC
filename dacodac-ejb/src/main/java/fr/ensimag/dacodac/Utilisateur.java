@@ -8,12 +8,13 @@ package fr.ensimag.dacodac;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.*;
 
 /**
  *
@@ -21,17 +22,41 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Utilisateur implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @Min(0)
+    @Column(nullable=false)
     private int dakos;
+    
+    @Pattern(regexp="^[A-Za-z0-9]+$")
+    @Size(min=1, max=63)
+    @Column(unique=true, nullable=false)
     private String pseudo;
+    
+    @Pattern(regexp="^[A-Za-z0-9]+$")
+    @Size(min=8, max=63)
+    @Column(nullable=false)
     private String password;
+    
+    @Pattern(regexp="^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$")
+    @Column(unique=true, nullable=false)
     private String email;
+    
+    @Min(1000)
+    @Max(99999)
+    @Column(nullable=false)
     private int codePostal;
+    
+    @Min(12)
+    @Max(150)
+    @Column(nullable=false)
     private int age;
+    
+    @Column(nullable=false)
     private boolean estAdmin;
     
     @OneToMany
@@ -50,8 +75,7 @@ public class Utilisateur implements Serializable {
         this.email = email;
         this.codePostal = codePostal;
         this.age = age;
-        this.estAdmin = estAdmin;
-        
+        this.estAdmin = estAdmin;      
         this.mesAnnonces = new ArrayList<>();
         this.commentaires = new ArrayList<>();
     }
