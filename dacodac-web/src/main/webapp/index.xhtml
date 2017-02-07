@@ -18,40 +18,12 @@
                 <div class="elements">
                     <div class="block_offres">
                         <h2> Dernières offres </h2>
-                        <f:view>
-                            <p:dataTable value="#{Last.offres}" var="offre">
-                                <p:column>
-                                    <h:outputText value="#{offre.titre}"/>
-                                    <br />
-                                    <h:outputText value="#{offre.tags}"/>
-                                    <br />
-                                    <h:outputText value="#{offre.codePostal}"/>
-                                    <br />
-                                    <h:outputText value="Prix = #{offre.prix}"/>
-                                    <br />
-                                    <h:outputText value="Publié le #{offre.date}"/>
-                                </p:column>
-                            </p:dataTable>
-                        </f:view>
+                        <ui:include src ="dernieresOffres.xhtml" />
                     </div>
 
                     <div class="block_demandes">
                         <h2> Dernières demandes </h2>
-                        <f:view>
-                            <p:dataTable value="#{Last.demandes}" var="demande">
-                                <p:column>
-                                    <h:outputText value="#{demande.titre}"/>
-                                    <br />
-                                    <h:outputText value="#{demande.tags}"/>
-                                    <br />
-                                    <h:outputText value="#{demande.codePostal}"/>
-                                    <br />
-                                    <h:outputText value="Prix = #{demande.prix}"/>
-                                    <br />
-                                    <h:outputText value="Publié le #{demande.date}"/>
-                                </p:column>
-                            </p:dataTable>
-                        </f:view>
+                        <ui:include src ="dernieresDemandes.xhtml" />
                     </div>
                 </div>
             </ui:define>

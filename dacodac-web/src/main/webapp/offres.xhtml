@@ -14,7 +14,7 @@
                 <h:form>
                     <p:panel header="Recherche">
                         <h:panelGrid columns="4" cellpadding="5">
-                            <p:inputText style="margin-right:10px" placeholder="Search"/>
+                            <p:inputText style="margin-right:10px" placeholder="Mots clés..."/>
                             <p:selectOneMenu value="Département">
                                 <f:selectItems id="item"
                                                value="#{Offres.departements}" var="c"
@@ -33,6 +33,8 @@
                         
                     </p:panel>
                 </h:form>
+                
+                <ui:include src ="dernieresOffres.xhtml" />
             </ui:define>
 
         </ui:composition>
