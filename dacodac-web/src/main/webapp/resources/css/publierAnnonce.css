@@ -21,3 +21,9 @@ and open the template in the editor.
 {
     text-align: center;
 }
+
+.boutonValidation.ui-button
+{
+    background-color: #D19275;
+    background-image: none;
+}
