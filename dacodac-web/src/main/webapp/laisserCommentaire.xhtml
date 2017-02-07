@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./mainTemplate.xhtml">
+        <ui:define name="content">
+                <h:form>
+    <p:panel header="Rediger un commentaire">
+        <p:fieldset  style="margin-bottom:20px" >
+            <h>Vous avez fait affaire avec Laura !</h>
+
+            <h:outputText value="#{validationView.text}" />
+            </p:fieldset>
+        <h:panelGrid columns="1" cellpadding="5">
+            <h>Rappel de l'annonce</h>
+            <p:fieldset  style="margin-bottom:20px" >
+            <h3>Rappel de l'annonce</h3>
+
+            <h:outputText value="#{validationView.text}" />
+            </p:fieldset>
+            <h:outputLabel for="text" value="Votre commentaire" />
+            <p:inputTextarea id="integer" value="#{validationView.integer}" rows = "6" cols ="33">
+                <p:clientValidator event="keyup"/>
+            </p:inputTextarea>
+            <p:message for="integer" display="icon" />
+            <h:outputText value="#{validationView.integer}" />
+        </h:panelGrid>
+            
+        <p:commandButton value="Laisser un commentaire" ajax="false" validateClient="true" />
+    </p:panel>
+</h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
