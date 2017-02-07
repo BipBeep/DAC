@@ -50,7 +50,7 @@ public class Identification implements Serializable {
         //MDP pas bon
     }
     
-    public void clearIdentite(){
+    public void clearIdentite() {
         identite = null;
     }
 }
