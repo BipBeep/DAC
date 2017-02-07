@@ -93,9 +93,9 @@ public class init extends HttpServlet {
         System.out.println(a.getTitre());
         Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
         commentaireFacade.create(c);
-        Commentaire retourne = commentaireFacade.findByAnnonce(a);
-        retourne.setDescription("NOUVELLE DESCRIPTION");
-        commentaireFacade.edit(retourne);
+        Commentaire retournes = commentaireFacade.findByAuteurAndAnnonce(utilisateur, a);
+        retournes.setDescription("NOUVELLE DESCRIPTION 245654222222");
+        commentaireFacade.edit(retournes);
         utilisateur = new Utilisateur(4, "Hillary", "J'aime pas les emails", "hillary.clinton@defaite.sanders", 5, 6, true);
 
         utilisateurFacade.create(utilisateur);
