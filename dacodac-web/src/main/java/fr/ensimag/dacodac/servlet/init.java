@@ -65,12 +65,12 @@ public class init extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Utilisateur utilisateur = new Utilisateur(1, "Donald", "Sanders", 2, 3, false);
+        Utilisateur utilisateur = new Utilisateur(1, "Donald", "donald.trump@maison-blanche.gouv", 2, 3, false);
         utilisateurFacade.create(utilisateur);
-        utilisateur = new Utilisateur(4, "Michelle", "Clinton", 5, 6, true);
+        utilisateur = new Utilisateur(4, "Hillary", "hillary.clinton@defaite.sanders", 5, 6, true);
         utilisateurFacade.create(utilisateur);
-        utilisateur = utilisateurFacade.findByName("Michelle");
-        utilisateur.setDakos(10);
+        utilisateur = utilisateurFacade.findByPseudo("Hillary");
+        utilisateur.setDakos(12);
         utilisateurFacade.edit(utilisateur);
         processRequest(request, response);
     }

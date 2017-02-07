@@ -27,8 +27,8 @@ public class Utilisateur implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int dakos;
-    private String nom;
-    private String prenom;
+    private String pseudo;
+    private String email;
     private int codePostal;
     private int age;
     private boolean estAdmin;
@@ -42,10 +42,10 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }
     
-    public Utilisateur(int dakos, String nom, String prenom, int codePostal, int age, boolean estAdmin) {
+    public Utilisateur(int dakos, String pseudo, String email, int codePostal, int age, boolean estAdmin) {
         this.dakos = dakos;
-        this.nom = nom;
-        this.prenom = prenom;
+        this.pseudo = pseudo;
+        this.email = email;
         this.codePostal = codePostal;
         this.age = age;
         this.estAdmin = estAdmin;
@@ -69,20 +69,20 @@ public class Utilisateur implements Serializable {
         this.dakos = dakos;
     }
 
-    public String getNom() {
-        return nom;
+    public String getPseudo() {
+        return pseudo;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getCodePostal() {
@@ -148,7 +148,7 @@ public class Utilisateur implements Serializable {
     @Override
     public String toString() {
         return "Utilisateur[ id=" + id + ", dakos=" + dakos +
-                ", nom=" + nom + ", prenom=" + prenom + ", code postal=" +
+                ", pseudo=" + pseudo + ", email=" + email + ", code postal=" +
                 codePostal + ", age=" + age + ", estAdmin=" + estAdmin +
                 ", a des annonces :" + !mesAnnonces.isEmpty() + 
                 ", a des commentaires :" + !commentaires.isEmpty() + "]";
