@@ -25,7 +25,6 @@ public class Connecteur {
      * Creates a new instance of Connecteur
      */
     public Connecteur() {
-        System.err.println("DAMN");
     }
 
     public Utilisateur getUtilisateur() {
@@ -40,10 +39,9 @@ public class Connecteur {
         return "index.xhtml";
     }
 
-    public String disconect(Identification idBean) {
-        System.err.println("HAAAAAAAAAAAA");
+    public String disconnect(Identification idBean) {
         idBean.clearIdentite();
-        return "index.xhtml";
+        return "deconnexion.xhtml";
     }
 
 }
