@@ -37,7 +37,6 @@ public class Identification implements Serializable {
 
     public void setIdentite(String pseudo, String mdp) {
         Utilisateur u = null;
-        System.err.println(pseudo);
         u = utilisateurFacade.findByPseudo(pseudo);
         if(u==null){
             //Pseudo pas bon
