@@ -8,8 +8,22 @@ and open the template in the editor.
     Author     : weschlel
 */
 
+#annonce {
+    width: 60%;
+}
+
+#titre {
+    font-weight: bold;
+}
+
 #prix {
     width: 70%;
+}
+
+#description {
+    height: 400px;
+    vertical-align: initial;
+    padding-top: 2%;
 }
 
 td {
@@ -18,4 +32,24 @@ td {
 
 #validation {
     text-align: right;
+}
+
+#tableau {
+    border-color: white !important;
+}
+
+#auteur {
+    vertical-align: top;
+}
+
+#auteur > table {
+    width: 100%
+}
+
+#consulterProfil {
+    text-align: center;
+}
+
+h1 {   
+    text-align: center;
 }

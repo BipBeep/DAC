@@ -7,53 +7,72 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
-
-
         <ui:composition template="./mainTemplate.xhtml">
             <ui:define name="css">
                 <h:outputStylesheet name="css/annonce.css"/>
             </ui:define>
 
             <ui:define name="content">
-
                 <p:panelGrid>
-                    <p:row>
-                        <p:column colspan="2">Titre Annonce</p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column colspan="2">Tags</p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column id="prix" colspan="1">Prix</p:column>
-                        <p:column>Code postal</p:column>
-                    </p:row>
+                    <p:row id="tableau">
+                        <p:column id="annonce">
+                            <p:panelGrid>
+                                <p:row>
+                                    <p:column colspan="2" id="titre">Titre Annonce</p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2">Tags</p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column id="prix" colspan="1">Prix</p:column>
+                                    <p:column>Code postal</p:column>
+                                </p:row>
 
-                    <p:row>
-                        <p:column colspan="2" style="font-weight: bold;">Description</p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column colspan="2">Devant la violence de cette scène nous préférons vous montrer ce documentaire consacré à la langouste. Contrairement à une idée largement répendue, la langouste se nourrit exclusivement de fruits de mer. Ce qui ne l’empêche pas de rester très humaine.</p:column>
-                    </p:row>
-                </p:panelGrid>
+                                <p:row>
+                                    <p:column id="description" colspan="2">
+                                        Description :
+                                        <br/>
+                                        <br/>
+                                        <span>
+                                            Devant la violence de cette scène nous préférons vous montrer ce documentaire consacré à la langouste. Contrairement à une idée largement répendue, la langouste se nourrit exclusivement de fruits de mer. Ce qui ne l’empêche pas de rester très humaine.
+                                        </span>
+                                    </p:column>
+                                </p:row>
 
-                <p:panelGrid>
-
-                    <p:row>
-                        <p:column>Pseudo</p:column>
-                    </p:row>
-
-                    <p:row>
-                        <p:column>Email</p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>Derniers commentaires :</p:column>
-                        <!-- COMMENTAIRES -->
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:commandButton value="Consulter le profil"/> 
+                            </p:panelGrid>
                         </p:column>
-                    </p:row>
+                        <p:column id="auteur">
+                            <p:panelGrid>
+                                <p:row>
+                                    <p:column>
+                                        <h1>Pseudo</h1>
+                                        <br/>
+                                        Email
+                                        <br/>
+                                        <br/>
+                                        Derniers commentaires :
+                                        <br/>
+                                        <ul>
+                                            <li>
+                                                Commentaire 1
+                                            </li>
+                                            <li>
+                                                Commentaire 2
+                                            </li>
+                                            <li>
+                                                Commentaire 3
+                                            </li>
+                                        </ul>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column id="consulterProfil">
+                                        <p:commandButton value="Consulter le profil"/>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:column>
+                    </p:row> 
                 </p:panelGrid>
 
                 <div id="validation">
@@ -61,8 +80,6 @@
                 </div>
 
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>
