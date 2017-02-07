@@ -6,11 +6,16 @@
 package fr.ensimag.dacodac.servlet;
 
 import fr.ensimag.dacodac.Utilisateur;
+import fr.ensimag.dacodac.Annonce;
+import fr.ensimag.dacodac.TypeAnnonce;
+import fr.ensimag.dacodac.Commentaire;
+
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import fr.ensimag.dacodac.stateless.CommentaireFacadeLocal;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +35,7 @@ public class init extends HttpServlet {
 
     @EJB(name = "annonceFacade")
     private AnnonceFacadeLocal annonceFacade;
-    
+
     @EJB(name = "commentaireFacade")
     private CommentaireFacadeLocal commentaireFacade;
 
@@ -72,38 +77,45 @@ public class init extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Utilisateur utilisateur = new Utilisateur(1, "Danald", "AMortLesSombreros", "donald.trump@maison-blanche.gouv", "28312", 60, false);
-        utilisateurFacade.create(utilisateur);
-        utilisateur = new Utilisateur(4, "Halliry", "JAimePasLesEmails", "hillary.clinton@defaite.lol", "52147", 55, true);
-        /*Annonce a = new Annonce(10, TypeAnnonce.OFFRE, utilisateur, new ArrayList<Utilisateur>(), 38000, "description", "titre", LocalDateTime.now());
 
+        Utilisateur utilisateur1 = new Utilisateur(1000000000, "Donald", "AMortLesSombreros", "donald.trump@maison-blanche.gouv", "28312", 60, false);
+        Utilisateur utilisateur2 = new Utilisateur(100000, "Jonas", "secret00", "jonas.maubert@j-aime-elle.com", "38190", 22, true);
+        Utilisateur utilisateur3 = new Utilisateur(100, "Leo", "secret00", "leo@gmail.com", "28300", 22, false);
+        Utilisateur utilisateur4 = new Utilisateur(100, "Nico", "secret00", "kamo@gmail.com", "28301", 22, false);
+        Utilisateur utilisateur5 = new Utilisateur(100, "Juju", "secret00", "juju@pl-s.com", "28302", 22, false);
+        Utilisateur utilisateur6 = new Utilisateur(400000, "Hillary", "JAimePasLesEmails", "hillary.clinton@defaite.seum", "52147", 98, false);
+        utilisateurFacade.create(utilisateur1);
+        utilisateurFacade.create(utilisateur2);
+        utilisateurFacade.create(utilisateur3);
+        utilisateurFacade.create(utilisateur4);
+        utilisateurFacade.create(utilisateur5);
+        utilisateurFacade.create(utilisateur6);
+        //public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, int codePostal, String description, String titre, LocalDateTime datePublication)
+        Annonce a1 = new Annonce(11, TypeAnnonce.OFFRE, utilisateur1, 38100, "description de l'offre numéro 1", "titre de l'offre 1", LocalDateTime.now());
+        //Annonce a2 = new Annonce(12, TypeAnnonce.OFFRE, utilisateur1, 38200, "description de l'offre numéro 2", "titre de l'offre 2", LocalDateTime.now());
+        //Annonce a3 = new Annonce(13, TypeAnnonce.OFFRE, utilisateur2, 38300, "description de l'offre numéro 3", "titre de l'offre 3", LocalDateTime.now());
+        Annonce a4 = new Annonce(14, TypeAnnonce.OFFRE, utilisateur2, 38400, "description de l'offre numéro 4", "titre de l'offre 4", LocalDateTime.now());
+        Annonce a5 = new Annonce(15, TypeAnnonce.OFFRE, utilisateur3, 38500, "description de l'offre numéro 5", "titre de l'offre 5", LocalDateTime.now());
+        annonceFacade.create(a1);
+        //annonceFacade.create(a2);
+        //annonceFacade.create(a3);
+        annonceFacade.create(a4);
+        annonceFacade.create(a5);
+        a1 = new Annonce(11, TypeAnnonce.DEMANDE, utilisateur1, 18100, "description de la demande numéro 1", "titre de la demande 1", LocalDateTime.now());
+        //a2 = new Annonce(12, TypeAnnonce.DEMANDE, utilisateur1, 18200, "description de la demande numéro 2", "titre de la demande 2", LocalDateTime.now());
+        //a3 = new Annonce(13, TypeAnnonce.DEMANDE, utilisateur4, 19300, "description de la demande numéro 3", "titre de la demande 3", LocalDateTime.now());
+        a4 = new Annonce(14, TypeAnnonce.DEMANDE, utilisateur4, 18400, "description de la demande numéro 4", "titre de la demande 4", LocalDateTime.now());
+        a5 = new Annonce(15, TypeAnnonce.DEMANDE, utilisateur5, 18500, "description de la demande numéro 5", "titre de la demande 5", LocalDateTime.now());
+        annonceFacade.create(a1);
+        //annonceFacade.create(a2);
+        //annonceFacade.create(a3);
+        annonceFacade.create(a4);
+        annonceFacade.create(a5);
 
-        Utilisateur utilisateur = new Utilisateur(1, "Donald", "A mort les sombrero", "donald.trump@maison-blanche.gouv", 2, 3, false);
-        utilisateurFacade.create(utilisateur);
-
-        utilisateur = utilisateurFacade.findByPseudo("Donald");
-        Annonce a = new Annonce(10, TypeAnnonce.OFFRE, utilisateur, 38000, "description", "Ceci est mon titre", LocalDateTime.now());
-        annonceFacade.create(a);
-        System.out.println("---------------------------------------------------------------------------------------");
-        System.out.println(a.getAuteur().getId());
-        System.out.println(utilisateur);
-        System.out.println("---------------------------------------------------------------------------------------11111");
-        a = annonceFacade.findByUtilAndTitre(a.getAuteur(), a.getTitre());
-        System.out.println("---------------------------------------------------------------------------------------22222");
-
-        System.out.println(a.getTitre());
-        Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
+        /*Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
         commentaireFacade.create(c);
         Commentaire retournes = commentaireFacade.findByAuteurAndAnnonce(utilisateur, a);
-        retournes.setDescription("NOUVELLE DESCRIPTION 245654222222");
-        commentaireFacade.edit(retournes);
-        utilisateur = new Utilisateur(4, "Hillary", "J'aime pas les emails", "hillary.clinton@defaite.sanders", 5, 6, true);
-
-        utilisateurFacade.create(utilisateur);
-        utilisateur = utilisateurFacade.findByPseudo("Halliry");
-        //utilisateurFacade.modifyUser(); */
-        utilisateur.setDakos(12);
-        utilisateurFacade.edit(utilisateur);
+         */
         processRequest(request, response);
     }
 
