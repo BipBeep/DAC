@@ -33,9 +33,15 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
     }
     
     @Override
-    public Utilisateur findByName(String nom)
+    public Utilisateur findByPseudo(String pseudo)
     {
-        return (Utilisateur) getEntityManager().createQuery("SELECT u FROM Utilisateur u WHERE u.nom LIKE :nom").setParameter("nom", nom).getResultList().get(0);
+        return (Utilisateur) getEntityManager().createQuery("SELECT u FROM Utilisateur u WHERE u.pseudo LIKE :pseudo")
+                .setParameter("pseudo", pseudo).getResultList().get(0);
+    }
+    
+    @Override
+    public void modifyUser() {
+        getEntityManager().createQuery("UPDATE Utilisateur SET dakos = 100 WHERE id = 2");
     }
     
 }

@@ -27,16 +27,17 @@ public class Commentaire implements Serializable {
     @ManyToOne
     private Utilisateur auteur;
     private LocalDateTime dateCreation;
-    private String titreAnnonce;
+    @ManyToOne
+    private Annonce annonce;
     private String description;
 
     public Commentaire() {
     }
     
-    public Commentaire(Utilisateur auteur, LocalDateTime dateCreation, String titreAnnonce, String description) {
+    public Commentaire(Utilisateur auteur, LocalDateTime dateCreation, Annonce annonce, String description) {
         this.auteur = auteur;
         this.dateCreation = dateCreation;
-        this.titreAnnonce = titreAnnonce;
+        this.annonce = annonce;
         this.description = description;
     }
     
@@ -56,8 +57,8 @@ public class Commentaire implements Serializable {
         return dateCreation;
     }
 
-    public String getTitreAnnonce() {
-        return titreAnnonce;
+    public Annonce getAnnonce() {
+        return annonce;
     }
 
     public String getDescription() {
@@ -72,8 +73,8 @@ public class Commentaire implements Serializable {
         this.dateCreation = dateCreation;
     }
 
-    public void setTitreAnnonce(String titreAnnonce) {
-        this.titreAnnonce = titreAnnonce;
+    public void setAnnonce(Annonce annonce) {
+        this.annonce = annonce;
     }
 
     public void setDescription(String description) {
@@ -102,6 +103,6 @@ public class Commentaire implements Serializable {
 
     @Override
     public String toString() {
-        return "Commentaire[id=" + id + ", ID-Auteur=" + auteur.getId() + ", DateCreation=" + dateCreation + ", TitreAnnonce=" + titreAnnonce + "]";
+        return "Commentaire[id=" + id + ", ID-Auteur=" + auteur.getId() + ", DateCreation=" + dateCreation + ", TitreAnnonce=" + annonce.getTitre() + "]";
     }
 }

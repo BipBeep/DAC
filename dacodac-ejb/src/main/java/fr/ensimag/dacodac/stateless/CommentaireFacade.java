@@ -6,6 +6,7 @@
 package fr.ensimag.dacodac.stateless;
 
 import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.Utilisateur;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,12 @@ public class CommentaireFacade extends AbstractFacade<Commentaire> implements Co
 
     public CommentaireFacade() {
         super(Commentaire.class);
+    }
+    
+    public Commentaire findByAnnonce(long annonceId)
+    {
+        return (Commentaire) getEntityManager().createQuery("SELECT c FROM Commentaire c WHERE c.annonce_id LIKE :annonceId")
+                .setParameter("annonceId", annonceId).getResultList().get(0);
     }
     
 }
