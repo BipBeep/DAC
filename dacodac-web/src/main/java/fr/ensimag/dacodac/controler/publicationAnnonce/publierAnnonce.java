@@ -26,7 +26,7 @@ public class publierAnnonce {
     private String tags;
     private String titre;
     private String description;
-    private String type;
+    private String type = "Offre";
     private String prix;
     private String codePostal;
  
