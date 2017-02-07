@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./mainTemplate.xhtml">
+
+            <ui:define name="css">
+                <h:outputStylesheet name="css/mesAnnonces.css"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <div id="mesAnnonces">
+                    <div class="type postees">
+                        <h2> Annonces postées </h2>
+
+                        <div class="boite">
+                            <h3>Offres</h3>
+                            <f:view>
+                                <p:dataTable value="#{Panier.offres}" var="offre">
+                                    <p:column>
+                                        <h:outputText value="#{offre.titre}"/>
+                                        <h:outputText value="Prix = #{offre.prix}"/>
+                                        <h:commandButton/>
+                                    </p:column>
+                                </p:dataTable>
+                            </f:view>
+                        </div>
+                        <h3>Demandes</h3>
+
+                        <div class="boite">
+                            <f:view>
+                                <p:dataTable value="#{Panier.demandes}" var="demande">
+                                    <p:column>
+                                        <h:outputText value="#{demande.titre}"/>
+                                        <h:outputText value="Prix = #{demande.prix}"/>
+                                        <h:commandButton/>
+                                    </p:column>
+                                </p:dataTable>
+                            </f:view>
+                        </div>
+                    </div>
+
+
+
+                    <div class="type reclamees">
+                        <h2> Annonces réclamées </h2>
+
+
+                        <div class="boite">
+                            <h3>Offres</h3>
+                            <f:view>
+                                <p:dataTable value="#{Panier.offres}" var="offre">
+                                    <p:column>
+                                        <h:outputText value="#{offre.titre}"/>
+                                        <h:outputText value="Prix = #{offre.prix}"/>
+                                        <h:commandButton/>
+                                    </p:column>
+                                </p:dataTable>
+                            </f:view>
+                        </div>
+
+                        <div class="boite">
+                            <h3>Demandes</h3>
+                            <f:view>
+                                <p:dataTable value="#{Panier.demandes}" var="demande">
+                                    <p:column>
+                                        <h:outputText value="#{demande.titre}"/>
+                                        <h:outputText value="Prix = #{demande.prix}"/>
+                                        <h:commandButton/>
+                                    </p:column>
+                                </p:dataTable>
+                            </f:view>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
