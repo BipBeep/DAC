@@ -72,9 +72,9 @@ public class init extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Utilisateur utilisateur = new Utilisateur(1, "Danald", "AMortLesSombreros", "donald.trump@maison-blanche.gouv", 28312, 60, false);
+        Utilisateur utilisateur = new Utilisateur(1, "Danald", "AMortLesSombreros", "donald.trump@maison-blanche.gouv", "28312", 60, false);
         utilisateurFacade.create(utilisateur);
-        utilisateur = new Utilisateur(4, "Halliry", "JAimePasLesEmails", "hillary.clinton@defaite.lol", 52147, 55, true);
+        utilisateur = new Utilisateur(4, "Halliry", "JAimePasLesEmails", "hillary.clinton@defaite.lol", "52147", 55, true);
         /*Annonce a = new Annonce(10, TypeAnnonce.OFFRE, utilisateur, new ArrayList<Utilisateur>(), 38000, "description", "titre", LocalDateTime.now());
 
 

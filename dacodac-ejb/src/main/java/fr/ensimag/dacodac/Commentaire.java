@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -24,11 +26,20 @@ public class Commentaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
     @ManyToOne
+    @Column(nullable=false)
     private Utilisateur auteur;
+    
+    @Column(nullable=false)
     private LocalDateTime dateCreation;
+    
     @ManyToOne
+    @Column(nullable=false)
     private Annonce annonce;
+    
+    @Column(nullable=false)
+    @Size(min=1, max=1023)
     private String description;
 
     public Commentaire() {
