@@ -9,17 +9,20 @@ and open the template in the editor.
 */
 
 #panierGauche {
+    display: inline-block;
     float:left; 
-    width:50px;
-    border-width:2px;
+    width:45%;
     color: red;
-    
+    border:1px solid black;
+    vertical-align: top;
+
 }
 
 .panierDroit {
+    display: inline-block;
     float:right; 
-    width:50px;
-    border-width:2px;
+    width:45%;
     color: black;
-    
+    border:1px solid black;
+    vertical-align: top;
 }
