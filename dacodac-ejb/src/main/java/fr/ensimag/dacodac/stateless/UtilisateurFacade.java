@@ -39,4 +39,9 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
                 .setParameter("pseudo", pseudo).getResultList().get(0);
     }
     
+    @Override
+    public void createUser(int dakos, String pseudo, String email, int codePostal, int age, boolean estAdmin) {
+        
+    }
+    
 }

@@ -69,7 +69,8 @@ public class init extends HttpServlet {
         utilisateurFacade.create(utilisateur);
         utilisateur = new Utilisateur(4, "Hillary", "hillary.clinton@defaite.sanders", 5, 6, true);
         utilisateurFacade.create(utilisateur);
-        utilisateur = utilisateurFacade.findByPseudo("Hillary");
+        utilisateur = utilisateurFacade.findByPseudo("Hillary"); 
+        //INSERT INTO utilisateur (dakos, pseudo, email, age, estAdmin, mesAnnonces, commentaires)\n" + " VALUES\n" + " (5, 'MLP', 'marie-laure.potet@tl.com', 50, false)");
         utilisateur.setDakos(12);
         utilisateurFacade.edit(utilisateur);
         processRequest(request, response);
