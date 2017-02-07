@@ -51,8 +51,9 @@ public class Utilisateur implements Serializable {
         this.codePostal = codePostal;
         this.age = age;
         this.estAdmin = estAdmin;
-        this.mesAnnonces = new ArrayList<Annonce>();
-        this.commentaires = new ArrayList<Commentaire>();
+        
+        this.mesAnnonces = new ArrayList<>();
+        this.commentaires = new ArrayList<>();
     }
     
     public Long getId() {

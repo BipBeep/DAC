@@ -5,11 +5,18 @@
  */
 package fr.ensimag.dacodac.servlet;
 
+import fr.ensimag.dacodac.Annonce;
+import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.TypeAnnonce;
 import fr.ensimag.dacodac.Utilisateur;
+import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
+import fr.ensimag.dacodac.stateless.CommentaireFacadeLocal;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +33,10 @@ public class init extends HttpServlet {
 
     @EJB(name = "utilisateurFacade")
     private UtilisateurFacadeLocal utilisateurFacade;
-
+    private AnnonceFacadeLocal annonceFacade;
+    private CommentaireFacadeLocal commentaireFacade;
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -68,6 +78,10 @@ public class init extends HttpServlet {
         Utilisateur utilisateur = new Utilisateur(1, "Donald", "A mort les sombrero", "donald.trump@maison-blanche.gouv", 2, 3, false);
         utilisateurFacade.create(utilisateur);
         utilisateur = new Utilisateur(4, "Hillary", "J'aime pas les emails", "hillary.clinton@defaite.sanders", 5, 6, true);
+        /*Annonce a = new Annonce(10, TypeAnnonce.OFFRE, utilisateur, new ArrayList<Utilisateur>(), 38000, "description", "titre", LocalDateTime.now());
+        annonceFacade.create(a);
+        Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
+        commentaireFacade.create(c);*/
         utilisateurFacade.create(utilisateur);
         utilisateur = utilisateurFacade.findByPseudo("Hillary");
         utilisateurFacade.modifyUser();

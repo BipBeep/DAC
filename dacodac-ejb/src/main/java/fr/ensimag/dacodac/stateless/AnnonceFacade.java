@@ -6,6 +6,9 @@
 package fr.ensimag.dacodac.stateless;
 
 import fr.ensimag.dacodac.Annonce;
+import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.Utilisateur;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +32,18 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         super(Annonce.class);
     }
     
+    @Override
+    public void addCommentaire(Annonce annonce, Commentaire com)
+    {
+        List<Commentaire> commentaires = annonce.getCommentaires();
+        commentaires.add(com);
+        annonce.setCommentaires(commentaires);
+    }
+
+    @Override
+    public void addPostulant(Annonce annonce, Utilisateur utilisateur) {
+        List<Utilisateur> postulants = annonce.getPostulants();
+        postulants.add(utilisateur);
+        annonce.setPostulants(postulants);
+    }
 }
