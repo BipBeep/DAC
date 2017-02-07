@@ -60,7 +60,7 @@ public class Utilisateur implements Serializable {
     private boolean estAdmin;
     
     @OneToMany
-    private List<Annonce> mesAnnonces;
+    private List<Annonce> annonces;
     
     @OneToMany
     private List<Commentaire> commentaires;
@@ -75,8 +75,9 @@ public class Utilisateur implements Serializable {
         this.email = email;
         this.codePostal = codePostal;
         this.age = age;
-        this.estAdmin = estAdmin;      
-        this.mesAnnonces = new ArrayList<>();
+        this.estAdmin = estAdmin;
+        
+        this.annonces = new ArrayList<>();
         this.commentaires = new ArrayList<>();
     }
     
@@ -144,12 +145,12 @@ public class Utilisateur implements Serializable {
         this.estAdmin = estAdmin;
     }
 
-    public List<Annonce> getMesAnnonces() {
-        return mesAnnonces;
+    public List<Annonce> getAnnonces() {
+        return annonces;
     }
 
-    public void setMesAnnonces(List<Annonce> mesAnnonces) {
-        this.mesAnnonces = mesAnnonces;
+    public void setAnnonces(List<Annonce> annonces) {
+        this.annonces = annonces;
     }
 
     public List<Commentaire> getCommentaires() {
@@ -185,7 +186,7 @@ public class Utilisateur implements Serializable {
         return "Utilisateur[ id=" + id + ", dakos=" + dakos +
                 ", pseudo=" + pseudo + ", email=" + email + ", code postal=" +
                 codePostal + ", age=" + age + ", estAdmin=" + estAdmin +
-                ", a des annonces :" + !mesAnnonces.isEmpty() + 
+                ", a des annonces :" + !annonces.isEmpty() + 
                 ", a des commentaires :" + !commentaires.isEmpty() + "]";
     }
     

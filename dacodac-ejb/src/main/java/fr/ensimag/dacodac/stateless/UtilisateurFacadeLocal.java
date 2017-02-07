@@ -5,6 +5,8 @@
  */
 package fr.ensimag.dacodac.stateless;
 
+import fr.ensimag.dacodac.Annonce;
+import fr.ensimag.dacodac.Commentaire;
 import fr.ensimag.dacodac.Utilisateur;
 import java.util.List;
 import javax.ejb.Local;
@@ -21,6 +23,10 @@ public interface UtilisateurFacadeLocal {
     void edit(Utilisateur utilisateur);
 
     void remove(Utilisateur utilisateur);
+    
+    void addCommentaire(Utilisateur utilisateur, Commentaire commentaire);
+    
+    void addAnnonce(Utilisateur utilisateur, Annonce annonce);
 
     Utilisateur find(Object id);
     
