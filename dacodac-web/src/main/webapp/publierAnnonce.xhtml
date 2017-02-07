@@ -1,14 +1,70 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"      
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <body>
 
         <ui:composition template="./mainTemplate.xhtml">
 
             <ui:define name="content">
-                Publication d'annonce
+                <h:form>
+                    <p:panel header="Publier une annonce">
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <h:outputLabel for="description" value="Description" />
+                            <p:inputTextarea id="description" rows="5" cols="30" 
+                                counter="display" maxlength="1000" counterTemplate="{0} characters remaining." 
+                                autoResize="false" required="true"/>
+                            <p:message for="description" display="icon" />
+                            <h:outputText id="display" value="#{publierAnnonce.description}" />
+                            
+                            <h:outputLabel for="tags" value="Tags" />
+                            <p:inputText id="tags" value="#{publierAnnonce.tags}" required="true">
+                                <f:validateLength />
+                                <p:clientValidator />
+                            </p:inputText>
+                            <p:message for="tags" display="icon" />
+                            <h:outputText value="#{publierAnnonce.tags}" />
+
+                            <h:outputLabel for="titre" value="Titre" />
+                            <p:inputText id="titre" value="#{publierAnnonce.titre}">
+                                <p:clientValidator event="keyup"/>
+                            </p:inputText>
+                            <p:message for="titre" display="icon" />
+                            <h:outputText value="#{publierAnnonce.titre}" />
+                            
+                            <p:outputLabel for="type" value="Type" />
+                            <p:selectOneRadio id="type" value="#{publierAnnonce.type}">
+                                <f:selectItem itemLabel="Offre" itemValue="Offre" />
+                                <f:selectItem itemLabel="Demande" itemValue="Demande" />
+                            </p:selectOneRadio>
+                        </h:panelGrid>
+                            
+                        <h:panelGrid columns="4" cellpadding="5">
+                            <h:outputLabel for="prix" value="Prix (en dakos)" />
+                            <p:inputText size="3" id="prix" value="#{publierAnnonce.prix}">
+                                <p:clientValidator event="keyup"/>
+                            </p:inputText>
+                            <p:message for="prix" display="icon" />
+                            <h:outputText value="#{publierAnnonce.prix}" />
+                            
+                            <h:outputLabel for="codePostal" value="Code postal" />
+                            <p:inputText size="5" id="codePostal" value="#{publierAnnonce.codePostal}">
+                                <p:clientValidator event="keyup"/>
+                            </p:inputText>
+                            <p:message for="codePostal" display="icon" />
+                            <h:outputText value="#{publierAnnonce.codePostal}" />
+                        </h:panelGrid>
+
+                        <p:commandButton value="Publier l'annonce" ajax="false" validateClient="true" />
+                    </p:panel>
+                </h:form>
+                <p:button outcome="/index.xhtml" value="Annuler" icon="ui-icon-circle-close">
+                    <f:param name="annuler" value="10" />
+                </p:button>
             </ui:define>
 
         </ui:composition>
