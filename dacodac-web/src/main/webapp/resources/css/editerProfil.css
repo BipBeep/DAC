@@ -1,0 +1,36 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 6, 2017, 9:11:09 AM
+    Author     : mignotju
+*/
+
+#accueil {
+    color: #000;
+    background-color: #CCFF99;
+}
+
+.ui-tabmenu 
+{
+    background-image: none;
+}
+
+.ui-tabmenu .ui-tabmenu-nav
+{
+    background-color: #88421D;
+    background-image: none;
+}
+
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a{
+    background-color: #D19275;
+}
+
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a:active,
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a:hover
+{
+    background-color: #CCFF99;
+    
+}
