@@ -30,7 +30,7 @@ public class Utilisateur implements Serializable {
     
     @Min(0)
     @Column(nullable=false)
-    private int dakos;
+    private int dakos = 100;
     
     @Pattern(regexp="^[A-Za-z0-9]+$")
     @Size(min=1, max=63)
@@ -54,10 +54,10 @@ public class Utilisateur implements Serializable {
     @Min(12)
     @Max(150)
     @Column(nullable=false)
-    private int age;
+    private int age = 20;
     
     @Column(nullable=false)
-    private boolean estAdmin;
+    private boolean estAdmin = false;
     
     @OneToMany
     private List<Annonce> annonces;
