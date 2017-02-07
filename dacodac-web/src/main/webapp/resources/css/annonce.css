@@ -1,0 +1,55 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 6, 2017, 9:11:09 AM
+    Author     : weschlel
+*/
+
+#annonce {
+    width: 60%;
+}
+
+#titre {
+    font-weight: bold;
+}
+
+#prix {
+    width: 70%;
+}
+
+#description {
+    height: 400px;
+    vertical-align: initial;
+    padding-top: 2%;
+}
+
+td {
+    text-align: left;
+}
+
+#validation {
+    text-align: right;
+}
+
+#tableau {
+    border-color: white !important;
+}
+
+#auteur {
+    vertical-align: top;
+}
+
+#auteur > table {
+    width: 100%
+}
+
+#consulterProfil {
+    text-align: center;
+}
+
+h1 {   
+    text-align: center;
+}
