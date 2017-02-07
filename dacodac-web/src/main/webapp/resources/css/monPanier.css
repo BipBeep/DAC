@@ -8,21 +8,36 @@ and open the template in the editor.
     Author     : maubertj
 */
 
-#panierGauche {
-    display: inline-block;
-    float:left; 
+.elements {
+    display: flex;
+    justify-content: space-between;
+    margin:10px 0px 10px 0px;
+}
+
+.block_demandes {
     width:45%;
-    color: red;
-    border:1px solid black;
-    vertical-align: top;
 
 }
 
-.panierDroit {
-    display: inline-block;
-    float:right; 
+.block_offres {
     width:45%;
-    color: black;
+}
+
+ul {
     border:1px solid black;
-    vertical-align: top;
+}
+
+h2 {
+    text-align: center;
+}
+
+input[type="submit"]{
+    margin:0px 0px 0px 50%;
+}
+
+
+.total {
+    width:auto;
+    display: flex;
+    justify-content: space-between;
 }
