@@ -46,4 +46,9 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         postulants.add(utilisateur);
         annonce.setPostulants(postulants);
     }
+    
+    /*public createAnnonce(Annonce annonce)
+    {
+        
+    }*/
 }
