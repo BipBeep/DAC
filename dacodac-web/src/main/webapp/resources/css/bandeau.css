@@ -12,3 +12,25 @@ and open the template in the editor.
     color: #000;
     background-color: #CCFF99;
 }
+
+.ui-tabmenu 
+{
+    background-image: none;
+}
+
+.ui-tabmenu .ui-tabmenu-nav
+{
+    background-color: #88421D;
+    background-image: none;
+}
+
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a{
+    background-color: #D19275;
+}
+
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a:active,
+.ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem a:hover
+{
+    background-color: #CCFF99;
+    
+}
