@@ -18,4 +18,21 @@ public class Departement {
         this.nom = nom;
     }
     
+    public int getNumero() {
+        return this.numero;
+    }
+    
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+    
+    public String getNom() {
+        return this.nom;
+    }
+    
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    
+    
 }

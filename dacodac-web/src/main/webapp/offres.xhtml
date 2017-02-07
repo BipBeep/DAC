@@ -15,13 +15,13 @@
                     <p:panel header="Recherche">
                         <h:panelGrid columns="4" cellpadding="5">
                             <p:inputText style="margin-right:10px" placeholder="Mots clés..."/>
-                            <p:selectOneMenu value="Département">
-                                <f:selectItems id="item"
-                                               value="#{Offres.departements}" var="c"
-                                               itemLabel="#{c.numero - c.nom}" itemValue="#{Offres.departement}" />
+                            
+                            <p:selectOneMenu id="country" value="#{offres.departement}" style="width:150px">
+                                <f:selectItem itemLabel="Département" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{offres.departements}" />
                             </p:selectOneMenu>
 
-                            <p:selectOneMenu id="tri" value="#{Offres.tri}">
+                            <p:selectOneMenu id="tri" value="#{offres.tri}">
                                 <f:selectItem itemLabel="Par prix croissants" itemValue="prix_croissants" />
                                 <f:selectItem itemLabel="Par prix décroissants" itemValue="prix_decroissants" />
                                 <f:selectItem itemLabel="Par dates (du plus récent au plus ancien)" itemValue="dates_croissantes" />
