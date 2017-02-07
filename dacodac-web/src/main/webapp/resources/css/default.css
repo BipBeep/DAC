@@ -1,3 +1,4 @@
+
 body {
     background-color: #CCFF99;
     font-size: 14px;
@@ -9,12 +10,12 @@ body {
 h1 {
     font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     border-bottom: 2px solid #AFAFAF; 
-    font-size:  20px;
+    font-size:  24px;
     font-weight: bold;
     margin: 0px;
     padding: 0px;
     padding-bottom: 3px;
-    color: #000000;//#D20005;
+    color: #000000;/*#D20005*/
 }
 
 a:link, a:visited {
