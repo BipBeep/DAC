@@ -7,6 +7,7 @@ package fr.ensimag.dacodac.stateless;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.Utilisateur;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,13 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         annonce.setPostulants(postulants);
     }
 
+    @Override
+    public void addTag(Annonce annonce, Tag tag) {
+        List<Tag> tags = annonce.getTags();
+        tags.add(tag);
+        annonce.setTags(tags);
+    }
+    
     @Override
     public void removePostulant(Annonce annonce, Utilisateur utilisateur) {
         List<Utilisateur> postulants = annonce.getPostulants();

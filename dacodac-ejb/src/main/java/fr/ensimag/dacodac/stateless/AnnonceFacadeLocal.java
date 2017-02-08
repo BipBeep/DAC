@@ -7,6 +7,7 @@ package fr.ensimag.dacodac.stateless;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.Utilisateur;
 
 import java.util.List;
@@ -30,6 +31,8 @@ public interface AnnonceFacadeLocal {
     Annonce findByUtilAndTitre(Utilisateur u, String titre);
 
     void addPostulant(Annonce annonce, Utilisateur utilisateur);
+    
+    void addTag(Annonce annonce, Tag tag);
 
     void removePostulant(Annonce annonce, Utilisateur utilisateur);
 
