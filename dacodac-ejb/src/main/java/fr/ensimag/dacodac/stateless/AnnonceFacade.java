@@ -8,6 +8,8 @@ package fr.ensimag.dacodac.stateless;
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
 import fr.ensimag.dacodac.Utilisateur;
+import fr.ensimag.dacodac.TypeAnnonce;
+
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -53,4 +55,10 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         return (Annonce) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.titre LIKE :titre and a.auteur = :auteur")
                 .setParameter("titre", titre).setParameter("auteur", u).getResultList().get(0);
     }
+    
+    @Override
+    public List<Annonce> findLatest(int nbAnnoncesAffichees, TypeAnnonce type) {
+        return getEntityManager().createQuery("SELECT a FROM Annonce a").getResultList();
+    }
+    
 }
