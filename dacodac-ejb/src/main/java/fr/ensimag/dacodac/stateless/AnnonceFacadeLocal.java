@@ -38,6 +38,8 @@ public interface AnnonceFacadeLocal {
     void addPostulant(Annonce annonce, Utilisateur utilisateur);
 
     void addTag(Annonce annonce, Tag tag);
+    
+    void modifierType(Annonce annonce, TypeAnnonce type);
 
     void removePostulant(Annonce annonce, Utilisateur utilisateur);
 

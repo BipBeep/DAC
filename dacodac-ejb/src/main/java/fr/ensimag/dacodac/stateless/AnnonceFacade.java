@@ -56,6 +56,11 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         tags.add(tag);
         annonce.setTags(tags);
     }
+    
+    @Override
+    public void modifierType(Annonce annonce, TypeAnnonce type) {
+        annonce.setType(type);
+    }
 
     @Override
     public void removePostulant(Annonce annonce, Utilisateur utilisateur) {

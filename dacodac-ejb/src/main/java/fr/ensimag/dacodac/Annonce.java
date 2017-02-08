@@ -219,7 +219,7 @@ public class Annonce implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.ensimag.dacodac.Annonce[ id=" + id + " ]";
+        return "fr.ensimag.dacodac.Annonce[ cp=" + codePostal + " ]";
     }
 
     public boolean isEstValidee() {
