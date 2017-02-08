@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+        <ui:composition template="./mainTemplate.xhtml">
+            <ui:define name="css">
+                <h:outputStylesheet name="css/modifierAnnonce.css"/>
+            </ui:define>
+
+            <ui:define name="content">
+                <p:panelGrid style="text-align: center">
+                    <p:row id="tableau">
+                        <p:column id="annonce">
+                            <p:panelGrid>
+                                <p:row>
+                                    <p:column colspan="2" id="titre">
+                                        <h:outputLabel for="titre" value="Titre Annonce" />
+                                        <p:inputText id="ti" value="Titre Annonce" required="true" >
+                                            <f:validateLength minimum="2" maximum="5" />
+                                            <p:clientValidator />
+                                        </p:inputText>
+                                        <p:message for="titre" display="icon" />
+                                        <h:outputText id="titreText" value="#{validationView.text} "  />
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2" id="tags">
+                                        <h:outputLabel for="tags" value="Tags" />
+                                        <p:inputText  id="ti" value="Tags" required="true">
+                                            <f:validateLength minimum="2" maximum="5" />
+                                            <p:clientValidator />
+                                        </p:inputText>
+                                        <p:message for="tags" display="icon" />
+                                        <h:outputText value="#{validationView.text}" />
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2" id="prix">
+                                        <h:outputLabel for="prix" value="Prix" />
+                                        <p:inputText  id="ti" value="Prix" required="true">
+                                            <f:validateLength minimum="2" maximum="5" />
+                                            <p:clientValidator />
+                                        </p:inputText>
+                                        <p:message for="tags" display="icon" />
+                                        <h:outputText value="#{validationView.text}" />
+                                    </p:column>
+                                    <p:column colspan="2" id="code">
+                                        <h:outputLabel for="code" value="Code Postal" />
+                                        <p:inputText id="ti" value="Code Postal" required="true">
+                                            <f:validateLength minimum="2" maximum="5" />
+                                            <p:clientValidator />
+                                        </p:inputText>
+                                        <p:message for="code" display="icon" />
+                                        <h:outputText value="#{validationView.text}" />
+                                    </p:column>
+                                </p:row>
+
+                                <p:row>
+                                    <p:column id="description" colspan="2">
+                                        <h:panelGrid>
+                                        <p:message for="description" display="icon" />
+                                        <h:outputText value="#{validationView.text}" />
+                                        <h:outputLabel id="labelDescription" for="text" value="Description :" />
+                                        <p:inputTextarea id="integer" value="#{validationView.integer}" rows = "6" cols ="33">
+                                            <p:clientValidator event="keyup"/>
+                                        </p:inputTextarea>
+                                        <p:message for="integer" display="icon" />
+                                        <h:outputText value="#{validationView.integer}" />
+                                        <span><h3>Aucune réponse à cette annonce</h3></span>
+                                        </h:panelGrid>
+                                    </p:column>
+                                </p:row>
+
+                            </p:panelGrid>
+                        </p:column>
+
+                    </p:row> 
+                </p:panelGrid>
+
+                <div id="validation">
+                    <p:commandButton id="valid" value="Valider l'édition" icon="ui-icon-check"  />
+                    <p:commandButton id="suppr" value="Supprimer" icon="ui-icon-check" />
+                </div>
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>
