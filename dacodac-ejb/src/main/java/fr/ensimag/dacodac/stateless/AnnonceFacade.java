@@ -79,9 +79,8 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         }
     }
     
-    // Selectionner le bon tag dans la liste des tags
     @Override
-    public List<Annonce> findByTag(Tag tag) {
+    public List<Annonce> findByTag(List<Tag> tags) {
         List<Annonce> annonces = findAll();    
         if (annonces.isEmpty())
         {
@@ -89,8 +88,14 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         }
         else
         {
+            boolean trouve = true;
             for (Annonce annonce : annonces) {
-                if (annonce.getTags().contains(tag)) {
+                for (Tag tag : tags) {
+                    if (!annonce.getTags().contains(tag)) {
+                        trouve = false;
+                    }
+                }
+                if (!trouve) {
                     annonces.remove(annonce);
                 }
             }
