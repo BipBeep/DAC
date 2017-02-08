@@ -96,7 +96,7 @@ public class init extends HttpServlet {
         Annonce a3 = new Annonce(13, TypeAnnonce.OFFRE, utilisateur2, "38300", "description de l'offre numéro 3", "titre de l'offre 3", LocalDateTime.now());
         Annonce a4 = new Annonce(14, TypeAnnonce.OFFRE, utilisateur2, "38400", "description de l'offre numéro 4", "titre de l'offre 4", LocalDateTime.now());
         Annonce a5 = new Annonce(15, TypeAnnonce.OFFRE, utilisateur3, "38500", "description de l'offre numéro 5", "titre de l'offre 5", LocalDateTime.now());
-        
+
         Annonce a6 = new Annonce(6, TypeAnnonce.DEMANDE, utilisateur1, "18100", "description de la demande numéro 6", "titre de la demande 6", LocalDateTime.now());
         Annonce a7 = new Annonce(7, TypeAnnonce.DEMANDE, utilisateur1, "18200", "description de la demande numéro 7", "titre de la demande 7", LocalDateTime.now());
         Annonce a8 = new Annonce(8, TypeAnnonce.DEMANDE, utilisateur4, "19300", "description de la demande numéro 8", "titre de la demande 8", LocalDateTime.now());
@@ -113,9 +113,25 @@ public class init extends HttpServlet {
         annonceFacade.create(a9);
         annonceFacade.create(a10);
         annonceFacade.addPostulant(a1, utilisateur2);
-        annonceFacade.addPostulant(a1, utilisateur3);
+        annonceFacade.addPostulant(a1, utilisateur3); //Des personnes ont postulé à a1
         annonceFacade.edit(a1);
-        
+        annonceFacade.addPostulant(a2, utilisateur6);
+        annonceFacade.accepterPostulant(a2, utilisateur6); //Une personne est validé pour a2
+        annonceFacade.addPostulant(a3, utilisateur1); //U1 postule a a3 et a4
+        annonceFacade.addPostulant(a4, utilisateur1);
+        annonceFacade.accepterPostulant(a3, utilisateur1); // U1 sera validé pour a3
+        annonceFacade.edit(a2);
+        annonceFacade.edit(a3);
+        annonceFacade.edit(a4);
+        annonceFacade.addPostulant(a6, utilisateur2);
+        annonceFacade.accepterPostulant(a6, utilisateur2);//U2 sera validé pour a6
+        //a7 n'aura aucun postulants
+        annonceFacade.addPostulant(a8, utilisateur1);//U1 ne sera pas encore validé pour a8
+        annonceFacade.addPostulant(a9, utilisateur1);
+        annonceFacade.accepterPostulant(a9, utilisateur1);//U1 sera validé pour a9
+        annonceFacade.edit(a6);
+        annonceFacade.edit(a8);
+        annonceFacade.edit(a9);
         /*Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
         commentaireFacade.create(c);
         Commentaire retournes = commentaireFacade.findByAuteurAndAnnonce(utilisateur, a);
