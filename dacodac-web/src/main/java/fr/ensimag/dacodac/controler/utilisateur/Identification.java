@@ -40,6 +40,7 @@ public class Identification implements Serializable {
         u = utilisateurFacade.findByPseudo(pseudo);
         if(u==null){
             //Pseudo pas bon
+            return;
         }
         if(u.getPassword().equals(mdp)){
             //Ok
