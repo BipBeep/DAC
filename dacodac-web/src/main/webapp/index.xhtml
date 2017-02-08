@@ -21,9 +21,8 @@
                         <f:view>
                             <p:dataTable value="#{index.dernieresOffres()}" var="offre">
                                 <p:column>
-                                    <h:outputText value="#{offre.titre}"/>
+                                    <h:outputText id="titre" value="#{offre.titre}"/>
                                     <br />
-
                                     <h:outputText value="#{offre.codePostal}"/>
                                     <br />
                                     <h:outputText value="Prix = #{offre.prix}"/>
@@ -38,9 +37,8 @@
                         <f:view>
                             <p:dataTable value="#{index.dernieresDemandes()}" var="demande">
                                 <p:column>
-                                    <h:outputText value="#{demande.titre}"/>
+                                    <h:outputText id="titre" value="#{demande.titre}"/>
                                     <br />
-
                                     <h:outputText value="#{demande.codePostal}"/>
                                     <br />
                                     <h:outputText value="Prix = #{demande.prix}"/>
