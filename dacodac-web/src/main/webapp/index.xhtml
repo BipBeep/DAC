@@ -19,10 +19,14 @@
                     <div class="block_offres">
                         <h2> Dernières offres </h2>
                         <f:view>
-                            <p:dataTable value="#{index.dernieresOffres()}" var="offre">
+                            <p:dataTable value="#{dernieresAnnonces.dernieresOffres()}" var="offre">
                                 <p:column>
                                     <h:outputText class="titre" value="#{offre.titre}"/>
-                                    <br />
+                                    <ul>
+                                        <ui:repeat value="#{offre.tags}" var="tag">
+                                            <li><h:outputText value="#{tag}, "/></li>
+                                        </ui:repeat>
+                                    </ul>
                                     <h:outputText value="Code postal : #{offre.codePostal}"/>
                                     <br />
                                     <h:outputText value="Prix : #{offre.prix} Dakos"/>
@@ -35,10 +39,14 @@
                     <div class="block_demandes">
                         <h2> Dernières demandes </h2>
                         <f:view>
-                            <p:dataTable value="#{index.dernieresDemandes()}" var="demande">
+                            <p:dataTable value="#{dernieresAnnonces.dernieresDemandes()}" var="demande">
                                 <p:column>
                                     <h:outputText class="titre" value="#{demande.titre}"/>
-                                    <br />
+                                    <ul>
+                                        <ui:repeat value="#{demande.tags}" var="tag">
+                                            <li><h:outputText value="#{tag}, "/></li>
+                                        </ui:repeat>
+                                    </ul>
                                     <h:outputText value="Code postal : #{demande.codePostal}"/>
                                     <br />
                                     <h:outputText value="Prix : #{demande.prix} Dakos"/>

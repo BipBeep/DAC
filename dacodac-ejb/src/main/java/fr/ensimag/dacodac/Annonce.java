@@ -6,9 +6,8 @@
 package fr.ensimag.dacodac;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,10 +43,9 @@ public class Annonce implements Serializable {
     @Column(nullable = false)
     private TypeAnnonce type;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    //NEED HELP
+    //@Temporal(TemporalType.DATE)
     @Column(nullable = false)
-    private Date datePublication;
+    private LocalDate datePublication;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -87,7 +85,7 @@ public class Annonce implements Serializable {
     public Annonce() {
     }
 
-    public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, String codePostal, String description, String titre, Date datePublication) {
+    public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, String codePostal, String description, String titre, LocalDate datePublication) {
         this.prix = prix;
         this.type = type;
         this.auteur = auteur;
@@ -138,7 +136,7 @@ public class Annonce implements Serializable {
      *
      * @return the value of datePublication
      */
-    public Date getDatePublication() {
+    public LocalDate getDatePublication() {
         return datePublication;
     }
 
@@ -147,7 +145,7 @@ public class Annonce implements Serializable {
      *
      * @param datePublication new value of datePublication
      */
-    public void setDatePublication(Date datePublication) {
+    public void setDatePublication(LocalDate datePublication) {
         this.datePublication = datePublication;
     }
 

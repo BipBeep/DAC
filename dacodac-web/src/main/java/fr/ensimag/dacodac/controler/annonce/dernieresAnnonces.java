@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.ensimag.dacodac.controler.index;
+package fr.ensimag.dacodac.controler.annonce;
 
 import java.util.List;
 import fr.ensimag.dacodac.Annonce;
@@ -17,9 +17,9 @@ import javax.ejb.EJB;
  *
  * @author weschlel
  */
-@Named(value = "index")
+@Named(value = "dernieresAnnonces")
 @RequestScoped
-public class Index {
+public class dernieresAnnonces {
 
     @EJB(name = "annonceFacade")
     private AnnonceFacadeLocal annonceFacade;
@@ -27,19 +27,23 @@ public class Index {
     /**
      * Creates a new instance of Index
      */
-    public Index() {
+    public dernieresAnnonces() {
     }
     
 
-    /* Renvoie les 3 dernières offres */
+    /* Renvoie les dernières offres */
     public List<Annonce> dernieresOffres() {
-        int nbAnnoncesAffichees = 3;
-        return annonceFacade.findLatest(nbAnnoncesAffichees, TypeAnnonce.OFFRE);
+        int nbAnnoncesAffichees = 5;
+        List<Annonce> list = annonceFacade.findLatest(nbAnnoncesAffichees, TypeAnnonce.OFFRE);
+     //   System.out.println("----------------------****----------------------------");
+     //   list.stream().forEach(e -> e.getTags().stream().forEach(t -> System.out.println("TAG : " + t)));
+    //    System.out.println("----------------------////----------------------------");
+        return list;
     }
 
-    /* Renvoie les 3 dernières demandes */
+    /* Renvoie les dernières demandes */
     public List<Annonce> dernieresDemandes() {
-        int nbAnnoncesAffichees = 3;
+        int nbAnnoncesAffichees = 5;
         List<Annonce> list = annonceFacade.findLatest(nbAnnoncesAffichees, TypeAnnonce.DEMANDE);
         return list;
     }
