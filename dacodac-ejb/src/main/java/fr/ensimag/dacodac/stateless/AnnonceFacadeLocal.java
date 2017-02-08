@@ -45,6 +45,8 @@ public interface AnnonceFacadeLocal {
     void accepterPostulant(Annonce annonce, Utilisateur utilisateur);
 
     List<Annonce> findAll();
+    
+    List<Annonce> findByTag(Tag tag);
 
     List<Annonce> findRange(int[] range);
 
