@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.ensimag.dacodac.controler.publicationAnnonce;
+package fr.ensimag.dacodac.controler.annonce;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Utilisateur;
@@ -16,31 +16,25 @@ import javax.enterprise.context.Dependent;
  *
  * @author maubertj
  */
-@Named(value = "managePostulantsAnnonce")
+@Named(value = "postulerAnnonce")
 @Dependent
-public class ManagePostulantsAnnonce {
-
-    @EJB
-    private AnnonceFacadeLocal annonceFacade;
-    
+public class PostulerAnnonce {
     private Annonce annonce = null;
     private Utilisateur utilisateur = null;
     
-
+    
+    
+    @EJB
+    private AnnonceFacadeLocal annonceFacade;
+    
     /**
-     * Creates a new instance of ManagePostulantsAnnonce
+     * Creates a new instance of PostulerAnnonce
      */
-    public ManagePostulantsAnnonce() {
-    }
-
-    String accepterPostulant() {
-        annonceFacade.accepterPostulant(getAnnonce(), getUtilisateur());
-        annonceFacade.edit(getAnnonce());
-        return "index.xhtml";
+    public PostulerAnnonce() {
     }
     
-    String refuserPostulant() {
-        annonceFacade.removePostulant(getAnnonce(), getUtilisateur());
+    String Postuler() {
+        annonceFacade.addPostulant(getAnnonce(), getUtilisateur());
         annonceFacade.edit(getAnnonce());
         return "index.xhtml";
     }
@@ -49,6 +43,10 @@ public class ManagePostulantsAnnonce {
      * @return the annonce
      */
     public Annonce getAnnonce() {
+        if (annonce == null)
+        {
+            annonce = new Annonce();
+        }
         return annonce;
     }
 
@@ -56,7 +54,10 @@ public class ManagePostulantsAnnonce {
      * @return the utilisateur
      */
     public Utilisateur getUtilisateur() {
+        if (utilisateur == null)
+        {
+            utilisateur = new Utilisateur();
+        }
         return utilisateur;
     }
 }
-

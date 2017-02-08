@@ -12,7 +12,6 @@ import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.TypeAnnonce;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -79,15 +78,55 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         }
     }
 
-    // Selectionner le bon tag dans la liste des tags
     @Override
-    public List<Annonce> findByTag(Tag tag) {
+    public List<Annonce> findByTag(List<Tag> tags) {
         List<Annonce> annonces = findAll();
         if (annonces.isEmpty()) {
             return null;
         } else {
+            boolean trouve = true;
             for (Annonce annonce : annonces) {
-                if (annonce.getTags().contains(tag)) {
+                for (Tag tag : tags) {
+                    if (!annonce.getTags().contains(tag)) {
+                        trouve = false;
+                        break;
+                    }
+                }
+                if (!trouve) {
+                    annonces.remove(annonce);
+                }
+            }
+            return annonces;
+        }
+    }
+
+    @Override
+    public List<Annonce> findByTitle(String titreRecherche) {
+        List<Annonce> annonces = findAll();
+        if (annonces.isEmpty()) {
+            return null;
+        } else {
+            String[] separeRecherche = titreRecherche.toLowerCase().split(" ");
+            boolean trouve = true;
+            boolean trouve_tmp;
+            for (Annonce annonce : annonces) {
+                String[] separeTitre = annonce.getTitre().toLowerCase().split(" ");
+                for (String subRecherche : separeRecherche) {
+                    for (String subTitre : separeTitre) {
+                        trouve_tmp = false;
+                        if (subTitre.equals(subRecherche)) {
+                            trouve_tmp = true;
+                            if (trouve_tmp == false) {
+                                trouve = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (!trouve) {
+                        break;
+                    }
+                }
+                if (!trouve) {
                     annonces.remove(annonce);
                 }
             }
@@ -114,7 +153,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
     public List<Annonce> findLatest(int nbAnnoncesAffichees, TypeAnnonce type) {
         List<Annonce> result = (List<Annonce>) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.type = :type ORDER BY a.datePublication")
                 .setParameter("type", type).getResultList();
-        
+
         if (!result.isEmpty()) {
             return result.subList(0, nbAnnoncesAffichees);
         }

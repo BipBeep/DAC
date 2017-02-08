@@ -35,9 +35,9 @@ public class dernieresAnnonces {
     public List<Annonce> dernieresOffres() {
         int nbAnnoncesAffichees = 5;
         List<Annonce> list = annonceFacade.findLatest(nbAnnoncesAffichees, TypeAnnonce.OFFRE);
-        System.out.println("----------------------****----------------------------");
-        list.stream().forEach(e -> e.getTags().stream().forEach(t -> System.out.println("TAG : " + t)));
-        System.out.println("----------------------////----------------------------");
+     //   System.out.println("----------------------****----------------------------");
+     //   list.stream().forEach(e -> e.getTags().stream().forEach(t -> System.out.println("TAG : " + t)));
+    //    System.out.println("----------------------////----------------------------");
         return list;
     }
 
