@@ -12,6 +12,7 @@ import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.TypeAnnonce;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -77,7 +78,26 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             //L'utilisateur rentré n'est pas dans la liste des postulants.
         }
     }
-
+    
+    // Selectionner le bon tag dans la liste des tags
+    @Override
+    public List<Annonce> findByTag(Tag tag) {
+        List<Annonce> annonces = findAll();    
+        if (annonces.isEmpty())
+        {
+            return null;
+        }
+        else
+        {
+            for (Annonce annonce : annonces) {
+                if (annonce.getTags().contains(tag)) {
+                    annonces.remove(annonce);
+                }
+            }
+            return annonces;
+        }
+    }
+    
     @Override
     public void serviceRendu(boolean realise, Annonce annonce, Utilisateur utilisateur) {
         if (annonce.getAuteur().equals(utilisateur)) {
