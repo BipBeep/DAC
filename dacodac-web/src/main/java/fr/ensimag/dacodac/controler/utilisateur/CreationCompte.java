@@ -21,41 +21,30 @@ public class CreationCompte {
 
     @EJB
     private UtilisateurFacadeLocal utilisateurFacade;
-    
+
     private Utilisateur newUtil = null;
-    
+
     /**
      * Creates a new instance of CreationCompte
      */
     public CreationCompte() {
     }
-    
+
     public Utilisateur getNewUtil() {
-        if (newUtil == null)
-        {
+        if (newUtil == null) {
             newUtil = new Utilisateur();
         }
         return newUtil;
     }
 
-    public String creerCompte(String testPass)
-    {
-        if (newUtil.getPassword().equals(testPass))
-        {
-           
-            try
-            {
-                utilisateurFacade.create(newUtil);
-            }
-            catch (Exception e)
-            {
-                System.err.println(e);
-                return "creerCompte.xhtml";
-            }
-            return "index.xhtml";
+    public String creerCompte() {
+
+        try {
+            utilisateurFacade.create(newUtil);
+        } catch (Exception e) {
+            System.err.println(e);
+            return "creerCompte.xhtml";
         }
-        
-        //mettre un message d'erreur
-        return "creerCompte.xhtml";
+        return "index.xhtml";
     }
 }
