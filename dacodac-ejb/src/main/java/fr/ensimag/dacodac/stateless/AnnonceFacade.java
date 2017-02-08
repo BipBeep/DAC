@@ -11,8 +11,8 @@ import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.TypeAnnonce;
 
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -93,6 +93,43 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
                 for (Tag tag : tags) {
                     if (!annonce.getTags().contains(tag)) {
                         trouve = false;
+                    }
+                }
+                if (!trouve) {
+                    annonces.remove(annonce);
+                }
+            }
+            return annonces;
+        }
+    }
+    
+    @Override
+    public List<Annonce> findByTitle(String titreRecherche) {
+        List<Annonce> annonces = findAll();    
+        if (annonces.isEmpty())
+        {
+            return null;
+        }
+        else
+        {
+            String[] separeRecherche = titreRecherche.toLowerCase().split(" ");
+            boolean trouve = true;
+            boolean trouve_tmp;
+            for (Annonce annonce : annonces) {
+                String[] separeTitre = annonce.getTitre().toLowerCase().split(" ");
+                for (String subRecherche : separeRecherche) {
+                    for (String subTitre : separeTitre) {
+                        trouve_tmp = false;
+                        if (subTitre.equals(subRecherche)) {
+                            trouve_tmp = true;
+                            if (trouve_tmp == false) {
+                                trouve = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (!trouve) {
+                        break;
                     }
                 }
                 if (!trouve) {

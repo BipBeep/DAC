@@ -48,6 +48,8 @@ public interface AnnonceFacadeLocal {
     List<Annonce> findAll();
 
     List<Annonce> findByTag(List<Tag> tag);
+    
+    List<Annonce> findByTitle(String name);
 
     List<Annonce> findRange(int[] range);
 
