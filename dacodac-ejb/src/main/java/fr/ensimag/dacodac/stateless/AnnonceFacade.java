@@ -56,7 +56,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         tags.add(tag);
         annonce.setTags(tags);
     }
-    
+
     @Override
     public void removePostulant(Annonce annonce, Utilisateur utilisateur) {
         List<Utilisateur> postulants = annonce.getPostulants();
@@ -67,7 +67,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
     @Override
     public void accepterPostulant(Annonce annonce, Utilisateur utilisateur) {
         List<Utilisateur> postulants = annonce.getPostulants();
-        
+
         if (postulants.contains(utilisateur)) {
             postulants = new ArrayList<>();
             postulants.add(utilisateur);
@@ -79,14 +79,23 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
     }
 
     @Override
+    public void serviceRendu(boolean realise, Annonce annonce, Utilisateur utilisateur) {
+        if (annonce.getAuteur().equals(utilisateur)) {
+            annonce.setServiceRendu_auteur(realise);
+        } else {
+            annonce.setServiceRendu_contracteur(realise);
+        }
+    }
+
+    @Override
     public Annonce findByUtilAndTitre(Utilisateur u, String titre) {
         return (Annonce) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.titre LIKE :titre and a.auteur = :auteur")
                 .setParameter("titre", titre).setParameter("auteur", u).getResultList().get(0);
     }
-    
+
     @Override
     public List<Annonce> findLatest(int nbAnnoncesAffichees, TypeAnnonce type) {
-        return (List<Annonce>)getEntityManager().createQuery("SELECT a FROM Annonce a").getResultList();
+        return (List<Annonce>) getEntityManager().createQuery("SELECT a FROM Annonce a").getResultList();
     }
-    
+
 }

@@ -104,7 +104,7 @@ public class init extends HttpServlet {
         Annonce a4 = new Annonce(14, TypeAnnonce.OFFRE, utilisateur2, "38400", "description de l'offre numéro 4", "titre de l'offre 4", LocalDateTime.now());
         Annonce a5 = new Annonce(15, TypeAnnonce.OFFRE, utilisateur3, "38500", "description de l'offre numéro 5", "titre de l'offre 5", LocalDateTime.now());
         
-        List<Tag> listeTags = new ArrayList<Tag>();
+        List<Tag> listeTags = new ArrayList<>();
         Tag tag1 = new Tag("Premier tag");
         Tag tag2 = new Tag("Deuxième tag");
         Tag tag3 = new Tag("Troisième tag");
@@ -161,6 +161,9 @@ public class init extends HttpServlet {
         utilisateurFacade.addCommentaire(utilisateur1, commentaire);
         utilisateurFacade.addCommentaire(utilisateur1, commentaire2);
         utilisateurFacade.edit(utilisateur1);
+        annonceFacade.serviceRendu(true, a2, utilisateur1);
+        annonceFacade.serviceRendu(true, a2, utilisateur6);
+        annonceFacade.edit(a2);
         /*Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
         commentaireFacade.create(c);
         Commentaire retournes = commentaireFacade.findByAuteurAndAnnonce(utilisateur, a);
