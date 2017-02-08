@@ -11,29 +11,7 @@
         <ui:composition template="./mainTemplate.xhtml">
 
             <ui:define name="content">
-                <h:form>
-                    <p:panel header="Recherche">
-                        <h:panelGrid columns="4" cellpadding="5">
-                            <p:inputText style="margin-right:10px" placeholder="Mots clés..."/>
-                            
-                            <p:selectOneMenu id="country" value="#{offres.departement}" style="width:150px">
-                                <f:selectItem itemLabel="Département" itemValue="" noSelectionOption="true" />
-                                <f:selectItems value="#{offres.departements}" />
-                            </p:selectOneMenu>
-
-                            <p:selectOneMenu id="tri" value="#{offres.tri}">
-                                <f:selectItem itemLabel="Par prix croissants" itemValue="prix_croissants" />
-                                <f:selectItem itemLabel="Par prix décroissants" itemValue="prix_decroissants" />
-                                <f:selectItem itemLabel="Par dates (du plus récent au plus ancien)" itemValue="dates_croissantes" />
-                                <f:selectItem itemLabel="Par dates (du plus ancien au plus récent)" itemValue="dates_decroissantes" />
-                            </p:selectOneMenu>
-                            
-                            <p:commandButton value="OK" ajax="false" validateClient="true"/>
-                        </h:panelGrid>
-                        
-                    </p:panel>
-                </h:form>
-                
+                <ui:include src ="fonctionRecherche.xhtml" />
                 <ui:include src ="dernieresOffres.xhtml" />
             </ui:define>
 
