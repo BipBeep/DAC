@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.validation.constraints.Size;
@@ -33,7 +33,7 @@ public class Commentaire implements Serializable {
     private Utilisateur auteur;
     
     @Column(nullable=false)
-    private LocalDateTime dateCreation;
+    private LocalDate dateCreation;
     
     @ManyToOne
     @JoinColumn(nullable=false)
@@ -46,7 +46,7 @@ public class Commentaire implements Serializable {
     public Commentaire() {
     }
     
-    public Commentaire(Utilisateur auteur, LocalDateTime dateCreation, Annonce annonce, String description) {
+    public Commentaire(Utilisateur auteur, LocalDate dateCreation, Annonce annonce, String description) {
         this.auteur = auteur;
         this.dateCreation = dateCreation;
         this.annonce = annonce;
@@ -65,7 +65,7 @@ public class Commentaire implements Serializable {
         return auteur;
     }
 
-    public LocalDateTime getDateCreation() {
+    public LocalDate getDateCreation() {
         return dateCreation;
     }
 
@@ -81,7 +81,7 @@ public class Commentaire implements Serializable {
         this.auteur = auteur;
     }
 
-    public void setDateCreation(LocalDateTime dateCreation) {
+    public void setDateCreation(LocalDate dateCreation) {
         this.dateCreation = dateCreation;
     }
 
@@ -115,6 +115,6 @@ public class Commentaire implements Serializable {
 
     @Override
     public String toString() {
-        return "Commentaire[id=" + id + ", ID-Auteur=" + auteur.getId() + ", DateCreation=" + dateCreation + ", TitreAnnonce=" + annonce.getTitre() + "]";
+        return "Commentaire[id=" + id + ", ID-Auteur=" + auteur.getId() + ", DateCreation=" + dateCreation.toString() + ", TitreAnnonce=" + annonce.getTitre() + "]";
     }
 }

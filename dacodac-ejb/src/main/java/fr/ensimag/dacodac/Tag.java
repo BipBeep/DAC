@@ -71,7 +71,7 @@ public class Tag implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.ensimag.dacodac.Tag[ id=" + id + " ]";
+        return nom;
     }
     
 }

@@ -6,6 +6,12 @@
 package fr.ensimag.dacodac.controler.annonce;
 
 import fr.ensimag.dacodac.Annonce;
+import fr.ensimag.dacodac.TypeAnnonce;
+import fr.ensimag.dacodac.Utilisateur;
+import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
+import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
+import java.util.Date;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 
@@ -17,6 +23,12 @@ import javax.enterprise.context.Dependent;
 @Dependent
 public class PublierAnnonce {
 
+    @EJB
+    private AnnonceFacadeLocal annonceFacade;
+    
+    @EJB
+    private UtilisateurFacadeLocal utilisateurFacade;
+    
     /**
      * Creates a new instance of publierAnnonce
      */
@@ -29,4 +41,21 @@ public class PublierAnnonce {
         return annonce;
     }
     
+    public String save(String descr, String tags, String titre, String type, String prix, String codePostal) {
+        int prixI = Integer.parseInt(prix);
+        TypeAnnonce typeA = TypeAnnonce.DEMANDE;
+        if (type.equals("Offre")) {
+            typeA = TypeAnnonce.OFFRE;
+        }        
+        
+        Utilisateur user = utilisateurFacade.findByPseudo("Nico");
+        
+        Annonce a = new Annonce(prixI, typeA, user, codePostal, descr, titre, new Date());
+        
+        annonceFacade.create(a);
+        //if not connected, renvoie vers connexion.xhtml
+        //récupérer utilisateur via fonction de javaee security
+        utilisateurFacade.addAnnonce(user, a);
+        return "index.xhtml";
+    }
 }
