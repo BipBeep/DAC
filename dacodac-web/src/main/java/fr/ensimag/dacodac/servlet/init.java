@@ -135,9 +135,25 @@ public class init extends HttpServlet {
         annonceFacade.create(a9);
         annonceFacade.create(a10);
         annonceFacade.addPostulant(a1, utilisateur2);
-        annonceFacade.addPostulant(a1, utilisateur3);
+        annonceFacade.addPostulant(a1, utilisateur3); //Des personnes ont postulé à a1
         annonceFacade.edit(a1);
-        
+        annonceFacade.addPostulant(a2, utilisateur6);
+        annonceFacade.accepterPostulant(a2, utilisateur6); //Une personne est validé pour a2
+        annonceFacade.addPostulant(a3, utilisateur1); //U1 postule a a3 et a4
+        annonceFacade.addPostulant(a4, utilisateur1);
+        annonceFacade.accepterPostulant(a3, utilisateur1); // U1 sera validé pour a3
+        annonceFacade.edit(a2);
+        annonceFacade.edit(a3);
+        annonceFacade.edit(a4);
+        annonceFacade.addPostulant(a6, utilisateur2);
+        annonceFacade.accepterPostulant(a6, utilisateur2);//U2 sera validé pour a6
+        //a7 n'aura aucun postulants
+        annonceFacade.addPostulant(a8, utilisateur1);//U1 ne sera pas encore validé pour a8
+        annonceFacade.addPostulant(a9, utilisateur1);
+        annonceFacade.accepterPostulant(a9, utilisateur1);//U1 sera validé pour a9
+        annonceFacade.edit(a6);
+        annonceFacade.edit(a8);
+        annonceFacade.edit(a9);
         /*Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
         commentaireFacade.create(c);
         Commentaire retournes = commentaireFacade.findByAuteurAndAnnonce(utilisateur, a);
