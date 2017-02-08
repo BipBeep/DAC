@@ -15,12 +15,12 @@ import javax.faces.bean.ManagedBean;
  */
 @Named(value = "publierAnnonce")
 @Dependent
-public class publierAnnonce {
+public class PublierAnnonce {
 
     /**
      * Creates a new instance of publierAnnonce
      */
-    public publierAnnonce() {
+    public PublierAnnonce() {
     }
     
     private String tags;
