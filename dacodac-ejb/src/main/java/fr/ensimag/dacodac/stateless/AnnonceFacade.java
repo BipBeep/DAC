@@ -78,17 +78,14 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             //L'utilisateur rentré n'est pas dans la liste des postulants.
         }
     }
-    
+
     // Selectionner le bon tag dans la liste des tags
     @Override
     public List<Annonce> findByTag(Tag tag) {
-        List<Annonce> annonces = findAll();    
-        if (annonces.isEmpty())
-        {
+        List<Annonce> annonces = findAll();
+        if (annonces.isEmpty()) {
             return null;
-        }
-        else
-        {
+        } else {
             for (Annonce annonce : annonces) {
                 if (annonce.getTags().contains(tag)) {
                     annonces.remove(annonce);
@@ -97,7 +94,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             return annonces;
         }
     }
-    
+
     @Override
     public void serviceRendu(boolean realise, Annonce annonce, Utilisateur utilisateur) {
         if (annonce.getAuteur().equals(utilisateur)) {
@@ -115,7 +112,13 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
 
     @Override
     public List<Annonce> findLatest(int nbAnnoncesAffichees, TypeAnnonce type) {
-        return (List<Annonce>) getEntityManager().createQuery("SELECT a FROM Annonce a").getResultList();
+        List<Annonce> result = (List<Annonce>) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.type = :type ORDER BY a.datePublication")
+                .setParameter("type", type).getResultList();
+        
+        if (!result.isEmpty()) {
+            return result.subList(0, nbAnnoncesAffichees);
+        }
+        return result;
     }
 
 }
