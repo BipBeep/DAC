@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./mainTemplate.xhtml">
+            <ui:define name="css">
+                <h:outputStylesheet name="css/consulterSonProfil.css"/>
+            </ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <p:panel style = "text-align : center">
+                        <h3>Mon Profil</h3>
+                        <p:panelGrid> 
+                            <p:row>
+                                <p:column colspan="1" style="width:50%"> 
+                                <h:panelGrid columns="2" >
+                                    <h:outputLabel for="pseudo" value="Pseudonyme" />
+                                    <h:outputText value="Jean"/>
+
+                                    <h:outputLabel for="email" value="email" />
+                                    <h:outputText value="jean@gmail.com"/>
+
+
+
+                                    <h:outputLabel for="text" value="Description :" />
+                                    <p:inputTextarea id="integer" value="#{validationView.integer}" rows = "6" cols ="25">
+                                        <p:clientValidator event="keyup"/>
+                                    </p:inputTextarea>
+
+
+                                    <h:outputLabel for="codePostal" value="Code Postal" />
+                                    <h:outputText value="38400"/>
+
+                                    <h:outputLabel for="dateNaissance" value="Date de naissance" />
+                                    <h:outputText value="23/06/1945"/>
+
+
+                                </h:panelGrid>
+                            </p:column>
+                            <p:column>
+                                <h3 >Commentaires</h3>
+                                <div class="boite">
+
+                                    <f:view>
+                                        <p:dataTable value="#{Panier.offres}" var="offre">
+                                            <p:column>
+                                                <h:outputText value="#{offre.titre}"/>
+                                                <h:outputText value="Prix = #{offre.prix}"/>
+                                                <h:commandButton/>
+                                            </p:column>
+                                        </p:dataTable>
+                                    </f:view>
+                                </div>
+
+                            </p:column>
+                                </p:row>
+                        </p:panelGrid>
+
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>
