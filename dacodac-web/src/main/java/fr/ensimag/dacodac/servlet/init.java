@@ -132,6 +132,13 @@ public class init extends HttpServlet {
         annonceFacade.edit(a6);
         annonceFacade.edit(a8);
         annonceFacade.edit(a9);
+        Commentaire commentaire = new Commentaire(utilisateur2, LocalDateTime.now(), a5, "Je suis U2. U1 m'a rendu service.");
+        commentaireFacade.create(commentaire);
+        Commentaire commentaire2 = new Commentaire(utilisateur3, LocalDateTime.now(), a6, "Je suis U3. U1 m'a rendu service.");
+        commentaireFacade.create(commentaire2);
+        utilisateurFacade.addCommentaire(utilisateur1, commentaire);
+        utilisateurFacade.addCommentaire(utilisateur1, commentaire2);
+        utilisateurFacade.edit(utilisateur1);
         /*Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
         commentaireFacade.create(c);
         Commentaire retournes = commentaireFacade.findByAuteurAndAnnonce(utilisateur, a);
