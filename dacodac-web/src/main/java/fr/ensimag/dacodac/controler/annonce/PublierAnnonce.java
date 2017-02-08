@@ -37,26 +37,16 @@ public class PublierAnnonce {
     }
     
     private Annonce annonce;
+    private Utilisateur utilisateur;
     
     public Annonce getAnnonce() {
         return annonce;
     }
     
-    public String save(String descr, String tags, String titre, String type, String prix, String codePostal) {
-        int prixI = Integer.parseInt(prix);
-        TypeAnnonce typeA = TypeAnnonce.DEMANDE;
-        if (type.equals("Offre")) {
-            typeA = TypeAnnonce.OFFRE;
-        }        
-        
-        Utilisateur user = utilisateurFacade.findByPseudo("Nico");
-        
-        Annonce a = new Annonce(prixI, typeA, user, codePostal, descr, titre, LocalDate.now());
-        
-        annonceFacade.create(a);
-        //if not connected, renvoie vers connexion.xhtml
-        //récupérer utilisateur via fonction de javaee security
-        utilisateurFacade.addAnnonce(user, a);
+    public String save() {
+        annonceFacade.create(annonce);
+        utilisateurFacade.addAnnonce(utilisateur, annonce);
+        utilisateurFacade.edit(utilisateur);
         return "index.xhtml";
     }
 }
