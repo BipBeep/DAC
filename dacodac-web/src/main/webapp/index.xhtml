@@ -21,13 +21,13 @@
                         <f:view>
                             <p:dataTable value="#{index.dernieresOffres()}" var="offre">
                                 <p:column>
-                                    <h:outputText class="titre" value="#{demande.titre}"/>
+                                    <h:outputText class="titre" value="#{offre.titre}"/>
                                     <br />
                                     <h:outputText value="Code postal : #{offre.codePostal}"/>
                                     <br />
                                     <h:outputText value="Prix : #{offre.prix} Dakos"/>
                                     <br />
-                                    <h:outputText class="datePublication" value="Publié le #{offre.datePublication}"/>
+                                    <span class="datePublication">Publié le #{offre.datePublication}</span>
                                 </p:column>
                             </p:dataTable>
                         </f:view>

@@ -33,9 +33,10 @@ h2 {
 
 .titre {
    font-weight: bold;
+   font-size:  20px;
 }
 
 .datePublication {
     position: relative;
-    right: -55%;
+    right: -50%;
 }
