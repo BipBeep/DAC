@@ -23,25 +23,25 @@
                                 counter="display" maxlength="1000" counterTemplate="{0} characters remaining." 
                                 autoResize="false" required="true"/>
                             <p:message for="description" display="icon" />
-                            <h:outputText id="display" value="#{publierAnnonce.description}" />
+                            <h:outputText id="display" value="#{publierAnnonce.annonce.description}" />
                             
                             <h:outputLabel for="tags" value="Tags" />
-                            <p:inputText id="tags" value="#{publierAnnonce.tags}" required="true">
+                            <p:inputText id="tags" value="#{null}" required="true">
                                 <f:validateLength />
                                 <p:clientValidator />
                             </p:inputText>
                             <p:message for="tags" display="icon" />
-                            <h:outputText value="#{publierAnnonce.tags}" />
+                            <h:outputText value="#{null}" />
 
                             <h:outputLabel for="titre" value="Titre" />
-                            <p:inputText id="titre" value="#{publierAnnonce.titre}">
+                            <p:inputText id="titre" value="#{publierAnnonce.annonce.titre}">
                                 <p:clientValidator event="keyup"/>
                             </p:inputText>
                             <p:message for="titre" display="icon" />
-                            <h:outputText value="#{publierAnnonce.titre}" />
+                            <h:outputText value="#{publierAnnonce.annonce.titre}" />
                             
                             <p:outputLabel for="type" value="Type" />
-                            <p:selectOneRadio id="type" value="#{publierAnnonce.type}">
+                            <p:selectOneRadio id="type" value="#{publierAnnonce.annonce.type}">
                                 <f:selectItem itemLabel="Offre" itemValue="Offre" />
                                 <f:selectItem itemLabel="Demande" itemValue="Demande" />
                             </p:selectOneRadio>
@@ -49,18 +49,18 @@
                             
                         <h:panelGrid columns="4" cellpadding="5">
                             <h:outputLabel for="prix" value="Prix (en dakos)" />
-                            <p:inputText size="3" id="prix" value="#{publierAnnonce.prix}">
+                            <p:inputText size="3" id="prix" value="#{publierAnnonce.annonce.prix}">
                                 <p:clientValidator event="keyup"/>
                             </p:inputText>
                             <p:message for="prix" display="icon" />
-                            <h:outputText value="#{publierAnnonce.prix}" />
+                            <h:outputText value="#{publierAnnonce.annonce.prix}" />
                             
                             <h:outputLabel for="codePostal" value="Code postal" />
-                            <p:inputText size="5" id="codePostal" value="#{publierAnnonce.codePostal}">
+                            <p:inputText size="5" id="codePostal" value="#{publierAnnonce.annonce.codePostal}">
                                 <p:clientValidator event="keyup"/>
                             </p:inputText>
                             <p:message for="codePostal" display="icon" />
-                            <h:outputText value="#{publierAnnonce.codePostal}" />
+                            <h:outputText value="#{publierAnnonce.annonce.codePostal}" />
                         </h:panelGrid>
 
                         <p:commandButton class="boutonValidation" value="Publier l'annonce" ajax="false" validateClient="true" />
