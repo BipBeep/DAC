@@ -46,12 +46,12 @@ public class Utilisateur implements Serializable {
     @Column(unique=true, nullable=false)
     private String email;
     
-    @Pattern(regexp="^(0[1-9]|[1-9][0-9])[0-9]{3}$")
+    @Pattern(regexp="^(0[1-9]|[1-8][0-9]|9[1-5])[0-9]{3}$")
     @Column(nullable=false)
     private String codePostal;
     
-    @Min(12)
-    @Max(150)
+    @Min(13)
+    @Max(130)
     @Column(nullable=false)
     private int age = 20;
     
