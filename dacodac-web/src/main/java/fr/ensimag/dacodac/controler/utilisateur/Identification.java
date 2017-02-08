@@ -39,7 +39,9 @@ public class Identification implements Serializable {
     public void setIdentite(String pseudo, String mdp) throws NotConnectedException {
         Utilisateur u = null;
         u = utilisateurFacade.findByPseudo(pseudo);
-        if((u != null) && (u.getPassword().equals(mdp))){
+        
+        if((u != null) && (u.getPassword().equals(mdp)))
+        {
             identite = u;
         }
         else

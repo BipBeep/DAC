@@ -22,7 +22,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
 /**
  *
  * @author duclaur
@@ -34,41 +33,45 @@ public class Annonce implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Min(0)
-    @Column(nullable=false)
+    @Column(nullable = false)
     private int prix;
-    
-    @Column(nullable=false)
+
+    @Column(nullable = false)
     private TypeAnnonce type;
 
     //@Temporal(TemporalType.TIMESTAMP)
     //NEED HELP
     private LocalDateTime datePublication;
-    
+
     @ManyToOne
-    @JoinColumn(nullable=false)
+    @JoinColumn(nullable = false)
     private Utilisateur auteur;
-    
-    @Pattern(regexp="^(0[1-9]|[1-9][0-9])[0-9]{3}$")
-    @Column(nullable=false)
+
+    @Pattern(regexp = "^(0[1-9]|[1-9][0-9])[0-9]{3}$")
+    @Column(nullable = false)
     private String codePostal;
-    
-    @Column(nullable=false)
-    @Size(min=1, max=1023)
+
+    @Column(nullable = false)
+    @Size(min = 1, max = 1023)
     private String description;
-    
-    @Column(nullable=false)
-    @Size(min=1, max=255)
+
+    @Column(nullable = false)
+    @Size(min = 1, max = 255)
     private String titre;
-    
+
     @ManyToMany
     private List<Utilisateur> postulants;
-    
+
+    @Column(nullable = false)
+    private boolean estValidee;
+
     @OneToMany
     private List<Commentaire> commentaires;
 
-    public Annonce() {}
+    public Annonce() {
+    }
 
     public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, String codePostal, String description, String titre, LocalDateTime datePublication) {
         this.prix = prix;
@@ -78,12 +81,11 @@ public class Annonce implements Serializable {
         this.description = description;
         this.titre = titre;
         this.datePublication = datePublication;
-        
+        estValidee = false;
         postulants = new ArrayList<>();
         commentaires = new ArrayList<>();
     }
-    
-    
+
     /**
      * Get the value of type
      *
@@ -101,7 +103,7 @@ public class Annonce implements Serializable {
     public void setType(TypeAnnonce type) {
         this.type = type;
     }
-    
+
     /**
      * Get the value of titre
      *
@@ -119,7 +121,6 @@ public class Annonce implements Serializable {
     public void setTitre(String titre) {
         this.titre = titre;
     }
-
 
     /**
      * Get the value of description
@@ -139,7 +140,6 @@ public class Annonce implements Serializable {
         this.description = description;
     }
 
-
     /**
      * Get the value of codePostal
      *
@@ -157,8 +157,6 @@ public class Annonce implements Serializable {
     public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
-
-    
 
     /**
      * Get the value of datePublication
@@ -178,7 +176,6 @@ public class Annonce implements Serializable {
         this.datePublication = datePublication;
     }
 
-
     /**
      * Get the value of postulants
      *
@@ -196,7 +193,7 @@ public class Annonce implements Serializable {
     public void setPostulants(List<Utilisateur> postulants) {
         this.postulants = postulants;
     }
-    
+
     /**
      * Get the value of commentaires
      *
@@ -214,7 +211,6 @@ public class Annonce implements Serializable {
     public void setCommentaires(List<Commentaire> commentaires) {
         this.commentaires = commentaires;
     }
-
 
     /**
      * Get the value of auteur
@@ -234,7 +230,6 @@ public class Annonce implements Serializable {
         this.auteur = auteur;
     }
 
-
     /**
      * Get the value of prix
      *
@@ -253,7 +248,6 @@ public class Annonce implements Serializable {
         this.prix = prix;
     }
 
-    
     public Long getId() {
         return id;
     }
@@ -286,5 +280,19 @@ public class Annonce implements Serializable {
     public String toString() {
         return "fr.ensimag.dacodac.Annonce[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the estValidee
+     */
+    public boolean isEstValidee() {
+        return estValidee;
+    }
+
+    /**
+     * @param estValidee the estValidee to set
+     */
+    public void setEstValidee(boolean estValidee) {
+        this.estValidee = estValidee;
+    }
+
 }

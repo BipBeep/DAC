@@ -16,23 +16,34 @@
             <ui:define name="content">
                 <h:form>
                     <h1>Création de compte</h1>              
-                    <h:panelGrid class="connexion_form" columns="2" cellpadding="5"> 
+                    <h:panelGrid class="connexion_form" columns="3" cellpadding="5"> 
                         
                         <h:outputLabel for="email" value="Email: " />
                         <p:inputText id="email" value="#{creationCompte.newUtil.email}" required="true"/>
+                        <p:message for="email" />
                         
                         <h:outputLabel for="pseudo" value="Pseudo: " />
                         <p:inputText id="pseudo" value="#{creationCompte.newUtil.pseudo}" required="true"/>
+                        <p:message for="pseudo" />
+                        
                         <h:outputLabel for="pwd" value="Mot de passe: " />
-                        <p:password id="pwd" value="#{creationCompte.newUtil.password}" label="Password" required="true" />
+                        <p:password id="pwd" value="#{creationCompte.newUtil.password}" label="Password" feedback="true" match="conf" required="true" />
+                        <p:message for="pwd" />
+                        
                         <h:outputLabel for="conf" value="Confirmation mot de passe: " />
-                        <p:password id="conf" binding="#{input1}" label="Confirmation"  required="true" />
+                        <p:password id="conf" value="#{creationCompte.newUtil.password}" label="Confirmation"   required="true" />
+                        <p:message for="conf" />
+                        
                         <h:outputLabel for="cp" value="Code postal: " />
                         <p:inputText id="cp" value="#{creationCompte.newUtil.codePostal}"/>
+                        <p:message for="cp" />
+                        
                         <h:outputLabel for="age" value="Age: " />
-                        <p:inputText id="age"  value="#{creationCompte.newUtil.age}" required="true"/>
+                        <p:spinner id="age" value ="#{creationCompte.newUtil.age}" min="12" max="150" />
+                        <p:message for="age"/>
+
                     </h:panelGrid>
-                    <p:commandButton value="Créer le compte" action="#{creationCompte.creerCompte(input1.value)}" icon="ui-icon-circle-plus"/>
+                    <p:commandButton value="Créer le compte" action="#{creationCompte.creerCompte(creationCompte.newUtil.password)}" icon="ui-icon-circle-plus" ajax="false"/>
                 </h:form>
             </ui:define>
         </ui:composition>
