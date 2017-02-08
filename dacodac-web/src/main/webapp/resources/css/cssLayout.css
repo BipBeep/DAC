@@ -7,10 +7,9 @@
 
 #bottom {
     position: fixed;
-    bottom:0;
-    width: 95%;
+    bottom: 0;
     background-color: #c2dfef;
-    padding: 5px;
+    padding: 5px 0px 5px 0px;
     text-align: center;
 }
 
