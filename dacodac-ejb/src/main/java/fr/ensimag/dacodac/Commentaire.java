@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.validation.constraints.Size;
 
 /**
@@ -28,14 +29,14 @@ public class Commentaire implements Serializable {
     private Long id;
     
     @ManyToOne
-    @Column(nullable=false)
+    @JoinColumn(nullable=false)
     private Utilisateur auteur;
     
     @Column(nullable=false)
     private LocalDateTime dateCreation;
     
     @ManyToOne
-    @Column(nullable=false)
+    @JoinColumn(nullable=false)
     private Annonce annonce;
     
     @Column(nullable=false)
