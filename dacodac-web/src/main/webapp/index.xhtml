@@ -21,7 +21,9 @@
                         <f:view>
                             <p:dataTable value="#{dernieresAnnonces.dernieresOffres()}" var="offre">
                                 <p:column>
-                                    <h:outputText class="titre" value="#{offre.titre}"/>
+                                    <h:link class="titre" value="#{offre.titre}" outcome="annonce.xhtml">
+                                        <f:param name="id" value="#{offre.id}"/>
+                                    </h:link>
                                     <ul>
                                         <ui:repeat value="#{offre.tags}" var="tag">
                                             <li><h:outputText value="#{tag}, "/></li>

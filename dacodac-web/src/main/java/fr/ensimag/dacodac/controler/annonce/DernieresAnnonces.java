@@ -19,7 +19,7 @@ import javax.ejb.EJB;
  */
 @Named(value = "dernieresAnnonces")
 @RequestScoped
-public class dernieresAnnonces {
+public class DernieresAnnonces {
 
     @EJB(name = "annonceFacade")
     private AnnonceFacadeLocal annonceFacade;
@@ -27,7 +27,7 @@ public class dernieresAnnonces {
     /**
      * Creates a new instance of Index
      */
-    public dernieresAnnonces() {
+    public DernieresAnnonces() {
     }
     
 

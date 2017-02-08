@@ -9,8 +9,7 @@
     <body>
 
         <ui:composition> 
-            <f:view>
-                <p:dataTable value="#{Last.offres}" var="offre">
+
                     <p:column>
                         <h:outputText value="#{offre.titre}"/>
                         <br />
@@ -22,8 +21,7 @@
                         <br />
                         <h:outputText value="Publié le #{offre.date}"/>
                     </p:column>
-                </p:dataTable>
-            </f:view>
+
         </ui:composition>
 
     </body>
