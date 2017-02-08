@@ -7,6 +7,7 @@ package fr.ensimag.dacodac.stateless;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.TypeAnnonce;
 
@@ -34,6 +35,8 @@ public interface AnnonceFacadeLocal {
     List<Annonce> findLatest(int nbAnnoncesAffichees, TypeAnnonce type);
 
     void addPostulant(Annonce annonce, Utilisateur utilisateur);
+    
+    void addTag(Annonce annonce, Tag tag);
 
     void removePostulant(Annonce annonce, Utilisateur utilisateur);
 
