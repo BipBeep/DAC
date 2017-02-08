@@ -29,8 +29,8 @@
                         <p:password id="conf" binding="#{input1}" label="Confirmation"  required="true" />
                         <h:outputLabel for="cp" value="Code postal: " />
                         <p:inputText id="cp" value="#{creationCompte.newUtil.codePostal}"/>
-                        <!--<h:outputLabel for="date" value="Date de naissance: " />
-                        <p:calendar id="date"  value="#{calendarView.date5}" navigator="true" pattern="dd/MM/yyyy" yearRange="1900:2017" />-->
+                        <h:outputLabel for="age" value="Age: " />
+                        <p:inputText id="age"  value="#{creationCompte.newUtil.age}" required="true"/>
                     </h:panelGrid>
                     <p:commandButton value="Créer le compte" action="#{creationCompte.creerCompte(input1.value)}" icon="ui-icon-circle-plus"/>
                 </h:form>
