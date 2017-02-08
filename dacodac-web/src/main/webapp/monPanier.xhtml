@@ -16,7 +16,7 @@
             <ui:define name="content">
                 <h1> Mon Panier : </h1>
                 <div class="elements">
-                    <div class="block_offres">
+                    <div class="block">
                         <h2> Offres </h2>
                         <f:view>
                             <p:dataTable value="#{Panier.offres}" var="offre">
@@ -31,7 +31,7 @@
 
 
 
-                    <div class="block_demandes">
+                    <div class="block">
                         <h2> Demandes </h2>
                         <f:view>
                             <p:dataTable value="#{Panier.demandes}" var="demande">
