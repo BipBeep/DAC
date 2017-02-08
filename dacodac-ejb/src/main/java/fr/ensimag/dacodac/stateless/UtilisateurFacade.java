@@ -5,10 +5,12 @@
  */
 package fr.ensimag.dacodac.stateless;
 
+import fr.ensimag.dacodac.Annonce;
+import fr.ensimag.dacodac.Commentaire;
 import fr.ensimag.dacodac.Utilisateur;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -42,6 +44,20 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
     @Override
     public void modifyUser() {
         getEntityManager().createQuery("UPDATE Utilisateur SET dakos = 100 WHERE id = 2");
+    }
+
+    @Override
+    public void addCommentaire(Utilisateur utilisateur, Commentaire commentaire) {
+        List<Commentaire> commentaires = utilisateur.getCommentaires();
+        commentaires.add(commentaire);
+        utilisateur.setCommentaires(commentaires);
+    }
+
+    @Override
+    public void addAnnonce(Utilisateur utilisateur, Annonce annonce) {
+        List<Annonce> annonces = utilisateur.getAnnonces();
+        annonces.add(annonce);
+        utilisateur.setAnnonces(annonces);
     }
     
 }

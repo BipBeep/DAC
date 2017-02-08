@@ -16,6 +16,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
 
 /**
  *
@@ -28,21 +35,40 @@ public class Annonce implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int prix;    
+    
+    @Min(0)
+    @Column(nullable=false)
+    private int prix;
+    
+    @Column(nullable=false)
     private TypeAnnonce type;
 
+    //@Temporal(TemporalType.TIMESTAMP)
+    //NEED HELP
+    private LocalDateTime datePublication;
+    
     @ManyToOne
+    @JoinColumn(nullable=false)
     private Utilisateur auteur;
+    
+    @Min(1000)
+    @Max(99999)
+    @Column(nullable=false)
+    private int codePostal;
+    
+    @Column(nullable=false)
+    @Size(min=1, max=1023)
+    private String description;
+    
+    @Column(nullable=false)
+    @Size(min=1, max=255)
+    private String titre;
     
     @ManyToMany
     private List<Utilisateur> postulants;
     
     @OneToMany
     private List<Commentaire> commentaires;
-    
-    private int codePostal;
-    private String description;
-    private String titre;
 
     public Annonce() {}
 
@@ -135,7 +161,6 @@ public class Annonce implements Serializable {
     }
 
     
-    private LocalDateTime datePublication;
 
     /**
      * Get the value of datePublication

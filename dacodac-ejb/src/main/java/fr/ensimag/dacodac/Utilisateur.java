@@ -8,12 +8,13 @@ package fr.ensimag.dacodac;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.*;
 
 /**
  *
@@ -21,21 +22,44 @@ import javax.persistence.OneToMany;
  */
 @Entity
 public class Utilisateur implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int dakos;
+    
+    @Min(0)
+    @Column(nullable=false)
+    private int dakos = 100;
+    
+    @Pattern(regexp="^[A-Za-z0-9]+$")
+    @Size(min=1, max=63)
+    @Column(unique=true, nullable=false)
     private String pseudo;
+    
+    @Pattern(regexp="^[A-Za-z0-9]+$")
+    @Size(min=8, max=63)
+    @Column(nullable=false)
     private String password;
+    
+    @Pattern(regexp="^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$")
+    @Column(unique=true, nullable=false)
     private String email;
-    private int codePostal;
-    private int age;
-    private boolean estAdmin;
+    
+    @Pattern(regexp="^(0[1-9]|[1-9][0-9])[0-9]{3}$")
+    @Column(nullable=false)
+    private String codePostal;
+    
+    @Min(12)
+    @Max(150)
+    @Column(nullable=false)
+    private int age = 20;
+    
+    @Column(nullable=false)
+    private boolean estAdmin = false;
     
     @OneToMany
-    private List<Annonce> mesAnnonces;
+    private List<Annonce> annonces;
     
     @OneToMany
     private List<Commentaire> commentaires;
@@ -43,7 +67,7 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }
     
-    public Utilisateur(int dakos, String pseudo, String password, String email, int codePostal, int age, boolean estAdmin) {
+    public Utilisateur(int dakos, String pseudo, String password, String email, String codePostal, int age, boolean estAdmin) {
         this.dakos = dakos;
         this.pseudo = pseudo;
         this.password= password;
@@ -52,7 +76,7 @@ public class Utilisateur implements Serializable {
         this.age = age;
         this.estAdmin = estAdmin;
         
-        this.mesAnnonces = new ArrayList<>();
+        this.annonces = new ArrayList<>();
         this.commentaires = new ArrayList<>();
     }
     
@@ -96,11 +120,11 @@ public class Utilisateur implements Serializable {
         this.email = email;
     }
 
-    public int getCodePostal() {
+    public String getCodePostal() {
         return codePostal;
     }
 
-    public void setCodePostal(int codePostal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
 
@@ -120,12 +144,12 @@ public class Utilisateur implements Serializable {
         this.estAdmin = estAdmin;
     }
 
-    public List<Annonce> getMesAnnonces() {
-        return mesAnnonces;
+    public List<Annonce> getAnnonces() {
+        return annonces;
     }
 
-    public void setMesAnnonces(List<Annonce> mesAnnonces) {
-        this.mesAnnonces = mesAnnonces;
+    public void setAnnonces(List<Annonce> annonces) {
+        this.annonces = annonces;
     }
 
     public List<Commentaire> getCommentaires() {
@@ -161,7 +185,7 @@ public class Utilisateur implements Serializable {
         return "Utilisateur[ id=" + id + ", dakos=" + dakos +
                 ", pseudo=" + pseudo + ", email=" + email + ", code postal=" +
                 codePostal + ", age=" + age + ", estAdmin=" + estAdmin +
-                ", a des annonces :" + !mesAnnonces.isEmpty() + 
+                ", a des annonces :" + !annonces.isEmpty() + 
                 ", a des commentaires :" + !commentaires.isEmpty() + "]";
     }
     

@@ -27,6 +27,8 @@ public interface AnnonceFacadeLocal {
     
     void addCommentaire(Annonce annonce, Commentaire com);
     
+    Annonce findByUtilAndTitre(Utilisateur u, String titre);
+    
     void addPostulant(Annonce annonce, Utilisateur utilisateur);
 
     Annonce find(Object id);
