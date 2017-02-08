@@ -17,11 +17,14 @@
                 <h:form>
                     <h1>Connexion</h1>
 
-                    <h:panelGrid class="connexion_form" columns="2" cellpadding="5">
+                    <h:panelGrid class="connexion_form" columns="3" cellpadding="5">
                         <h:outputLabel for="pseudo" value="Pseudo: " />
-                        <p:inputText id="pseudo" value="#{connecteur.utilisateur.pseudo}"/>
+                        <p:inputText id="pseudo" value="#{connecteur.utilisateur.pseudo}" required="true"/>
+                        <p:message for="pseudo" />
+                        
                         <h:outputLabel for="pwd" value="Mot de passe: " />
                         <p:password id="pwd" value="#{connecteur.utilisateur.password}" label="Password" required="true" />
+                        <p:message for="pwd" />
                     </h:panelGrid>
                     <div>
                         <p:commandButton value="Se connecter" action="#{connecteur.connect(identification)}" icon="ui-icon-check" ajax="false"/>

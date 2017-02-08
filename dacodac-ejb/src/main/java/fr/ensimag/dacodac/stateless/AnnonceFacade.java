@@ -7,7 +7,10 @@ package fr.ensimag.dacodac.stateless;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.Utilisateur;
+import fr.ensimag.dacodac.TypeAnnonce;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -48,6 +51,13 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
     }
 
     @Override
+    public void addTag(Annonce annonce, Tag tag) {
+        List<Tag> tags = annonce.getTags();
+        tags.add(tag);
+        annonce.setTags(tags);
+    }
+    
+    @Override
     public void removePostulant(Annonce annonce, Utilisateur utilisateur) {
         List<Utilisateur> postulants = annonce.getPostulants();
         postulants.remove(utilisateur);
@@ -73,4 +83,10 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         return (Annonce) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.titre LIKE :titre and a.auteur = :auteur")
                 .setParameter("titre", titre).setParameter("auteur", u).getResultList().get(0);
     }
+    
+    @Override
+    public List<Annonce> findLatest(int nbAnnoncesAffichees, TypeAnnonce type) {
+        return (List<Annonce>)getEntityManager().createQuery("SELECT a FROM Annonce a").getResultList();
+    }
+    
 }

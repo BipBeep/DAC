@@ -7,7 +7,10 @@ package fr.ensimag.dacodac.stateless;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.Utilisateur;
+import fr.ensimag.dacodac.TypeAnnonce;
+
 
 import java.util.List;
 import javax.ejb.Local;
@@ -28,8 +31,12 @@ public interface AnnonceFacadeLocal {
     void addCommentaire(Annonce annonce, Commentaire com);
 
     Annonce findByUtilAndTitre(Utilisateur u, String titre);
+    
+    List<Annonce> findLatest(int nbAnnoncesAffichees, TypeAnnonce type);
 
     void addPostulant(Annonce annonce, Utilisateur utilisateur);
+    
+    void addTag(Annonce annonce, Tag tag);
 
     void removePostulant(Annonce annonce, Utilisateur utilisateur);
 

@@ -5,6 +5,7 @@
  */
 package fr.ensimag.dacodac.controler.publicationAnnonce;
 
+import fr.ensimag.dacodac.Annonce;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.faces.bean.ManagedBean;
@@ -23,53 +24,10 @@ public class PublierAnnonce {
     public PublierAnnonce() {
     }
     
-    private String tags;
-    private String titre;
-    private String description;
-    private String type = "Offre";
-    private String prix;
-    private String codePostal;
- 
-    public String getTags() {
-        return tags;
-    }
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
- 
-    public String getTitre() {
-        return titre;
-    }
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
+    private Annonce annonce;
     
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-    public String getType() {
-        return type;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
-    
-    public String getPrix() {
-        return prix;
-    }
-    public void setPrix(String prix) {
-        this.prix = prix;
-    }
-    
-    public String getCodePostal() {
-        return codePostal;
-    }
-    public void setCodePostal(String codePostal) {
-        this.codePostal = codePostal;
+    public Annonce getAnnonce() {
+        return annonce;
     }
     
 }
