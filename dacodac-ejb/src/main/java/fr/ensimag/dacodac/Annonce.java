@@ -16,11 +16,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
@@ -51,10 +50,9 @@ public class Annonce implements Serializable {
     @JoinColumn(nullable=false)
     private Utilisateur auteur;
     
-    @Min(1000)
-    @Max(99999)
+    @Pattern(regexp="^(0[1-9]|[1-9][0-9])[0-9]{3}$")
     @Column(nullable=false)
-    private int codePostal;
+    private String codePostal;
     
     @Column(nullable=false)
     @Size(min=1, max=1023)
@@ -72,7 +70,7 @@ public class Annonce implements Serializable {
 
     public Annonce() {}
 
-    public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, int codePostal, String description, String titre, LocalDateTime datePublication) {
+    public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, String codePostal, String description, String titre, LocalDateTime datePublication) {
         this.prix = prix;
         this.type = type;
         this.auteur = auteur;
@@ -147,7 +145,7 @@ public class Annonce implements Serializable {
      *
      * @return the value of codePostal
      */
-    public int getCodePostal() {
+    public String getCodePostal() {
         return codePostal;
     }
 
@@ -156,7 +154,7 @@ public class Annonce implements Serializable {
      *
      * @param codePostal new value of codePostal
      */
-    public void setCodePostal(int codePostal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
 
