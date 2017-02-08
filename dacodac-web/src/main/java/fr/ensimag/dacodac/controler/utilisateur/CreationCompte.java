@@ -43,7 +43,6 @@ public class CreationCompte {
         if (newUtil.getPassword().equals(testPass))
         {
            
-            System.err.println("TU ME FAIS PEUR NETBEANS");
             try
             {
                 utilisateurFacade.create(newUtil);
@@ -55,8 +54,6 @@ public class CreationCompte {
             }
             return "index.xhtml";
         }
-        
-        System.err.println("TA MERE SUCE DES BITES EN ENFER");
         
         //mettre un message d'erreur
         return "creerCompte.xhtml";
