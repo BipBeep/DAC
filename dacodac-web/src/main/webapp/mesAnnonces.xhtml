@@ -22,25 +22,25 @@
                         <div class="boite">
                             <h3>Offres</h3>
                             <f:view>
-                                <p:dataTable value="#{mesAnnonces.offresSoumises}" var="offre">
+                                <p:dataTable value="#{mesAnnonces.offresSoumises}" var="item">
                                     <p:column>
-                                        <h:outputText value="#{offre.titre}"/>
-                                        <h:outputText value="Prix = #{offre.prix}"/>
-                                        <h:commandButton/>
+                                        <ui:include src = "fragment.xhtml" >
+                                            <ui:param name="annonce" value="#{item}" />
+                                        </ui:include>
                                     </p:column>
                                 </p:dataTable>
                             </f:view>
                         </div>
-                        
+
                         <h3>Demandes</h3>
 
                         <div class="boite">
                             <f:view>
-                                <p:dataTable value="#{mesAnnonces.demandesSoumises}" var="demande">
+                                <p:dataTable value="#{mesAnnonces.demandesSoumises}" var="item">
                                     <p:column>
-                                        <h:outputText value="#{demande.titre}"/>
-                                        <h:outputText value="Prix = #{demande.prix}"/>
-                                        <h:commandButton/>
+                                        <ui:include src = "fragment.xhtml" >
+                                            <ui:param name="annonce" value="#{item}" />
+                                        </ui:include>
                                     </p:column>
                                 </p:dataTable>
                             </f:view>
@@ -56,11 +56,11 @@
                         <div class="boite">
                             <h3>Offres</h3>
                             <f:view>
-                                <p:dataTable value="#{mesAnnonces.offresRepondues}" var="offre">
+                                <p:dataTable value="#{mesAnnonces.offresRepondues}" var="item">
                                     <p:column>
-                                        <h:outputText value="#{offre.titre}"/>
-                                        <h:outputText value="Prix = #{offre.prix}"/>
-                                        <h:commandButton/>
+                                        <ui:include src = "fragment.xhtml" >
+                                            <ui:param name="annonce" value="#{item}" />
+                                        </ui:include>
                                     </p:column>
                                 </p:dataTable>
                             </f:view>
@@ -69,11 +69,11 @@
                         <div class="boite">
                             <h3>Demandes</h3>
                             <f:view>
-                                <p:dataTable value="#{mesAnnonces.offresRepondues}" var="demande">
+                                <p:dataTable value="#{mesAnnonces.demandesRepondues}" var="item">
                                     <p:column>
-                                        <h:outputText value="#{demande.titre}"/>
-                                        <h:outputText value="Prix = #{demande.prix}"/>
-                                        <h:commandButton/>
+                                        <ui:include src = "fragment.xhtml" >
+                                            <ui:param name="annonce" value="#{item}" />
+                                        </ui:include>
                                     </p:column>
                                 </p:dataTable>
                             </f:view>
