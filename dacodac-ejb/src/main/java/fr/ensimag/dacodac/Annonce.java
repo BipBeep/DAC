@@ -8,6 +8,7 @@ package fr.ensimag.dacodac;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -41,9 +44,10 @@ public class Annonce implements Serializable {
     @Column(nullable = false)
     private TypeAnnonce type;
 
-    //@Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     //NEED HELP
-    private LocalDateTime datePublication;
+    @Column(nullable = false)
+    private Date datePublication;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -83,7 +87,7 @@ public class Annonce implements Serializable {
     public Annonce() {
     }
 
-    public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, String codePostal, String description, String titre, LocalDateTime datePublication) {
+    public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, String codePostal, String description, String titre, Date datePublication) {
         this.prix = prix;
         this.type = type;
         this.auteur = auteur;
@@ -129,11 +133,21 @@ public class Annonce implements Serializable {
         this.codePostal = codePostal;
     }
 
-    public LocalDateTime getDatePublication() {
+    /**
+     * Get the value of datePublication
+     *
+     * @return the value of datePublication
+     */
+    public Date getDatePublication() {
         return datePublication;
     }
 
-    public void setDatePublication(LocalDateTime datePublication) {
+    /**
+     * Set the value of datePublication
+     *
+     * @param datePublication new value of datePublication
+     */
+    public void setDatePublication(Date datePublication) {
         this.datePublication = datePublication;
     }
 
