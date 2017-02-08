@@ -67,6 +67,10 @@ public class Annonce implements Serializable {
     
     @OneToMany
     private List<Commentaire> commentaires;
+    
+    // LIMITER A 5 TAGS
+    @ManyToMany
+    private List<Tag> tags;
 
     public Annonce() {}
 
@@ -81,8 +85,8 @@ public class Annonce implements Serializable {
         
         postulants = new ArrayList<>();
         commentaires = new ArrayList<>();
-    }
-    
+        tags = new ArrayList<>();
+    }  
     
     /**
      * Get the value of type
@@ -157,8 +161,6 @@ public class Annonce implements Serializable {
     public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
-
-    
 
     /**
      * Get the value of datePublication
@@ -253,6 +255,13 @@ public class Annonce implements Serializable {
         this.prix = prix;
     }
 
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
     
     public Long getId() {
         return id;
