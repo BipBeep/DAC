@@ -6,6 +6,7 @@
 package fr.ensimag.dacodac.controler.utilisateur;
 
 import fr.ensimag.dacodac.Utilisateur;
+import fr.ensimag.dacodac.exceptions.NotConnectedException;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -35,7 +36,14 @@ public class Connecteur {
     }
 
     public String connect(Identification idBean) {
-        idBean.setIdentite(utilisateur.getPseudo(), utilisateur.getPassword());
+        try
+        {
+            idBean.setIdentite(utilisateur.getPseudo(), utilisateur.getPassword());
+        }
+        catch (NotConnectedException e)
+        {
+            //rattraper
+        }
         return "index.xhtml";
     }
 

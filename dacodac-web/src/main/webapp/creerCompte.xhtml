@@ -41,6 +41,7 @@
                         <h:outputLabel for="age" value="Age: " />
                         <p:spinner id="age" value ="#{creationCompte.newUtil.age}" min="12" max="150" />
                         <p:message for="age"/>
+
                     </h:panelGrid>
                     <p:commandButton value="Créer le compte" action="#{creationCompte.creerCompte()}" icon="ui-icon-circle-plus" ajax="false"/>
                 </h:form>

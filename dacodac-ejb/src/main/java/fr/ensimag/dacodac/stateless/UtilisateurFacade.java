@@ -37,8 +37,16 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
     @Override
     public Utilisateur findByPseudo(String pseudo)
     {
-        return (Utilisateur) getEntityManager().createQuery("SELECT u FROM Utilisateur u WHERE u.pseudo LIKE :pseudo")
-                .setParameter("pseudo", pseudo).getResultList().get(0);
+        List<Utilisateur> liste = getEntityManager().createQuery("SELECT u FROM Utilisateur u WHERE u.pseudo LIKE :pseudo")
+                .setParameter("pseudo", pseudo).getResultList();
+        if (liste.isEmpty())
+        {
+            return null;
+        }
+        else
+        {
+            return liste.get(0);
+        }
     }
     
     @Override

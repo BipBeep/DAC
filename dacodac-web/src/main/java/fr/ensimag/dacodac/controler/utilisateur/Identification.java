@@ -5,6 +5,7 @@
  */
 package fr.ensimag.dacodac.controler.utilisateur;
 
+import fr.ensimag.dacodac.exceptions.NotConnectedException;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import javax.inject.Named;
@@ -35,19 +36,19 @@ public class Identification implements Serializable {
         return identite;
     }
 
-    public void setIdentite(String pseudo, String mdp) {
+    public void setIdentite(String pseudo, String mdp) throws NotConnectedException {
         Utilisateur u = null;
         u = utilisateurFacade.findByPseudo(pseudo);
-        if(u==null){
-            //Pseudo pas bon
-            return;
-        }
-        if(u.getPassword().equals(mdp)){
-            //Ok
+        
+        if((u != null) && (u.getPassword().equals(mdp)))
+        {
             identite = u;
-            return;
         }
-        //MDP pas bon
+        else
+        {
+            u = null;
+            throw new NotConnectedException();
+        }
     }
     
     public void clearIdentite() {
