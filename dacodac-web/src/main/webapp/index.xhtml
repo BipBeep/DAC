@@ -21,13 +21,13 @@
                         <f:view>
                             <p:dataTable value="#{index.dernieresOffres()}" var="offre">
                                 <p:column>
-                                    <h:outputText id="titre" value="#{offre.titre}"/>
+                                    <h:outputText class="titre" value="#{demande.titre}"/>
                                     <br />
-                                    <h:outputText value="#{offre.codePostal}"/>
+                                    <h:outputText value="Code postal : #{offre.codePostal}"/>
                                     <br />
-                                    <h:outputText value="Prix = #{offre.prix}"/>
+                                    <h:outputText value="Prix : #{offre.prix} Dakos"/>
                                     <br />
-                                    <h:outputText value="Publié le #{offre.datePublication}"/>
+                                    <h:outputText class="datePublication" value="Publié le #{offre.datePublication}"/>
                                 </p:column>
                             </p:dataTable>
                         </f:view>
@@ -37,13 +37,13 @@
                         <f:view>
                             <p:dataTable value="#{index.dernieresDemandes()}" var="demande">
                                 <p:column>
-                                    <h:outputText id="titre" value="#{demande.titre}"/>
+                                    <h:outputText class="titre" value="#{demande.titre}"/>
                                     <br />
-                                    <h:outputText value="#{demande.codePostal}"/>
+                                    <h:outputText value="Code postal : #{demande.codePostal}"/>
                                     <br />
-                                    <h:outputText value="Prix = #{demande.prix}"/>
+                                    <h:outputText value="Prix : #{demande.prix} Dakos"/>
                                     <br />
-                                    <h:outputText value="Publié le #{demande.datePublication}"/>
+                                    <h:outputText class="datePublication" value="Publié le #{demande.datePublication}"/>
                                 </p:column>
                             </p:dataTable>
                         </f:view>
