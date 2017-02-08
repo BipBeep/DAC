@@ -46,10 +46,9 @@ public class Utilisateur implements Serializable {
     @Column(unique=true, nullable=false)
     private String email;
     
-    @Min(1000)
-    @Max(99999)
+    @Pattern(regexp="^(0[1-9]|[1-9][0-9])[0-9]{3}$")
     @Column(nullable=false)
-    private int codePostal;
+    private String codePostal;
     
     @Min(12)
     @Max(150)
@@ -68,7 +67,7 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }
     
-    public Utilisateur(int dakos, String pseudo, String password, String email, int codePostal, int age, boolean estAdmin) {
+    public Utilisateur(int dakos, String pseudo, String password, String email, String codePostal, int age, boolean estAdmin) {
         this.dakos = dakos;
         this.pseudo = pseudo;
         this.password= password;
@@ -121,11 +120,11 @@ public class Utilisateur implements Serializable {
         this.email = email;
     }
 
-    public int getCodePostal() {
+    public String getCodePostal() {
         return codePostal;
     }
 
-    public void setCodePostal(int codePostal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
 
