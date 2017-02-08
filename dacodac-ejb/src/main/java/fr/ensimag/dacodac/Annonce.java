@@ -53,7 +53,7 @@ public class Annonce implements Serializable {
     @JoinColumn(nullable = false)
     private Utilisateur auteur;
 
-    @Pattern(regexp = "^(0[1-9]|[1-9][0-9])[0-9]{3}$")
+    @Pattern(regexp="^(0[1-9]|[1-8][0-9]|9[1-5])[0-9]{3}$")
     @Column(nullable = false)
     private String codePostal;
 
@@ -62,7 +62,7 @@ public class Annonce implements Serializable {
     private String description;
 
     @Column(nullable = false)
-    @Size(min = 1, max = 255)
+    @Size(min = 1, max = 127)
     private String titre;
 
     @ManyToMany
