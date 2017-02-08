@@ -40,21 +40,22 @@ public class CreationCompte {
 
     public String creerCompte(String testPass)
     {
-        /*//tester si le pseudo existe
-        if (utilisateurFacade.findByPseudo(newUtil.getPseudo()) != null)
-        {
-            return "index.xhtml";
-        }
-        else */
         if (newUtil.getPassword().equals(testPass))
         {
-            System.err.println("TU ME FAIS PEUR NETBEANS");
-            utilisateurFacade.create(newUtil);
+           
+            try
+            {
+                utilisateurFacade.create(newUtil);
+            }
+            catch (Exception e)
+            {
+                System.err.println(e);
+                return "creerCompte.xhtml";
+            }
             return "index.xhtml";
         }
         
-        System.err.println("TA MERE SUCE DES BITES EN ENFER");
-        
-        return "index.xhtml";
+        //mettre un message d'erreur
+        return "creerCompte.xhtml";
     }
 }

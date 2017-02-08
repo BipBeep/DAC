@@ -26,21 +26,25 @@ public interface AnnonceFacadeLocal {
     void edit(Annonce annonce);
 
     void remove(Annonce annonce);
-    
+
     void addCommentaire(Annonce annonce, Commentaire com);
-    
+
     Annonce findByUtilAndTitre(Utilisateur u, String titre);
     
     List<Annonce> findLatest(int nbAnnoncesAffichees, TypeAnnonce type);
-     
+
     void addPostulant(Annonce annonce, Utilisateur utilisateur);
 
+    void removePostulant(Annonce annonce, Utilisateur utilisateur);
+
     Annonce find(Object id);
+
+    void accepterPostulant(Annonce annonce, Utilisateur utilisateur);
 
     List<Annonce> findAll();
 
     List<Annonce> findRange(int[] range);
 
     int count();
-    
+
 }

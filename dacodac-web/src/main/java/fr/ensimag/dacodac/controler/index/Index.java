@@ -40,6 +40,7 @@ public class Index {
     /* Renvoie les 3 dernières demandes */
     public List<Annonce> dernieresDemandes() {
         int nbAnnoncesAffichees = 3;
-        return annonceFacade.findLatest(nbAnnoncesAffichees, TypeAnnonce.DEMANDE);
+        List<Annonce> list = annonceFacade.findLatest(nbAnnoncesAffichees, TypeAnnonce.DEMANDE);
+        return list;
     }
 }
