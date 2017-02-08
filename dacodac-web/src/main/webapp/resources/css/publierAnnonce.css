@@ -27,3 +27,8 @@ and open the template in the editor.
     background-color: #D19275;
     background-image: none;
 }
+
+.grilleSansBordure.ui-panelgrid>*>tr,
+.grilleSansBordure.ui-panelgrid .ui-panelgrid-cell {
+    border: none;
+}
