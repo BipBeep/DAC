@@ -63,7 +63,7 @@
                             <h:outputText value="#{publierAnnonce.annonce.codePostal}" />
                         </h:panelGrid>
 
-                        <p:commandButton class="boutonValidation" value="Publier l'annonce" ajax="false" validateClient="true" />
+                        <p:commandButton class="boutonValidation" value="Publier l'annonce" action="#{publierAnnonce.save()}" ajax="false" validateClient="true" />
                     </p:panel>
                 </h:form>
                 <p:button id="boutonAnnuler" outcome="/index.xhtml" value="Annuler" icon="ui-icon-circle-close">
