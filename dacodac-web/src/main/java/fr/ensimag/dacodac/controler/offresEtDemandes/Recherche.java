@@ -5,10 +5,11 @@
  */
 package fr.ensimag.dacodac.controler.offresEtDemandes;
 
+import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
@@ -19,6 +20,9 @@ import javax.enterprise.context.RequestScoped;
 @Named(value = "recherche")
 @RequestScoped
 public class Recherche {
+    
+    @EJB
+    private AnnonceFacadeLocal annonceFacade;
 
     String depart;
     String tri;
@@ -47,6 +51,7 @@ public class Recherche {
      * Creates a new instance of Recherche
      */
     public Recherche() {
+        //Création de la liste des départements
         liste_departs = new TreeMap<String, String>(keyComparator);
         String num, code, num_dep;
         for (int i = 1; i < 101; i++) {
@@ -79,4 +84,7 @@ public class Recherche {
         this.liste_departs = departs;
     }
     
+    public void effectuer() {
+        
+    }
 }

@@ -16,60 +16,97 @@
             <ui:define name="content">
                 <h2 id="titre">Publier une annonce</h2>
                 <h:form>
-                    <p:panel>
-                        <h:panelGrid columns="4" cellpadding="5">
-                            <h:outputLabel for="description" value="Description" />
-                            <p:inputTextarea id="description" rows="5" cols="30" 
-                                counter="display" maxlength="1000" counterTemplate="{0} characters remaining." 
-                                autoResize="false" required="true"/>
-                            <p:message for="description" display="icon" />
-                            <h:outputText id="display" value="#{publierAnnonce.annonce.description}" />
-                            
-                            <h:outputLabel for="tags" value="Tags" />
-                            <p:inputText id="tags" value="#{null}" required="true">
-                                <f:validateLength />
-                                <p:clientValidator />
-                            </p:inputText>
-                            <p:message for="tags" display="icon" />
-                            <h:outputText value="#{null}" />
+                    <p:panelGrid styleClass="grilleSansBordure">  
+                        <p:row>  
+                            <p:column>  
+                                <h:outputLabel for="description" value="Description" /> 
+                            </p:column>  
+                            <p:column>  
+                                <p:inputTextarea binding="#{descr}" id="description" rows="5" cols="30" 
+                                                 counter="display" maxlength="1000" counterTemplate="{0} characters remaining." 
+                                                 autoResize="false" required="true"/> 
+                            </p:column>  
+                            <p:column>  
+                                <p:message for="description" display="icon" />
+                            </p:column>
+                            <p:column>  
+                                <h:outputText id="display"/>
+                            </p:column>  
+                        </p:row>
+                        <p:row>  
+                            <p:column>  
+                                <h:outputLabel for="tags" value="Tags" />
+                            </p:column>  
+                            <p:column>  
+                                <p:inputText binding="#{tags}" id="tags" required="true">
+                                    <f:validateLength />
+                                    <p:clientValidator />
+                                </p:inputText>
+                            </p:column>  
+                            <p:column>  
+                                <p:message for="tags" display="icon" />
+                            </p:column>  
+                        </p:row>
+                        <p:row>  
+                            <p:column>  
+                                <h:outputLabel for="titre" value="Titre" />
+                            </p:column>  
+                            <p:column>  
+                                <p:inputText binding="#{titre}" id="titre" required="true">
+                                    <p:clientValidator event="keyup"/>
+                                </p:inputText>
+                            </p:column>  
+                            <p:column>  
+                                <p:message for="titre" display="icon" />
+                            </p:column>  
+                        </p:row>
+                        <p:row>  
+                            <p:column>  
+                                <p:outputLabel for="type" value="Type" />
+                            </p:column>  
+                            <p:column>  
+                                <p:selectOneRadio id="type" binding="#{type}">
+                                    <f:selectItem itemLabel="Offre" itemValue="Offre" />
+                                    <f:selectItem itemLabel="Demande" itemValue="Demande" />
+                                </p:selectOneRadio>
+                            </p:column>  
+                        </p:row>
+                        <p:row>  
+                            <p:column>  
+                                <h:outputLabel for="prix" value="Prix (en dakos)" />
+                            </p:column>  
+                            <p:column>  
+                                <p:inputText id="prix" binding="#{prix}">
+                                    <p:clientValidator event="keyup"/>
+                                </p:inputText>
+                            </p:column>  
+                            <p:column>  
+                                <p:message for="prix" display="icon" />
+                            </p:column>  
+                        </p:row>
+                        <p:row>  
+                            <p:column>  
+                                <h:outputLabel for="codePostal" value="Code postal" />
+                            </p:column>  
+                            <p:column>  
+                                <p:inputText binding="#{codePostal}" size="5" id="codePostal" >
+                                    <p:clientValidator event="keyup"/>
+                                </p:inputText>
+                            </p:column>  
+                            <p:column>  
+                                <p:message for="codePostal" display="icon" />
+                            </p:column>  
+                        </p:row>
+                    </p:panelGrid>
+                    <p:commandButton class="boutonValidation" value="Publier l'annonce"
+                                     action="#{publierAnnonce.save(descr.value,tags.value,titre.value,type.value,prix.value,codePostal.value)}" 
+                                     ajax="false" validateClient="true" />
 
-                            <h:outputLabel for="titre" value="Titre" />
-                            <p:inputText id="titre" value="#{publierAnnonce.annonce.titre}">
-                                <p:clientValidator event="keyup"/>
-                            </p:inputText>
-                            <p:message for="titre" display="icon" />
-                            <h:outputText value="#{publierAnnonce.annonce.titre}" />
-                            
-                            <p:outputLabel for="type" value="Type" />
-                            <p:selectOneRadio id="type" value="#{publierAnnonce.annonce.type}">
-                                <f:selectItem itemLabel="Offre" itemValue="Offre" />
-                                <f:selectItem itemLabel="Demande" itemValue="Demande" />
-                            </p:selectOneRadio>
-                        </h:panelGrid>
-                            
-                        <h:panelGrid columns="4" cellpadding="5">
-                            <h:outputLabel for="prix" value="Prix (en dakos)" />
-                            <p:inputText size="3" id="prix" value="#{publierAnnonce.annonce.prix}">
-                                <p:clientValidator event="keyup"/>
-                            </p:inputText>
-                            <p:message for="prix" display="icon" />
-                            <h:outputText value="#{publierAnnonce.annonce.prix}" />
-                            
-                            <h:outputLabel for="codePostal" value="Code postal" />
-                            <p:inputText size="5" id="codePostal" value="#{publierAnnonce.annonce.codePostal}">
-                                <p:clientValidator event="keyup"/>
-                            </p:inputText>
-                            <p:message for="codePostal" display="icon" />
-                            <h:outputText value="#{publierAnnonce.annonce.codePostal}" />
-                        </h:panelGrid>
-
-                        <p:commandButton class="boutonValidation" value="Publier l'annonce" ajax="false" validateClient="true" />
-                    </p:panel>
                 </h:form>
                 <p:button id="boutonAnnuler" outcome="/index.xhtml" value="Annuler" icon="ui-icon-circle-close">
                     <f:param name="annuler" value="10" />
                 </p:button>
-                
+
             </ui:define>
 
         </ui:composition>
