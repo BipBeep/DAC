@@ -10,6 +10,7 @@ import fr.ensimag.dacodac.TypeAnnonce;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -50,7 +51,7 @@ public class PublierAnnonce {
         
         Utilisateur user = utilisateurFacade.findByPseudo("Nico");
         
-        Annonce a = new Annonce(prixI, typeA, user, codePostal, descr, titre, new Date());
+        Annonce a = new Annonce(prixI, typeA, user, codePostal, descr, titre, LocalDate.now());
         
         annonceFacade.create(a);
         //if not connected, renvoie vers connexion.xhtml
