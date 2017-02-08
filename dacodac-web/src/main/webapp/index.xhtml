@@ -18,12 +18,35 @@
                 <div class="elements">
                     <div class="block_offres">
                         <h2> Dernières offres </h2>
-                        <ui:include src ="dernieresOffres.xhtml" />
+                        <f:view>
+                            <p:dataTable value="#{index.dernieresOffres()}" var="offre">
+                                <p:column>
+                                    <h:outputText class="titre" value="#{offre.titre}"/>
+                                    <br />
+                                    <h:outputText value="Code postal : #{offre.codePostal}"/>
+                                    <br />
+                                    <h:outputText value="Prix : #{offre.prix} Dakos"/>
+                                    <br />
+                                    <span class="datePublication">Publié le #{offre.datePublication}</span>
+                                </p:column>
+                            </p:dataTable>
+                        </f:view>
                     </div>
-
                     <div class="block_demandes">
                         <h2> Dernières demandes </h2>
-                        <ui:include src ="dernieresDemandes.xhtml" />
+                        <f:view>
+                            <p:dataTable value="#{index.dernieresDemandes()}" var="demande">
+                                <p:column>
+                                    <h:outputText class="titre" value="#{demande.titre}"/>
+                                    <br />
+                                    <h:outputText value="Code postal : #{demande.codePostal}"/>
+                                    <br />
+                                    <h:outputText value="Prix : #{demande.prix} Dakos"/>
+                                    <br />
+                                    <h:outputText class="datePublication" value="Publié le #{demande.datePublication}"/>
+                                </p:column>
+                            </p:dataTable>
+                        </f:view>
                     </div>
                 </div>
             </ui:define>

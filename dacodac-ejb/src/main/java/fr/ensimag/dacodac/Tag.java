@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.ensimag.contacts;
+package fr.ensimag.dacodac;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,51 +14,40 @@ import javax.persistence.Id;
 
 /**
  *
- * @author duclaur
+ * @author roussena
  */
 @Entity
-public class Person implements Serializable {
+public class Tag implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @Column(nullable=false)
     private String nom;
-    private String prenom;
-    
-    public Person() {}
-    
-    public Person(String nom, String prenom)
-    {
-        this.nom = nom;
-        this.prenom = prenom;
-    }
 
-    public Long getId() {
-        return id;
+    public Tag() {}
+    
+    public Tag(String nom) {
+        this.nom = nom;
     }
     
     public String getNom() {
         return nom;
     }
-    
-    public String getPrenom() {
-        return prenom;
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
-    
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-    
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-    
 
     @Override
     public int hashCode() {
@@ -69,10 +59,10 @@ public class Person implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Person)) {
+        if (!(object instanceof Tag)) {
             return false;
         }
-        Person other = (Person) object;
+        Tag other = (Tag) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -81,7 +71,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.ensimag.contacts.Person[ id=" + id + " ]";
+        return "fr.ensimag.dacodac.Tag[ id=" + id + " ]";
     }
     
 }

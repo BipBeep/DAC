@@ -8,6 +8,7 @@ package fr.ensimag.dacodac;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -41,9 +44,10 @@ public class Annonce implements Serializable {
     @Column(nullable = false)
     private TypeAnnonce type;
 
-    //@Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     //NEED HELP
-    private LocalDateTime datePublication;
+    @Column(nullable = false)
+    private Date datePublication;
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -67,13 +71,23 @@ public class Annonce implements Serializable {
     @Column(nullable = false)
     private boolean estValidee;
 
+    @Column(nullable = false)
+    private boolean serviceRendu_auteur;
+    
+    @Column(nullable = false)
+    private boolean serviceRendu_contracteur;
+    
     @OneToMany
     private List<Commentaire> commentaires;
+    
+    // LIMITER A 5 TAGS
+    @ManyToMany
+    private List<Tag> tags;
 
     public Annonce() {
     }
 
-    public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, String codePostal, String description, String titre, LocalDateTime datePublication) {
+    public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, String codePostal, String description, String titre, Date datePublication) {
         this.prix = prix;
         this.type = type;
         this.auteur = auteur;
@@ -84,76 +98,37 @@ public class Annonce implements Serializable {
         estValidee = false;
         postulants = new ArrayList<>();
         commentaires = new ArrayList<>();
-    }
-
-    /**
-     * Get the value of type
-     *
-     * @return the value of type
-     */
+        tags = new ArrayList<>();
+    }  
+  
     public TypeAnnonce getType() {
         return type;
     }
 
-    /**
-     * Set the value of type
-     *
-     * @param type new value of type
-     */
     public void setType(TypeAnnonce type) {
         this.type = type;
     }
 
-    /**
-     * Get the value of titre
-     *
-     * @return the value of titre
-     */
     public String getTitre() {
         return titre;
     }
 
-    /**
-     * Set the value of titre
-     *
-     * @param titre new value of titre
-     */
     public void setTitre(String titre) {
         this.titre = titre;
     }
 
-    /**
-     * Get the value of description
-     *
-     * @return the value of description
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * Set the value of description
-     *
-     * @param description new value of description
-     */
     public void setDescription(String description) {
         this.description = description;
     }
 
-    /**
-     * Get the value of codePostal
-     *
-     * @return the value of codePostal
-     */
     public String getCodePostal() {
         return codePostal;
     }
 
-    /**
-     * Set the value of codePostal
-     *
-     * @param codePostal new value of codePostal
-     */
     public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
@@ -163,7 +138,7 @@ public class Annonce implements Serializable {
      *
      * @return the value of datePublication
      */
-    public LocalDateTime getDatePublication() {
+    public Date getDatePublication() {
         return datePublication;
     }
 
@@ -172,80 +147,48 @@ public class Annonce implements Serializable {
      *
      * @param datePublication new value of datePublication
      */
-    public void setDatePublication(LocalDateTime datePublication) {
+    public void setDatePublication(Date datePublication) {
         this.datePublication = datePublication;
     }
 
-    /**
-     * Get the value of postulants
-     *
-     * @return the value of postulants
-     */
     public List<Utilisateur> getPostulants() {
         return postulants;
     }
 
-    /**
-     * Set the value of postulants
-     *
-     * @param postulants new value of postulants
-     */
     public void setPostulants(List<Utilisateur> postulants) {
         this.postulants = postulants;
     }
 
-    /**
-     * Get the value of commentaires
-     *
-     * @return the value of commentaires
-     */
     public List<Commentaire> getCommentaires() {
         return commentaires;
     }
 
-    /**
-     * Set the value of commentaires
-     *
-     * @param commentaires new value of commentaires
-     */
     public void setCommentaires(List<Commentaire> commentaires) {
         this.commentaires = commentaires;
     }
 
-    /**
-     * Get the value of auteur
-     *
-     * @return the value of auteur
-     */
     public Utilisateur getAuteur() {
         return auteur;
     }
 
-    /**
-     * Set the value of auteur
-     *
-     * @param auteur new value of auteur
-     */
     public void setAuteur(Utilisateur auteur) {
         this.auteur = auteur;
     }
 
-    /**
-     * Get the value of prix
-     *
-     * @return the value of prix
-     */
     public int getPrix() {
         return prix;
     }
 
-    /**
-     * Set the value of prix
-     *
-     * @param prix new value of prix
-     */
     public void setPrix(int prix) {
         this.prix = prix;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public Long getId() {
@@ -281,18 +224,28 @@ public class Annonce implements Serializable {
         return "fr.ensimag.dacodac.Annonce[ id=" + id + " ]";
     }
 
-    /**
-     * @return the estValidee
-     */
     public boolean isEstValidee() {
         return estValidee;
     }
 
-    /**
-     * @param estValidee the estValidee to set
-     */
     public void setEstValidee(boolean estValidee) {
         this.estValidee = estValidee;
+    }
+
+    public boolean getServiceRendu_auteur() {
+        return serviceRendu_auteur;
+    }
+
+    public void setServiceRendu_auteur(boolean serviceRendu_auteur) {
+        this.serviceRendu_auteur = serviceRendu_auteur;
+    }
+
+    public boolean getServiceRendu_contracteur() {
+        return serviceRendu_contracteur;
+    }
+
+    public void setServiceRendu_contracteur(boolean serviceRendu_contracteur) {
+        this.serviceRendu_contracteur = serviceRendu_contracteur;
     }
 
 }

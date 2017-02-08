@@ -30,3 +30,13 @@ ul {
 h2 {
     text-align: center;
 }
+
+.titre {
+   font-weight: bold;
+   font-size:  20px;
+}
+
+.datePublication {
+    position: relative;
+    right: -50%;
+}

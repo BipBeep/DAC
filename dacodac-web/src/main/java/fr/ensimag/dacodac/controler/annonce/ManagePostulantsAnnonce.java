@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.ensimag.dacodac.controler.publicationAnnonce;
+package fr.ensimag.dacodac.controler.annonce;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Utilisateur;
@@ -16,25 +16,41 @@ import javax.enterprise.context.Dependent;
  *
  * @author maubertj
  */
-@Named(value = "postulerAnnonce")
+@Named(value = "managePostulantsAnnonce")
 @Dependent
-public class PostulerAnnonce {
-    private Annonce annonce = null;
-    private Utilisateur utilisateur = null;
-    
-    
-    
+public class ManagePostulantsAnnonce {
+
     @EJB
     private AnnonceFacadeLocal annonceFacade;
     
+    private Annonce annonce = null;
+    private Utilisateur utilisateur = null;
+    
+
     /**
-     * Creates a new instance of PostulerAnnonce
+     * Creates a new instance of ManagePostulantsAnnonce
      */
-    public PostulerAnnonce() {
+    public ManagePostulantsAnnonce() {
     }
     
-    String Postuler() {
-        annonceFacade.addPostulant(getAnnonce(), getUtilisateur());
+    public String supprimerAnnonce(){
+        annonceFacade.remove(getAnnonce());
+        return "index.xhtml";
+    }
+    
+    public String editerAnnonce() {
+        annonceFacade.edit(getAnnonce());
+        return "index.xhtml";
+    }
+    
+    public String accepterPostulant() {
+        annonceFacade.accepterPostulant(getAnnonce(), getUtilisateur());
+        annonceFacade.edit(getAnnonce());
+        return "index.xhtml";
+    }
+    
+    public String refuserPostulant() {
+        annonceFacade.removePostulant(getAnnonce(), getUtilisateur());
         annonceFacade.edit(getAnnonce());
         return "index.xhtml";
     }
@@ -43,10 +59,6 @@ public class PostulerAnnonce {
      * @return the annonce
      */
     public Annonce getAnnonce() {
-        if (annonce == null)
-        {
-            annonce = new Annonce();
-        }
         return annonce;
     }
 
@@ -54,10 +66,7 @@ public class PostulerAnnonce {
      * @return the utilisateur
      */
     public Utilisateur getUtilisateur() {
-        if (utilisateur == null)
-        {
-            utilisateur = new Utilisateur();
-        }
         return utilisateur;
     }
 }
+
