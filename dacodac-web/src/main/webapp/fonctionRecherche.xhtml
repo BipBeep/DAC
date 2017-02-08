@@ -15,12 +15,12 @@
                         <h:panelGrid columns="4" cellpadding="5">
                             <p:inputText style="margin-right:10px" placeholder="Mots clés..."/>
                             
-                            <p:selectOneMenu id="country" value="#{recherche.departement}" style="width:150px">
+                            <p:selectOneMenu id="departement" binding="#{departement} style="width:150px">
                                 <f:selectItem itemLabel="Département" itemValue="" noSelectionOption="true" />
                                 <f:selectItems value="#{recherche.departements}" />
                             </p:selectOneMenu>
 
-                            <p:selectOneMenu id="tri" value="#{recherche.tri}">
+                            <p:selectOneMenu id="tri" binding="#{tri}">
                                 <f:selectItem itemLabel="Tri" itemValue="" noSelectionOption="true" />
                                 <f:selectItem itemLabel="Par prix croissants" itemValue="prix_croissants" />
                                 <f:selectItem itemLabel="Par prix décroissants" itemValue="prix_decroissants" />
@@ -28,7 +28,7 @@
                                 <f:selectItem itemLabel="Par dates (du plus ancien au plus récent)" itemValue="dates_decroissantes" />
                             </p:selectOneMenu>
                             
-                            <p:commandButton value="OK" ajax="false" validateClient="true"/>
+                            <p:commandButton value="OK" action="#{recherche.effectuer(departement.value, tri.value)}" ajax="false" validateClient="true"/>
                         </h:panelGrid>
                         
                     </p:panel>
