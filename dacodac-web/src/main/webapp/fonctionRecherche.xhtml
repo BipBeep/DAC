@@ -13,9 +13,9 @@
             <h:form>
                     <p:panel header="Recherche">
                         <h:panelGrid columns="4" cellpadding="5">
-                            <p:inputText style="margin-right:10px" placeholder="Mots clés..."/>
+                            <p:inputText style="margin-right:10px" placeholder="Tags..." binding="#{tags}"/>
                             
-                            <p:selectOneMenu id="departement" binding="#{departement} style="width:150px">
+                            <p:selectOneMenu id="departement" binding="#{departement}" style="width:150px">
                                 <f:selectItem itemLabel="Département" itemValue="" noSelectionOption="true" />
                                 <f:selectItems value="#{recherche.departements}" />
                             </p:selectOneMenu>
@@ -28,7 +28,7 @@
                                 <f:selectItem itemLabel="Par dates (du plus ancien au plus récent)" itemValue="dates_decroissantes" />
                             </p:selectOneMenu>
                             
-                            <p:commandButton value="OK" action="#{recherche.effectuer(departement.value, tri.value)}" ajax="false" validateClient="true"/>
+                            <p:commandButton value="OK" action="#{recherche.effectuer(tags.value, departement.value, tri.value)}" ajax="false" validateClient="true"/>
                         </h:panelGrid>
                         
                     </p:panel>

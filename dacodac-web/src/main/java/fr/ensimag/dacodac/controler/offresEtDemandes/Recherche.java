@@ -5,8 +5,11 @@
  */
 package fr.ensimag.dacodac.controler.offresEtDemandes;
 
+import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.ejb.EJB;
@@ -61,7 +64,16 @@ public class Recherche {
             liste_departs.put(num_dep,num_dep);
         }
     }
+    
+    public void effectuer(String tags, String departement, String tri) {
+        String[] arrayTags = tags.split(" ");
+        List<Tag> listTags = new ArrayList<Tag>();
         
+        for (String s : arrayTags) {
+            Tag t = new Tag(s);
+            listTags.add(t);
+        }
+    }
     
     public String getDepartement() {
         return depart;
@@ -84,7 +96,5 @@ public class Recherche {
         this.liste_departs = departs;
     }
     
-    public void effectuer() {
-        
-    }
+    
 }
