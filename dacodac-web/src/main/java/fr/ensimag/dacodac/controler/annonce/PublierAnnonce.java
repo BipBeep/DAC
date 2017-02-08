@@ -7,9 +7,10 @@ package fr.ensimag.dacodac.controler.annonce;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.TypeAnnonce;
+import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
-import java.time.LocalDateTime;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -47,13 +48,14 @@ public class PublierAnnonce {
             typeA = TypeAnnonce.OFFRE;
         }        
         
-        Annonce a = new Annonce(prixI, typeA, null, codePostal, descr, titre, LocalDateTime.now());
+        Utilisateur user = utilisateurFacade.findByPseudo("Nico");
+        
+        Annonce a = new Annonce(prixI, typeA, user, codePostal, descr, titre, new Date());
         
         annonceFacade.create(a);
         //if not connected, renvoie vers connexion.xhtml
         //récupérer utilisateur via fonction de javaee security
-        utilisateurFacade.addAnnonce(null, a);
-        // to do
+        utilisateurFacade.addAnnonce(user, a);
         return "index.xhtml";
     }
 }

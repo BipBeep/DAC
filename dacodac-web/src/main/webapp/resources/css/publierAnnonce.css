@@ -29,6 +29,12 @@ and open the template in the editor.
 }
 
 .grilleSansBordure.ui-panelgrid>*>tr,
-.grilleSansBordure.ui-panelgrid .ui-panelgrid-cell {
+.grilleSansBordure.ui-panelgrid .ui-panelgrid-cell 
+{
     border: none;
+}
+
+.grilleSansBordure.ui-panelgrid 
+{
+    margin-bottom: 15px;
 }
