@@ -10,6 +10,7 @@ import fr.ensimag.dacodac.Commentaire;
 import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.Utilisateur;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -75,7 +76,26 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             //L'utilisateur rentré n'est pas dans la liste des postulants.
         }
     }
-
+    
+    // Selectionner le bon tag dans la liste des tags
+    @Override
+    public List<Annonce> findByTag(Tag tag) {
+        List<Annonce> annonces = findAll();    
+        if (annonces.isEmpty())
+        {
+            return null;
+        }
+        else
+        {
+            for (Annonce annonce : annonces) {
+                if (annonce.getTags().contains(tag)) {
+                    annonces.remove(annonce);
+                }
+            }
+            return annonces;
+        }
+    }
+    
     @Override
     public Annonce findByUtilAndTitre(Utilisateur u, String titre) {
         return (Annonce) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.titre LIKE :titre and a.auteur = :auteur")
