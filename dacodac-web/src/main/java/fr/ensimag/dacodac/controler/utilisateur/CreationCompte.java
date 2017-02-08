@@ -21,40 +21,30 @@ public class CreationCompte {
 
     @EJB
     private UtilisateurFacadeLocal utilisateurFacade;
-    
+
     private Utilisateur newUtil = null;
-    
+
     /**
      * Creates a new instance of CreationCompte
      */
     public CreationCompte() {
     }
-    
+
     public Utilisateur getNewUtil() {
-        if (newUtil == null)
-        {
+        if (newUtil == null) {
             newUtil = new Utilisateur();
         }
         return newUtil;
     }
 
-    public String creerCompte(String testPass)
-    {
-        /*//tester si le pseudo existe
-        if (utilisateurFacade.findByPseudo(newUtil.getPseudo()) != null)
-        {
-            return "index.xhtml";
-        }
-        else */
-        if (newUtil.getPassword().equals(testPass))
-        {
-            System.err.println("TU ME FAIS PEUR NETBEANS");
+    public String creerCompte() {
+
+        try {
             utilisateurFacade.create(newUtil);
-            return "index.xhtml";
+        } catch (Exception e) {
+            System.err.println(e);
+            return "creerCompte.xhtml";
         }
-        
-        System.err.println("TA MERE SUCE DES BITES EN ENFER");
-        
         return "index.xhtml";
     }
 }

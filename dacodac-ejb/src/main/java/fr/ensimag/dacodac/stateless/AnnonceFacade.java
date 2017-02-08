@@ -7,7 +7,12 @@ package fr.ensimag.dacodac.stateless;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.Utilisateur;
+import fr.ensimag.dacodac.TypeAnnonce;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -31,10 +36,9 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
     public AnnonceFacade() {
         super(Annonce.class);
     }
-    
+
     @Override
-    public void addCommentaire(Annonce annonce, Commentaire com)
-    {
+    public void addCommentaire(Annonce annonce, Commentaire com) {
         List<Commentaire> commentaires = annonce.getCommentaires();
         commentaires.add(com);
         annonce.setCommentaires(commentaires);
@@ -46,11 +50,77 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         postulants.add(utilisateur);
         annonce.setPostulants(postulants);
     }
+
+    @Override
+    public void addTag(Annonce annonce, Tag tag) {
+        List<Tag> tags = annonce.getTags();
+        tags.add(tag);
+        annonce.setTags(tags);
+    }
+
+    @Override
+    public void removePostulant(Annonce annonce, Utilisateur utilisateur) {
+        List<Utilisateur> postulants = annonce.getPostulants();
+        postulants.remove(utilisateur);
+        annonce.setPostulants(postulants);
+    }
+
+    @Override
+    public void accepterPostulant(Annonce annonce, Utilisateur utilisateur) {
+        List<Utilisateur> postulants = annonce.getPostulants();
+
+        if (postulants.contains(utilisateur)) {
+            postulants = new ArrayList<>();
+            postulants.add(utilisateur);
+            annonce.setPostulants(postulants);
+            annonce.setEstValidee(true);
+        } else {
+            //L'utilisateur rentré n'est pas dans la liste des postulants.
+        }
+    }
     
     @Override
-    public Annonce findByUtilAndTitre(Utilisateur u, String titre)
-    {
+    public List<Annonce> findByTag(List<Tag> tags) {
+        List<Annonce> annonces = findAll();    
+        if (annonces.isEmpty())
+        {
+            return null;
+        }
+        else
+        {
+            boolean trouve = true;
+            for (Annonce annonce : annonces) {
+                for (Tag tag : tags) {
+                    if (!annonce.getTags().contains(tag)) {
+                        trouve = false;
+                    }
+                }
+                if (!trouve) {
+                    annonces.remove(annonce);
+                }
+            }
+            return annonces;
+        }
+    }
+    
+    @Override
+    public void serviceRendu(boolean realise, Annonce annonce, Utilisateur utilisateur) {
+        if (annonce.getAuteur().equals(utilisateur)) {
+            annonce.setServiceRendu_auteur(realise);
+        } else {
+            annonce.setServiceRendu_contracteur(realise);
+        }
+    }
+
+    @Override
+    public Annonce findByUtilAndTitre(Utilisateur u, String titre) {
         return (Annonce) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.titre LIKE :titre and a.auteur = :auteur")
                 .setParameter("titre", titre).setParameter("auteur", u).getResultList().get(0);
     }
+
+    @Override
+    public List<Annonce> findLatest(int nbAnnoncesAffichees, TypeAnnonce type) {
+        return (List<Annonce>) getEntityManager().createQuery("SELECT a FROM Annonce a").getResultList();
+    }
+
 }

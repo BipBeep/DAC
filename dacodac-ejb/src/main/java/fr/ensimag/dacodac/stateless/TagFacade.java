@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.ensimag.contacts.stateless;
+package fr.ensimag.dacodac.stateless;
 
-import fr.ensimag.contacts.Person;
+import fr.ensimag.dacodac.Tag;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author duclaur
+ * @author roussena
  */
 @Stateless
-public class PersonFacade extends AbstractFacade<Person> implements PersonFacadeLocal {
+public class TagFacade extends AbstractFacade<Tag> implements TagFacadeLocal {
 
     @PersistenceContext(unitName = "Dacodac_PU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class PersonFacade extends AbstractFacade<Person> implements PersonFacade
         return em;
     }
 
-    public PersonFacade() {
-        super(Person.class);
+    public TagFacade() {
+        super(Tag.class);
     }
     
 }
