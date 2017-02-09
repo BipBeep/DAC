@@ -42,8 +42,10 @@
                                             </p:dataTable>
                                         </f:view>
                                     </div>
-                                    <c:if test="#{identification.identite eq consulterProfil.getUtilisateur(pseudo)}">
-                                        <p:button value="Editer le profil" style="margin-top:20px" outcome="/editerProfil.xhtml"/>
+                                    <c:if test="#{not (identification.identite eq null)}">
+                                        <c:if test="#{(identification.identite.estAdmin eq true) || (identification.identite eq consulterProfil.getUtilisateur(pseudo))}">
+                                            <p:button value="Editer le profil" style="margin-top:20px" outcome="/editerProfil.xhtml"/>
+                                        </c:if>
                                     </c:if>
                                 </p:column>
                             </p:row>
