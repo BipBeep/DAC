@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition>
+            <h:panelGrid columns="2" cellpadding="25">
+
+                <h:outputLabel for="pseudo" value="Pseudonyme" />
+                <h:outputText id="pseudo" value="#{utilisateur.pseudo}"/>
+
+
+                <h:outputLabel for="email" value="email" />
+                <h:outputText id="email" value="#{utilisateur.email}"/>
+
+
+
+                <h:outputLabel for="text" value="Description :" />
+                <h:outputText id="description" value="#{utilisateur.description}"/>
+
+
+                <h:outputLabel for="codePostal" value="Code Postal" />
+                <h:outputText id="codePostal" value="#{utilisateur.codePostal}"/>
+
+
+                <h:outputLabel for="age" value="Age" />
+                <h:outputText id="age" value="#{utilisateur.age}"/>
+
+
+            </h:panelGrid>
+
+        </ui:composition>
+
+    </body>
+</html>

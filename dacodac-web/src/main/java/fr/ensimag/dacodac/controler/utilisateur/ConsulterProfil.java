@@ -5,8 +5,12 @@
  */
 package fr.ensimag.dacodac.controler.utilisateur;
 
+import fr.ensimag.dacodac.Utilisateur;
+import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
+import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import javax.inject.Named;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
@@ -18,41 +22,24 @@ import javax.inject.Inject;
 @RequestScoped
 public class ConsulterProfil implements Serializable {
 
-    @Inject
-    private Identification beanID;
-    
+    Utilisateur utilisateur = null;
+
+    @EJB(name = "utilisateurFacade")
+    private UtilisateurFacadeLocal utilisateurFacade;
+
     /**
      * Creates a new instance of ConsulterProfil
      */
     public ConsulterProfil() {
     }
+
     
-    public void setIdentification(Identification identification){
-        this.beanID=identification;
-    }
     
-    public Identification getIdentification(){
-        return beanID;
+    public Utilisateur getUtilisateur(String pseudo) {
+        if (utilisateur == null) {
+            utilisateur = utilisateurFacade.findByPseudo(pseudo);
+        }
+        return utilisateur;
     }
-    
-    public String getPseudoUtilisateur() {
-        return beanID.getIdentite().getPseudo();
-    }
-    
-    public String getEmailUtilisateur() {
-        return beanID.getIdentite().getEmail();
-    }
-    
-    public String getDescriptionUtilisateur() {
-        return beanID.getIdentite().getDescription();
-    }
-    
-    public String getCodePostalUtilisateur() {
-        return beanID.getIdentite().getCodePostal();
-    }
-        
-    public String getAgeUtilisateur() {
-        int age =  beanID.getIdentite().getAge();
-        return String.valueOf(age);
-    }
+
 }

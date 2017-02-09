@@ -61,7 +61,9 @@
                                 <p:row>
                                     <p:column id="consulterProfil">
                                         <h:form>
-                                            <p:link value="Consulter le profil" outcome="/index.xhtml"/>
+                                            <p:link value="Consulter le profil" outcome="/consulterUnProfil.xhtml">
+                                                <f:param name="pseudo" value="#{annoncePublic.getAnnonce(id).auteur.pseudo}"/>
+                                            </p:link>
                                         </h:form>
                                     </p:column>
                                 </p:row>
