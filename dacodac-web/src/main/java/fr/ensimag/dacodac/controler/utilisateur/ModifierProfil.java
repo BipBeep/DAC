@@ -10,38 +10,52 @@ import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 
 /**
  *
  * @author maubertj
  */
 @Named(value = "modifierProfil")
-@Dependent
+@RequestScoped
 public class ModifierProfil {
 
-    
     @EJB
     private UtilisateurFacadeLocal utilisateurFacade;
 
     private Utilisateur utilisateur = null;
-    
+
+    private String nouveauMotDePasse;
+    private String ancienMotDePasse;
+
     /**
      * Creates a new instance of ModifierProfil
      */
     public ModifierProfil() {
     }
-    
+
     public String modificationProfil() {
+        //Gestion du mot de passe
+        if ((!nouveauMotDePasse.equals("")) && ancienMotDePasse.equals(utilisateur.getPassword())) {
+            utilisateur.setPassword(nouveauMotDePasse);
+        }
         utilisateurFacade.edit(utilisateur);
         return "index.xhtml";
     }
-    
-    public Utilisateur getUtilisateur() {
-        if (utilisateur == null)
-        {
-            utilisateur = new Utilisateur();
+
+    public String getNouveauMotDePasse() {
+        return nouveauMotDePasse;
+    }
+
+    public String getAncienMotDePasse() {
+        return ancienMotDePasse;
+    }
+
+    public Utilisateur getUtilisateur(String pseudo) {
+        if (utilisateur == null) {
+            utilisateur = utilisateurFacade.findByPseudo(pseudo);
         }
         return utilisateur;
     }
-    
+
 }
