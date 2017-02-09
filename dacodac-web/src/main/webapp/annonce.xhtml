@@ -53,29 +53,16 @@
                             <p:panelGrid>
                                 <p:row>
                                     <p:column>
-                                        <h1>Pseudo</h1>
-                                        <br/>
-                                        Email
-                                        <br/>
-                                        <br/>
-                                        Derniers commentaires :
-                                        <br/>
-                                        <ul>
-                                            <li>
-                                                Commentaire 1
-                                            </li>
-                                            <li>
-                                                Commentaire 2
-                                            </li>
-                                            <li>
-                                                Commentaire 3
-                                            </li>
-                                        </ul>
+                                        <ui:include src="vignettePseudo.xhtml">
+                                            <ui:param name="utilisateur" value="#{annoncePublic.getAnnonce(id).auteur}" />
+                                        </ui:include>
                                     </p:column>
                                 </p:row>
                                 <p:row>
                                     <p:column id="consulterProfil">
-                                        <p:commandButton value="Consulter le profil"/>
+                                        <h:form>
+                                            <p:link value="Consulter le profil" outcome="/index.xhtml"/>
+                                        </h:form>
                                     </p:column>
                                 </p:row>
                             </p:panelGrid>

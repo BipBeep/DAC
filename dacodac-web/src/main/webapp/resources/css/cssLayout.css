@@ -88,4 +88,14 @@
     border: none;
 }
 
+li.commentaire {
+    display: block;
+    margin-top: 5px;
+}
+
+li.commentaire .infos{
+    text-align: right;
+    font-size: 12px;
+    margin:0;
+}
 
