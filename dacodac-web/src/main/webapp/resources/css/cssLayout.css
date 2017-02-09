@@ -16,8 +16,15 @@
 
 #left {
     float: left;
-    background-color: #F0C300;
+    background-color: #730800;
     width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#left a{
+    color: #ffffff;
 }
 
 #right {
@@ -89,5 +96,14 @@
 .datePublication {
     position: relative;
     right: -70%;
+
+li.commentaire {
+    display: block;
+    margin-top: 5px;
 }
 
+li.commentaire .infos {
+    text-align: right;
+    font-size: 12px;
+    margin:0;
+}
