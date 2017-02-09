@@ -81,4 +81,13 @@
     border: none;
 }
 
+.titre {
+    font-weight: bold;
+    font-size:  20px;
+}
+
+.datePublication {
+    position: relative;
+    right: -70%;
+}
 
