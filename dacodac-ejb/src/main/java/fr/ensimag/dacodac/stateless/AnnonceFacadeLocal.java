@@ -38,6 +38,8 @@ public interface AnnonceFacadeLocal {
     void addPostulant(Annonce annonce, Utilisateur utilisateur);
 
     void addTag(Annonce annonce, Tag tag);
+    
+    void modifierType(Annonce annonce, TypeAnnonce type);
 
     void removePostulant(Annonce annonce, Utilisateur utilisateur);
 
@@ -52,7 +54,11 @@ public interface AnnonceFacadeLocal {
     List<Annonce> findByTitle(String name);
 
     List<Annonce> findRange(int[] range);
-
+    
+    List<Annonce> getOffres();
+    
+    List<Annonce> getDemandes();
+    
     int count();
 
 }

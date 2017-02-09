@@ -56,6 +56,11 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         tags.add(tag);
         annonce.setTags(tags);
     }
+    
+    @Override
+    public void modifierType(Annonce annonce, TypeAnnonce type) {
+        annonce.setType(type);
+    }
 
     @Override
     public void removePostulant(Annonce annonce, Utilisateur utilisateur) {
@@ -143,6 +148,18 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         }
     }
 
+    @Override
+    public List<Annonce> getOffres() {
+        List<Annonce> offres = getEntityManager().createQuery("Select a FROM Annonce a WHERE a.type = :type").setParameter("type", TypeAnnonce.OFFRE).getResultList();
+        return offres;
+    }
+    
+    @Override
+    public List<Annonce> getDemandes() {
+        List<Annonce> demandes = getEntityManager().createQuery("Select a FROM Annonce a WHERE a.type = :type").setParameter("type",TypeAnnonce.DEMANDE).getResultList();
+        return demandes;
+    }
+    
     @Override
     public Annonce findByUtilAndTitre(Utilisateur u, String titre) {
         return (Annonce) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.titre LIKE :titre and a.auteur = :auteur")

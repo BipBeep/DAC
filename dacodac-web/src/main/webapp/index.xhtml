@@ -21,19 +21,9 @@
                         <f:view>
                             <p:dataTable value="#{dernieresAnnonces.dernieresOffres()}" var="offre">
                                 <p:column>
-                                    <h:link class="titre" value="#{offre.titre}" outcome="annonce.xhtml">
-                                        <f:param name="id" value="#{offre.id}"/>
-                                    </h:link>
-                                    <ul>
-                                        <ui:repeat value="#{offre.tags}" var="tag">
-                                            <li><h:outputText value="#{tag}, "/></li>
-                                        </ui:repeat>
-                                    </ul>
-                                    <h:outputText value="Code postal : #{offre.codePostal}"/>
-                                    <br />
-                                    <h:outputText value="Prix : #{offre.prix} Dakos"/>
-                                    <br />
-                                    <span class="datePublication">Publié le #{offre.datePublication}</span>
+                                    <ui:include src = "fragment.xhtml" >
+                                            <ui:param name="annonce" value="#{offre}" />
+                                        </ui:include>
                                 </p:column>
                             </p:dataTable>
                         </f:view>
@@ -43,17 +33,9 @@
                         <f:view>
                             <p:dataTable value="#{dernieresAnnonces.dernieresDemandes()}" var="demande">
                                 <p:column>
-                                    <h:outputText class="titre" value="#{demande.titre}"/>
-                                    <ul>
-                                        <ui:repeat value="#{demande.tags}" var="tag">
-                                            <li><h:outputText value="#{tag}, "/></li>
-                                        </ui:repeat>
-                                    </ul>
-                                    <h:outputText value="Code postal : #{demande.codePostal}"/>
-                                    <br />
-                                    <h:outputText value="Prix : #{demande.prix} Dakos"/>
-                                    <br />
-                                    <h:outputText class="datePublication" value="Publié le #{demande.datePublication}"/>
+                                    <ui:include src = "fragment.xhtml" >
+                                            <ui:param name="annonce" value="#{demande}" />
+                                        </ui:include>
                                 </p:column>
                             </p:dataTable>
                         </f:view>
