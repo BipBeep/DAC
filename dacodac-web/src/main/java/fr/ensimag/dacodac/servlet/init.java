@@ -85,7 +85,7 @@ public class init extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Utilisateur utilisateur1 = new Utilisateur(1000000000, "Donald", "AMortLesSombreros", "donald.trump@maison-blanche.gouv", "28312", 60, false);
+        Utilisateur utilisateur1 = new Utilisateur(1000000000, "Trump", "secret00", "donald.trump@maison-blanche.gouv", "28312", 60, false);
         Utilisateur utilisateur2 = new Utilisateur(100000, "Jonas", "secret00", "jonas.maubert@j-aime-elle.com", "38190", 22, true);
         Utilisateur utilisateur3 = new Utilisateur(100, "Leo", "secret00", "leo@gmail.com", "28300", 22, false);
         Utilisateur utilisateur4 = new Utilisateur(100, "Nico", "secret00", "kamo@gmail.com", "28301", 22, false);
