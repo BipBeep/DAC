@@ -6,10 +6,13 @@
 package fr.ensimag.dacodac.controler.utilisateur;
 
 import fr.ensimag.dacodac.Annonce;
+import fr.ensimag.dacodac.TypeAnnonce;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -33,6 +36,7 @@ public class Panier implements Serializable {
     private Identification beanID;
 
     private Set<Annonce> annonces = null;
+    private int prixTotal = 0;
 
     public void setIdentification(Identification identification) {
         this.beanID = identification;
@@ -57,31 +61,81 @@ public class Panier implements Serializable {
 
     }
 
+    public List<Annonce> getOffres() {
+        List<Annonce> list = new LinkedList<>();
+        for (Annonce a : annonces) {
+            if (a.getType() == TypeAnnonce.OFFRE) {
+                list.add(a);
+            }
+        }
+        return list;
+    }
+
+    public List<Annonce> getDemandes() {
+        List<Annonce> list = new LinkedList<>();
+        for (Annonce a : annonces) {
+            if (a.getType() == TypeAnnonce.DEMANDE) {
+                list.add(a);
+            }
+        }
+        return list;
+    }
+
     public void addAnnonce(Annonce annonce) {
         String msg;
-        if(annonces.add(annonce)) {
+        if (annonces.add(annonce)) {
+            if (annonce.getType() == TypeAnnonce.OFFRE) {
+                prixTotal += annonce.getPrix();
+            }
             msg = "Cette annonce a été ajouté à votre panier";
         } else {
             msg = "Cette annonce est déjà présente dans votre panier";
         }
-        
+
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
-        System.out.println("-----------------------------------------------------------------");
-        System.out.println(annonces.toString());
     }
 
-    public void removeAnnonce(Annonce annonce) {
-        annonces.remove(annonce);
-    }
-
-    public String validerPanier() {
-        Utilisateur u = beanID.getIdentite();
-        for (Annonce a : annonces) {
-            annonceFacade.addPostulant(a, u);
-            annonceFacade.edit(a);
+    public String removeAnnonce(Annonce annonce) {
+        String msg;
+        if (annonces.remove(annonce)) {
+            if (annonce.getType() == TypeAnnonce.OFFRE) {
+                prixTotal -= annonce.getPrix();
+            }
+            msg = "Cette annonce a été supprimée à votre panier";
+        } else {
+            msg = "[ERROR] Suppression invalide !";
         }
-        return "index.xhtml";
+
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        return "monPanier.xhtml";
     }
 
+    public String validerPanier() throws InterruptedException {
+        Utilisateur u = beanID.getIdentite();
+        if (u == null) {
+            //Utilisateur non connecté
+            return "connexion.xhtml";
+        } else if (u.getDakos() < prixTotal) {
+            String msg = "Vous ne possédez pas assez de Dakos !!";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
+            FacesContext.getCurrentInstance().addMessage(null, message);
+            return null;
+        } else {
+            for (Annonce a : annonces) {
+                if (!a.getPostulants().contains(u)) {
+                    annonceFacade.addPostulant(a, u);
+                    annonceFacade.edit(a);
+                }
+            }
+            annonces.clear();
+            prixTotal = 0;
+            return "index.xhtml";
+        }
+    }
+
+    public int getPrixTotal() {
+        return prixTotal;
+    }
 }
