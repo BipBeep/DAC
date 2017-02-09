@@ -13,67 +13,50 @@
                 <h:outputStylesheet name="css/editerProfil.css"/>
             </ui:define>
             <ui:define name="content">
+
+                <f:metadata>
+                    <f:viewParam name="pseudo" value="#{pseudo}"/>
+                </f:metadata>
+
                 <h:form>
                     <p:panel header="Editer son profil" style = "text-align : center">
 
 
-                        <h:panelGrid columns="2" cellpadding="5">
+                        <h:panelGrid columns="3" cellpadding="5">
                             <h:outputLabel for="pseudo" value="Pseudonyme" />
-                            <p:inputText id="pseudo" value="Pseudonyme" required="true">
-                                <f:validateLength minimum="2" maximum="5" />
-                                <p:clientValidator />
-                            </p:inputText>
-                            <p:message for="pseudo" display="icon" />
-                            <h:outputText value="#{validationView.text}" />
+                            <p:inputText id="pseudo" value="#{modifierProfil.getUtilisateur(pseudo).pseudo}" required="true"/>
+                            <p:message for="pseudo" />
 
                             <h:outputLabel for="email" value="email" />
-                            <p:inputText id="email" value="adresse.mail@valide.com" required="true">
-                                <f:validateLength minimum="2" maximum="5" />
-                                <p:clientValidator />
-                            </p:inputText>
-                            <p:message for="email" display="icon" />
-                            <h:outputText value="#{validationView.text}" />
+                            <p:inputText id="email" value="#{modifierProfil.getUtilisateur(pseudo).email}" required="true"/>
+                            <p:message for="email"/>
 
 
                             <h:outputLabel id="mdp" for="motDePasse" value = "Mot de passe" style="vertical-align: text-top"/> 
 
-                            <h:panelGrid columns="2" cellpadding="5"> 
-
+                            <h:panelGrid id="changerMDP" columns="3" cellpadding="5"> 
                                 <h:outputLabel for="ancienMotDePasse" value="Ancien mot de passe" />
-                                <p:inputText id="ancienMotDePasse" value="******" required="true">
-                                    <f:validateLength minimum="2" maximum="5" />
-                                    <p:clientValidator />
-                                </p:inputText>
-                                <p:message for="email" display="icon" />
-                                <h:outputText value="#{validationView.text}" />
+                                <p:password id="ancienMotDePasse" value="#{modifierProfil.ancienMotDePasse}"  />
+                                <p:message for="email" />
 
                                 <h:outputLabel for="nouveauMotDePasse1" value="Nouveau mot de passe" />
-                                <p:inputText id="nouveauMotDePasse1" value="******" required="true">
-                                    <f:validateLength minimum="2" maximum="5" />
-                                    <p:clientValidator />
-                                </p:inputText>
-                                <p:message for="email" display="icon" />
-                                <h:outputText value="#{validationView.text}" />
+                                <p:password id="nouveauMotDePasse1" value="#{modifierProfil.nouveauMotDePasse}" feedback="true" match="nouveauMotdePasse2" />
+                                <p:message for="nouveauMotDePasse1"/>
 
                                 <h:outputLabel for="nouveauMotDePasse2" value="Répéter nouveau mot de passe" />
-                                <p:inputText id="nouveauMotDePasse2" value="******" required="true">
-                                    <f:validateLength minimum="2" maximum="5" />
-                                    <p:clientValidator />
-                                </p:inputText>
-
-
+                                <p:password id="nouveauMotDePasse2" value="#{modifierProfil.nouveauMotDePasse}" />
+                                <p:message for="nouveauMotDePasse2"/>
                             </h:panelGrid>
-                            <p:message for="email" display="icon" />
-                            <h:outputText value="#{validationView.text}" />
+                            <p:message for="changerMDP"/>
+                            
                             <h:outputLabel for="text" value="Description :" />
-                            <p:inputTextarea id="integer" value="#{validationView.integer}" rows = "6" cols ="33">
+                            <p:inputTextarea id="description" value="#{modifierProfil.getUtilisateur(pseudo).description}" rows = "6" cols ="33">
                                 <p:clientValidator event="keyup"/>
                             </p:inputTextarea>
-                            <p:message for="integer" display="icon" />
-                            <h:outputText value="#{validationView.integer}" />
+                            <p:message for="description" />
                         </h:panelGrid>
 
-                        <p:commandButton value="Valider la modification de profil" ajax="false" validateClient="true" />
+                        <p:commandButton value="Valider la modification de profil" action="#{modifierProfil.modificationProfil()}" ajax="false" />
                     </p:panel>
                 </h:form>
             </ui:define>

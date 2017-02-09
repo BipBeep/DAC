@@ -44,7 +44,9 @@
                                     </div>
                                     <c:if test="#{not (identification.identite eq null)}">
                                         <c:if test="#{(identification.identite.estAdmin eq true) || (identification.identite eq consulterProfil.getUtilisateur(pseudo))}">
-                                            <p:button value="Editer le profil" style="margin-top:20px" outcome="/editerProfil.xhtml"/>
+                                            <p:button value="Editer le profil" style="margin-top:20px" outcome="/editerProfil.xhtml">
+                                                <f:param name="pseudo" value="#{pseudo}"/>
+                                            </p:button>
                                         </c:if>
                                     </c:if>
                                 </p:column>
