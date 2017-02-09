@@ -20,27 +20,27 @@
                             <p:row>
                                 <p:column colspan="2" style="width:50%"> 
                                     <h:panelGrid columns="2" cellpadding="25">
-                                        
+
                                         <h:outputLabel for="pseudo" value="Pseudonyme" />
                                         <h:outputText id="pseudo" value="#{consulterProfil.pseudoUtilisateur}"/>
-                                       
+
 
                                         <h:outputLabel for="email" value="email" />
                                         <h:outputText id="email" value="#{consulterProfil.emailUtilisateur}"/>
-                                     
+
 
 
                                         <h:outputLabel for="text" value="Description :" />
                                         <h:outputText id="description" value="#{consulterProfil.descriptionUtilisateur}"/>
-                                       
+
 
                                         <h:outputLabel for="codePostal" value="Code Postal" />
                                         <h:outputText id="codePostal" value="#{consulterProfil.codePostalUtilisateur}"/>
-                                       
+
 
                                         <h:outputLabel for="age" value="Age" />
                                         <h:outputText id="age" value="#{consulterProfil.ageUtilisateur}"/>
-                                       
+
 
                                     </h:panelGrid>
                                 </p:column>
@@ -50,6 +50,11 @@
 
                                         <f:view>
                                             <p:dataTable value="#{mesCommentaires.commentaires}" var="item">
+                                                <p:column>
+                                                    <ui:include src = "fragmentCommentaires.xhtml" >
+                                                        <ui:param name="commentaire" value="#{item}" />
+                                                    </ui:include>
+                                                </p:column>
                                             </p:dataTable>
                                         </f:view>
                                     </div>
