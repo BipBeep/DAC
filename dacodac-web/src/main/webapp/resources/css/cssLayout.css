@@ -48,14 +48,26 @@
 }
 
 #top a:link, #top a:visited {
-  color: black;
-  font-weight : bold;
-  text-decoration: none;
+    color: black;
+    font-weight : bold;
+    text-decoration: none;
 }
 
 #top a:link:hover, #top a:visited:hover  {
-  color: black;
-  font-weight : bold;
+    color: black;
+    font-weight : bold;
+}
+
+.tagElement {
+    display: inline;
+    font-style: italic;
+    color: grey;
+}
+
+.tagList {
+    padding: 0;
+    margin: 0;
+    border: none;
 }
 
 
