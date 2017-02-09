@@ -90,8 +90,6 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         if (tags.isEmpty()) {
             return trouve;
         } else if (annonce.getTags().isEmpty()) {
-            System.out.println(annonce.getTitre());
-            System.err.println("Pas de tags");
             return false;
         } else {
             for (Tag tag : tags) {
@@ -112,22 +110,18 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
     @Override
     public List<Annonce> findByTags(List<Tag> tags) {
         List<Annonce> annonces = findAll();       
-        
+        List<Annonce> annoncesCorrespondantes = new ArrayList<>();
         if (annonces.isEmpty()) {
             return null;
         } else {
             boolean trouve = true;
             for (Annonce annonce : annonces) {
-                System.out.println("CA C'EST");                
-                System.out.println(annonce.getTitre());
-                trouve = containsTag(annonce, tags); 
-                
-                if (!trouve) {
-                    System.err.println("J'en enleve une");
-                    annonces.remove(annonce);
+                trouve = containsTag(annonce, tags);                 
+                if (trouve) {
+                    annoncesCorrespondantes.add(annonce);
                 }
             }
-            return annonces;
+            return annoncesCorrespondantes;
         }
     }
     
