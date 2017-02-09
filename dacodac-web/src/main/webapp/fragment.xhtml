@@ -11,9 +11,9 @@
             <h:link class="titre" value="#{annonce.titre}" outcome="annonce.xhtml">
                 <f:param name="id" value="#{annonce.id}"/>
             </h:link>
-            <ul>
-                <ui:repeat value="#{annonce.tags}" var="tag">
-                    <li><h:outputText value="#{tag}, "/></li>
+            <ul class="tagList">
+                <ui:repeat value="#{annonce.tags}" var="tag" >
+                    <li class="tagElement"><h:outputText value="#{tag}, "/></li>
                 </ui:repeat>
             </ul>
             <h:outputText value="Code postal : #{annonce.codePostal}"/>
