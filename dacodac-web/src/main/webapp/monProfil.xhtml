@@ -18,53 +18,47 @@
                         <h3>Mon Profil</h3>
                         <p:panelGrid> 
                             <p:row>
-                                <p:column colspan="1" style="width:50%"> 
-                                <h:panelGrid columns="2" cellpadding="25">
-                                    <h:outputLabel for="pseudo" value="Pseudonyme" />
-                                    <h:outputText value="Jean"/>
+                                <p:column colspan="2" style="width:50%"> 
+                                    <h:panelGrid columns="2" cellpadding="25">
+                                        
+                                        <h:outputLabel for="pseudo" value="Pseudonyme" />
+                                        <h:outputText id="pseudo" value="#{consulterProfil.pseudoUtilisateur}"/>
+                                       
 
-                                    <h:outputLabel for="email" value="email" />
-                                    <h:outputText value="jean@gmail.com"/>
-
-
-
-                                    <h:outputLabel for="text" value="Description :" />
-                                    <p:panelGrid columns="1">
-                                        <span>
-                                            Devant la violence de cette scène nous préférons vous montrer ce documentaire consacré à la langouste. Contrairement à une idée largement répendue, la langouste se nourrit exclusivement de fruits de mer. Ce qui ne l’empêche pas de rester très humaine.
-                                        </span>
-                                    </p:panelGrid>
+                                        <h:outputLabel for="email" value="email" />
+                                        <h:outputText id="email" value="#{consulterProfil.emailUtilisateur}"/>
+                                     
 
 
-                                    <h:outputLabel for="codePostal" value="Code Postal" />
-                                    <h:outputText value="38400"/>
+                                        <h:outputLabel for="text" value="Description :" />
+                                        <h:outputText id="description" value="#{consulterProfil.descriptionUtilisateur}"/>
+                                       
 
-                                    <h:outputLabel for="dateNaissance" value="Date de naissance" />
-                                    <h:outputText value="23/06/1945"/>
+                                        <h:outputLabel for="codePostal" value="Code Postal" />
+                                        <h:outputText id="codePostal" value="#{consulterProfil.codePostalUtilisateur}"/>
+                                       
 
+                                        <h:outputLabel for="age" value="Age" />
+                                        <h:outputText id="age" value="#{consulterProfil.ageUtilisateur}"/>
+                                       
 
-                                </h:panelGrid>
-                            </p:column>
-                            <p:column>
-                                <h3 >Commentaires</h3>
-                                <div class="boite">
+                                    </h:panelGrid>
+                                </p:column>
+                                <p:column>
+                                    <h3 >Commentaires</h3>
+                                    <div class="boite">
 
-                                    <f:view>
-                                        <p:dataTable value="#{Panier.offres}" var="offre">
-                                            <p:column>
-                                                <h:outputText value="#{offre.titre}"/>
-                                                <h:outputText value="Prix = #{offre.prix}"/>
-                                                <h:commandButton/>
-                                            </p:column>
-                                        </p:dataTable>
-                                    </f:view>
-                                </div>
+                                        <f:view>
+                                            <p:dataTable value="#{mesCommentaires.commentaires}" var="item">
+                                            </p:dataTable>
+                                        </f:view>
+                                    </div>
 
-                            </p:column>
-                                </p:row>
+                                </p:column>
+                            </p:row>
                         </p:panelGrid>
                         <p:button value="Editer le profil" style="margin-top:20px" outcome="/editerProfil.xhtml"/>
-                          
+
                     </p:panel>
                 </h:form>
             </ui:define>

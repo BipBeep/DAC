@@ -88,7 +88,6 @@ public class MesAnnonces {
         allAnonces = annonceFacade.findAll();
         Utilisateur u = beanID.getIdentite();
         annoncesPostees = u.getAnnonces();
-        System.err.println("Size: " + allAnonces.size()+", user: " + u.getPseudo() +", post: "+ annoncesPostees.size());
         for (Annonce a : allAnonces) {
             if (annoncesPostees.contains(a)) {
                 if (a.getType().equals(TypeAnnonce.DEMANDE)) {
@@ -102,13 +101,10 @@ public class MesAnnonces {
                 } else {
                     offres_repondues.add(a);
                 }
-            } else {
-                System.err.println("nope");
             }
-
         }
         for(Annonce a: annoncesPostees){
-            System.err.println("a: "+ a.getId());
+            System.err.println("\n \n \n a: "+ a.getId() + "\n \n \n");
         }
     }
 

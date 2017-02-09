@@ -58,6 +58,8 @@ public class Utilisateur implements Serializable {
     @Column(nullable=false)
     private boolean estAdmin = false;
     
+    private String description;
+    
     @OneToMany
     private List<Annonce> annonces;
     
@@ -76,6 +78,7 @@ public class Utilisateur implements Serializable {
         this.age = age;
         this.estAdmin = estAdmin;
         
+        this.description = "";
         this.annonces = new ArrayList<>();
         this.commentaires = new ArrayList<>();
     }
@@ -143,7 +146,15 @@ public class Utilisateur implements Serializable {
     public void setEstAdmin(boolean estAdmin) {
         this.estAdmin = estAdmin;
     }
+    
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public List<Annonce> getAnnonces() {
         return annonces;
     }
