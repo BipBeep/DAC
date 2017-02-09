@@ -12,8 +12,16 @@
 
             <ui:define name="content">
                 <ui:include src ="fonctionRecherche.xhtml" />
+                <f:view>
+                    <p:dataTable value="#{demandes.demandes}" var="demande">
+                        <p:column>
+                            <ui:include src = "fragment.xhtml" >
+                                <ui:param name="annonce" value="#{demande}" />
+                            </ui:include>
+                        </p:column>
+                    </p:dataTable>
+                </f:view>
             </ui:define>
-
         </ui:composition>
 
     </body>

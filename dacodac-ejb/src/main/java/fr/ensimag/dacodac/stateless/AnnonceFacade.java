@@ -150,13 +150,13 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
 
     @Override
     public List<Annonce> getOffres() {
-        List<Annonce> offres = getEntityManager().createQuery("Select a FROM Annonce a WHERE a.type = :offre").getResultList();
+        List<Annonce> offres = getEntityManager().createQuery("Select a FROM Annonce a WHERE a.type = :type").setParameter("type", TypeAnnonce.OFFRE).getResultList();
         return offres;
     }
     
     @Override
     public List<Annonce> getDemandes() {
-        List<Annonce> demandes = getEntityManager().createQuery("Select a FROM Annonce a WHERE a.type = :demande").getResultList();
+        List<Annonce> demandes = getEntityManager().createQuery("Select a FROM Annonce a WHERE a.type = :type").setParameter("type",TypeAnnonce.DEMANDE).getResultList();
         return demandes;
     }
     
