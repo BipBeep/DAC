@@ -15,17 +15,28 @@
 }
 
 #left {
-    display: none;
     float: left;
     background-color: #F0C300;
     width: 150px;
 }
 
 #right {
-    display: none;
     float: right;
     background-color: #F0C300;
     width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    display:flex;
+    justify-content: center;
+    align-content: center;
+
+}
+
+#right span{
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 1px;
 }
 
 .center_content {
@@ -48,14 +59,26 @@
 }
 
 #top a:link, #top a:visited {
-  color: black;
-  font-weight : bold;
-  text-decoration: none;
+    color: black;
+    font-weight : bold;
+    text-decoration: none;
 }
 
 #top a:link:hover, #top a:visited:hover  {
-  color: black;
-  font-weight : bold;
+    color: black;
+    font-weight : bold;
+}
+
+.tagElement {
+    display: inline;
+    font-style: italic;
+    color: grey;
+}
+
+.tagList {
+    padding: 0;
+    margin: 0;
+    border: none;
 }
 
 
