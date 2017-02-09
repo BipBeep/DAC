@@ -54,7 +54,11 @@ public interface AnnonceFacadeLocal {
     List<Annonce> findByTitle(String name);
 
     List<Annonce> findRange(int[] range);
-
+    
+    List<Annonce> getOffres();
+    
+    List<Annonce> getDemandes();
+    
     int count();
 
 }
