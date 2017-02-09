@@ -18,28 +18,29 @@
                         <h3>Mon Profil</h3>
                         <p:panelGrid> 
                             <p:row>
-                                <p:column colspan="1" style="width:50%"> 
+                                <p:column colspan="2" style="width:50%"> 
                                     <h:panelGrid columns="2" cellpadding="25">
+                                        
                                         <h:outputLabel for="pseudo" value="Pseudonyme" />
                                         <h:outputText id="pseudo" value="#{consulterProfil.pseudoUtilisateur}"/>
-                                        <p:message for="pseudo" />
+                                       
 
                                         <h:outputLabel for="email" value="email" />
                                         <h:outputText id="email" value="#{consulterProfil.emailUtilisateur}"/>
-                                        <p:message for="email" />
+                                     
 
 
                                         <h:outputLabel for="text" value="Description :" />
                                         <h:outputText id="description" value="#{consulterProfil.descriptionUtilisateur}"/>
-                                        <p:message for="description" />
+                                       
 
                                         <h:outputLabel for="codePostal" value="Code Postal" />
                                         <h:outputText id="codePostal" value="#{consulterProfil.codePostalUtilisateur}"/>
-                                        <p:message for="description" />
+                                       
 
                                         <h:outputLabel for="age" value="Age" />
                                         <h:outputText id="age" value="#{consulterProfil.ageUtilisateur}"/>
-                                        <p:message for="age" />
+                                       
 
                                     </h:panelGrid>
                                 </p:column>
