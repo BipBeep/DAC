@@ -16,8 +16,15 @@
 
 #left {
     float: left;
-    background-color: #F0C300;
+    background-color: #730800;
     width: 150px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#left a{
+    color: #ffffff;
 }
 
 #right {
