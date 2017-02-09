@@ -84,7 +84,10 @@
                 </p:panelGrid>
 
                 <div id="validation">
-                    <p:commandButton value="Ajouter au panier" icon="ui-icon-check" />
+                    <h:form>
+                        <p:growl id="growl" life="2000" />
+                        <p:commandButton value="Ajouter au panier" update="growl" actionListener="#{panier.addAnnonce(annoncePublic.getAnnonce(id))}" icon="ui-icon-check" />
+                    </h:form>
                 </div>
 
             </ui:define>
