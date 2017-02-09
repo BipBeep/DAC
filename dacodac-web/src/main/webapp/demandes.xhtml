@@ -11,7 +11,9 @@
         <ui:composition template="./mainTemplate.xhtml">
 
             <ui:define name="content">
-                <ui:include src ="fonctionRecherche.xhtml" />
+                <ui:include src ="fonctionRecherche.xhtml">
+                    <ui:param name="type" value="Demandes" />
+                </ui:include>
                 <f:view>
                     <p:dataTable value="#{demandes.demandes}" var="demande">
                         <p:column>

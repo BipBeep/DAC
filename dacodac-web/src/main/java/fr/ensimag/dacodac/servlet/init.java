@@ -108,9 +108,9 @@ public class init extends HttpServlet {
         Annonce a5 = new Annonce(15, TypeAnnonce.OFFRE, utilisateur3, "38500", "description de l'offre numéro 5", "titre de l'offre 5", now.plusDays(3));
         createAnnonce(a1.getAuteur(), a1);
         List<Tag> listeTags = new ArrayList<>();
-        Tag tag1 = new Tag("Premier tag");
-        Tag tag2 = new Tag("Deuxième tag");
-        Tag tag3 = new Tag("Troisième tag");
+        Tag tag1 = new Tag("tag1");
+        Tag tag2 = new Tag("tag2");
+        Tag tag3 = new Tag("tag3");
 
         tagFacade.create(tag1);
         tagFacade.create(tag2);

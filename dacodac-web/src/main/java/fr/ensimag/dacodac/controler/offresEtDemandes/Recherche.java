@@ -5,10 +5,14 @@
  */
 package fr.ensimag.dacodac.controler.offresEtDemandes;
 
+import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Tag;
+import fr.ensimag.dacodac.TypeAnnonce;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
+import fr.ensimag.dacodac.stateless.TagFacadeLocal;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -26,9 +30,16 @@ public class Recherche {
     
     @EJB
     private AnnonceFacadeLocal annonceFacade;
+    
+    @EJB
+    private TagFacadeLocal tagFacade;
 
     String depart;
     String tri;
+    String tags;
+    private List<Annonce> offres = null;
+    private List<Annonce> demandes = null;
+    
     
     String tab_depart[] = {"ain","aisne","allier","hautes-alpes","alpes-de-haute-provence","alpes-maritimes","ardeche","ardennes","ariege","aube","aude","aveyron","bouches-du-rhone","calvados","cantal","charente","charente-maritime","cher","correze","corse-du-sud","haute-corse","cote-dor","cotes-darmor","creuse","dordogne","doubs","drome","eure","eure-et-loir","finistere","gard","haute-garonne","gers","gironde","herault","ile-et-vilaine","indre","indre-et-loire","isere","jura","landes","loir-et-cher","loire","haute-loire","loire-atlantique","loiret","lot","lot-et-garonne","lozere","maine-et-loire","manche","marne","haute-marne","mayenne","meurthe-et-moselle","meuse","morbihan","moselle","nievre","nord","oise","orne","pas-de-calais","puy-de-dome","pyrenees-atlantiques","hautes-pyrenees","pyrenees-orientales","bas-rhin","haut-rhin","rhone","haute-saone","saone-et-loire","sarthe","savoie","haute-savoie","paris","seine-maritime","seine-et-marne","yvelines","deux-sevres","somme","tarn","tarn-et-garonne","var","vaucluse","vendee","vienne","haute-vienne","vosges","yonne","territoire-de-belfort","essonne","hauts-de-seine","seine-saint-denis","val-de-marne","val-doise","mayotte","guadeloupe","guyane","martinique","reunion"};
     private Map<String,String> liste_departs;
@@ -65,14 +76,40 @@ public class Recherche {
         }
     }
     
-    public void effectuer(String tags, String departement, String tri) {
-        String[] arrayTags = tags.split(" ");
-        List<Tag> listTags = new ArrayList<Tag>();
-        
-        for (String s : arrayTags) {
-            Tag t = new Tag(s);
-            listTags.add(t);
+    public String effectuer(String type) {
+        TypeAnnonce typeA = TypeAnnonce.OFFRE;
+        if (type.equals("Demandes")) {
+            typeA = TypeAnnonce.DEMANDE;
         }
+        
+        String[] arrayTags = tags.split(" ");
+        List<Tag> listTags = new ArrayList<>();
+        
+        // A aller chercher en BD
+//        for (String s : arrayTags) {
+//            Tag t = tagFacade.getTagByName(s);
+//            listTags.add(t);
+//        }
+        
+        listTags.add(tagFacade.getTagByName("tag1"));
+        
+        for (Iterator<Tag> it = listTags.iterator(); it.hasNext();) {
+            Tag t = it.next();
+            System.out.println("-%%%%%%%%%%%%%%%%%%%%%%%%------------------------------");
+            System.out.println(t.getNom());            
+        }
+        
+//        if (type.equals("Demandes")) {
+//            demandes = annonceFacade.findDemandesByTag(listTags);
+//            return "/demandes.xhtml";
+//        } else {
+//            offres = annonceFacade.findOffresByTag(listTags);
+//            return "/offres.xhtml";
+//        }
+
+        offres = annonceFacade.findByTags(listTags);
+        
+        return "offres.xhtml";
     }
     
     public String getDepartement() {
@@ -96,5 +133,31 @@ public class Recherche {
         this.liste_departs = departs;
     }
     
+    public String getTags() {
+        return tags;
+    }
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+    
+    public List<Annonce> getOffres(){
+        if(offres==null){
+            offres = ensembleOffres();
+        }
+        return offres;
+    }
+    public List<Annonce> ensembleOffres() {
+        return annonceFacade.findLatest(5, TypeAnnonce.OFFRE);
+    }
+    
+    public List<Annonce> getDemandes(){
+        if(demandes==null){
+            demandes = ensembleDemandes();
+        }
+        return demandes;
+    }
+    public List<Annonce> ensembleDemandes() {
+        return annonceFacade.findLatest(5, TypeAnnonce.DEMANDE);
+    }
     
 }

@@ -11,9 +11,11 @@
         <ui:composition template="./mainTemplate.xhtml">
 
             <ui:define name="content">
-                <ui:include src ="fonctionRecherche.xhtml" />
+                <ui:include src ="fonctionRecherche.xhtml">
+                    <ui:param name="type" value="Offres" />
+                </ui:include>
                 <f:view>
-                    <p:dataTable value="#{offres.offres}" var="offre">
+                    <p:dataTable value="#{recherche.offres}" var="offre">
                         <p:column>
                             <ui:include src = "fragment.xhtml" >
                                 <ui:param name="annonce" value="#{offre}" />

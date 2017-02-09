@@ -10,8 +10,10 @@ import fr.ensimag.dacodac.Commentaire;
 import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.TypeAnnonce;
+import java.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -56,7 +58,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         tags.add(tag);
         annonce.setTags(tags);
     }
-    
+
     @Override
     public void modifierType(Annonce annonce, TypeAnnonce type) {
         annonce.setType(type);
@@ -82,26 +84,97 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             //L'utilisateur rentré n'est pas dans la liste des postulants.
         }
     }
+    
+    public boolean containsTag(Annonce annonce, List<Tag> tags) {
+        boolean trouve = true;
+        if (tags.isEmpty()) {
+            return trouve;
+        } else if (annonce.getTags().isEmpty()) {
+            System.out.println(annonce.getTitre());
+            System.err.println("Pas de tags");
+            return false;
+        } else {
+            for (Tag tag : tags) {
+                for (Iterator<Tag> it = annonce.getTags().iterator(); it.hasNext();) {
+                    Tag t = it.next();
+                    if (t.getNom().equals(tag.getNom())) {
+                        break;
+                    } else if (!it.hasNext()) {
+                        trouve = false;
+                        break;
+                    }
+                }
+            }
+            return trouve;
+        } 
+    }
 
     @Override
-    public List<Annonce> findByTag(List<Tag> tags) {
-        List<Annonce> annonces = findAll();
+    public List<Annonce> findByTags(List<Tag> tags) {
+        List<Annonce> annonces = findAll();       
+        
         if (annonces.isEmpty()) {
             return null;
         } else {
             boolean trouve = true;
             for (Annonce annonce : annonces) {
+                System.out.println("CA C'EST");                
+                System.out.println(annonce.getTitre());
+                trouve = containsTag(annonce, tags); 
+                
+                if (!trouve) {
+                    System.err.println("J'en enleve une");
+                    annonces.remove(annonce);
+                }
+            }
+            return annonces;
+        }
+    }
+    
+
+    
+    @Override
+    public List<Annonce> findOffresByTags(List<Tag> tags) {
+        List<Annonce> offres = getOffres();
+        if (offres.isEmpty()) {
+            return null;
+        } else {
+            boolean trouve = true;
+            for (Annonce offre : offres) {
+                
                 for (Tag tag : tags) {
-                    if (!annonce.getTags().contains(tag)) {
+                    if (!offre.getTags().contains(tag)) {
                         trouve = false;
                         break;
                     }
                 }
                 if (!trouve) {
-                    annonces.remove(annonce);
+                    offres.remove(offre);
                 }
             }
-            return annonces;
+            return offres;
+        }
+    }
+
+    @Override
+    public List<Annonce> findDemandesByTags(List<Tag> tags) {
+        List<Annonce> demandes = getDemandes();
+        if (demandes.isEmpty()) {
+            return null;
+        } else {
+            boolean trouve = true;
+            for (Annonce demande : demandes) {
+                for (Tag tag : tags) {
+                    if (!demande.getTags().contains(tag)) {
+                        trouve = false;
+                        break;
+                    }
+                }
+                if (!trouve) {
+                    demandes.remove(demande);
+                }
+            }
+            return demandes;
         }
     }
 
@@ -153,13 +226,13 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         List<Annonce> offres = getEntityManager().createQuery("Select a FROM Annonce a WHERE a.type = :type").setParameter("type", TypeAnnonce.OFFRE).getResultList();
         return offres;
     }
-    
+
     @Override
     public List<Annonce> getDemandes() {
-        List<Annonce> demandes = getEntityManager().createQuery("Select a FROM Annonce a WHERE a.type = :type").setParameter("type",TypeAnnonce.DEMANDE).getResultList();
+        List<Annonce> demandes = getEntityManager().createQuery("Select a FROM Annonce a WHERE a.type = :type").setParameter("type", TypeAnnonce.DEMANDE).getResultList();
         return demandes;
     }
-    
+
     @Override
     public Annonce findByUtilAndTitre(Utilisateur u, String titre) {
         return (Annonce) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.titre LIKE :titre and a.auteur = :auteur")

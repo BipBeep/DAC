@@ -27,6 +27,8 @@ public interface TagFacadeLocal {
     List<Tag> findAll();
 
     List<Tag> findRange(int[] range);
+    
+    Tag getTagByName(String nom);
 
     int count();
     

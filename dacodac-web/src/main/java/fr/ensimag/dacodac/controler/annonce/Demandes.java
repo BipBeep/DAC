@@ -6,6 +6,7 @@
 package fr.ensimag.dacodac.controler.annonce;
 
 import fr.ensimag.dacodac.Annonce;
+import fr.ensimag.dacodac.TypeAnnonce;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import java.util.List;
 import javax.ejb.EJB;
@@ -40,7 +41,7 @@ public class Demandes {
         return demandes;
     }
     public List<Annonce> ensembleDemandes() {
-        return annonceFacade.getDemandes();
+        return annonceFacade.findLatest(5, TypeAnnonce.DEMANDE);
     }
     
 }
