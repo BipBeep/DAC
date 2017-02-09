@@ -8,12 +8,18 @@ and open the template in the editor.
     Author     : weschlel
 */
 
+
+#colonneAnnonce {
+    width: 70%;
+}
+
 #annonce {
-    width: 60%;
+    width: 100%;
 }
 
 #titre {
     font-weight: bold;
+    font-size:  20px;
 }
 
 #prix {
@@ -34,6 +40,10 @@ td {
     text-align: right;
 }
 
+#frame {
+    width: 100%
+}
+
 #tableau {
     border-color: white !important;
 }
@@ -52,4 +62,16 @@ td {
 
 h1 {   
     text-align: center;
+}
+
+ul li{
+    display: inline;
+    font-style: italic;
+    color: grey;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    border: none;
 }

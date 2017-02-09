@@ -12,30 +12,30 @@
                 <h:outputStylesheet name="css/annonce.css"/>
             </ui:define>
 
+            <f:metadata>
+                <f:viewParam name="id" value="#{id}"/>
+            </f:metadata>
+
             <ui:define name="content">
-                <p:panelGrid>
+                <p:panelGrid id="frame">
                     <p:row id="tableau">
-                        <p:column id="annonce">
-                            <p:panelGrid>
+                        <p:column id="colonneAnnonce">
+                            <p:panelGrid id="annonce">
                                 <p:row>
-                                    <p:column colspan="2" id="titre">Titre Annonce</p:column>
+                                    <p:column colspan="2" id="titre">#{annoncePublic.getAnnonce(id).titre}</p:column>
                                 </p:row>
-
                                 <p:row>
-                                    <p:column colspan="2">
-                                        <f:metadata>
-                                            <f:viewParam name="id" value="#{id}"/>
-                                        </f:metadata>
-                                        <p>Id de l'annonce : #{id}</p>
-
+                                    <p:column colspan="2">   
+                                        <ul>
+                                            <ui:repeat value="#{annoncePublic.getAnnonce(id).tags}" var="tag">
+                                                <li><h:outputText value="#{tag}, "/></li>
+                                            </ui:repeat>
+                                        </ul>
                                     </p:column>
                                 </p:row>
                                 <p:row>
-                                    <p:column colspan="2">Tags</p:column>
-                                </p:row>
-                                <p:row>
-                                    <p:column id="prix" colspan="1">Prix</p:column>
-                                    <p:column>Code postal</p:column>
+                                    <p:column id="prix" colspan="1">Prix : #{annoncePublic.getAnnonce(id).prix} Dakos</p:column>
+                                    <p:column>#{annoncePublic.getAnnonce(id).codePostal}</p:column>
                                 </p:row>
 
                                 <p:row>
@@ -43,9 +43,7 @@
                                         Description :
                                         <br/>
                                         <br/>
-                                        <span>
-                                            Devant la violence de cette scène nous préférons vous montrer ce documentaire consacré à la langouste. Contrairement à une idée largement répendue, la langouste se nourrit exclusivement de fruits de mer. Ce qui ne l’empêche pas de rester très humaine.
-                                        </span>
+                                        <span>#{annoncePublic.getAnnonce(id).description}</span>
                                     </p:column>
                                 </p:row>
 

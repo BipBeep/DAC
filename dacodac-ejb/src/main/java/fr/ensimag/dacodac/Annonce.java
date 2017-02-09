@@ -219,7 +219,11 @@ public class Annonce implements Serializable {
 
     @Override
     public String toString() {
-        return "fr.ensimag.dacodac.Annonce[ id=" + id + " ]";
+        return "Annonce[id=" + id + ", prix=" + prix +
+                ", type=" + type + ", auteur=" + auteur.getPseudo() + ", code postal=" +
+                codePostal + ", date de publication=" + datePublication +
+                ", a une description:" + !description.isEmpty() + 
+                ", a un titre:" + !titre.isEmpty() + ", est validée:" + estValidee + "]";
     }
 
     public boolean isEstValidee() {
