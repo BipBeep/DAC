@@ -42,7 +42,7 @@ public class init extends HttpServlet {
 
     @EJB(name = "commentaireFacade")
     private CommentaireFacadeLocal commentaireFacade;
-    
+
     @EJB(name = "tagFacade")
     private TagFacadeLocal tagFacade;
 
@@ -90,54 +90,52 @@ public class init extends HttpServlet {
         Utilisateur utilisateur3 = new Utilisateur(100, "Leo", "secret00", "leo@gmail.com", "28300", 22, false);
         Utilisateur utilisateur4 = new Utilisateur(100, "Nico", "secret00", "kamo@gmail.com", "28301", 22, false);
         Utilisateur utilisateur5 = new Utilisateur(100, "Juju", "secret00", "juju@pl-s.com", "28302", 22, false);
-        Utilisateur utilisateur6 = new Utilisateur(400000, "Hillary", "JAimePasLesEmails", "hillary.clinton@defaite.seum", "52147", 98, false);   
+        Utilisateur utilisateur6 = new Utilisateur(400000, "Hillary", "JAimePasLesEmails", "hillary.clinton@defaite.seum", "52147", 98, false);
         utilisateurFacade.create(utilisateur1);
         utilisateurFacade.create(utilisateur2);
         utilisateurFacade.create(utilisateur3);
         utilisateurFacade.create(utilisateur4);
         utilisateurFacade.create(utilisateur5);
         utilisateurFacade.create(utilisateur6);
-        
+
         LocalDate now = LocalDate.now();
-        
+
         //public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, int codePostal, String description, String titre, LocalDateTime datePublication)
         Annonce a1 = new Annonce(11, TypeAnnonce.OFFRE, utilisateur1, "38100", "description de l'offre numéro 1", "titre de l'offre 1", now);
-        utilisateur1.getAnnonces().add(a1);
-        utilisateurFacade.edit(utilisateur1);
-        Annonce a2 = new Annonce(12, TypeAnnonce.OFFRE, utilisateur1, "38200", "description de l'offre numéro 2", "titre de l'offre 2", now.plusDays(1));
+        Annonce a2 = new Annonce(12, TypeAnnonce.OFFRE, utilisateur1, "38200", "description de l'offre numéro 2", "titre de l'offre 22", now.plusDays(1));
         Annonce a3 = new Annonce(13, TypeAnnonce.OFFRE, utilisateur2, "38300", "description de l'offre numéro 3", "titre de l'offre 3", now.plusDays(2));
         Annonce a4 = new Annonce(14, TypeAnnonce.OFFRE, utilisateur2, "38400", "description de l'offre numéro 4", "titre de l'offre 4", now.plusDays(5));
         Annonce a5 = new Annonce(15, TypeAnnonce.OFFRE, utilisateur3, "38500", "description de l'offre numéro 5", "titre de l'offre 5", now.plusDays(3));
-        
+        createAnnonce(a1.getAuteur(), a1);
         List<Tag> listeTags = new ArrayList<>();
         Tag tag1 = new Tag("Premier tag");
         Tag tag2 = new Tag("Deuxième tag");
         Tag tag3 = new Tag("Troisième tag");
-        
+
         tagFacade.create(tag1);
         tagFacade.create(tag2);
         tagFacade.create(tag3);
-        
+
         listeTags.add(tag1);
         listeTags.add(tag2);
         listeTags.add(tag3);
         a1.setTags(listeTags);
+        annonceFacade.edit(a1);
         Annonce a6 = new Annonce(6, TypeAnnonce.DEMANDE, utilisateur1, "18100", "description de la demande numéro 6", "titre de la demande 6", now);
         Annonce a7 = new Annonce(7, TypeAnnonce.DEMANDE, utilisateur1, "18200", "description de la demande numéro 7", "titre de la demande 7", now.plusDays(8));
         Annonce a8 = new Annonce(8, TypeAnnonce.DEMANDE, utilisateur4, "19300", "description de la demande numéro 8", "titre de la demande 8", now.plusDays(4));
         Annonce a9 = new Annonce(9, TypeAnnonce.DEMANDE, utilisateur4, "18400", "description de la demande numéro 9", "titre de la demande 9", now.plusDays(10));
         Annonce a10 = new Annonce(10, TypeAnnonce.DEMANDE, utilisateur5, "18500", "description de la demande numéro 10", "titre de la demande 10", now.plusDays(15));
+        createAnnonce(a2.getAuteur(), a2);
+        createAnnonce(a3.getAuteur(), a3);
+        createAnnonce(a4.getAuteur(), a4);
+        createAnnonce(a5.getAuteur(), a5);
+        createAnnonce(a6.getAuteur(), a6);
+        createAnnonce(a7.getAuteur(), a7);
+        createAnnonce(a8.getAuteur(), a8);
+        createAnnonce(a9.getAuteur(), a9);
+        createAnnonce(a10.getAuteur(), a10);
 
-        annonceFacade.create(a1);
-        annonceFacade.create(a2);
-        annonceFacade.create(a3);
-        annonceFacade.create(a4);
-        annonceFacade.create(a5);
-        annonceFacade.create(a6);
-        annonceFacade.create(a7);
-        annonceFacade.create(a8);
-        annonceFacade.create(a9);
-        annonceFacade.create(a10);
         annonceFacade.addPostulant(a1, utilisateur2);
         annonceFacade.addPostulant(a1, utilisateur3); //Des personnes ont postulé à a1
         annonceFacade.edit(a1);
@@ -173,6 +171,12 @@ public class init extends HttpServlet {
         Commentaire retournes = commentaireFacade.findByAuteurAndAnnonce(utilisateur, a);
          */
         processRequest(request, response);
+    }
+
+    private void createAnnonce(Utilisateur u, Annonce a) {
+        annonceFacade.create(a);
+        utilisateurFacade.addAnnonce(u, a);
+        utilisateurFacade.edit(u);
     }
 
     /**
