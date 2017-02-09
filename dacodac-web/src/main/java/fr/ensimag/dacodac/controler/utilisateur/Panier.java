@@ -22,27 +22,29 @@ import javax.enterprise.context.SessionScoped;
 @SessionScoped
 public class Panier implements Serializable {
 
-    
-    private List<Annonce> annonces; 
-    
+    private List<Annonce> annonces = null;
+
     /**
      * Creates a new instance of Panier
      */
     public Panier() {
         annonces = new ArrayList<>();
     }
-    
-    
+
     public List<Annonce> getAnnonces() {
+        if (annonces == null) {
+            annonces = new ArrayList<>();
+        }
         return annonces;
+
     }
-    
+
     public void addAnnonce(Annonce annonce) {
         annonces.add(annonce);
     }
-    
+
     public void removeAnnonce(Annonce annonce) {
         annonces.remove(annonce);
     }
-    
+
 }

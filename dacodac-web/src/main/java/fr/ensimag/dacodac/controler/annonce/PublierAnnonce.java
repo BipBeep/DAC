@@ -69,7 +69,10 @@ public class PublierAnnonce {
         System.out.println("----------------------------------------------");
         System.out.println("annonce : " + getAnnonce());
         Utilisateur u = beanID.getIdentite();
-
+        if (u == null) {
+            //Utilisateur non connecté
+            return "connexion.xhtml";
+        }
         TypeAnnonce typeA = TypeAnnonce.DEMANDE;
         if (type.equals("Offre")) {
             typeA = TypeAnnonce.OFFRE;
