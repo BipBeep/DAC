@@ -33,7 +33,7 @@ public class PostulerAnnonce {
     public PostulerAnnonce() {
     }
     
-    String Postuler() {
+    public String Postuler() {
         annonceFacade.addPostulant(getAnnonce(), getUtilisateur());
         annonceFacade.edit(getAnnonce());
         return "index.xhtml";

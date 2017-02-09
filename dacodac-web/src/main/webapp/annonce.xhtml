@@ -53,29 +53,18 @@
                             <p:panelGrid>
                                 <p:row>
                                     <p:column>
-                                        <h1>Pseudo</h1>
-                                        <br/>
-                                        Email
-                                        <br/>
-                                        <br/>
-                                        Derniers commentaires :
-                                        <br/>
-                                        <ul>
-                                            <li>
-                                                Commentaire 1
-                                            </li>
-                                            <li>
-                                                Commentaire 2
-                                            </li>
-                                            <li>
-                                                Commentaire 3
-                                            </li>
-                                        </ul>
+                                        <ui:include src="vignettePseudo.xhtml">
+                                            <ui:param name="utilisateur" value="#{annoncePublic.getAnnonce(id).auteur}" />
+                                        </ui:include>
                                     </p:column>
                                 </p:row>
                                 <p:row>
                                     <p:column id="consulterProfil">
-                                        <p:commandButton value="Consulter le profil"/>
+                                        <h:form>
+                                            <p:link value="Consulter le profil" outcome="/consulterUnProfil.xhtml">
+                                                <f:param name="pseudo" value="#{annoncePublic.getAnnonce(id).auteur.pseudo}"/>
+                                            </p:link>
+                                        </h:form>
                                     </p:column>
                                 </p:row>
                             </p:panelGrid>
@@ -84,7 +73,10 @@
                 </p:panelGrid>
 
                 <div id="validation">
-                    <p:commandButton value="Ajouter au panier" icon="ui-icon-check" />
+                    <h:form>
+                        <p:growl id="growl" life="3000" />
+                        <p:commandButton value="Ajouter au panier" update="growl" actionListener="#{panier.addAnnonce(annoncePublic.getAnnonce(id))}" icon="ui-icon-check" />
+                    </h:form>
                 </div>
 
             </ui:define>

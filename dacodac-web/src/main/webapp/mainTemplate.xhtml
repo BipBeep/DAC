@@ -34,11 +34,23 @@
         </div>
         <div>
             <div id="left">
-                <ui:insert name="left"></ui:insert>
+                <ui:insert name="left">
+                    <c:if test="#{not (identification.identite eq null)}">
+                        <c:if test="#{identification.identite.estAdmin eq true}">
+                            <h:form>
+                                <h:link id="adminBoard" value="Panneau d'administration" outcome="index.xhtml"/>
+                            </h:form>
+                        </c:if>
+                    </c:if>
+                </ui:insert>
             </div>
             <div>
                 <div id="right">
-                    <ui:insert name="right"></ui:insert>
+                    <ui:insert name="right">
+                        <c:if test="#{not (identification.identite eq null)}">
+                            <ui:include src ="banque.xhtml" />
+                        </c:if>
+                    </ui:insert>
                 </div>
                 <div id="content" class="right_content">
                     <ui:insert name="content">Content</ui:insert>

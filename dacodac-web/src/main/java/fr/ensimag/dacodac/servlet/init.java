@@ -102,7 +102,7 @@ public class init extends HttpServlet {
 
         //public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, int codePostal, String description, String titre, LocalDateTime datePublication)
         Annonce a1 = new Annonce(11, TypeAnnonce.OFFRE, utilisateur1, "38100", "description de l'offre numéro 1", "titre de l'offre 1", now);
-        Annonce a2 = new Annonce(12, TypeAnnonce.OFFRE, utilisateur1, "38200", "description de l'offre numéro 2", "titre de l'offre 22", now.plusDays(1));
+        Annonce a2 = new Annonce(120, TypeAnnonce.OFFRE, utilisateur1, "38200", "description de l'offre numéro 2", "titre de l'offre 2", now.plusDays(1));
         Annonce a3 = new Annonce(13, TypeAnnonce.OFFRE, utilisateur2, "38300", "description de l'offre numéro 3", "titre de l'offre 3", now.plusDays(2));
         Annonce a4 = new Annonce(14, TypeAnnonce.OFFRE, utilisateur2, "38400", "description de l'offre numéro 4", "titre de l'offre 4", now.plusDays(5));
         Annonce a5 = new Annonce(15, TypeAnnonce.OFFRE, utilisateur3, "38500", "description de l'offre numéro 5", "titre de l'offre 5", now.plusDays(3));
