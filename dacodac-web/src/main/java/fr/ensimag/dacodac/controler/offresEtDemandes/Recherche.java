@@ -83,11 +83,16 @@ public class Recherche {
         String[] arrayTags = tags.split(" ");
         List<Tag> listTags = new ArrayList<>();
 
+        
         for (String s : arrayTags) {
             Tag t = tagFacade.getTagByName(s);
             if (t != null) {
                 listTags.add(t);
             }
+        }
+
+        if (tags.equals("")) {
+            listTags = null;
         }
 
         //Departement
@@ -133,6 +138,7 @@ public class Recherche {
             if (demandes != null) {
                 demandes.sort(comparateurAnnonce);
             }
+            
             return "demandes.xhtml";
         } else {
             offres = annonceFacade.findOffresByTagsAndDepartement(listTags, departChoisi);

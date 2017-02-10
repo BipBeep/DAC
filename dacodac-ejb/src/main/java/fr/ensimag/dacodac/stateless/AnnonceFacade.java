@@ -87,11 +87,17 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
     
     public boolean containsTag(Annonce annonce, List<Tag> tags) {
         boolean trouve = true;
-        if (tags.isEmpty()) {
+        if (tags == null) {
+            System.out.println("je viendrais donc ici, ???");
             return trouve;
+        } else if (tags.isEmpty()) {
+            return false;
         } else if (annonce.getTags().isEmpty()) {
+            System.out.println("Pourquoi je viens pas la ?? :((((((");
             return false;
         } else {
+            System.err.println("je suis tres con");
+            System.err.println("les tags : " + annonce.getTags().toString());
             for (Tag tag : tags) {
                 for (Iterator<Tag> it = annonce.getTags().iterator(); it.hasNext();) {
                     Tag t = it.next();
