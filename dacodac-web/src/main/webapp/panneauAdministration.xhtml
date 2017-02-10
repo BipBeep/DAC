@@ -23,7 +23,7 @@
                             <ui:include src ="fonctionRechercheAdmin.xhtml">
                                 <ui:param name="type" value="Offres" />
                             </ui:include>
-                            <p:dataTable value="#{dernieresAnnonces.dernieresOffres()}" var="offre">
+                            <p:dataTable value="#{administrateur.offres}" var="offre">
                                 <p:column style="width: 70%">
                                     <ui:include src = "fragment.xhtml" >
                                         <ui:param name="annonce" value="#{offre}" />
@@ -45,7 +45,7 @@
                             <ui:include src ="fonctionRechercheAdmin.xhtml">
                                 <ui:param name="type" value="Demandes" />
                             </ui:include>
-                            <p:dataTable value="#{dernieresAnnonces.dernieresDemandes()}" var="demande">
+                            <p:dataTable value="#{administrateur.demandes}" var="demande">
                                 <p:column style="width: 70%">
                                     <ui:include src = "fragment.xhtml" >
                                         <ui:param name="annonce" value="#{demande}" />

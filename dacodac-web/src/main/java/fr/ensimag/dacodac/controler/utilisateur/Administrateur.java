@@ -7,10 +7,14 @@ package fr.ensimag.dacodac.controler.utilisateur;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.Tag;
+import fr.ensimag.dacodac.TypeAnnonce;
 import fr.ensimag.dacodac.stateless.CommentaireFacadeLocal;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
+import fr.ensimag.dacodac.stateless.TagFacadeLocal;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -37,6 +41,19 @@ public class Administrateur {
     
     @Inject
     private Connecteur connecteur;
+    
+    @EJB
+    private TagFacadeLocal tagFacade;
+    
+    private List<Annonce> offres = null;
+    
+    private List<Annonce> demandes = null;
+    
+    private List<Utilisateur> utilisateurs = null;
+    
+    private String tags;
+    
+    private String pseudo;
 
 
     public Administrateur() {
@@ -85,10 +102,100 @@ public class Administrateur {
     }
 
     public List<Utilisateur> getUtilisateurs() {
-        return utilisateurFacade.findAll();
+        if (utilisateurs == null) {
+            utilisateurs = utilisateurFacade.findAll();
+        }
+        return utilisateurs;
     }
 
     public void removeAnnonce(Annonce annonce) {
         annonceFacade.remove(annonce);
+    }
+    
+    /* Renvoie les dernières offres */
+    public List<Annonce> getOffres() {
+        if (offres == null) {
+            offres = annonceFacade.getOffres();
+        }
+        return offres;
+        
+    }
+
+    /* Renvoie les dernières demandes */
+    public List<Annonce> getDemandes() {
+        if (demandes == null) {
+            demandes = annonceFacade.getDemandes();
+        }
+        return demandes;
+    }
+    
+    public String effectuer(String type) {
+        TypeAnnonce typeA = TypeAnnonce.OFFRE;
+        if (type.equals("Demandes")) {
+            typeA = TypeAnnonce.DEMANDE;
+        }
+        String[] arrayTags = getTags().split(" ");
+        List<Tag> listTags = new ArrayList<>();
+
+        
+        for (String s : arrayTags) {
+            Tag t = tagFacade.getTagByName(s);
+            if (t != null) {
+                listTags.add(t);
+            } else {
+                // la personne cherche au moins un tag qui n'existe pas, aucune annonce ne correspond
+                listTags = new ArrayList<>();
+                break;
+            }
+        }
+
+        if (getTags().equals("")) {
+            listTags = null;
+        }
+
+
+        if (type.equals("Demandes")) {
+            demandes = annonceFacade.findDemandesByTagsAndDepartement(listTags, "");            
+        } else {
+            offres = annonceFacade.findOffresByTagsAndDepartement(listTags, "");
+        }
+        
+        return "administrateur.xhtml";
+
+    }
+    
+    public String findByPseudo(){
+      Utilisateur u = utilisateurFacade.findByPseudo(pseudo);
+      utilisateurs = new ArrayList<>();
+      utilisateurs.add(u);
+      return "administrateur.xhtml";
+   }
+
+    /**
+     * @return the tags
+     */
+    public String getTags() {
+        return tags;
+    }
+
+    /**
+     * @param tags the tags to set
+     */
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    /**
+     * @return the pseudo
+     */
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    /**
+     * @param pseudo the pseudo to set
+     */
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
 }
