@@ -23,12 +23,7 @@
                     <ui:include src ="bandeau.xhtml" />
                 </c:if>
                 <c:if test="#{not (identification.identite eq null)}">
-                    <c:if test="#{identification.identite.estAdmin eq true}">
-                        <ui:include src ="bandeauAdmin.xhtml" />
-                    </c:if>
-                    <c:if test="#{identification.identite.estAdmin eq false}">
-                        <ui:include src ="bandeauConnecte.xhtml" />
-                    </c:if>
+                    <ui:include src ="bandeauConnecte.xhtml" />
                 </c:if>
             </ui:insert>
         </div>
