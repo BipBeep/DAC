@@ -51,9 +51,17 @@ public interface AnnonceFacadeLocal {
 
     List<Annonce> findByTags(List<Tag> tag);
     
+    List<Annonce> findByTagsAndDepartement(List<Tag> tags, String codeDepart);
+    
+    List<Annonce> findOffresByTagsAndDepartement(List<Tag> tags, String codeDepart);
+            
+    List<Annonce> findDemandesByTagsAndDepartement(List<Tag> tags, String codeDepart);
+    
     List<Annonce> findOffresByTags(List<Tag> tags);
     
     List<Annonce> findDemandesByTags(List<Tag> tags);
+    
+    List<Annonce> findByDepartement(List<Annonce> annonces, String departement);
     
     List<Annonce> findByTitle(String name);
 

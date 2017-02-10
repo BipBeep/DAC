@@ -91,12 +91,17 @@ public class Recherche {
             }
         }
         
+        //Departement
+        String codeDepart = "";
+        if (depart != null) {
+            codeDepart = depart.split(" ")[0];
+        }
+        
         if (type.equals("Demandes")) {
-            demandes = annonceFacade.findDemandesByTags(listTags);
+            demandes = annonceFacade.findDemandesByTagsAndDepartement(listTags, codeDepart);
             return "demandes.xhtml";
         } else {
-            offres = annonceFacade.findOffresByTags(listTags);
-            System.err.println("offres : "+offres);
+            offres = annonceFacade.findOffresByTagsAndDepartement(listTags, codeDepart);
             return "offres.xhtml";
         }
 

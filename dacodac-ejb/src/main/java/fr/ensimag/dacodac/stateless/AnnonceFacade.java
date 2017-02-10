@@ -116,7 +116,8 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         } else {
             boolean trouve = true;
             for (Annonce annonce : annonces) {
-                trouve = containsTag(annonce, tags);                 
+                trouve = containsTag(annonce, tags);
+                
                 if (trouve) {
                     annoncesCorrespondantes.add(annonce);
                 }
@@ -125,6 +126,84 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
                 return null;
             }
             return annoncesCorrespondantes;
+        }
+    }
+    
+        
+    public boolean bonDepartement(Annonce annonce, String codeDepart) {
+        if (codeDepart.equals("")) {
+            return true;
+        }
+        if (annonce.getCodePostal().substring(0, 2).equals(codeDepart)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    @Override
+    public List<Annonce> findByTagsAndDepartement(List<Tag> tags, String codeDepart) {
+        List<Annonce> annonces = findAll();       
+        List<Annonce> annoncesCorrespondantes = new ArrayList<>();
+        if (annonces.isEmpty()) {
+            return null;
+        } else {
+            boolean trouve = true;
+            for (Annonce annonce : annonces) {
+                trouve = containsTag(annonce, tags) && bonDepartement(annonce, codeDepart);
+                
+                if (trouve) {
+                    annoncesCorrespondantes.add(annonce);
+                }
+            }
+            if (annoncesCorrespondantes.isEmpty()) {
+                return null;
+            }
+            return annoncesCorrespondantes;
+        }
+    }
+    
+    @Override
+    public List<Annonce> findOffresByTagsAndDepartement(List<Tag> tags, String codeDepart) {
+        List<Annonce> offres = getOffres();       
+        List<Annonce> offresCorrespondantes = new ArrayList<>();
+        if (offres.isEmpty()) {
+            return offresCorrespondantes;
+        } else {
+            boolean trouve = true;
+            for (Annonce offre : offres) {
+                trouve = containsTag(offre, tags) && bonDepartement(offre, codeDepart);
+                
+                if (trouve) {
+                    offresCorrespondantes.add(offre);
+                }
+            }
+            if (offresCorrespondantes.isEmpty()) {
+                return offresCorrespondantes;
+            }
+            return offresCorrespondantes;
+        }
+    }
+    
+    @Override
+    public List<Annonce> findDemandesByTagsAndDepartement(List<Tag> tags, String codeDepart) {
+        List<Annonce> demandes = getDemandes();       
+        List<Annonce> demandesCorrespondantes = new ArrayList<>();
+        if (demandes.isEmpty()) {
+            return demandesCorrespondantes;
+        } else {
+            boolean trouve = true;
+            for (Annonce demande : demandes) {
+                trouve = containsTag(demande, tags) && bonDepartement(demande, codeDepart);
+                
+                if (trouve) {
+                    demandesCorrespondantes.add(demande);
+                }
+            }
+            if (demandesCorrespondantes.isEmpty()) {
+                return demandesCorrespondantes;
+            }
+            return demandesCorrespondantes;
         }
     }
     
@@ -175,6 +254,21 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             }
             return demandesCorrespondantes;
         }
+    }
+    
+    @Override
+    public List<Annonce> findByDepartement(List<Annonce> annonces, String departement) {
+        if (annonces == null) {
+            return null;
+        }
+        List<Annonce> annoncesCorrespondantes = new ArrayList<>();
+        for (Annonce annonce : annonces) {
+            String departAnnonce = annonce.getCodePostal().substring(0, 1);
+            if (departAnnonce.equals(departement)) {
+                annoncesCorrespondantes.add(annonce);
+            }
+        }
+        return annoncesCorrespondantes;
     }
 
     @Override
