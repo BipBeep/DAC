@@ -7,19 +7,19 @@ package fr.ensimag.dacodac.controler.utilisateur;
 
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+
 import javax.inject.Named;
+import javax.enterprise.context.Dependent;
 
 /**
  *
  * @author maubertj
  */
 @Named(value = "modifierProfil")
-@ViewScoped
+@RequestScoped
 public class ModifierProfil {
 
     @EJB
@@ -39,11 +39,11 @@ public class ModifierProfil {
     public ModifierProfil() {
     }
 
-    @PostConstruct
-    public void postBuild() {
-        pseudo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("pseudo");
-        utilisateur = utilisateurFacade.findByPseudo(pseudo);
-    }
+//    @PostConstruct
+//    public void postBuild() {
+//        pseudo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("pseudo");
+//        utilisateur = utilisateurFacade.findByPseudo(pseudo);
+//    }
 
     public String modificationProfil() {
         //Gestion du mot de passe
