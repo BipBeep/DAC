@@ -38,7 +38,7 @@
                                 <h:outputLabel for="tags" value="Tags" />
                             </p:column>  
                             <p:column>  
-                                <p:inputText value="#{publierAnnonce.tags}" id="tags" required="true">
+                                <p:inputText value="#{publierAnnonce.tags}" id="tags">
                                     <f:validateLength />
                                     <p:clientValidator />
                                 </p:inputText>
@@ -65,7 +65,7 @@
                                 <p:outputLabel for="type" value="Type" />
                             </p:column>  
                             <p:column>  
-                                <p:selectOneRadio id="type" value="#{publierAnnonce.type}">
+                                <p:selectOneRadio id="type" value="#{publierAnnonce.type}" required="true">
                                     <f:selectItem itemLabel="Offre" itemValue="Offre" />
                                     <f:selectItem itemLabel="Demande" itemValue="Demande" />
                                 </p:selectOneRadio>
@@ -76,7 +76,7 @@
                                 <h:outputLabel for="prix" value="Prix (en dakos)" />
                             </p:column>  
                             <p:column>  
-                                <p:inputText id="prix" value="#{publierAnnonce.annonce.prix}">
+                                <p:inputText id="prix" size="5" value="#{publierAnnonce.annonce.prix}" required="true">
                                     <p:clientValidator event="keyup"/>
                                 </p:inputText>
                             </p:column>  

@@ -121,6 +121,9 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
                     annoncesCorrespondantes.add(annonce);
                 }
             }
+            if (annoncesCorrespondantes.isEmpty()) {
+                return null;
+            }
             return annoncesCorrespondantes;
         }
     }
@@ -129,46 +132,48 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
     
     @Override
     public List<Annonce> findOffresByTags(List<Tag> tags) {
-        List<Annonce> offres = getOffres();
+        List<Annonce> offres = getOffres();       
+        List<Annonce> offresCorrespondantes = new ArrayList<>();
         if (offres.isEmpty()) {
+            System.err.println("offres empty");
+            return null;
+        } else if (tags.isEmpty()) {
+            System.err.println("tags empty");
             return null;
         } else {
+            System.err.println("offres not empty");
             boolean trouve = true;
             for (Annonce offre : offres) {
-                
-                for (Tag tag : tags) {
-                    if (!offre.getTags().contains(tag)) {
-                        trouve = false;
-                        break;
-                    }
-                }
-                if (!trouve) {
-                    offres.remove(offre);
+                trouve = containsTag(offre, tags);                 
+                if (trouve) {
+                    offresCorrespondantes.add(offre);
                 }
             }
-            return offres;
+            if (offresCorrespondantes.isEmpty()) {
+                return null;
+            }
+            return offresCorrespondantes;
         }
     }
 
     @Override
     public List<Annonce> findDemandesByTags(List<Tag> tags) {
-        List<Annonce> demandes = getDemandes();
+        List<Annonce> demandes = getDemandes();       
+        List<Annonce> demandesCorrespondantes = new ArrayList<>();
         if (demandes.isEmpty()) {
             return null;
         } else {
             boolean trouve = true;
             for (Annonce demande : demandes) {
-                for (Tag tag : tags) {
-                    if (!demande.getTags().contains(tag)) {
-                        trouve = false;
-                        break;
-                    }
-                }
-                if (!trouve) {
-                    demandes.remove(demande);
+                trouve = containsTag(demande, tags);                 
+                if (trouve) {
+                    demandesCorrespondantes.add(demande);
                 }
             }
-            return demandes;
+            if (demandesCorrespondantes.isEmpty()) {
+                return null;
+            }
+            return demandesCorrespondantes;
         }
     }
 
