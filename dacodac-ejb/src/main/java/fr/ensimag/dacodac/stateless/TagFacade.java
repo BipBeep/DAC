@@ -29,18 +29,15 @@ public class TagFacade extends AbstractFacade<Tag> implements TagFacadeLocal {
     public TagFacade() {
         super(Tag.class);
     }
-    
+
     @Override
     public Tag getTagByName(String nom) {
         List<Tag> liste = getEntityManager().createQuery("Select t FROM Tag t WHERE t.nom = :nom").setParameter("nom", nom).getResultList();
-        if (liste.isEmpty())
-        {
+        if (liste.isEmpty()) {
             return null;
-        }
-        else
-        {
+        } else {
             return liste.get(0);
         }
     }
-    
+
 }

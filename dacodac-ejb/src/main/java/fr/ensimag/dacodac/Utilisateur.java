@@ -8,6 +8,7 @@ package fr.ensimag.dacodac;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -60,10 +61,10 @@ public class Utilisateur implements Serializable {
     
     private String description;
     
-    @OneToMany
+    @OneToMany(mappedBy="auteur", cascade=CascadeType.ALL)
     private List<Annonce> annonces;
     
-    @OneToMany
+    @OneToMany(mappedBy="destinataire", cascade=CascadeType.ALL)
     private List<Commentaire> commentaires;
 
     public Utilisateur() {

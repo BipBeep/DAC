@@ -32,6 +32,10 @@ public class Commentaire implements Serializable {
     @JoinColumn(nullable=false)
     private Utilisateur auteur;
     
+    @ManyToOne
+    @JoinColumn(nullable=false)
+    private Utilisateur destinataire;
+
     @Column(nullable=false)
     private LocalDate dateCreation;
     
@@ -42,6 +46,7 @@ public class Commentaire implements Serializable {
     @Column(nullable=false)
     @Size(min=1, max=1023)
     private String description;
+    
 
     public Commentaire() {
     }
@@ -51,6 +56,7 @@ public class Commentaire implements Serializable {
         this.dateCreation = dateCreation;
         this.annonce = annonce;
         this.description = description;
+        this.destinataire = annonce.getAuteur();
     }
     
     public Long getId() {
@@ -75,6 +81,14 @@ public class Commentaire implements Serializable {
 
     public String getDescription() {
         return description;
+    }
+    
+    public Utilisateur getDestinataire() {
+        return destinataire;
+    }
+
+    public void setDestinataire(Utilisateur destinataire) {
+        this.destinataire = destinataire;
     }
     
     public void setAuteur(Utilisateur auteur) {
@@ -115,6 +129,6 @@ public class Commentaire implements Serializable {
 
     @Override
     public String toString() {
-        return "Commentaire[id=" + id + ", ID-Auteur=" + auteur.getId() + ", DateCreation=" + dateCreation.toString() + ", TitreAnnonce=" + annonce.getTitre() + "]";
+        return "Commentaire[id=" + id + ", ID-Auteur=" + auteur.getId() + ", ID-Dest=" + destinataire.getId() + ", DateCreation=" + dateCreation.toString() + ", TitreAnnonce=" + annonce.getTitre() + "]";
     }
 }

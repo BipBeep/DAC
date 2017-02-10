@@ -17,13 +17,11 @@ import javax.persistence.PersistenceContext;
  *
  * @author weschlel
  */
-
 @Stateless
 public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements UtilisateurFacadeLocal {
 
     @PersistenceContext(unitName = "Dacodac_PU")
     private EntityManager em;
-    
 
     @Override
     protected EntityManager getEntityManager() {
@@ -33,25 +31,16 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
     public UtilisateurFacade() {
         super(Utilisateur.class);
     }
-    
+
     @Override
-    public Utilisateur findByPseudo(String pseudo)
-    {
+    public Utilisateur findByPseudo(String pseudo) {
         List<Utilisateur> liste = getEntityManager().createQuery("SELECT u FROM Utilisateur u WHERE u.pseudo LIKE :pseudo")
                 .setParameter("pseudo", pseudo).getResultList();
-        if (liste.isEmpty())
-        {
+        if (liste.isEmpty()) {
             return null;
-        }
-        else
-        {
+        } else {
             return liste.get(0);
         }
-    }
-    
-    @Override
-    public void modifyUser() {
-        getEntityManager().createQuery("UPDATE Utilisateur SET dakos = 100 WHERE id = 2");
     }
 
     @Override
@@ -59,6 +48,7 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
         List<Commentaire> commentaires = utilisateur.getCommentaires();
         commentaires.add(commentaire);
         utilisateur.setCommentaires(commentaires);
+        edit(utilisateur);
     }
 
     @Override
@@ -66,6 +56,7 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
         List<Annonce> annonces = utilisateur.getAnnonces();
         annonces.add(annonce);
         utilisateur.setAnnonces(annonces);
+        edit(utilisateur);
     }
-    
+
 }

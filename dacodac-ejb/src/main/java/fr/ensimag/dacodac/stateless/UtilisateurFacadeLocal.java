@@ -31,8 +31,6 @@ public interface UtilisateurFacadeLocal {
     Utilisateur find(Object id);
     
     Utilisateur findByPseudo(String pseudo);
-    
-    void modifyUser();
 
     List<Utilisateur> findAll();
 

@@ -48,10 +48,9 @@
                                                 <f:param name="pseudo" value="#{pseudo}"/>
                                             </p:button>
                                         </c:if>
-
                                         <c:if test="#{(identification.identite.estAdmin eq true)}" >
                                             <h:form>
-                                                <p:commandButton value="Bannir cet utilisateur" action="#{administrateur.supprimerUtilisateur(consulterProfil.getUtilisateur(pseudo))}" icon="ui-icon-check" ajax="false"/>
+                                                <p:commandButton value="Bannir cet utilisateur" action="#{administrateur.supprimerUtilisateur(consulterProfil.getUtilisateur(pseudo))}" icon="ui-icon-circle-close" style="color:red" ajax="false"/>
                                             </h:form>
                                         </c:if>        
                                     </c:if>

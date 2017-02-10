@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -75,7 +76,7 @@ public class Annonce implements Serializable {
     @Column(nullable = false)
     private boolean serviceRendu_contracteur;
     
-    @OneToMany
+    @OneToMany(mappedBy="annonce", cascade=CascadeType.ALL)
     private List<Commentaire> commentaires;
     
     // LIMITER A 5 TAGS
