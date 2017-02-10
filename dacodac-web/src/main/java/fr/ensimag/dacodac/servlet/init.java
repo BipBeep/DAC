@@ -91,6 +91,7 @@ public class init extends HttpServlet {
         Utilisateur utilisateur4 = new Utilisateur(100, "Nico", "secret00", "kamo@gmail.com", "28301", 22, false);
         Utilisateur utilisateur5 = new Utilisateur(100, "Juju", "secret00", "juju@pl-s.com", "28302", 22, false);
         Utilisateur utilisateur6 = new Utilisateur(400000, "Hillary", "JAimePasLesEmails", "hillary.clinton@defaite.seum", "52147", 98, false);
+        utilisateur1.setDescription("It's going to be America FIRST, AMERICA FIRST!");
         utilisateurFacade.create(utilisateur1);
         utilisateurFacade.create(utilisateur2);
         utilisateurFacade.create(utilisateur3);

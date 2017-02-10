@@ -13,6 +13,7 @@ import javax.enterprise.context.RequestScoped;
 
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 
 /**
  *
@@ -29,10 +30,15 @@ public class ModifierProfil {
     
     private Utilisateur utilisateur = null;
 
-    private String nouveauMotDePasse = null;
+    private String nouveauMotDePasse = "";
     
-    private String ancienMotDePasse = null;
+    private String nouveauMotDePasse2 = "";
+    
+    private String ancienMotDePasse = "";
 
+    @Inject
+    private Identification beanID;
+    
     /**
      * Creates a new instance of ModifierProfil
      */
@@ -51,7 +57,18 @@ public class ModifierProfil {
             System.err.println("I'm in!");
             utilisateur.setPassword(nouveauMotDePasse);
         }*/
-        utilisateurFacade.edit(utilisateur);
+        System.out.println("-----------------------------------------------------");
+        if (!nouveauMotDePasse.equals("")) {
+            System.err.println("le nouveau mdp est non null");
+            if (nouveauMotDePasse.equals(getNouveauMotDePasse2()) && (ancienMotDePasse.equals(getUtilisateur().getPassword()))) {
+                System.err.println("je set le mdp");
+                getUtilisateur().setPassword(nouveauMotDePasse);
+            }
+            
+        }
+        System.err.println("Je sors des 2 ifs, et j'edit le profil");
+        utilisateurFacade.edit(getUtilisateur());
+        System.err.println("done");
         return "index.xhtml";
     }
 
@@ -78,11 +95,51 @@ public class ModifierProfil {
     }
 
     public Utilisateur getUtilisateur() {
-        if (utilisateur == null) {
-            utilisateur = new Utilisateur();
-            utilisateur.setPseudo(pseudo);
-        }
-        return utilisateur;
+        return beanID.getIdentite();
     }
+
+    /**
+     * @return the pseudo
+     */
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    /**
+     * @param pseudo the pseudo to set
+     */
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    /**
+     * @return the beanID
+     */
+    public Identification getBeanID() {
+        return beanID;
+    }
+
+    /**
+     * @param beanID the beanID to set
+     */
+    public void setBeanID(Identification beanID) {
+        this.beanID = beanID;
+    }
+
+    /**
+     * @return the nouveauMotDePasse2
+     */
+    public String getNouveauMotDePasse2() {
+        return nouveauMotDePasse2;
+    }
+
+    /**
+     * @param nouveauMotDePasse2 the nouveauMotDePasse2 to set
+     */
+    public void setNouveauMotDePasse2(String nouveauMotDePasse2) {
+        this.nouveauMotDePasse2 = nouveauMotDePasse2;
+    }
+
+  
 
 }
