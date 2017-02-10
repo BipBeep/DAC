@@ -5,6 +5,7 @@
  */
 package fr.ensimag.dacodac.controler.offresEtDemandes;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.TypeAnnonce;
@@ -88,6 +89,10 @@ public class Recherche {
             Tag t = tagFacade.getTagByName(s);
             if (t != null) {
                 listTags.add(t);
+            } else {
+                // la personne cherche au moins un tag qui n'existe pas, aucune annonce ne correspond
+                listTags = new ArrayList<>();
+                break;
             }
         }
 
