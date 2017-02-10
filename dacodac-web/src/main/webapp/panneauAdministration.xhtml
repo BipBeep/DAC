@@ -19,7 +19,11 @@
                     <div class="block">
                         <h2> Offres </h2>
                         <f:view>
-                            <p:dataTable value="#{dernieresAnnonces.dernieresOffres()}" var="offre">
+
+                            <ui:include src ="fonctionRechercheAdmin.xhtml">
+                                <ui:param name="type" value="Offres" />
+                            </ui:include>
+                            <p:dataTable value="#{administrateur.offres}" var="offre">
                                 <p:column style="width: 70%">
                                     <ui:include src = "fragment.xhtml" >
                                         <ui:param name="annonce" value="#{offre}" />
@@ -38,7 +42,10 @@
                     <div class="block">
                         <h2> Demandes </h2>
                         <f:view>
-                            <p:dataTable value="#{dernieresAnnonces.dernieresDemandes()}" var="demande">
+                            <ui:include src ="fonctionRechercheAdmin.xhtml">
+                                <ui:param name="type" value="Demandes" />
+                            </ui:include>
+                            <p:dataTable value="#{administrateur.demandes}" var="demande">
                                 <p:column style="width: 70%">
                                     <ui:include src = "fragment.xhtml" >
                                         <ui:param name="annonce" value="#{demande}" />
@@ -47,7 +54,7 @@
                                 <p:column>
                                     <h:form>
                                         <p:growl id="growl" life="5000" />
-                                        <p:commandButton class="trash" action="#{panier.removeAnnonce(demande)}" update="growl" icon="ui-icon-trash" ajax="false" />
+                                        <p:commandButton class="trash" action="#{administrateur.removeAnnonce(demande)}" update="growl" icon="ui-icon-trash" ajax="false" />
                                     </h:form>
                                 </p:column>
                             </p:dataTable>
@@ -56,20 +63,23 @@
                     <div class="block">
                         <h2> Utilisateurs </h2>
                         <f:view>
+                            <ui:include src ="fonctionRechercheUtilisateurAdmin.xhtml">
+                                <ui:param name="nom" value="utilisateur" />
+                            </ui:include>
                             <p:dataTable value="#{administrateur.utilisateurs}" var="utilisateur">
-                                <p:column style="width: 70%">
+                                <p:column>
                                     <ui:include src = "fragmentAdmin.xhtml" >
                                         <ui:param name="utilisateur" value="#{utilisateur}" />
                                     </ui:include>
                                 </p:column>
-                                
+
                             </p:dataTable>
                         </f:view>
                     </div> 
                 </div>
-                
-                
-                
+
+
+
             </ui:define>
 
         </ui:composition>

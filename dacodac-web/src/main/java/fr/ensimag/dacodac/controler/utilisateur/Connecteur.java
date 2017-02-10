@@ -8,6 +8,7 @@ package fr.ensimag.dacodac.controler.utilisateur;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.exceptions.NotConnectedException;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
+import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -35,7 +36,7 @@ public class Connecteur {
         return utilisateur;
     }
 
-    public String connect(Identification idBean) {
+    public String connect(Identification idBean) throws NoSuchAlgorithmException {
         try
         {
             idBean.setIdentite(utilisateur.getPseudo(), utilisateur.getPassword());

@@ -6,6 +6,8 @@
 package fr.ensimag.dacodac;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -72,15 +74,19 @@ public class Utilisateur implements Serializable {
 
     public Utilisateur() {
     }
-
-    public Utilisateur(int dakos, String pseudo, String password, String email, String codePostal, int age, boolean estAdmin) {
+    
+    public Utilisateur(int dakos, String pseudo, String password, String email, String codePostal, int age, boolean estAdmin) throws NoSuchAlgorithmException {
         this.dakos = dakos;
         this.pseudo = pseudo;
-        this.password = password;
+        //this.password= password;
+
         this.email = email;
         this.codePostal = codePostal;
         this.age = age;
         this.estAdmin = estAdmin;
+        
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        this.password = crypt(md, password);
 
         this.description = "";
         this.annonces = new ArrayList<>();
@@ -210,6 +216,26 @@ public class Utilisateur implements Serializable {
                 + ", pseudo=" + pseudo + ", email=" + email + ", code postal="
                 + codePostal + ", age=" + age + ", estAdmin=" + estAdmin
                 + ", a des annonces :" + !annonces.isEmpty() + "]";
+    }
+
+    public static String crypt(MessageDigest digester, String str) {
+        if (str == null || str.length() == 0) {
+            throw new IllegalArgumentException("String to encript cannot be null or zero length");
+        }
+
+        digester.update(str.getBytes());
+        byte[] hash = digester.digest();
+        StringBuffer hexString = new StringBuffer();
+        for (int i = 0; i < hash.length; i++) {
+            if ((0xff & hash[i]) < 0x10) {
+                hexString.append("0" + Integer.toHexString((0xFF & hash[i])));
+            }
+            else
+            {
+                hexString.append(Integer.toHexString(0xFF & hash[i]));
+            }
+        }
+        return hexString.toString();
     }
 
 }

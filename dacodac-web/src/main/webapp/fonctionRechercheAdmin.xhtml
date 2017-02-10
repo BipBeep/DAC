@@ -9,14 +9,17 @@
     <body>
 
         <ui:composition>
-            <h:link style="padding-left: 5%;" value="#{utilisateur.pseudo}" outcome="consulterUnProfil.xhtml">
-                <f:param name="pseudo" value="#{utilisateur.pseudo}"/>
-                <br></br>
-                <p:button value="consulter le profil" style="float:right" outcome="/consulterUnProfil.xhtml">
-                    <f:param name="pseudo" value="#{utilisateur.pseudo}"/> 
-                </p:button>
-            </h:link>
 
+            <h:form>
+                
+                    <h:panelGrid columns="4" cellpadding="5">
+                        <p:inputText size="30" style="margin-right:10px" placeholder="Offre" value="#{administrateur.tags}"/>
+
+                        <p:commandButton value="OK" action="#{administrateur.effectuer(type)}" ajax="false" validateClient="true"/>
+                    </h:panelGrid>
+
+               
+            </h:form>
 
         </ui:composition>
 
