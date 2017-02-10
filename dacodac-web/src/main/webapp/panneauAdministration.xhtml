@@ -19,6 +19,10 @@
                     <div class="block">
                         <h2> Offres </h2>
                         <f:view>
+
+                            <ui:include src ="fonctionRechercheAdmin.xhtml">
+                                <ui:param name="type" value="Offres" />
+                            </ui:include>
                             <p:dataTable value="#{dernieresAnnonces.dernieresOffres()}" var="offre">
                                 <p:column style="width: 70%">
                                     <ui:include src = "fragment.xhtml" >
@@ -38,6 +42,9 @@
                     <div class="block">
                         <h2> Demandes </h2>
                         <f:view>
+                            <ui:include src ="fonctionRechercheAdmin.xhtml">
+                                <ui:param name="type" value="Demandes" />
+                            </ui:include>
                             <p:dataTable value="#{dernieresAnnonces.dernieresDemandes()}" var="demande">
                                 <p:column style="width: 70%">
                                     <ui:include src = "fragment.xhtml" >
@@ -56,20 +63,23 @@
                     <div class="block">
                         <h2> Utilisateurs </h2>
                         <f:view>
+                            <ui:include src ="fonctionRechercheUtilisateurAdmin.xhtml">
+                                <ui:param name="nom" value="utilisateur" />
+                            </ui:include>
                             <p:dataTable value="#{administrateur.utilisateurs}" var="utilisateur">
                                 <p:column style="width: 70%">
                                     <ui:include src = "fragmentAdmin.xhtml" >
                                         <ui:param name="utilisateur" value="#{utilisateur}" />
                                     </ui:include>
                                 </p:column>
-                                
+
                             </p:dataTable>
                         </f:view>
                     </div> 
                 </div>
-                
-                
-                
+
+
+
             </ui:define>
 
         </ui:composition>
