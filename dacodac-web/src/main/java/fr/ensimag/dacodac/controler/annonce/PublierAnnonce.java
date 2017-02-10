@@ -11,6 +11,7 @@ import fr.ensimag.dacodac.TypeAnnonce;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.controler.utilisateur.Identification;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
+import fr.ensimag.dacodac.stateless.TagFacadeLocal;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,6 +37,9 @@ public class PublierAnnonce {
 
     @EJB
     private UtilisateurFacadeLocal utilisateurFacade;
+    
+    @EJB
+    private TagFacadeLocal tagFacade;
 
     @Inject
     private Identification beanID;
@@ -66,8 +70,6 @@ public class PublierAnnonce {
     }
 
     public String save() {
-        System.out.println("----------------------------------------------");
-        System.out.println("annonce : " + getAnnonce());
         Utilisateur u = beanID.getIdentite();
         if (u == null) {
             //Utilisateur non connecté
@@ -84,8 +86,12 @@ public class PublierAnnonce {
         String[] arrayTags = tags.split(" ");
         
         for (String s : arrayTags) {
-            
-            annonceFacade.addTag(getAnnonce(), new Tag(s));
+            Tag t = tagFacade.getTagByName(s);
+            if (t == null) {
+                tagFacade.create(new Tag(s));
+            }
+            Tag tag = tagFacade.getTagByName(s);
+            annonceFacade.addTag(getAnnonce(), tag);
         }
 
         annonceFacade.edit(getAnnonce());
