@@ -65,7 +65,7 @@
                                 <p:outputLabel for="type" value="Type" />
                             </p:column>  
                             <p:column>  
-                                <p:selectOneRadio id="type" value="#{publierAnnonce.type}">
+                                <p:selectOneRadio id="type" value="#{publierAnnonce.type}" required="true">
                                     <f:selectItem itemLabel="Offre" itemValue="Offre" />
                                     <f:selectItem itemLabel="Demande" itemValue="Demande" />
                                 </p:selectOneRadio>
@@ -81,7 +81,7 @@
                                 </p:inputText>
                             </p:column>  
                             <p:column>  
-                                <p:message for="prix" display="icon" value="Veuillez entrer un prix (non négatif)"/>
+                                <p:message for="prix" display="icon" />
                             </p:column>  
                         </p:row>
                         <p:row>  
