@@ -6,6 +6,7 @@
 package fr.ensimag.dacodac.controler.annonce;
 
 import fr.ensimag.dacodac.Annonce;
+import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -20,7 +21,7 @@ import javax.enterprise.context.RequestScoped;
 public class AnnoncePublic {
 
     
-    @EJB(name = "annonceFacade")
+    @EJB
     private AnnonceFacadeLocal annonceFacade;
     
     private Annonce annonce = null;
@@ -37,5 +38,30 @@ public class AnnoncePublic {
         }
         return annonce;
     }
+    
+    public void validerAnnonce(){
+        System.err.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%OK");
+    }
+    
+    public String refuserProposition(Utilisateur postulant){
+        System.err.println("NON");
+        annonce.getPostulants().remove(postulant);
+        annonceFacade.edit(annonce);
+        return null;
+    }
+    
+    public void hello(){
+        System.err.println("hello");
+        System.err.println("hello");
+        System.err.println("hello");
+        System.err.println("hello");
+        System.err.println("hello");
+        System.err.println("hello");
+        System.err.println("hello");
+        System.err.println("hello");
+        
+    }
+    
+    
     
 }

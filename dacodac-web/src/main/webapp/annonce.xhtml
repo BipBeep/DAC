@@ -4,7 +4,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
         <ui:composition template="./mainTemplate.xhtml">
@@ -17,7 +18,8 @@
             </f:metadata>
 
             <ui:define name="content">
-                <p:panelGrid id="frame">
+
+                
                     <p:row id="tableau">
                         <p:column id="colonneAnnonce">
                             <p:panelGrid id="annonce">
@@ -49,7 +51,9 @@
 
                             </p:panelGrid>
                         </p:column>
-                        <p:column id="auteur">
+
+                        <!--Si ce n'est pas mon annonce-->
+                        <p:column id="auteur" rendered="#{not (identification.identite eq annoncePublic.getAnnonce(id).auteur)}">
                             <p:panelGrid>
                                 <p:row>
                                     <p:column>
@@ -69,15 +73,55 @@
                                 </p:row>
                             </p:panelGrid>
                         </p:column>
-                    </p:row> 
-                </p:panelGrid>
 
+                    </p:row> 
+
+                    <!--Si l'annonce n'est pas encore validée-->
+                    <c:set var="bool" value ="" />
+                    <p:row rendered="#{(identification.identite eq annoncePublic.getAnnonce(id).auteur) 
+                                       and not(annoncePublic.getAnnonce(id).estValidee)}">
+                        <p:column>
+                            <h:form>
+                                <h:commandButton value="hello" action="#{annoncePublic.hello()}"/>
+                            </h:form>
+                            <p:dataTable value="#{annoncePublic.getAnnonce(id).postulants}" var="postulant">
+                                <p:column>
+                                    <ui:include src="fragmentPostulant.xhtml">
+                                        <ui:param name="id" value="#{id}"/>
+                                        <ui:param name="postulant" value="#{postulant}"/>
+                                    </ui:include>
+                                </p:column>
+                            </p:dataTable>
+                        </p:column>
+                    </p:row> 
+
+                    <!--Si l'annonce est validée-->
+                    <p:row rendered="#{(identification.identite eq annoncePublic.getAnnonce(id).auteur) 
+                                       and annoncePublic.getAnnonce(id).estValidee}">
+                        <p:column>
+                            <h:outputText value="Contractée avec #{annoncePublic.getAnnonce(id).postulants.get(0).pseudo}" />
+                            <h:link value="Consulter le profil"  outcome="consulterUnProfil.xhtml">
+                                <f:param name="pseudo" value="#{annoncePublic.getAnnonce(id).postulants.get(0).pseudo}"/>
+                            </h:link>
+                            <h:outputText value="Le service a été rendu:"/>
+                            <h:form>
+                                <!--Si oui on va rédiger un commentaire-->
+                                <h:commandButton class="green" value="Oui"/>
+                                <h:commandButton class="red" value="Non"/>
+                            </h:form>
+                        </p:column>
+                    </p:row> 
+
+
+                
                 <div id="validation">
-                    <h:form>
+                    <h:form rendered="#{not(identification.identite eq annoncePublic.getAnnonce(id).auteur)}">
                         <p:growl id="growl" life="50" />
                         <p:commandButton value="Ajouter au panier" update="growl" actionListener="#{panier.addAnnonce(annoncePublic.getAnnonce(id))}" icon="ui-icon-check" />
                     </h:form>
                 </div>
+
+
 
             </ui:define>
         </ui:composition>

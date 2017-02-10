@@ -13,9 +13,9 @@
             <h:form>
                 
                     <h:panelGrid columns="4" cellpadding="5">
-                        <p:inputText size="40" style="margin-right:10px" placeholder="Pseudo" value="#{rechercheUtilisateur.nom}"/>
+                        <p:inputText size="40" style="margin-right:10px" placeholder="Pseudo" value="#{administrateur.pseudo}"/>
 
-                        <p:commandButton value="OK" action="#{rechercheUtilisateur.findByPseudo()}" ajax="false" validateClient="true"/>
+                        <p:commandButton value="OK" action="#{administrateur.findByPseudo()}" ajax="false" validateClient="true"/>
                     </h:panelGrid>
 
                
