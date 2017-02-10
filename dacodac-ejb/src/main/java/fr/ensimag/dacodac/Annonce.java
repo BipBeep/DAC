@@ -72,8 +72,6 @@ public class Annonce implements Serializable {
     @Column(nullable = false)
     private boolean serviceRendu_contracteur;
     
-    
-    // LIMITER A 5 TAGS
     @ManyToMany
     private List<Tag> tags;
 
