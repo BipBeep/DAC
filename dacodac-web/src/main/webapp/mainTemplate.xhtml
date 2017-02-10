@@ -33,7 +33,7 @@
                     <c:if test="#{not (identification.identite eq null)}">
                         <c:if test="#{identification.identite.estAdmin eq true}">
                             <h:form>
-                                <h:link id="adminBoard" value="Panneau d'administration" outcome="index.xhtml"/>
+                                <h:link id="adminBoard" value="Panneau d'administration" outcome="panneauAdministration.xhtml"/>
                             </h:form>
                         </c:if>
                     </c:if>
