@@ -109,7 +109,13 @@ public class Administrateur {
     }
 
     public void removeAnnonce(Annonce annonce) {
+        if (annonce.getType() == TypeAnnonce.DEMANDE) {
+            demandes.remove(annonce);
+        } else {
+            offres.remove(annonce);
+        }
         annonceFacade.remove(annonce);
+        
     }
     
     /* Renvoie les dernières offres */
