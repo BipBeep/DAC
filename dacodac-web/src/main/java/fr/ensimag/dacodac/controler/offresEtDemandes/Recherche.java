@@ -5,7 +5,6 @@
  */
 package fr.ensimag.dacodac.controler.offresEtDemandes;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.TypeAnnonce;
