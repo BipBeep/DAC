@@ -82,7 +82,9 @@ public class PublierAnnonce {
         annonce.setAuteur(u);
         annonceFacade.create(getAnnonce());
         String[] arrayTags = tags.split(" ");
+        
         for (String s : arrayTags) {
+            
             annonceFacade.addTag(getAnnonce(), new Tag(s));
         }
 
