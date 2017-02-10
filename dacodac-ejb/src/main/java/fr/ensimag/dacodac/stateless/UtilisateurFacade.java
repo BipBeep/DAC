@@ -44,11 +44,18 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
     }
 
     @Override
-    public void addCommentaire(Utilisateur utilisateur, Commentaire commentaire) {
-        List<Commentaire> commentaires = utilisateur.getCommentaires();
-        commentaires.add(commentaire);
-        utilisateur.setCommentaires(commentaires);
-        edit(utilisateur);
+    public void addCommentaire(Commentaire commentaire) {
+        Utilisateur destinataire = commentaire.getDestinataire();
+        List<Commentaire> commentairesDest = destinataire.getCommentairesDest();
+        commentairesDest.add(commentaire);
+        destinataire.setCommentairesDest(commentairesDest);
+        edit(destinataire);
+
+        Utilisateur auteur = commentaire.getAuteur();
+        List<Commentaire> commentairesAuteur = auteur.getCommentairesAuteur();
+        commentairesAuteur.add(commentaire);
+        auteur.setCommentairesAuteur(commentairesAuteur);
+        edit(auteur);
     }
 
     @Override

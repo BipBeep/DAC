@@ -7,7 +7,6 @@ package fr.ensimag.dacodac.controler.utilisateur;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
-import fr.ensimag.dacodac.Commentaire_;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import fr.ensimag.dacodac.stateless.CommentaireFacadeLocal;
@@ -16,6 +15,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -27,53 +27,62 @@ public class Administrateur {
 
     @EJB
     private UtilisateurFacadeLocal utilisateurFacade;
-    
     @EJB
     private AnnonceFacadeLocal annonceFacade;
-    
     @EJB
     private CommentaireFacadeLocal commentaireFacade;
+
+    @Inject
+    private Identification beanID;
     
+    @Inject
+    private Connecteur connecteur;
+
     /**
      * Creates a new instance of SupprimerProfil
      */
     public Administrateur() {
     }
+
+    public void setIdentification(Identification identification) {
+        this.beanID = identification;
+    }
+    
+    public Identification getIdentification(){
+        return beanID;
+    }
+    
+    public void setConnecteur(Connecteur connecteur) {
+        this.connecteur = connecteur;
+    }
+    
+    public Connecteur getConnecteur(){
+        return connecteur;
+    }
     
     public String supprimerUtilisateur(Utilisateur user) {
-        System.out.println("---------------------------------");
-        System.out.println(user.toString());
-        System.out.println("---------------------------------");
-        
-        
-        //remove user de annonpostulant
+
         List<Annonce> listAnnonce = annonceFacade.findAll();
         for (Annonce a : listAnnonce) {
             if (a.getPostulants().contains(user)) {
-                System.out.println("-**** : " + a.getId());
-                System.out.println("---HERE : " + user.toString());
                 annonceFacade.removePostulant(a, user);
             }
         }
 
-                      System.out.println("----------------------Commentaires ! --------------------");
-        //remove les commentaires qui vont etre delete dans la liste des comms des autres user
-        List<Utilisateur> listUser = utilisateurFacade.findAll();
-        for (Utilisateur u : listUser) {
-            List<Commentaire> listComm = u.getCommentaires();
-                for (Commentaire c : listComm) {
-                    if (c.getAuteur().equals(u)) {
-                        System.out.println("[SUPPPPPPPPR]" + u.getPseudo() + "   " + c.getId());
-                        commentaireFacade.remove(c);
-                    }
-                }
+        List<Commentaire> listComm = commentaireFacade.findAll();
+        for (Commentaire c : listComm) {
+            if (c.getAuteur().equals(user) || c.getDestinataire().equals(user)) {
+                commentaireFacade.remove(c);
+            }
         }
-        
-        
-        
-        //peut etre vider la liste des postulant de la liste des annonces de user
-        // autoban -> deconnection
+
         utilisateurFacade.remove(user);
+        
+        // Auto-Banned
+        if (user.equals(beanID.getIdentite())) {
+            return connecteur.disconnect(beanID);
+        }
+
         return "index.xhtml";
     }
 }

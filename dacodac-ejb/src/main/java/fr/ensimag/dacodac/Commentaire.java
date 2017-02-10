@@ -27,38 +27,37 @@ public class Commentaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @ManyToOne
-    @JoinColumn(nullable=false)
+    @JoinColumn(nullable = false)
     private Utilisateur auteur;
-    
+
     @ManyToOne
-    @JoinColumn(nullable=false)
+    @JoinColumn(nullable = false)
     private Utilisateur destinataire;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private LocalDate dateCreation;
-    
-    @ManyToOne
-    @JoinColumn(nullable=false)
-    private Annonce annonce;
-    
-    @Column(nullable=false)
-    @Size(min=1, max=1023)
+
+    @Column(nullable = false)
+    @Size(min = 1, max = 1023)
     private String description;
-    
+
+    @Column(nullable = false)
+    @Size(min = 1, max = 127)
+    private String titre;
 
     public Commentaire() {
     }
-    
-    public Commentaire(Utilisateur auteur, LocalDate dateCreation, Annonce annonce, String description) {
+
+    public Commentaire(Utilisateur auteur, Utilisateur destinataire, LocalDate dateCreation, String description, String titre) {
         this.auteur = auteur;
+        this.destinataire = destinataire;
         this.dateCreation = dateCreation;
-        this.annonce = annonce;
         this.description = description;
-        this.destinataire = annonce.getAuteur();
+        this.titre = titre;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -75,14 +74,14 @@ public class Commentaire implements Serializable {
         return dateCreation;
     }
 
-    public Annonce getAnnonce() {
-        return annonce;
+    public String getTitre() {
+        return titre;
     }
 
     public String getDescription() {
         return description;
     }
-    
+
     public Utilisateur getDestinataire() {
         return destinataire;
     }
@@ -90,7 +89,7 @@ public class Commentaire implements Serializable {
     public void setDestinataire(Utilisateur destinataire) {
         this.destinataire = destinataire;
     }
-    
+
     public void setAuteur(Utilisateur auteur) {
         this.auteur = auteur;
     }
@@ -99,14 +98,14 @@ public class Commentaire implements Serializable {
         this.dateCreation = dateCreation;
     }
 
-    public void setAnnonce(Annonce annonce) {
-        this.annonce = annonce;
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -129,6 +128,6 @@ public class Commentaire implements Serializable {
 
     @Override
     public String toString() {
-        return "Commentaire[id=" + id + ", ID-Auteur=" + auteur.getId() + ", ID-Dest=" + destinataire.getId() + ", DateCreation=" + dateCreation.toString() + ", TitreAnnonce=" + annonce.getTitre() + "]";
+        return "Commentaire[id=" + id + ", ID-Auteur=" + auteur.getId() + ", ID-Dest=" + destinataire.getId() + ", DateCreation=" + dateCreation.toString() + ", TitreComm=" + titre + "]";
     }
 }

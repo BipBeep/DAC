@@ -16,11 +16,11 @@
             <h:outputText value="Derniers commentaires :" />
             <br/>
             <ul>
-                <c:set var="size" value="#{utilisateur.commentaires.size()}"/>
+                <c:set var="size" value="#{utilisateur.commentairesDest.size()}"/>
                 <c:if test="size>=3}">
                     <c:set var="size" value="3"/>
                 </c:if>
-                <ui:repeat value="#{utilisateur.commentaires}" var="commentaire" size="#{size}" >
+                <ui:repeat value="#{utilisateur.commentairesDest}" var="commentaire" size="#{size}" >
                     <li class="commentaire">
                         <h:outputText value="#{commentaire.description}"/>
                         <p class="infos">-- #{commentaire.auteur.pseudo}</p>

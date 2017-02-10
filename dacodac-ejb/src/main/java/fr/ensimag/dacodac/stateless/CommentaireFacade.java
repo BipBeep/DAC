@@ -31,25 +31,5 @@ public class CommentaireFacade extends AbstractFacade<Commentaire> implements Co
     public CommentaireFacade() {
         super(Commentaire.class);
     }
-    
-    @Override
-    public List<Commentaire> findByAnnonce(Annonce annonce)
-    {
-        return (List<Commentaire>) getEntityManager().createQuery("SELECT c FROM Commentaire c WHERE c.annonce = :annonce")
-                .setParameter("annonce", annonce).getResultList();
-    }
-    
-    @Override
-    public List<Commentaire> findByAuteur(Utilisateur utilisateur)
-    {
-        return (List<Commentaire>) getEntityManager().createQuery("SELECT c FROM Commentaire c WHERE c.auteur= :utilisateur")
-                .setParameter("utilisateur", utilisateur).getResultList();
-    }
-    
-     @Override
-    public Commentaire findByAuteurAndAnnonce(Utilisateur utilisateur, Annonce annonce)
-    {
-        return (Commentaire) getEntityManager().createQuery("SELECT c FROM Commentaire c WHERE c.auteur= :utilisateur and c.annonce = :annonce")
-                .setParameter("utilisateur", utilisateur).setParameter("annonce", annonce).getResultList().get(0);
-    }
+ 
 }

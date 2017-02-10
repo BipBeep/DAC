@@ -33,7 +33,7 @@
                                     <h3 >Commentaires</h3>
                                     <div class="boite">
                                         <f:view>
-                                            <p:dataTable value="#{consulterProfil.getUtilisateur(pseudo).commentaires}" var="item">
+                                            <p:dataTable value="#{consulterProfil.getUtilisateur(pseudo).commentairesDest}" var="item">
                                                 <p:column>
                                                     <ui:include src = "fragmentCommentaires.xhtml" >
                                                         <ui:param name="commentaire" value="#{item}" />

@@ -56,7 +56,7 @@ public class MesCommentaires {
     private void fill(){
         mesCommentaires = new ArrayList<>();
         Utilisateur u = beanID.getIdentite();
-        mesCommentaires = u.getCommentaires();
+        mesCommentaires = u.getCommentairesDest();
         for(Commentaire c : mesCommentaires){
             System.err.println("\n \n \n c: "+ c.getId() + "\n \n \n");
         }

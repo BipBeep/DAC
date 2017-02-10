@@ -82,6 +82,8 @@ public class Panier implements Serializable {
     }
 
     public void addAnnonce(Annonce annonce) {
+        System.out.println("-------------------------------------------------");
+        System.err.println(annonce);
         String msg;
         if (annonces.add(annonce)) {
             if (annonce.getType() == TypeAnnonce.OFFRE) {
@@ -96,20 +98,28 @@ public class Panier implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public String removeAnnonce(Annonce annonce) {
+    public void test() {
+        String msg="ca marche";
+
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+    
+    public void removeAnnonce(Annonce annonce) {
+        System.err.println("On rentre dans remove Annonce");
         String msg;
         if (annonces.remove(annonce)) {
             if (annonce.getType() == TypeAnnonce.OFFRE) {
                 prixTotal -= annonce.getPrix();
             }
-            msg = "Cette annonce a été supprimée à votre panier";
+            msg = "Cette annonce a été supprimée de votre panier";
         } else {
             msg = "[ERROR] Suppression invalide !";
         }
 
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
-        return "monPanier.xhtml";
+        //return "monPanier.xhtml";
     }
 
     public String validerPanier() throws InterruptedException {
@@ -118,7 +128,7 @@ public class Panier implements Serializable {
             //Utilisateur non connecté
             return "connexion.xhtml";
         } else if (u.getDakos() < prixTotal) {
-            String msg = "Vous ne possédez pas assez de Dakos !!";
+            String msg = "Vous ne possédez pas assez de Dakos !";
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
             FacesContext.getCurrentInstance().addMessage(null, message);
             return null;
@@ -131,6 +141,9 @@ public class Panier implements Serializable {
             }
             annonces.clear();
             prixTotal = 0;
+            /*String msg = "Votre panier a été validé";
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
+            FacesContext.getCurrentInstance().addMessage(null, message);*/
             return "index.xhtml";
         }
     }

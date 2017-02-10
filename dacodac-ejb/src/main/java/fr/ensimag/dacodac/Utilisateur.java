@@ -23,67 +23,71 @@ import javax.validation.constraints.*;
  */
 @Entity
 public class Utilisateur implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @Min(0)
-    @Column(nullable=false)
+    @Column(nullable = false)
     private int dakos = 100;
-    
-    @Pattern(regexp="^[A-Za-z0-9]+$")
-    @Size(min=1, max=63)
-    @Column(unique=true, nullable=false)
+
+    @Pattern(regexp = "^[A-Za-z0-9]+$")
+    @Size(min = 1, max = 63)
+    @Column(unique = true, nullable = false)
     private String pseudo;
-    
-    @Pattern(regexp="^[A-Za-z0-9]+$")
-    @Size(min=8, max=63)
-    @Column(nullable=false)
+
+    @Pattern(regexp = "^[A-Za-z0-9]+$")
+    @Size(min = 8, max = 63)
+    @Column(nullable = false)
     private String password;
-    
-    @Pattern(regexp="^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$")
-    @Column(unique=true, nullable=false)
+
+    @Pattern(regexp = "^[a-z0-9._-]+@[a-z0-9._-]{2,}\\.[a-z]{2,4}$")
+    @Column(unique = true, nullable = false)
     private String email;
-    
-    @Pattern(regexp="^(0[1-9]|[1-8][0-9]|9[1-5])[0-9]{3}$")
-    @Column(nullable=false)
+
+    @Pattern(regexp = "^(0[1-9]|[1-8][0-9]|9[1-5])[0-9]{3}$")
+    @Column(nullable = false)
     private String codePostal;
-    
+
     @Min(13)
     @Max(130)
-    @Column(nullable=false)
+    @Column(nullable = false)
     private int age = 20;
-    
-    @Column(nullable=false)
+
+    @Column(nullable = false)
     private boolean estAdmin = false;
-    
+
     private String description;
-    
-    @OneToMany(mappedBy="auteur", cascade=CascadeType.ALL)
+
+    @OneToMany(mappedBy = "auteur", cascade = CascadeType.ALL)
     private List<Annonce> annonces;
-    
-    @OneToMany(mappedBy="destinataire", cascade=CascadeType.ALL)
-    private List<Commentaire> commentaires;
+
+    @OneToMany(mappedBy = "destinataire", cascade = CascadeType.ALL)
+    private List<Commentaire> commentairesDest;
+
+    @OneToMany(mappedBy = "auteur", cascade = CascadeType.ALL)
+    private List<Commentaire> commentairesAuteur;
 
     public Utilisateur() {
     }
-    
+
     public Utilisateur(int dakos, String pseudo, String password, String email, String codePostal, int age, boolean estAdmin) {
         this.dakos = dakos;
         this.pseudo = pseudo;
-        this.password= password;
+        this.password = password;
         this.email = email;
         this.codePostal = codePostal;
         this.age = age;
         this.estAdmin = estAdmin;
-        
+
         this.description = "";
         this.annonces = new ArrayList<>();
-        this.commentaires = new ArrayList<>();
+        this.commentairesDest = new ArrayList<>();
+        this.commentairesAuteur = new ArrayList<>();
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -107,7 +111,7 @@ public class Utilisateur implements Serializable {
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
-    
+
     public String getPassword() {
         return password;
     }
@@ -115,7 +119,7 @@ public class Utilisateur implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public String getEmail() {
         return email;
     }
@@ -147,7 +151,7 @@ public class Utilisateur implements Serializable {
     public void setEstAdmin(boolean estAdmin) {
         this.estAdmin = estAdmin;
     }
-    
+
     public String getDescription() {
         return description;
     }
@@ -155,7 +159,7 @@ public class Utilisateur implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public List<Annonce> getAnnonces() {
         return annonces;
     }
@@ -164,12 +168,20 @@ public class Utilisateur implements Serializable {
         this.annonces = annonces;
     }
 
-    public List<Commentaire> getCommentaires() {
-        return commentaires;
+    public List<Commentaire> getCommentairesDest() {
+        return commentairesDest;
     }
 
-    public void setCommentaires(List<Commentaire> commentaires) {
-        this.commentaires = commentaires;
+    public void setCommentairesDest(List<Commentaire> commentairesDest) {
+        this.commentairesDest = commentairesDest;
+    }
+
+    public List<Commentaire> getCommentairesAuteur() {
+        return commentairesAuteur;
+    }
+
+    public void setCommentairesAuteur(List<Commentaire> commentairesAuteur) {
+        this.commentairesAuteur = commentairesAuteur;
     }
 
     @Override
@@ -194,11 +206,10 @@ public class Utilisateur implements Serializable {
 
     @Override
     public String toString() {
-        return "Utilisateur[ id=" + id + ", dakos=" + dakos +
-                ", pseudo=" + pseudo + ", email=" + email + ", code postal=" +
-                codePostal + ", age=" + age + ", estAdmin=" + estAdmin +
-                ", a des annonces :" + !annonces.isEmpty() + 
-                ", a des commentaires :" + !commentaires.isEmpty() + "]";
+        return "Utilisateur[ id=" + id + ", dakos=" + dakos
+                + ", pseudo=" + pseudo + ", email=" + email + ", code postal="
+                + codePostal + ", age=" + age + ", estAdmin=" + estAdmin
+                + ", a des annonces :" + !annonces.isEmpty() + "]";
     }
-    
+
 }
