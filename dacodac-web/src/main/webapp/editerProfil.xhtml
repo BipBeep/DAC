@@ -14,57 +14,64 @@
                 <h:outputStylesheet name="css/editerProfil.css"/>
             </ui:define>
             <ui:define name="content">
-                
+
                 <f:metadata>
                     <f:viewParam name="pseudo" value="#{pseudo}"/>
                 </f:metadata>
 
-                <c:if test="#{(not(identification.identite eq null)) and ((identification.identite.estAdmin eq true) or (identification.identite.pseudo eq pseudo))}">
                 <h:form>
-                    <p:panel header="Editer son profil" style = "text-align : center">
+                    <h1>Editer son profil</h1>
+                    <h:panelGrid class="connexion_form" columns="3" cellpadding="5">
+
+                        <h:outputLabel for="pseudo" value="Pseudonyme" />
+                        <h:outputText id="pseudo" value="#{modifierProfil.utilisateur.pseudo}"/>
+                        <p:message for="pseudo" />
+
+                        <h:outputLabel for="email" value="Email:" />
+                        <p:inputText id="email" value="#{modifierProfil.utilisateur.email}" required="true"/>
+                        <p:message for="email"/>
 
 
-                        <h:panelGrid columns="3" cellpadding="5">
-                            <h:outputLabel for="pseudo" value="Pseudonyme" />
-                            <p:inputText id="pseudo" value="#{modifierProfil.getUtilisateur(pseudo).pseudo}" required="true"/>
-                            <p:message for="pseudo" />
+                        <h:outputLabel id="mdp" for="motDePasse" value = "Mot de passe" /> 
 
-                            <h:outputLabel for="email" value="email" />
-                            <p:inputText id="email" value="#{modifierProfil.getUtilisateur(pseudo).email}" required="true"/>
-                            <p:message for="email"/>
+                        <h:panelGrid id="changerMDP" columns="3" cellpadding="5"> 
+                            <h:outputLabel for="ancienMotDePasse" value="Ancien mot de passe" />
+                            <p:password id="ancienMotDePasse" value="#{modifierProfil.ancienMotDePasse}"  />
+                            <p:message for="ancienMotDePasse" />
 
+                            <h:outputLabel for="nouveauMotDePasse1" value="Nouveau mot de passe" />
+                            <p:password id="nouveauMotDePasse1" value="#{modifierProfil.nouveauMotDePasse}" feedback="true">
+                                <f:validateLength minimum="8" />
+                                <f:validateRegex pattern="^[A-Za-z0-9]+$" />
+                            </p:password>
+                            <p:message for="nouveauMotDePasse1"/>
 
-                            <h:outputLabel id="mdp" for="motDePasse" value = "Mot de passe" style="vertical-align: text-top"/> 
-
-                            <h:panelGrid id="changerMDP" columns="3" cellpadding="5"> 
-                                <h:outputLabel for="ancienMotDePasse" value="Ancien mot de passe" />
-                                <p:password id="ancienMotDePasse" value="#{modifierProfil.ancienMotDePasse}"  />
-                                <p:message for="email" />
-
-                                <h:outputLabel for="nouveauMotDePasse1" value="Nouveau mot de passe" />
-                                <p:password id="nouveauMotDePasse1" value="#{modifierProfil.nouveauMotDePasse}" feedback="true" match="nouveauMotdePasse2" />
-                                <p:message for="nouveauMotDePasse1"/>
-
-                                <h:outputLabel for="nouveauMotDePasse2" value="Répéter nouveau mot de passe" />
-                                <p:password id="nouveauMotDePasse2" value="#{modifierProfil.nouveauMotDePasse}" />
-                                <p:message for="nouveauMotDePasse2"/>
-                            </h:panelGrid>
-                            <p:message for="changerMDP"/>
-                            
-                            <h:outputLabel for="text" value="Description :" />
-                            <p:inputTextarea id="description" value="#{modifierProfil.getUtilisateur(pseudo).description}" rows = "6" cols ="33">
-                                <p:clientValidator event="keyup"/>
-                            </p:inputTextarea>
-                            <p:message for="description" />
+                            <h:outputLabel for="nouveauMotDePasse2" value="Répéter nouveau mot de passe" />
+                            <p:password id="nouveauMotDePasse2" value="#{modifierProfil.nouveauMotDePasse2}">
+                                <f:validateLength minimum="8" />
+                                <f:validateRegex pattern="^[A-Za-z0-9]+$" />
+                            </p:password>
+                            <p:message for="nouveauMotDePasse2"/>
                         </h:panelGrid>
+                        <p:message for="changerMDP"/>
 
-                        <p:commandButton value="Valider la modification de profil" action="#{modifierProfil.modificationProfil()}" ajax="false" />
-                    </p:panel>
+                        <h:outputLabel for="text" value="Description :" />
+                        <p:inputTextarea id="description" value="#{modifierProfil.utilisateur.description}" rows = "6" cols ="33">
+                            <p:clientValidator event="keyup"/>
+                        </p:inputTextarea>
+                        <p:message for="description" />
+
+                        <h:outputLabel for="cp" value="Code postal :" />
+                        <p:inputText id="cp" value="#{modifierProfil.utilisateur.codePostal}" />
+                        <p:message for="cp" />
+
+                        <h:outputLabel for="date" value="Age :" />
+                        <h:inputText id = "date" value="#{modifierProfil.utilisateur.age}"/>
+                        <p:message for="date" />
+                    </h:panelGrid>
+
+                    <p:commandButton value="Valider la modification de profil" action="#{modifierProfil.modificationProfil()}" ajax="false" />
                 </h:form>
-                </c:if>
-                <c:if test="#{(identification.identite eq null) or ((identification.identite.estAdmin eq false) and (not(identification.identite.pseudo eq pseudo)))}">
-                    <h:outputText value="Vous n'avez pas accès à cette page."/>
-                </c:if>
             </ui:define>
         </ui:composition>
 

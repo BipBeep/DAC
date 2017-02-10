@@ -50,10 +50,10 @@ public class Utilisateur implements Serializable {
     @Pattern(regexp = "^(0[1-9]|[1-8][0-9]|9[1-5])[0-9]{3}$")
     @Column(nullable = false)
     private String codePostal;
-
-    @Min(13)
-    @Max(130)
-    @Column(nullable = false)
+    
+    @Min(12)
+    @Max(150)
+    @Column(nullable=false)
     private int age = 20;
 
     @Column(nullable = false)

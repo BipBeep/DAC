@@ -6,16 +6,28 @@
 package fr.ensimag.dacodac.controler.utilisateur;
 
 import fr.ensimag.dacodac.Annonce;
+<<<<<<< HEAD
 import fr.ensimag.dacodac.Commentaire;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import fr.ensimag.dacodac.stateless.CommentaireFacadeLocal;
+=======
+import fr.ensimag.dacodac.TypeAnnonce;
+import fr.ensimag.dacodac.Utilisateur;
+import fr.ensimag.dacodac.controler.annonce.DernieresAnnonces;
+import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
+>>>>>>> a0309802df3b70d76f3c8d4fa593fbad72e96ecf
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+<<<<<<< HEAD
 import javax.inject.Inject;
+=======
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+>>>>>>> a0309802df3b70d76f3c8d4fa593fbad72e96ecf
 
 /**
  *
@@ -38,9 +50,7 @@ public class Administrateur {
     @Inject
     private Connecteur connecteur;
 
-    /**
-     * Creates a new instance of SupprimerProfil
-     */
+
     public Administrateur() {
     }
 
@@ -84,5 +94,13 @@ public class Administrateur {
         }
 
         return "index.xhtml";
+    }
+
+    public List<Utilisateur> getUtilisateurs() {
+        return utilisateurFacade.findAll();
+    }
+
+    public void removeAnnonce(Annonce annonce) {
+        annonceFacade.remove(annonce);
     }
 }

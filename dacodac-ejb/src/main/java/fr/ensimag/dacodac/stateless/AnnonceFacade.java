@@ -85,17 +85,21 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
 
     public boolean containsTag(Annonce annonce, List<Tag> tags) {
         boolean trouve = true;
-        if (tags.isEmpty()) {
+        if (tags == null) {
             return trouve;
+        } else if (tags.isEmpty()) {
+            return false;
         } else if (annonce.getTags().isEmpty()) {
             return false;
         } else {
             for (Tag tag : tags) {
                 for (Iterator<Tag> it = annonce.getTags().iterator(); it.hasNext();) {
+                    
                     Tag t = it.next();
                     if (t.getNom().equals(tag.getNom())) {
                         break;
-                    } else if (!it.hasNext()) {
+                    }
+                    if (!it.hasNext()) {
                         trouve = false;
                         break;
                     }
@@ -208,13 +212,10 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         List<Annonce> offres = getOffres();
         List<Annonce> offresCorrespondantes = new ArrayList<>();
         if (offres.isEmpty()) {
-            System.err.println("offres empty");
             return null;
         } else if (tags.isEmpty()) {
-            System.err.println("tags empty");
             return null;
         } else {
-            System.err.println("offres not empty");
             boolean trouve = true;
             for (Annonce offre : offres) {
                 trouve = containsTag(offre, tags);
