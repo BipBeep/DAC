@@ -81,24 +81,14 @@ public class Recherche {
         if (type.equals("Demandes")) {
             typeA = TypeAnnonce.DEMANDE;
         }
-        System.err.println("ici1");
         String[] arrayTags = tags.split(" ");
         List<Tag> listTags = new ArrayList<>();
-        System.err.println("ici2");
-        // A aller chercher en BD
+
         for (String s : arrayTags) {
             Tag t = tagFacade.getTagByName(s);
             if (t != null) {
                 listTags.add(t);
             }
-        }
-        System.err.println("ici3");
-//        listTags.add(tagFacade.getTagByName("tag1"));
-        
-        for (Iterator<Tag> it = listTags.iterator(); it.hasNext();) {
-            Tag t = it.next();
-            System.out.println("-%%%%%%%%%%%%%%%%%%%%%%%%------------------------------");
-            System.out.println(t.getNom());            
         }
         
         if (type.equals("Demandes")) {
@@ -110,9 +100,6 @@ public class Recherche {
             return "offres.xhtml";
         }
 
-//        offres = annonceFacade.findByTags(listTags);
-//        
-//        return "offres.xhtml";
     }
     
     public String getDepartement() {
