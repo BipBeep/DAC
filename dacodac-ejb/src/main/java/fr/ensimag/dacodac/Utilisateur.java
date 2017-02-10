@@ -50,8 +50,8 @@ public class Utilisateur implements Serializable {
     @Column(nullable=false)
     private String codePostal;
     
-    @Min(13)
-    @Max(130)
+    @Min(12)
+    @Max(150)
     @Column(nullable=false)
     private int age = 20;
     
