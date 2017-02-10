@@ -40,7 +40,7 @@ public class Recherche {
     private List<Annonce> offres = null;
     private List<Annonce> demandes = null;
 
-    String tab_depart[] = {"ain", "aisne", "allier", "hautes-alpes", "alpes-de-haute-provence", "alpes-maritimes", "ardeche", "ardennes", "ariege", "aube", "aude", "aveyron", "bouches-du-rhone", "calvados", "cantal", "charente", "charente-maritime", "cher", "correze", "corse-du-sud", "haute-corse", "cote-dor", "cotes-darmor", "creuse", "dordogne", "doubs", "drome", "eure", "eure-et-loir", "finistere", "gard", "haute-garonne", "gers", "gironde", "herault", "ile-et-vilaine", "indre", "indre-et-loire", "isere", "jura", "landes", "loir-et-cher", "loire", "haute-loire", "loire-atlantique", "loiret", "lot", "lot-et-garonne", "lozere", "maine-et-loire", "manche", "marne", "haute-marne", "mayenne", "meurthe-et-moselle", "meuse", "morbihan", "moselle", "nievre", "nord", "oise", "orne", "pas-de-calais", "puy-de-dome", "pyrenees-atlantiques", "hautes-pyrenees", "pyrenees-orientales", "bas-rhin", "haut-rhin", "rhone", "haute-saone", "saone-et-loire", "sarthe", "savoie", "haute-savoie", "paris", "seine-maritime", "seine-et-marne", "yvelines", "deux-sevres", "somme", "tarn", "tarn-et-garonne", "var", "vaucluse", "vendee", "vienne", "haute-vienne", "vosges", "yonne", "territoire-de-belfort", "essonne", "hauts-de-seine", "seine-saint-denis", "val-de-marne", "val-doise", "mayotte", "guadeloupe", "guyane", "martinique", "reunion"};
+    String tab_depart[] = {"ain", "aisne", "allier", "hautes-alpes", "alpes-de-haute-provence", "alpes-maritimes", "ardeche", "ardennes", "ariege", "aube", "aude", "aveyron", "bouches-du-rhone", "calvados", "cantal", "charente", "charente-maritime", "cher", "correze", "corse-du-sud", "haute-corse", "cote-dor", "cotes-darmor", "creuse", "dordogne", "doubs", "drome", "eure", "eure-et-loir", "finistere", "gard", "haute-garonne", "gers", "gironde", "herault", "ile-et-vilaine", "indre", "indre-et-loire", "isere", "jura", "landes", "loir-et-cher", "loire", "haute-loire", "loire-atlantique", "loiret", "lot", "lot-et-garonne", "lozere", "maine-et-loire", "manche", "marne", "haute-marne", "mayenne", "meurthe-et-moselle", "meuse", "morbihan", "moselle", "nievre", "nord", "oise", "orne", "pas-de-calais", "puy-de-dome", "pyrenees-atlantiques", "hautes-pyrenees", "pyrenees-orientales", "bas-rhin", "haut-rhin", "rhone", "haute-saone", "saone-et-loire", "sarthe", "savoie", "haute-savoie", "paris", "seine-maritime", "seine-et-marne", "yvelines", "deux-sevres", "somme", "tarn", "tarn-et-garonne", "var", "vaucluse", "vendee", "vienne", "haute-vienne", "vosges", "yonne", "territoire-de-belfort", "essonne", "hauts-de-seine", "seine-saint-denis", "val-de-marne", "val-doise"};
     private Map<String, String> liste_departs;
 
     Comparator<String> keyComparator = new Comparator<String>() {
@@ -67,7 +67,7 @@ public class Recherche {
         //Création de la liste des départements
         liste_departs = new TreeMap<String, String>(keyComparator);
         String num, code, num_dep;
-        for (int i = 1; i < 101; i++) {
+        for (int i = 1; i < 96; i++) {
             num = Integer.toString(i);
             code = num.concat(" - ");
             num_dep = code.concat(tab_depart[i]);

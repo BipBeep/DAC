@@ -223,13 +223,10 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         List<Annonce> offres = getOffres();
         List<Annonce> offresCorrespondantes = new ArrayList<>();
         if (offres.isEmpty()) {
-            System.err.println("offres empty");
             return null;
         } else if (tags.isEmpty()) {
-            System.err.println("tags empty");
             return null;
         } else {
-            System.err.println("offres not empty");
             boolean trouve = true;
             for (Annonce offre : offres) {
                 trouve = containsTag(offre, tags);
