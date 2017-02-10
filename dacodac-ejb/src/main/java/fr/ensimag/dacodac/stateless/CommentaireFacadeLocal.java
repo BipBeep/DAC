@@ -30,12 +30,5 @@ public interface CommentaireFacadeLocal {
 
     List<Commentaire> findRange(int[] range);
 
-    Commentaire findByAuteurAndAnnonce(Utilisateur utilisateur, Annonce annonce);
-
-    List<Commentaire> findByAnnonce(Annonce annonce);
-
-    List<Commentaire> findByAuteur(Utilisateur utilisateur);
-
     int count();
-
 }

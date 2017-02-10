@@ -24,8 +24,8 @@ public interface UtilisateurFacadeLocal {
 
     void remove(Utilisateur utilisateur);
     
-    void addCommentaire(Utilisateur utilisateur, Commentaire commentaire);
-    
+    void addCommentaire(Commentaire commentaire);
+       
     void addAnnonce(Utilisateur utilisateur, Annonce annonce);
 
     Utilisateur find(Object id);

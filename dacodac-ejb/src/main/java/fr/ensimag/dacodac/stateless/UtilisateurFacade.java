@@ -17,13 +17,11 @@ import javax.persistence.PersistenceContext;
  *
  * @author weschlel
  */
-
 @Stateless
 public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements UtilisateurFacadeLocal {
 
     @PersistenceContext(unitName = "Dacodac_PU")
     private EntityManager em;
-    
 
     @Override
     protected EntityManager getEntityManager() {
@@ -33,28 +31,31 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
     public UtilisateurFacade() {
         super(Utilisateur.class);
     }
-    
+
     @Override
-    public Utilisateur findByPseudo(String pseudo)
-    {
+    public Utilisateur findByPseudo(String pseudo) {
         List<Utilisateur> liste = getEntityManager().createQuery("SELECT u FROM Utilisateur u WHERE u.pseudo LIKE :pseudo")
                 .setParameter("pseudo", pseudo).getResultList();
-        if (liste.isEmpty())
-        {
+        if (liste.isEmpty()) {
             return null;
-        }
-        else
-        {
+        } else {
             return liste.get(0);
         }
     }
 
     @Override
-    public void addCommentaire(Utilisateur utilisateur, Commentaire commentaire) {
-        List<Commentaire> commentaires = utilisateur.getCommentaires();
-        commentaires.add(commentaire);
-        utilisateur.setCommentaires(commentaires);
-        edit(utilisateur);
+    public void addCommentaire(Commentaire commentaire) {
+        Utilisateur destinataire = commentaire.getDestinataire();
+        List<Commentaire> commentairesDest = destinataire.getCommentairesDest();
+        commentairesDest.add(commentaire);
+        destinataire.setCommentairesDest(commentairesDest);
+        edit(destinataire);
+
+        Utilisateur auteur = commentaire.getAuteur();
+        List<Commentaire> commentairesAuteur = auteur.getCommentairesAuteur();
+        commentairesAuteur.add(commentaire);
+        auteur.setCommentairesAuteur(commentairesAuteur);
+        edit(auteur);
     }
 
     @Override
@@ -64,5 +65,5 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
         utilisateur.setAnnonces(annonces);
         edit(utilisateur);
     }
-    
+
 }

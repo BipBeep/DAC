@@ -27,8 +27,6 @@ public interface AnnonceFacadeLocal {
 
     void remove(Annonce annonce);
 
-    void addCommentaire(Annonce annonce, Commentaire com);
-
     Annonce findByUtilAndTitre(Utilisateur u, String titre);
 
     List<Annonce> findLatest(int nbAnnoncesAffichees, TypeAnnonce type);

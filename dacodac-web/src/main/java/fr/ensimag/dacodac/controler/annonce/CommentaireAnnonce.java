@@ -7,53 +7,58 @@ package fr.ensimag.dacodac.controler.annonce;
 
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
+import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
+import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 
 /**
  *
  * @author maubertj
  */
 @Named(value = "commentaireAnnonce")
-@Dependent
+@RequestScoped
 public class CommentaireAnnonce {
+
+    @EJB
+    private UtilisateurFacadeLocal utilisateurFacade;
 
     private Annonce annonce = null;
     private Commentaire commentaire = null;
-
-    @EJB
-    private AnnonceFacadeLocal annonceFacade;
+    private Utilisateur destinataire = null;
+    private Utilisateur auteur = null;
 
     /**
      * Creates a new instance of CommentaireAnnonce
      */
     public CommentaireAnnonce() {
     }
-    
+
     public String laisserCommentaire() {
-        annonceFacade.addCommentaire(getAnnonce(), getCommentaire());
-        annonceFacade.edit(getAnnonce());
+        utilisateurFacade.addCommentaire(getCommentaire());
         return "index.xhtml";
     }
-    
-    public Annonce getAnnonce() {
-        if (annonce == null)
-        {
-            annonce = new Annonce();
-        }
-        return annonce;
-    }
 
-    /**
-     * @return the commentaire
-     */
     public Commentaire getCommentaire() {
-        if (commentaire == null)
-        {
+        if (commentaire == null) {
             commentaire = new Commentaire();
         }
         return commentaire;
+    }
+
+    public Utilisateur getDestinataire() {
+        if (destinataire == null) {
+            destinataire = new Utilisateur();
+        }
+        return destinataire;
+    }
+
+    public Utilisateur getAuteur() {
+        if (auteur == null) {
+            auteur = new Utilisateur();
+        }
+        return auteur;
     }
 }
