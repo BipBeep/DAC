@@ -42,7 +42,7 @@ public class Connecteur {
         }
         catch (NotConnectedException e)
         {
-            //rattraper
+            return null;
         }
         return "index.xhtml";
     }
