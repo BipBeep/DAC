@@ -96,7 +96,8 @@
 .datePublication {
     position: relative;
     right: -70%;
-
+}
+    
 li.commentaire {
     display: block;
     margin-top: 5px;
