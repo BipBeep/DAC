@@ -95,15 +95,17 @@ public class init extends HttpServlet {
             Utilisateur utilisateur4 = new Utilisateur(100, "Nico", "secret00", "kamo@gmail.com", "28301", 22, false);
             Utilisateur utilisateur5 = new Utilisateur(100, "Juju", "secret00", "juju@pl-s.com", "28302", 22, false);
             Utilisateur utilisateur6 = new Utilisateur(400000, "Hillary", "JAimePasLesEmails", "hillary.clinton@defaite.seum", "52147", 98, false);
+            utilisateur1.setDescription("It's going to be America FIRST, AMERICA FIRST!");
+
             utilisateurFacade.create(utilisateur1);
             utilisateurFacade.create(utilisateur2);
             utilisateurFacade.create(utilisateur3);
             utilisateurFacade.create(utilisateur4);
             utilisateurFacade.create(utilisateur5);
             utilisateurFacade.create(utilisateur6);
-            
+
             LocalDate now = LocalDate.now();
-            
+
             //public Annonce(int prix, TypeAnnonce type, Utilisateur auteur, int codePostal, String description, String titre, LocalDateTime datePublication)
             Annonce a1 = new Annonce(11, TypeAnnonce.OFFRE, utilisateur1, "38100", "description de l'offre numéro 1", "titre de l'offre 1", now);
             Annonce a2 = new Annonce(120, TypeAnnonce.OFFRE, utilisateur1, "38200", "description de l'offre numéro 2", "titre de l'offre 2", now.plusDays(1));
@@ -111,20 +113,19 @@ public class init extends HttpServlet {
             Annonce a4 = new Annonce(14, TypeAnnonce.OFFRE, utilisateur2, "38400", "description de l'offre numéro 4", "titre de l'offre 4", now.plusDays(5));
             Annonce a5 = new Annonce(15, TypeAnnonce.OFFRE, utilisateur3, "38500", "description de l'offre numéro 5", "titre de l'offre 5", now.plusDays(3));
             createAnnonce(a1.getAuteur(), a1);
-            List<Tag> listeTags = new ArrayList<>();
+            
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             Tag tag3 = new Tag("tag3");
-            
+
             tagFacade.create(tag1);
             tagFacade.create(tag2);
             tagFacade.create(tag3);
+
+            annonceFacade.addTag(a1, tag1);
+            annonceFacade.addTag(a1, tag2);
+            annonceFacade.addTag(a1, tag3);
             
-            listeTags.add(tag1);
-            listeTags.add(tag2);
-            listeTags.add(tag3);
-            a1.setTags(listeTags);
-            annonceFacade.edit(a1);
             Annonce a6 = new Annonce(6, TypeAnnonce.DEMANDE, utilisateur1, "18100", "description de la demande numéro 6", "titre de la demande 6", now);
             Annonce a7 = new Annonce(7, TypeAnnonce.DEMANDE, utilisateur1, "18200", "description de la demande numéro 7", "titre de la demande 7", now.plusDays(8));
             Annonce a8 = new Annonce(8, TypeAnnonce.DEMANDE, utilisateur4, "19300", "description de la demande numéro 8", "titre de la demande 8", now.plusDays(4));
@@ -139,7 +140,7 @@ public class init extends HttpServlet {
             createAnnonce(a8.getAuteur(), a8);
             createAnnonce(a9.getAuteur(), a9);
             createAnnonce(a10.getAuteur(), a10);
-            
+
             annonceFacade.addPostulant(a1, utilisateur2);
             annonceFacade.addPostulant(a1, utilisateur3); //Des personnes ont postulé à a1
             annonceFacade.edit(a1);
@@ -173,11 +174,12 @@ public class init extends HttpServlet {
             /*Commentaire c = new Commentaire(utilisateur, LocalDateTime.MIN, a, "description");
             commentaireFacade.create(c);
             Commentaire retournes = commentaireFacade.findByAuteurAndAnnonce(utilisateur, a);
-            */
+             */
             processRequest(request, response);
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(init.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     private void createAnnonce(Utilisateur u, Annonce a) {
