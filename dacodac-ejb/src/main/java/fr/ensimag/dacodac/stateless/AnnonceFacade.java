@@ -39,14 +39,6 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
     }
 
     @Override
-    public void addCommentaire(Annonce annonce, Commentaire com) {
-        List<Commentaire> commentaires = annonce.getCommentaires();
-        commentaires.add(com);
-        annonce.setCommentaires(commentaires);
-        edit(annonce);
-    }
-
-    @Override
     public void addPostulant(Annonce annonce, Utilisateur utilisateur) {
         List<Utilisateur> postulants = annonce.getPostulants();
         postulants.add(utilisateur);
@@ -127,7 +119,6 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             boolean trouve = true;
             for (Annonce annonce : annonces) {
                 trouve = containsTag(annonce, tags);
-
                 if (trouve) {
                     annoncesCorrespondantes.add(annonce);
                 }
@@ -347,9 +338,10 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         List<Annonce> result = (List<Annonce>) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.type = :type ORDER BY a.datePublication")
                 .setParameter("type", type).getResultList();
 
-        if (!result.isEmpty()) {
+        if (result.size() > nbAnnoncesAffichees) {
             return result.subList(0, nbAnnoncesAffichees);
         }
+
         return result;
     }
 

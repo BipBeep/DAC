@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -75,8 +76,6 @@ public class Annonce implements Serializable {
     @Column(nullable = false)
     private boolean serviceRendu_contracteur;
     
-    @OneToMany
-    private List<Commentaire> commentaires;
     
     // LIMITER A 5 TAGS
     @ManyToMany
@@ -95,7 +94,6 @@ public class Annonce implements Serializable {
         this.datePublication = datePublication;
         estValidee = false;
         postulants = new ArrayList<>();
-        commentaires = new ArrayList<>();
         tags = new ArrayList<>();
     }  
   
@@ -155,14 +153,6 @@ public class Annonce implements Serializable {
 
     public void setPostulants(List<Utilisateur> postulants) {
         this.postulants = postulants;
-    }
-
-    public List<Commentaire> getCommentaires() {
-        return commentaires;
-    }
-
-    public void setCommentaires(List<Commentaire> commentaires) {
-        this.commentaires = commentaires;
     }
 
     public Utilisateur getAuteur() {
