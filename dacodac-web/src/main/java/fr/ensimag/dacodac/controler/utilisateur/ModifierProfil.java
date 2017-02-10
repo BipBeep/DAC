@@ -7,6 +7,7 @@ package fr.ensimag.dacodac.controler.utilisateur;
 
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
+import java.security.NoSuchAlgorithmException;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -51,7 +52,7 @@ public class ModifierProfil {
 //        utilisateur = utilisateurFacade.findByPseudo(pseudo);
 //    }
 
-    public String modificationProfil() {
+    public String modificationProfil() throws NoSuchAlgorithmException {
         //Gestion du mot de passe
         /*if ((!nouveauMotDePasse.equals(null)) && ancienMotDePasse.equals(utilisateur.getPassword())) {
             System.err.println("I'm in!");
@@ -60,7 +61,10 @@ public class ModifierProfil {
         System.out.println("-----------------------------------------------------");
         if (!nouveauMotDePasse.equals("")) {
             System.err.println("le nouveau mdp est non null");
+            
+            ancienMotDePasse = Crypting.crypt(ancienMotDePasse);
             if (nouveauMotDePasse.equals(getNouveauMotDePasse2()) && (ancienMotDePasse.equals(getUtilisateur().getPassword()))) {
+                nouveauMotDePasse = Crypting.crypt(nouveauMotDePasse);
                 System.err.println("je set le mdp");
                 getUtilisateur().setPassword(nouveauMotDePasse);
             }

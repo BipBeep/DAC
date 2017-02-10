@@ -11,6 +11,8 @@ import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 
 /**
@@ -36,9 +38,11 @@ public class Identification implements Serializable {
         return identite;
     }
 
-    public void setIdentite(String pseudo, String mdp) throws NotConnectedException {
+    public void setIdentite(String pseudo, String mdp) throws NotConnectedException, NoSuchAlgorithmException {
         Utilisateur u = null;
         u = utilisateurFacade.findByPseudo(pseudo);
+        
+        mdp = Crypting.crypt(mdp);
         
         if((u != null) && (u.getPassword().equals(mdp)))
         {
