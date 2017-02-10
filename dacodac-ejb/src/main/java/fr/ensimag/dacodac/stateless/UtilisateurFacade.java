@@ -48,17 +48,13 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
             return liste.get(0);
         }
     }
-    
-    @Override
-    public void modifyUser() {
-        getEntityManager().createQuery("UPDATE Utilisateur SET dakos = 100 WHERE id = 2");
-    }
 
     @Override
     public void addCommentaire(Utilisateur utilisateur, Commentaire commentaire) {
         List<Commentaire> commentaires = utilisateur.getCommentaires();
         commentaires.add(commentaire);
         utilisateur.setCommentaires(commentaires);
+        edit(utilisateur);
     }
 
     @Override
@@ -66,6 +62,7 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
         List<Annonce> annonces = utilisateur.getAnnonces();
         annonces.add(annonce);
         utilisateur.setAnnonces(annonces);
+        edit(utilisateur);
     }
     
 }

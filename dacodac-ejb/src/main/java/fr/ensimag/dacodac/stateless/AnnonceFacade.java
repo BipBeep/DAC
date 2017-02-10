@@ -43,6 +43,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         List<Commentaire> commentaires = annonce.getCommentaires();
         commentaires.add(com);
         annonce.setCommentaires(commentaires);
+        edit(annonce);
     }
 
     @Override
@@ -50,6 +51,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         List<Utilisateur> postulants = annonce.getPostulants();
         postulants.add(utilisateur);
         annonce.setPostulants(postulants);
+        edit(annonce);
     }
 
     @Override
@@ -57,11 +59,13 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         List<Tag> tags = annonce.getTags();
         tags.add(tag);
         annonce.setTags(tags);
+        edit(annonce);
     }
 
     @Override
     public void modifierType(Annonce annonce, TypeAnnonce type) {
         annonce.setType(type);
+        edit(annonce);
     }
 
     @Override
@@ -69,6 +73,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         List<Utilisateur> postulants = annonce.getPostulants();
         postulants.remove(utilisateur);
         annonce.setPostulants(postulants);
+        edit(annonce);
     }
 
     @Override
@@ -83,8 +88,9 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         } else {
             //L'utilisateur rentré n'est pas dans la liste des postulants.
         }
+        edit(annonce);
     }
-    
+
     public boolean containsTag(Annonce annonce, List<Tag> tags) {
         boolean trouve = true;
         if (tags == null) {
@@ -110,12 +116,12 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
                 }
             }
             return trouve;
-        } 
+        }
     }
 
     @Override
     public List<Annonce> findByTags(List<Tag> tags) {
-        List<Annonce> annonces = findAll();       
+        List<Annonce> annonces = findAll();
         List<Annonce> annoncesCorrespondantes = new ArrayList<>();
         if (annonces.isEmpty()) {
             return null;
@@ -123,7 +129,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             boolean trouve = true;
             for (Annonce annonce : annonces) {
                 trouve = containsTag(annonce, tags);
-                
+
                 if (trouve) {
                     annoncesCorrespondantes.add(annonce);
                 }
@@ -134,8 +140,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             return annoncesCorrespondantes;
         }
     }
-    
-        
+
     public boolean bonDepartement(Annonce annonce, String codeDepart) {
         if (codeDepart.equals("")) {
             return true;
@@ -146,10 +151,10 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             return false;
         }
     }
-    
+
     @Override
     public List<Annonce> findByTagsAndDepartement(List<Tag> tags, String codeDepart) {
-        List<Annonce> annonces = findAll();       
+        List<Annonce> annonces = findAll();
         List<Annonce> annoncesCorrespondantes = new ArrayList<>();
         if (annonces.isEmpty()) {
             return null;
@@ -157,7 +162,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             boolean trouve = true;
             for (Annonce annonce : annonces) {
                 trouve = containsTag(annonce, tags) && bonDepartement(annonce, codeDepart);
-                
+
                 if (trouve) {
                     annoncesCorrespondantes.add(annonce);
                 }
@@ -168,10 +173,10 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             return annoncesCorrespondantes;
         }
     }
-    
+
     @Override
     public List<Annonce> findOffresByTagsAndDepartement(List<Tag> tags, String codeDepart) {
-        List<Annonce> offres = getOffres();       
+        List<Annonce> offres = getOffres();
         List<Annonce> offresCorrespondantes = new ArrayList<>();
         if (offres.isEmpty()) {
             return offresCorrespondantes;
@@ -179,7 +184,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             boolean trouve = true;
             for (Annonce offre : offres) {
                 trouve = containsTag(offre, tags) && bonDepartement(offre, codeDepart);
-                
+
                 if (trouve) {
                     offresCorrespondantes.add(offre);
                 }
@@ -190,10 +195,10 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             return offresCorrespondantes;
         }
     }
-    
+
     @Override
     public List<Annonce> findDemandesByTagsAndDepartement(List<Tag> tags, String codeDepart) {
-        List<Annonce> demandes = getDemandes();       
+        List<Annonce> demandes = getDemandes();
         List<Annonce> demandesCorrespondantes = new ArrayList<>();
         if (demandes.isEmpty()) {
             return demandesCorrespondantes;
@@ -201,7 +206,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             boolean trouve = true;
             for (Annonce demande : demandes) {
                 trouve = containsTag(demande, tags) && bonDepartement(demande, codeDepart);
-                
+
                 if (trouve) {
                     demandesCorrespondantes.add(demande);
                 }
@@ -212,12 +217,10 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             return demandesCorrespondantes;
         }
     }
-    
 
-    
     @Override
     public List<Annonce> findOffresByTags(List<Tag> tags) {
-        List<Annonce> offres = getOffres();       
+        List<Annonce> offres = getOffres();
         List<Annonce> offresCorrespondantes = new ArrayList<>();
         if (offres.isEmpty()) {
             System.err.println("offres empty");
@@ -229,7 +232,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             System.err.println("offres not empty");
             boolean trouve = true;
             for (Annonce offre : offres) {
-                trouve = containsTag(offre, tags);                 
+                trouve = containsTag(offre, tags);
                 if (trouve) {
                     offresCorrespondantes.add(offre);
                 }
@@ -243,14 +246,14 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
 
     @Override
     public List<Annonce> findDemandesByTags(List<Tag> tags) {
-        List<Annonce> demandes = getDemandes();       
+        List<Annonce> demandes = getDemandes();
         List<Annonce> demandesCorrespondantes = new ArrayList<>();
         if (demandes.isEmpty()) {
             return null;
         } else {
             boolean trouve = true;
             for (Annonce demande : demandes) {
-                trouve = containsTag(demande, tags);                 
+                trouve = containsTag(demande, tags);
                 if (trouve) {
                     demandesCorrespondantes.add(demande);
                 }
@@ -261,7 +264,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
             return demandesCorrespondantes;
         }
     }
-    
+
     @Override
     public List<Annonce> findByDepartement(List<Annonce> annonces, String departement) {
         if (annonces == null) {
@@ -318,6 +321,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         } else {
             annonce.setServiceRendu_contracteur(realise);
         }
+        edit(annonce);
     }
 
     @Override
@@ -334,8 +338,13 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
 
     @Override
     public Annonce findByUtilAndTitre(Utilisateur u, String titre) {
-        return (Annonce) getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.titre LIKE :titre and a.auteur = :auteur")
-                .setParameter("titre", titre).setParameter("auteur", u).getResultList().get(0);
+        List<Annonce> liste = getEntityManager().createQuery("SELECT a FROM Annonce a WHERE a.titre LIKE :titre and a.auteur = :auteur")
+                .setParameter("titre", titre).setParameter("auteur", u).getResultList();
+        if (liste.isEmpty()) {
+            return null;
+        } else {
+            return liste.get(0);
+        }
     }
 
     @Override
