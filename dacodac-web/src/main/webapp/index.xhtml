@@ -22,8 +22,8 @@
                             <p:dataTable value="#{dernieresAnnonces.dernieresOffres()}" var="offre">
                                 <p:column>
                                     <ui:include src = "fragment.xhtml" >
-                                            <ui:param name="annonce" value="#{offre}" />
-                                        </ui:include>
+                                        <ui:param name="annonce" value="#{offre}" />
+                                    </ui:include>
                                 </p:column>
                             </p:dataTable>
                         </f:view>
@@ -34,8 +34,8 @@
                             <p:dataTable value="#{dernieresAnnonces.dernieresDemandes()}" var="demande">
                                 <p:column>
                                     <ui:include src = "fragment.xhtml" >
-                                            <ui:param name="annonce" value="#{demande}" />
-                                        </ui:include>
+                                        <ui:param name="annonce" value="#{demande}" />
+                                    </ui:include>
                                 </p:column>
                             </p:dataTable>
                         </f:view>
