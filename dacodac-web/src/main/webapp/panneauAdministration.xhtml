@@ -54,7 +54,7 @@
                                 <p:column>
                                     <h:form>
                                         <p:growl id="growl" life="5000" />
-                                        <p:commandButton class="trash" action="#{panier.removeAnnonce(demande)}" update="growl" icon="ui-icon-trash" ajax="false" />
+                                        <p:commandButton class="trash" action="#{administrateur.removeAnnonce(demande)}" update="growl" icon="ui-icon-trash" ajax="false" />
                                     </h:form>
                                 </p:column>
                             </p:dataTable>
@@ -67,7 +67,7 @@
                                 <ui:param name="nom" value="utilisateur" />
                             </ui:include>
                             <p:dataTable value="#{administrateur.utilisateurs}" var="utilisateur">
-                                <p:column style="width: 70%">
+                                <p:column>
                                     <ui:include src = "fragmentAdmin.xhtml" >
                                         <ui:param name="utilisateur" value="#{utilisateur}" />
                                     </ui:include>

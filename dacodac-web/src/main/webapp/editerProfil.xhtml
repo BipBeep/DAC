@@ -55,6 +55,14 @@
                         </h:panelGrid>
                         <p:message for="changerMDP"/>
 
+                        <c:if test="#{not (identification.identite eq null)}">
+                            <c:if test="#{(identification.identite.estAdmin eq true)}">
+                                <h:outputLabel for="dakos" value="Dakos :" />
+                                <h:inputText id = "dakos" value="#{modifierProfil.utilisateur.dakos}"/>
+                                <p:message for="dakos" />
+                            </c:if>    
+                        </c:if>
+
                         <h:outputLabel for="text" value="Description :" />
                         <p:inputTextarea id="description" value="#{modifierProfil.utilisateur.description}" rows = "6" cols ="33">
                             <p:clientValidator event="keyup"/>
