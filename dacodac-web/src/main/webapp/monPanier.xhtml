@@ -19,38 +19,38 @@
                     <div class="block">
                         <h2> Offres </h2>
                         <f:view>
-                            <p:dataTable value="#{panier.getOffres()}" var="offre">
-                                <p:column style="width: 85%">
-                                    <ui:include src = "fragment.xhtml" >
-                                        <ui:param name="annonce" value="#{offre}" />
-                                    </ui:include>
-                                </p:column>
-                                <p:column>
-                                    <h:form>
-                                        <p:growl id="growl" life="5000" />
-                                        <p:commandButton action="#{panier.removeAnnonce(offre)}" update="growl" icon="ui-icon-trash" ajax="false" />
-                                    </h:form>
-                                </p:column>
-                            </p:dataTable>
+                            <h:form>
+                                <p:growl id="growl" life="3000" />
+                                <p:dataTable id="offres" value="#{panier.getOffres()}" var="offre">
+                                    <p:column style="width: 85%">
+                                        <ui:include src = "fragment.xhtml" >
+                                            <ui:param name="annonce" value="#{offre}" />
+                                        </ui:include>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton actionListener="#{panier.removeAnnonce(offre)}" update=":#{p:component('growl')} offres" icon="ui-icon-trash" />                                        
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
                         </f:view>
                     </div>
 
                     <div class="block">
                         <h2> Demandes </h2>
                         <f:view>
-                            <p:dataTable value="#{panier.getDemandes()}" var="demande">
-                                <p:column style="width: 85%">
-                                    <ui:include src = "fragment.xhtml" >
-                                        <ui:param name="annonce" value="#{demande}" />
-                                    </ui:include>
-                                </p:column>
-                                <p:column>
-                                    <h:form>
-                                        <p:growl id="growl" life="5000" />
-                                        <p:commandButton action="#{panier.removeAnnonce(demande)}" update="growl" icon="ui-icon-trash" ajax="false" />
-                                    </h:form>
-                                </p:column>
-                            </p:dataTable>
+                            <h:form>
+                                <p:growl id="growl" life="3000" />
+                                <p:dataTable id="demandes" value="#{panier.getDemandes()}" var="demande">
+                                    <p:column style="width: 85%">
+                                        <ui:include src = "fragment.xhtml" >
+                                            <ui:param name="annonce" value="#{demande}" />
+                                        </ui:include>
+                                    </p:column>
+                                    <p:column>
+                                        <p:commandButton actionListener="#{panier.removeAnnonce(demande)}" update=":#{p:component('growl')} demandes" icon="ui-icon-trash" />
+                                    </p:column>
+                                </p:dataTable>
+                            </h:form>
                         </f:view>
                     </div>
                 </div>
