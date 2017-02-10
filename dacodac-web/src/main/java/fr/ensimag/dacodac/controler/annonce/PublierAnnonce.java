@@ -83,15 +83,17 @@ public class PublierAnnonce {
         annonce.setDatePublication(LocalDate.now());
         annonce.setAuteur(u);
         annonceFacade.create(getAnnonce());
-        String[] arrayTags = tags.split(" ");
-        
-        for (String s : arrayTags) {
-            Tag t = tagFacade.getTagByName(s);
-            if (t == null) {
-                tagFacade.create(new Tag(s));
+        if (!tags.isEmpty()) {
+            String[] arrayTags = tags.split(" ");
+
+            for (String s : arrayTags) {
+                Tag t = tagFacade.getTagByName(s);
+                if (t == null) {
+                    tagFacade.create(new Tag(s));
+                }
+                Tag tag = tagFacade.getTagByName(s);
+                annonceFacade.addTag(getAnnonce(), tag);
             }
-            Tag tag = tagFacade.getTagByName(s);
-            annonceFacade.addTag(getAnnonce(), tag);
         }
 
         annonceFacade.edit(getAnnonce());

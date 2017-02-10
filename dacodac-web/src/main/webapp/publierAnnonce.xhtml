@@ -38,7 +38,7 @@
                                 <h:outputLabel for="tags" value="Tags" />
                             </p:column>  
                             <p:column>  
-                                <p:inputText value="#{publierAnnonce.tags}" id="tags" required="true">
+                                <p:inputText value="#{publierAnnonce.tags}" id="tags">
                                     <f:validateLength />
                                     <p:clientValidator />
                                 </p:inputText>
@@ -76,12 +76,12 @@
                                 <h:outputLabel for="prix" value="Prix (en dakos)" />
                             </p:column>  
                             <p:column>  
-                                <p:inputText id="prix" value="#{publierAnnonce.annonce.prix}">
+                                <p:inputText id="prix" size="5" value="#{publierAnnonce.annonce.prix}" required="true">
                                     <p:clientValidator event="keyup"/>
                                 </p:inputText>
                             </p:column>  
                             <p:column>  
-                                <p:message for="prix" display="icon" />
+                                <p:message for="prix" display="icon" value="Veuillez entrer un prix (non négatif)"/>
                             </p:column>  
                         </p:row>
                         <p:row>  

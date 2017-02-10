@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     
     <body> 
@@ -12,9 +13,18 @@
                 <p:menuitem value="Accueil" outcome="/index.xhtml" id="accueil" icon="ui-icon-home">
                     <f:param name="i" value="0" />
                 </p:menuitem>
-                <p:menuitem value="Publier une annonce" outcome="/publierAnnonce.xhtml" icon="ui-icon-document">
-                    <f:param name="i" value="1" />
-                </p:menuitem>
+                <c:choose>
+                    <c:when test="#{(identification.identite eq null)}">
+                        <p:menuitem value="Publier une annonce" outcome="/connexion.xhtml" icon="ui-icon-document">
+                            <f:param name="i" value="1" />
+                        </p:menuitem>
+                    </c:when>
+                    <c:otherwise>
+                        <p:menuitem value="Publier une annonce" outcome="/publierAnnonce.xhtml" icon="ui-icon-document">
+                            <f:param name="i" value="1" />
+                        </p:menuitem>
+                    </c:otherwise>
+                </c:choose>
                 <p:menuitem value="Offres" outcome="/offres.xhtml" icon="ui-icon-search">
                     <f:param name="i" value="2" />
                 </p:menuitem>
