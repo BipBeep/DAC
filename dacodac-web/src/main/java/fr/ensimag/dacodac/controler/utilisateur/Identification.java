@@ -11,7 +11,6 @@ import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 

@@ -43,7 +43,7 @@ public class Connecteur {
         }
         catch (NotConnectedException e)
         {
-            //rattraper
+            return "deconnexion.xhtml";
         }
         return "index.xhtml";
     }
