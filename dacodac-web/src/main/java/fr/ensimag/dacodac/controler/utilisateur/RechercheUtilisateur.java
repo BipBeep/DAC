@@ -43,8 +43,6 @@ public class RechercheUtilisateur {
      * Creates a new instance of Recherche
      */
     public RechercheUtilisateur() {
-        //Création de la liste des départements
-        //liste_departs = new TreeMap<String, String>(keyComparator);
      
     }
     
