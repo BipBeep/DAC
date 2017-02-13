@@ -59,7 +59,7 @@ public class ModifierProfil {
             utilisateur.setPassword(nouveauMotDePasse);
         }*/
         System.out.println("-----------------------------------------------------");
-        if (!nouveauMotDePasse.equals("")) {
+        if (!ancienMotDePasse.equals("")) {
             System.err.println("le nouveau mdp est non null");
             
             ancienMotDePasse = Crypting.crypt(ancienMotDePasse);
