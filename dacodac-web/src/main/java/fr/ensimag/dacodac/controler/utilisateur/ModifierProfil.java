@@ -14,6 +14,8 @@ import javax.enterprise.context.RequestScoped;
 
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 /**
@@ -52,28 +54,39 @@ public class ModifierProfil {
 //        utilisateur = utilisateurFacade.findByPseudo(pseudo);
 //    }
 
-    public String modificationProfil() throws NoSuchAlgorithmException {
+    public void modificationProfil() throws NoSuchAlgorithmException {
         //Gestion du mot de passe
         /*if ((!nouveauMotDePasse.equals(null)) && ancienMotDePasse.equals(utilisateur.getPassword())) {
             System.err.println("I'm in!");
             utilisateur.setPassword(nouveauMotDePasse);
         }*/
-        System.out.println("-----------------------------------------------------");
-        if (!ancienMotDePasse.equals("")) {
-            System.err.println("le nouveau mdp est non null");
-            
-            ancienMotDePasse = Crypting.crypt(ancienMotDePasse);
-            if (nouveauMotDePasse.equals(getNouveauMotDePasse2()) && (ancienMotDePasse.equals(getUtilisateur().getPassword()))) {
-                nouveauMotDePasse = Crypting.crypt(nouveauMotDePasse);
-                System.err.println("je set le mdp");
-                getUtilisateur().setPassword(nouveauMotDePasse);
+        String msg = "";
+        if (ancienMotDePasse.equals("") && nouveauMotDePasse.equals("") && nouveauMotDePasse2.equals("")) {
+            //Pas besoin de toucher aux mdp. mais on edit le reste.
+            msg = "Le profil a été édité";
+            utilisateurFacade.edit(getUtilisateur());
+        } else if (ancienMotDePasse.equals("") || nouveauMotDePasse.equals("") || nouveauMotDePasse2.equals("")) {
+            //1 est null, on lui dit de recommencer.
+            msg = "Il faut entrer les 3 mots de passe. Profil non modifié";
+        } else {
+            //les 3 sont remplis. on edit peut etre le mdp.
+            if (nouveauMotDePasse.length() < 8) {
+                msg = "Le nouveau mot de passe entré est trop court (8 caracteres minimium). Profil non modifié";
+            } else {
+                ancienMotDePasse = Crypting.crypt(ancienMotDePasse);
+                if (nouveauMotDePasse.equals(getNouveauMotDePasse2()) && (ancienMotDePasse.equals(getUtilisateur().getPassword()))) {
+                    nouveauMotDePasse = Crypting.crypt(nouveauMotDePasse);
+                    System.err.println("je set le mdp");
+                    getUtilisateur().setPassword(nouveauMotDePasse);
+                    msg = "Le profil a été édité";
+                    utilisateurFacade.edit(getUtilisateur());
+                } else {
+                    msg = "Un des mots de passe entrés est mauvais. Profil non modifié";
+                }
             }
-            
         }
-        System.err.println("Je sors des 2 ifs, et j'edit le profil");
-        utilisateurFacade.edit(getUtilisateur());
-        System.err.println("done");
-        return "index.xhtml";
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     public String getNouveauMotDePasse() {
