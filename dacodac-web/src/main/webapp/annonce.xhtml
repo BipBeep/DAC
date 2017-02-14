@@ -18,7 +18,8 @@
             </f:metadata>
 
             <ui:define name="content">
-                <p:panelGrid id="frame">
+
+                <p:panelGrid id ="frame">
                     <p:row id="tableau">
                         <p:column id="colonneAnnonce">
                             <p:panelGrid id="annonce">
@@ -74,6 +75,7 @@
                     </p:row> 
                 </p:panelGrid>
 
+
                 <h:form rendered="#{(((identification.identite eq annoncePublic.getAnnonce(id).auteur) and annoncePublic.getAnnonce(id).serviceRendu_auteur eq false)
                                     or (identification.identite eq annoncePublic.getAnnonce(id).postulants.get(0)) and annoncePublic.getAnnonce(id).serviceRendu_contracteur eq false)
                                     and (annoncePublic.getAnnonce(id).estValidee eq true)}">
@@ -87,6 +89,7 @@
                     <h:commandButton class="green" value="Oui" action="#{annoncePublic.serviceRendu()}" />
                     
                 </h:form>
+
 
 
                 <h:form rendered="#{((identification.identite eq annoncePublic.getAnnonce(id).auteur) eq true) and (annoncePublic.getAnnonce(id).estValidee eq false)}">
@@ -108,6 +111,7 @@
                     </p:dataTable>
                 </h:form>
 
+                
                 <div id="validation">
                     <h:form rendered="#{((identification.identite eq annoncePublic.getAnnonce(id).auteur) eq false) and (annoncePublic.getAnnonce(id).estValidee eq false)}">
                         <p:growl id="growl" life="50" />
