@@ -73,7 +73,11 @@ public class AnnoncePublic implements Serializable {
         } else {
             annonce.setServiceRendu_contracteur(true);
         }
-        return "laisserCommentaire.xhtml";
+        annonceFacade.edit(annonce);
+        if (annonce.getServiceRendu_auteur() && annonce.getServiceRendu_contracteur()) {
+            annonceFacade.remove(annonce);
+        }
+        return "index.xhtml";
     }
 
 }
