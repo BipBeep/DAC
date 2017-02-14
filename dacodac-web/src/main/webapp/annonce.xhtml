@@ -18,7 +18,7 @@
             </f:metadata>
 
             <ui:define name="content">
-
+                <p:panelGrid id ="frame">
                 
                     <p:row id="tableau">
                         <p:column id="colonneAnnonce">
@@ -75,7 +75,7 @@
                         </p:column>
 
                     </p:row> 
-
+                </p:panelGrid>
                     <!--Si l'annonce n'est pas encore validée-->
                     <c:set var="bool" value ="" />
                     <p:row rendered="#{(identification.identite eq annoncePublic.getAnnonce(id).auteur) 
