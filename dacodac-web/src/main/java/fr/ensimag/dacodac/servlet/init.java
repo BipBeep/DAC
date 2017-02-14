@@ -199,16 +199,37 @@ public class init extends HttpServlet {
             annonceFacade.accepterPostulant(a9, utilisateur1);//U1 sera validé pour a9
 
             // ANNONCES TERMINEES !!! NON PRESENTES EN BASE !!!!
-            Annonce old1 = new Annonce(85, TypeAnnonce.DEMANDE, utilisateur2, "18800", "description de la demande numéro old1", "titre de la demande old1", now.plusDays(18));
-            Annonce old2 = new Annonce(81, TypeAnnonce.OFFRE, utilisateur4, "18900", "description de l'offre numéro old2", "titre de l'offre old2", now.plusDays(19));
-
+            Annonce old1 = new Annonce(81, TypeAnnonce.DEMANDE, utilisateur2, "18800", "description de la demande numéro old1", "titre de la demande old1", now.plusDays(18));
+            Annonce old2 = new Annonce(82, TypeAnnonce.OFFRE, utilisateur4, "18900", "description de l'offre numéro old2", "titre de l'offre old2", now.plusDays(19));
+            Annonce old3 = new Annonce(83, TypeAnnonce.DEMANDE, utilisateur3, "19000", "description de la demande numéro old3", "titre de la demande old3", now.plusDays(20));
+            Annonce old4 = new Annonce(84, TypeAnnonce.OFFRE, utilisateur7, "19100", "description de l'offre numéro old4", "titre de l'offre old4", now.plusDays(21));
+            Annonce old5 = new Annonce(85, TypeAnnonce.DEMANDE, utilisateur4, "19200", "description de la demande numéro old5", "titre de la demande old5", now.plusDays(22));
+            
             Commentaire commentaire1 = new Commentaire(utilisateur1, old1.getAuteur(), LocalDate.now(), "Je suis " + utilisateur1.getPseudo() + " auteur de ce commentaire et il est destiné à " + old1.getAuteur().getPseudo(), old1.getTitre());
-            commentaireFacade.create(commentaire1);
-            utilisateurFacade.addCommentaire(commentaire1);
-
             Commentaire commentaire2 = new Commentaire(utilisateur3, old2.getAuteur(), LocalDate.now(), "Je suis " + utilisateur3.getPseudo() + " auteur de ce commentaire et il est destiné à " + old2.getAuteur().getPseudo(), old2.getTitre());
+            Commentaire commentaire3 = new Commentaire(utilisateur5, old3.getAuteur(), LocalDate.now(), "Je suis " + utilisateur5.getPseudo() + " auteur de ce commentaire et il est destiné à " + old3.getAuteur().getPseudo(), old3.getTitre());
+            Commentaire commentaire4 = new Commentaire(utilisateur4, old4.getAuteur(), LocalDate.now(), "Je suis " + utilisateur4.getPseudo() + " auteur de ce commentaire et il est destiné à " + old4.getAuteur().getPseudo(), old4.getTitre());
+            Commentaire commentaire5 = new Commentaire(utilisateur1, old5.getAuteur(), LocalDate.now(), "Je suis " + utilisateur1.getPseudo() + " auteur de ce commentaire et il est destiné à " + old5.getAuteur().getPseudo(), old5.getTitre());
+            Commentaire commentaire6 = new Commentaire(utilisateur2, old4.getAuteur(), LocalDate.now(), "Je suis " + utilisateur2.getPseudo() + " auteur de ce commentaire et il est destiné à " + old4.getAuteur().getPseudo(), old4.getTitre());
+            Commentaire commentaire7 = new Commentaire(utilisateur7, old2.getAuteur(), LocalDate.now(), "Je suis " + utilisateur7.getPseudo() + " auteur de ce commentaire et il est destiné à " + old2.getAuteur().getPseudo(), old2.getTitre());
+            Commentaire commentaire8 = new Commentaire(utilisateur6, old3.getAuteur(), LocalDate.now(), "Je suis " + utilisateur6.getPseudo() + " auteur de ce commentaire et il est destiné à " + old3.getAuteur().getPseudo(), old3.getTitre());
+            
+            commentaireFacade.create(commentaire1);
             commentaireFacade.create(commentaire2);
+            commentaireFacade.create(commentaire3);
+            commentaireFacade.create(commentaire4);
+            commentaireFacade.create(commentaire5);
+            commentaireFacade.create(commentaire6);
+            commentaireFacade.create(commentaire7);
+            commentaireFacade.create(commentaire8);
+            utilisateurFacade.addCommentaire(commentaire1);
             utilisateurFacade.addCommentaire(commentaire2);
+            utilisateurFacade.addCommentaire(commentaire3);
+            utilisateurFacade.addCommentaire(commentaire4);
+            utilisateurFacade.addCommentaire(commentaire5);
+            utilisateurFacade.addCommentaire(commentaire6);
+            utilisateurFacade.addCommentaire(commentaire7);
+            utilisateurFacade.addCommentaire(commentaire8);
 
             annonceFacade.serviceRendu(true, a2, utilisateur1);
             annonceFacade.serviceRendu(true, a2, utilisateur6);
