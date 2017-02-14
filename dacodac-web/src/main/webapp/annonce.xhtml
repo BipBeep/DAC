@@ -121,8 +121,11 @@
                     </h:form>
                 </div>
 
-
-
+                <div id="edition">
+                <p:button value="Modifier l'annonce" style="margin-top:20px" outcome="/modifierAnnonce.xhtml">
+                    <f:param name="pseudo" value="#{pseudo}"/>
+                </p:button>
+                </div>
             </ui:define>
         </ui:composition>
     </body>
