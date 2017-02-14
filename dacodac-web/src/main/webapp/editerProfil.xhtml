@@ -16,19 +16,20 @@
             <ui:define name="content">
 
                 <f:metadata>
-                    <f:viewParam name="pseudo" value="#{pseudo}"/>
+                    <f:viewParam name="pseudo" value="#{pseudo}" for="pseudo" id="pseudo"/>
                 </f:metadata>
-
+                
+                
                 <h:form>
                     <h1>Editer son profil</h1>
                     <h:panelGrid class="connexion_form" columns="3" cellpadding="5">
 
                         <h:outputLabel for="pseudo" value="Pseudonyme" />
-                        <h:outputText id="pseudo" value="#{modifierProfil.utilisateur.pseudo}"/>
+                        <h:outputText id="pseudo" value="#{modifierProfil.getUtilisateur(pseudo).pseudo}"/>
                         <p:message for="pseudo" />
 
                         <h:outputLabel for="email" value="Email:" />
-                        <p:inputText id="email" value="#{modifierProfil.utilisateur.email}" required="true"/>
+                        <p:inputText id="email" value="#{modifierProfil.getUtilisateurTest().email}" required="true"/>
                         <p:message for="email"/>
 
 
@@ -58,22 +59,22 @@
                         <c:if test="#{not (identification.identite eq null)}">
                             <c:if test="#{(identification.identite.estAdmin eq true)}">
                                 <h:outputLabel for="dakos" value="Dakos :" />
-                                <h:inputText id = "dakos" value="#{modifierProfil.utilisateur.dakos}"/>
+                                <h:inputText id = "dakos" value="#{modifierProfil.getUtilisateur(pseudo).dakos}"/>
                                 <p:message for="dakos" />
                             </c:if>    
                         </c:if>
                         <h:outputLabel for="description" value="Description :" />
-                        <p:inputTextarea id="description" value="#{modifierProfil.utilisateur.description}" rows = "6" cols ="33">
+                        <p:inputTextarea id="description" value="#{modifierProfil.getUtilisateur(pseudo).description}" rows = "6" cols ="33">
                             <p:clientValidator event="keyup"/>
                         </p:inputTextarea>
                         <p:message for="description" />
 
                         <h:outputLabel for="cp" value="Code postal :" />
-                        <p:inputText id="cp" value="#{modifierProfil.utilisateur.codePostal}" />
+                        <p:inputText id="cp" value="#{modifierProfil.getUtilisateur(pseudo).codePostal}" />
                         <p:message for="cp" />
 
                         <h:outputLabel for="date" value="Age :" />
-                        <h:inputText id = "date" value="#{modifierProfil.utilisateur.age}"/>
+                        <h:inputText id = "date" value="#{modifierProfil.getUtilisateur(pseudo).age}"/>
                         <p:message for="date" />
                     </h:panelGrid>
                     <p:growl id="growl" life="3000" />

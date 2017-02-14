@@ -26,12 +26,12 @@ import javax.inject.Inject;
 @RequestScoped
 public class ModifierProfil {
 
-    @EJB
+    @EJB(name = "utilisateurFacade")
     private UtilisateurFacadeLocal utilisateurFacade;
     
     private String pseudo;
     
-    private Utilisateur utilisateur = null;
+    Utilisateur utilisateur = null;
 
     private String nouveauMotDePasse = "";
     
@@ -61,10 +61,12 @@ public class ModifierProfil {
             utilisateur.setPassword(nouveauMotDePasse);
         }*/
         String msg = "";
+        System.err.println("--------- pseudo dans modification " + pseudo + " .");
+        String pseudo="Nico";
         if (ancienMotDePasse.equals("") && nouveauMotDePasse.equals("") && nouveauMotDePasse2.equals("")) {
             //Pas besoin de toucher aux mdp. mais on edit le reste.
             msg = "Le profil a été édité";
-            utilisateurFacade.edit(getUtilisateur());
+            utilisateurFacade.edit(getUtilisateur(pseudo));
         } else if (ancienMotDePasse.equals("") || nouveauMotDePasse.equals("") || nouveauMotDePasse2.equals("")) {
             //1 est null, on lui dit de recommencer.
             msg = "Il faut entrer les 3 mots de passe. Profil non modifié";
@@ -74,12 +76,12 @@ public class ModifierProfil {
                 msg = "Le nouveau mot de passe entré est trop court (8 caracteres minimium). Profil non modifié";
             } else {
                 ancienMotDePasse = Crypting.crypt(ancienMotDePasse);
-                if (nouveauMotDePasse.equals(getNouveauMotDePasse2()) && (ancienMotDePasse.equals(getUtilisateur().getPassword()))) {
+                if (nouveauMotDePasse.equals(getNouveauMotDePasse2()) && (ancienMotDePasse.equals(getUtilisateur(pseudo).getPassword()))) {
                     nouveauMotDePasse = Crypting.crypt(nouveauMotDePasse);
                     System.err.println("je set le mdp");
-                    getUtilisateur().setPassword(nouveauMotDePasse);
+                    getUtilisateur(pseudo).setPassword(nouveauMotDePasse);
                     msg = "Le profil a été édité";
-                    utilisateurFacade.edit(getUtilisateur());
+                    utilisateurFacade.edit(getUtilisateur(pseudo));
                 } else {
                     msg = "Un des mots de passe entrés est mauvais. Profil non modifié";
                 }
@@ -111,8 +113,23 @@ public class ModifierProfil {
         return ancienMotDePasse;
     }
 
-    public Utilisateur getUtilisateur() {
+    /*public Utilisateur getUtilisateur() {
+        System.err.println("pseudo : " + pseudo);
         return beanID.getIdentite();
+    }*/
+    
+    public Utilisateur getUtilisateur(String pseudo) {
+        System.err.println("pseudo modif profil vaut : " + pseudo + " .");
+        if (utilisateur == null) {
+            utilisateur = utilisateurFacade.findByPseudo(pseudo);
+            this.pseudo=pseudo;
+        }
+        return utilisateur;
+    }
+    
+    public Utilisateur getUtilisateurTest() {
+        System.err.println("je RENTRE LA " + pseudo);
+        return utilisateur;
     }
 
     /**
