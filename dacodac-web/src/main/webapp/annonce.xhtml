@@ -18,8 +18,8 @@
             </f:metadata>
 
             <ui:define name="content">
+
                 <p:panelGrid id ="frame">
-                
                     <p:row id="tableau">
                         <p:column id="colonneAnnonce">
                             <p:panelGrid id="annonce">
@@ -52,8 +52,7 @@
                             </p:panelGrid>
                         </p:column>
 
-                        <!--Si ce n'est pas mon annonce-->
-                        <p:column id="auteur" rendered="#{not (identification.identite eq annoncePublic.getAnnonce(id).auteur)}">
+                        <p:column id="auteur">
                             <p:panelGrid>
                                 <p:row>
                                     <p:column>
@@ -73,55 +72,59 @@
                                 </p:row>
                             </p:panelGrid>
                         </p:column>
-
                     </p:row> 
                 </p:panelGrid>
-                    <!--Si l'annonce n'est pas encore validée-->
-                    <c:set var="bool" value ="" />
-                    <p:row rendered="#{(identification.identite eq annoncePublic.getAnnonce(id).auteur) 
-                                       and not(annoncePublic.getAnnonce(id).estValidee)}">
-                        <p:column>
-                            <h:form>
-                                <h:commandButton value="hello" action="#{annoncePublic.hello()}"/>
-                            </h:form>
-                            <p:dataTable value="#{annoncePublic.getAnnonce(id).postulants}" var="postulant">
-                                <p:column>
-                                    <ui:include src="fragmentPostulant.xhtml">
-                                        <ui:param name="id" value="#{id}"/>
-                                        <ui:param name="postulant" value="#{postulant}"/>
-                                    </ui:include>
-                                </p:column>
-                            </p:dataTable>
-                        </p:column>
-                    </p:row> 
 
-                    <!--Si l'annonce est validée-->
-                    <p:row rendered="#{(identification.identite eq annoncePublic.getAnnonce(id).auteur) 
-                                       and annoncePublic.getAnnonce(id).estValidee}">
-                        <p:column>
-                            <h:outputText value="Contractée avec #{annoncePublic.getAnnonce(id).postulants.get(0).pseudo}" />
-                            <h:link value="Consulter le profil"  outcome="consulterUnProfil.xhtml">
-                                <f:param name="pseudo" value="#{annoncePublic.getAnnonce(id).postulants.get(0).pseudo}"/>
-                            </h:link>
-                            <h:outputText value="Le service a été rendu:"/>
-                            <h:form>
-                                <!--Si oui on va rédiger un commentaire-->
-                                <h:commandButton class="green" value="Oui"/>
-                                <h:commandButton class="red" value="Non"/>
-                            </h:form>
-                        </p:column>
-                    </p:row> 
 
+                <h:form rendered="#{(((identification.identite eq annoncePublic.getAnnonce(id).auteur) and annoncePublic.getAnnonce(id).serviceRendu_auteur eq false)
+                                    or (identification.identite eq annoncePublic.getAnnonce(id).postulants.get(0)) and annoncePublic.getAnnonce(id).serviceRendu_contracteur eq false)
+                                    and (annoncePublic.getAnnonce(id).estValidee eq true)}">
+                    
+                    <h:outputText value="Contractée avec #{annoncePublic.getAnnonce(id).postulants.get(0).pseudo} : " />
+                    <h:link value="Consulter le profil"  outcome="consulterUnProfil.xhtml">
+                        <f:param name="pseudo" value="#{annoncePublic.getAnnonce(id).postulants.get(0).pseudo}"/>
+                    </h:link>
+                    <br />
+                    <h:outputText value="Le service a été rendu:"/>
+                    <h:commandButton class="green" value="Oui" action="#{annoncePublic.serviceRendu()}" />
+                    
+                </h:form>
+
+
+
+                <h:form rendered="#{((identification.identite eq annoncePublic.getAnnonce(id).auteur) eq true) and (annoncePublic.getAnnonce(id).estValidee eq false)}">
+                    <p:dataTable value="#{annoncePublic.getAnnonce(id).postulants}" var="postulant">
+                        <p:column>
+                            <div class="postulant">
+                                <span>
+                                    <strong><h:outputText value="#{postulant.pseudo}"/></strong>
+                                    <h:link value="Consulter le profil"  outcome="consulterUnProfil.xhtml">
+                                        <f:param name="pseudo" value="#{postulant.pseudo}"/>
+                                    </h:link>
+                                </span>
+                                <span>
+                                    <h:commandButton value="Dac'O'Dac" action="#{annoncePublic.validerAnnonce(postulant)}" class="green" />
+                                    <h:commandButton value="Refuser" action="#{annoncePublic.refuserProposition(postulant)}" class="red" />
+                                </span>
+                            </div>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
 
                 
                 <div id="validation">
-                    <h:form rendered="#{not(identification.identite eq annoncePublic.getAnnonce(id).auteur)}">
+                    <h:form rendered="#{((identification.identite eq annoncePublic.getAnnonce(id).auteur) eq false) and (annoncePublic.getAnnonce(id).estValidee eq false)}">
                         <p:growl id="growl" life="50" />
                         <p:commandButton value="Ajouter au panier" update="growl" actionListener="#{panier.addAnnonce(annoncePublic.getAnnonce(id))}" icon="ui-icon-check" />
                     </h:form>
                 </div>
 
 
+                <div id="edition">
+                <p:button value="Modifier l'annonce" style="margin-top:20px" outcome="/modifierAnnonce.xhtml">
+                    <f:param name="pseudo" value="#{pseudo}"/>
+                </p:button>
+                </div>
 
             </ui:define>
         </ui:composition>

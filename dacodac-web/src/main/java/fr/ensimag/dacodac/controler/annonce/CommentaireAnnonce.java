@@ -5,10 +5,8 @@
  */
 package fr.ensimag.dacodac.controler.annonce;
 
-import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Commentaire;
 import fr.ensimag.dacodac.Utilisateur;
-import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -25,7 +23,6 @@ public class CommentaireAnnonce {
     @EJB
     private UtilisateurFacadeLocal utilisateurFacade;
 
-    private Annonce annonce = null;
     private Commentaire commentaire = null;
     private Utilisateur destinataire = null;
     private Utilisateur auteur = null;

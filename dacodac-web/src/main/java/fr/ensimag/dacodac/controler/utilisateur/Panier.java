@@ -82,8 +82,6 @@ public class Panier implements Serializable {
     }
 
     public void addAnnonce(Annonce annonce) {
-        System.out.println("-------------------------------------------------");
-        System.err.println(annonce);
         String msg;
         if (annonces.add(annonce)) {
             if (annonce.getType() == TypeAnnonce.OFFRE) {
@@ -98,15 +96,8 @@ public class Panier implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    public void test() {
-        String msg="ca marche";
-
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
     
     public void removeAnnonce(Annonce annonce) {
-        System.err.println("On rentre dans remove Annonce");
         String msg;
         if (annonces.remove(annonce)) {
             if (annonce.getType() == TypeAnnonce.OFFRE) {
@@ -119,7 +110,6 @@ public class Panier implements Serializable {
 
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
-        //return "monPanier.xhtml";
     }
 
     public String validerPanier() throws InterruptedException {

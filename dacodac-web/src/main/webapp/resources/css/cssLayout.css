@@ -109,13 +109,13 @@ li.commentaire .infos {
     margin:0;
 }
 
-.green.ui-state-default{
+.green {
     background-color: #00CC00;
     color: black;
 
 }
 
-.red.ui-state-default {
+.red {
     background-color: #CC0000;
     color: black;
 

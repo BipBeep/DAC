@@ -181,8 +181,10 @@ public class Administrateur {
 
     public String findByPseudo() {
         Utilisateur u = utilisateurFacade.findByPseudo(pseudo);
-        utilisateurs = new ArrayList<>();
-        utilisateurs.add(u);
+        if (u != null) {
+            utilisateurs = new ArrayList<>();
+            utilisateurs.add(u);
+        }
         return "administrateur.xhtml";
     }
 
@@ -213,4 +215,5 @@ public class Administrateur {
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
+
 }
