@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+        <ui:composition template="./mainTemplate.xhtml">
+            <ui:define name="css">
+                <h:outputStylesheet name="css/annonce.css"/>
+            </ui:define>
+
+            <f:metadata>
+                <f:viewParam name="id" value="#{id}"/>
+            </f:metadata>
+
+            <ui:define name="content">
+
+                
+                    <p:row id="tableau">
+                        <p:column id="colonneAnnonce">
+                            <p:panelGrid id="annonce">
+                                <p:row>
+                                    <p:column colspan="2" id="titre">#{annoncePublic.getAnnonce(id).titre}</p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column colspan="2">   
+                                        <ul>
+                                            <ui:repeat value="#{annoncePublic.getAnnonce(id).tags}" var="tag">
+                                                <li><h:outputText value="#{tag}, "/></li>
+                                            </ui:repeat>
+                                        </ul>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column id="prix" colspan="1">Prix : #{annoncePublic.getAnnonce(id).prix} Dakos</p:column>
+                                    <p:column>#{annoncePublic.getAnnonce(id).codePostal}</p:column>
+                                </p:row>
+
+                                <p:row>
+                                    <p:column id="description" colspan="2">
+                                        Description :
+                                        <br/>
+                                        <br/>
+                                        <span>#{annoncePublic.getAnnonce(id).description}</span>
+                                    </p:column>
+                                </p:row>
+
+                            </p:panelGrid>
+                        </p:column>
+
+                        <!--Si ce n'est pas mon annonce-->
+                        <p:column id="auteur">
+                            <p:panelGrid>
+                                <p:row>
+                                    <p:column>
+                                        <ui:include src="vignettePseudo.xhtml">
+                                            <ui:param name="utilisateur" value="#{annoncePublic.getAnnonce(id).auteur}" />
+                                        </ui:include>
+                                    </p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column id="consulterProfil">
+                                        <h:form>
+                                            <p:link value="Consulter le profil" outcome="/consulterUnProfil.xhtml">
+                                                <f:param name="pseudo" value="#{annoncePublic.getAnnonce(id).auteur.pseudo}"/>
+                                            </p:link>
+                                        </h:form>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+                        </p:column>
+                    </p:row> 
+                <div id="validation">
+                    <h:form>
+                        <p:growl id="growl" life="50" />
+                        <p:commandButton value="Ajouter au panier" update="growl" actionListener="#{panier.addAnnonce(annoncePublic.getAnnonce(id))}" icon="ui-icon-check" />
+                    </h:form>
+                </div>
+
+
+
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

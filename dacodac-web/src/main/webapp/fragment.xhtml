@@ -3,14 +3,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
 
         <ui:composition>
-            <h:link class="titre" value="#{annonce.titre}" outcome="annonce.xhtml">
+            <!--<h:link class="titre" value="#{annonce.titre}" outcome="annonce.xhtml">
+                    <f:param name="id" value="#{annonce.id}"/>
+                </h:link>-->
+            <c:set var="connecte" value="#{identification.identite ne null}"/>
+            <c:set var="auteur" value="#{ (identification.identite.id eq annonce.auteur.id)}"/>
+            <c:set var="valide" value="#{annonce.estValidee}"/>
+
+            <c:if test="#{connecte}">
+                
+                <!--Je suis l'auteur de l'annonce et elle n'est pas validé-->
+                <c:if test="#{auteur and not(valide)}">
+                    <c:set var ="page" value="annonceAuteur.xhtml"/>
+                </c:if>
+                <!--Je suis l'auteur de l'annonce et elle est validé-->
+                <c:if test="#{auteur and valide}">
+                    <c:set var ="page" value="annonceAuteurValide.xhtml"/>
+                </c:if>
+                <!--Je ne suis pas l'auteur de l'annonce et elle est validé-->
+                <c:if test="#{not(auteur) and valide}">
+                    <c:set var ="page" value="annonceVisiteurValide.xhtml"/>
+                </c:if>
+            </c:if>
+            <!--Je ne suis pas l'auteur de l'annonce et elle n'est pas validé-->
+                <c:if test="#{not(valide)}">
+                    <c:set var ="page" value="annonceVisiteur.xhtml"/>
+                </c:if>
+            <h:link class="titre" value="#{annonce.titre}" outcome="#{page}">
                 <f:param name="id" value="#{annonce.id}"/>
             </h:link>
+            <h:outputText value ="#{page}"/>
             <ul class="tagList">
                 <ui:repeat value="#{annonce.tags}" var="tag" >
                     <li class="tagElement"><h:outputText value="#{tag}, "/></li>
