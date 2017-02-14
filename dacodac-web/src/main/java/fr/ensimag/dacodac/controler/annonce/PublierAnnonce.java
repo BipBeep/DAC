@@ -14,9 +14,7 @@ import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import fr.ensimag.dacodac.stateless.TagFacadeLocal;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 
 import javax.ejb.EJB;
 import javax.inject.Named;
