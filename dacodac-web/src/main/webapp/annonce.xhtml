@@ -111,13 +111,24 @@
                     </p:dataTable>
                 </h:form>
 
-                
+                <h:panelGrid columns="2">
                 <div id="validation">
                     <h:form rendered="#{((identification.identite eq annoncePublic.getAnnonce(id).auteur) eq false) and (annoncePublic.getAnnonce(id).estValidee eq false)}">
                         <p:growl id="growl" life="50" />
                         <p:commandButton value="Ajouter au panier" update="growl" actionListener="#{panier.addAnnonce(annoncePublic.getAnnonce(id))}" icon="ui-icon-check" />
                     </h:form>
                 </div>
+                 <div id="validation">
+                    <h:form rendered="#{((identification.identite eq annoncePublic.getAnnonce(id).auteur) eq false) and (annoncePublic.getAnnonce(id).estValidee eq false)}">
+                        
+                        <h:button value="Modifier cette annonce" outcome="modifierAnnonce.xhtml"  >
+                            
+                        </h:button>
+                        
+                    </h:form>
+                </div>   
+                </h:panelGrid>
+               
 
             </ui:define>
         </ui:composition>
