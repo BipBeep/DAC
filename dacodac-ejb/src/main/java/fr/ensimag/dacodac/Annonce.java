@@ -250,5 +250,9 @@ public class Annonce implements Serializable {
     public void setContracteur(Utilisateur contracteur) {
         this.contracteur = contracteur;
     }
+    
+    public boolean hasPostulant() {
+        return (!this.postulants.isEmpty());
+    }
 
 }

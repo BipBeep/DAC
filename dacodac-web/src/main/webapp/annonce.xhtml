@@ -71,11 +71,12 @@
                                     </p:column>
                                 </p:row>                       
                             </p:panelGrid>
-                            <c:if test="#{(identification.identite.estAdmin eq true) || (identification.identite eq annoncePublic.getAnnonce(id).auteur)}">
-                                <p:button value="Editer l'annonce" style="margin-top:20px" outcome="/modifierAnnonce.xhtml">
-                                    <f:param name="id" value="#{id}"/>
-                                </p:button>
-                            </c:if>
+                            <c:if test="#{((identification.identite.estAdmin eq true) or (identification.identite eq annoncePublic.getAnnonce(id).auteur)
+                                          and ((annoncePublic.getAnnonce(id).hasPostulant() eq true) and (annoncePublic.getAnnonce(id).estValidee eq true)))}">
+                                    <p:button value="Editer l'annonce" style="margin-top:20px" outcome="/modifierAnnonce.xhtml">
+                                        <f:param name="id" value="#{id}"/>
+                                    </p:button>
+                           </c:if>
                         </p:column>
                     </p:row> 
                 </p:panelGrid>
@@ -85,11 +86,11 @@
                                     or (identification.identite eq annoncePublic.getAnnonce(id).getContracteur()) and annoncePublic.getAnnonce(id).serviceRendu_contracteur eq false)
                                     and (annoncePublic.getAnnonce(id).estValidee eq true)}">
 
-                    <c:if test="#{(annoncePublic.getAnnonce(id).postulants.get(0).id eq identification.identite.id)}">
+                    <c:if test="#{(identification.identite eq annoncePublic.getAnnonce(id).auteur)}">
                         <c:set var="dest" value ="#{annoncePublic.getAnnonce(id).auteur.pseudo}"/>
                     </c:if>
-                    <c:if test="#{(annoncePublic.getAnnonce(id).postulants.get(0).id ne identification.identite.id)}">
-                        <c:set var="dest" value ="#{annoncePublic.getAnnonce(id).postulants.get(0)}"/>
+                    <c:if test="#{(identification.identite ne annoncePublic.getAnnonce(id).auteur)}">
+                        <c:set var="dest" value ="#{annoncePublic.getAnnonce(id).getContracteur()}"/>
                     </c:if>
                     <h:outputText value="Contractée avec #{annoncePublic.getAnnonce(id).getContracteur().pseudo} : "/>
                     <h:link value="Consulter le profil"  outcome="consulterUnProfil.xhtml">
@@ -106,7 +107,7 @@
 
 
 
-                <h:form rendered="#{((identification.identite eq annoncePublic.getAnnonce(id).auteur) eq true) and (annoncePublic.getAnnonce(id).estValidee eq false)}">
+                <h:form rendered="#{(identification.identite eq annoncePublic.getAnnonce(id).auteur) and (annoncePublic.getAnnonce(id).estValidee eq false) and (annoncePublic.getAnnonce(id).hasPostulant() eq true)}">
                     <p:dataTable value="#{annoncePublic.getAnnonce(id).postulants}" var="postulant">
                         <p:column>
                             <div class="postulant">
