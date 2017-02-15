@@ -6,16 +6,12 @@
 package fr.ensimag.dacodac.controler.utilisateur;
 
 import fr.ensimag.dacodac.Annonce;
-import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
-import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
-import java.security.NoSuchAlgorithmException;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 /**
@@ -23,8 +19,9 @@ import javax.inject.Inject;
  * @author roussena
  */
 @Named(value = "modifierAnnonce")
-@RequestScoped
-public class ModifierAnnonce {
+@ManagedBean
+@ViewScoped
+public class ModifierAnnonce implements Serializable {
 
     @EJB
     private AnnonceFacadeLocal annonceFacade;
@@ -39,21 +36,16 @@ public class ModifierAnnonce {
      */
     public ModifierAnnonce() {
     }
-    
+
     public Annonce getAnnonce(long id) {
-        if (annonce == null)
-        {
+        if (annonce == null) {
             annonce = annonceFacade.find(id);
         }
         return annonce;
     }
-    
-    public void modificationAnnonce() {
-        //System.err.println("Annonce :");
-        //System.err.println(annonce);
-        String msg = "L'annonce a été éditée";
+
+    public String modificationAnnonce() {
         annonceFacade.edit(annonce);
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        return "index.html";
     }
 }
