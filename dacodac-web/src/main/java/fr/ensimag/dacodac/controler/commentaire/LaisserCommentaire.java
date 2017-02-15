@@ -7,12 +7,14 @@ package fr.ensimag.dacodac.controler.commentaire;
 
 import fr.ensimag.dacodac.Commentaire;
 import fr.ensimag.dacodac.Annonce;
+import fr.ensimag.dacodac.TypeAnnonce;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.controler.utilisateur.Identification;
 import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import fr.ensimag.dacodac.stateless.CommentaireFacadeLocal;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import java.time.LocalDate;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
@@ -40,6 +42,7 @@ public class LaisserCommentaire {
     private Annonce annonce = null;
 
     public LaisserCommentaire() {
+
     }
 
     public void setIdentification(Identification identification) {
@@ -74,7 +77,7 @@ public class LaisserCommentaire {
     public String save(long id, String description, String pseudoDest) {
         Utilisateur auteur = beanID.getIdentite();
         Utilisateur destCom = null;
-        Annonce annonceCour = getAnnonce(id);               
+        Annonce annonceCour = getAnnonce(id);
 
         System.err.println("auteurAnnonce : ");
         System.err.println(annonceCour.getAuteur());
@@ -98,23 +101,45 @@ public class LaisserCommentaire {
         Commentaire commentaire = new Commentaire(auteur, destCom, LocalDate.now(), description, annonceCour.getTitre());
         commentaireFacade.create(commentaire);
         utilisateurFacade.addCommentaire(commentaire);
-        
-        if (annonceCour.getServiceRendu_auteur() && annonceCour.getServiceRendu_contracteur())
-        {
+        validerannonce();
+        if (annonceCour.getServiceRendu_auteur() && annonceCour.getServiceRendu_contracteur()) {
             annonceFacade.remove(annonceCour);
         }
 
         return "index.xhtml";
     }
-    
-    public String retourneAccueil(long id)
-    {
+
+    public void validerannonce() {
+        if (beanID.getIdentite().equals(annonce.getAuteur())) {
+            annonce.setServiceRendu_auteur(true);
+        } else {
+            annonce.setServiceRendu_contracteur(true);
+        }
+        annonceFacade.edit(annonce);
+        if (annonce.getServiceRendu_auteur() && annonce.getServiceRendu_contracteur()) {
+            int prix = annonce.getPrix();
+            System.err.println("Auteur :");
+            System.err.println(annonce.getAuteur());
+            System.err.println("Contracteur :");
+            System.err.println(annonce.getContracteur());
+            if (annonce.getType() == TypeAnnonce.DEMANDE) {
+                utilisateurFacade.addDakos(annonce.getAuteur(), -prix);
+                utilisateurFacade.addDakos(annonce.getContracteur(), prix);
+            } else {
+                utilisateurFacade.addDakos(annonce.getAuteur(), prix);
+                utilisateurFacade.addDakos(annonce.getContracteur(), -prix);
+            }
+            beanID.update();
+        }
+    }
+
+    public String retourneAccueil(long id) {
         Annonce annonceCour = getAnnonce(id);
-        if (annonceCour.getServiceRendu_auteur() && annonceCour.getServiceRendu_contracteur())
-        {
+        validerannonce();
+        if (annonceCour.getServiceRendu_auteur() && annonceCour.getServiceRendu_contracteur()) {
             annonceFacade.remove(annonceCour);
         }
-        
+
         return "index.xhtml";
     }
 
