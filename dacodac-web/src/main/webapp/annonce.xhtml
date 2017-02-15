@@ -72,10 +72,10 @@
                                 </p:row>                       
                             </p:panelGrid>
                             <c:if test="#{(identification.identite.estAdmin eq true) || (identification.identite eq annoncePublic.getAnnonce(id).auteur)}">
-                                    <p:button value="Editer l'annonce" style="margin-top:20px" outcome="/modifierAnnonce.xhtml">
-                                        <f:param name="id" value="#{id}"/>
-                                    </p:button>
-                           </c:if>
+                                <p:button value="Editer l'annonce" style="margin-top:20px" outcome="/modifierAnnonce.xhtml">
+                                    <f:param name="id" value="#{id}"/>
+                                </p:button>
+                            </c:if>
                         </p:column>
                     </p:row> 
                 </p:panelGrid>
@@ -97,10 +97,10 @@
                     </h:link>
                     <br/>
                     <h:outputText value="Le service a été rendu:"/>
-                    <p:button class="green" value="Oui" outcome="#{annoncePublic.serviceRendu()}">
+                    <p:commandButton class="green" value="Oui" action="#{annoncePublic.serviceRendu()}" ajax="">
                         <f:param name="annonceId" value="#{id}"/>
                         <f:param name="destinataire" value="#{annoncePublic.getAnnonce(id).getContracteur().pseudo}"/>
-                    </p:button>
+                    </p:commandButton>
 
                 </h:form>
 
@@ -117,8 +117,12 @@
                                     </h:link>
                                 </span>
                                 <span>
-                                    <h:commandButton value="Dac'O'Dac" action="#{annoncePublic.validerAnnonce(postulant)}" class="green" />
-                                    <h:commandButton value="Refuser" action="#{annoncePublic.refuserProposition(postulant)}" class="red" />
+                                    <h:commandButton value="Dac'O'Dac" action="#{annoncePublic.validerAnnonce(postulant)}" class="green"  >
+                                        <f:param name="id" value="#{id}"/>
+                                    </h:commandButton>
+                                    <h:commandButton value="Refuser" action="#{annoncePublic.refuserProposition(postulant)}" class="red" >
+                                        <f:param name="id" value="#{id}"/>
+                                    </h:commandButton>
                                 </span>
                             </div>
                         </p:column>
