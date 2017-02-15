@@ -71,7 +71,8 @@
                                     </p:column>
                                 </p:row>                       
                             </p:panelGrid>
-                            <c:if test="#{(identification.identite.estAdmin eq true) || (identification.identite eq annoncePublic.getAnnonce(id).auteur)}">
+                            <c:if test="#{((identification.identite.estAdmin eq true) or (identification.identite eq annoncePublic.getAnnonce(id).auteur)
+                                          and ((annoncePublic.getAnnonce(id).hasPostulant() eq true) and (annoncePublic.getAnnonce(id).estValidee eq true)))}">
                                     <p:button value="Editer l'annonce" style="margin-top:20px" outcome="/modifierAnnonce.xhtml">
                                         <f:param name="id" value="#{id}"/>
                                     </p:button>
@@ -106,7 +107,7 @@
 
 
 
-                <h:form rendered="#{((identification.identite eq annoncePublic.getAnnonce(id).auteur) eq true) and (annoncePublic.getAnnonce(id).estValidee eq false)}">
+                <h:form rendered="#{(identification.identite eq annoncePublic.getAnnonce(id).auteur) and (annoncePublic.getAnnonce(id).estValidee eq false) and (annoncePublic.getAnnonce(id).hasPostulant() eq true)}">
                     <p:dataTable value="#{annoncePublic.getAnnonce(id).postulants}" var="postulant">
                         <p:column>
                             <div class="postulant">
