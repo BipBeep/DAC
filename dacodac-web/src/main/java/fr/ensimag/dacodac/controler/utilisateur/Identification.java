@@ -34,6 +34,10 @@ public class Identification implements Serializable {
     }
 
     public Utilisateur getIdentite() {
+        if (identite != null)
+        {
+            update();
+        }
         return identite;
     }
     

@@ -115,6 +115,10 @@ public class AnnoncePublic implements Serializable {
         annonceFacade.edit(annonce);
         if (annonce.getServiceRendu_auteur() && annonce.getServiceRendu_contracteur()) {
             int prix = annonce.getPrix();
+            System.err.println("Auteur :");
+            System.err.println(annonce.getAuteur());
+            System.err.println("Contracteur :");
+            System.err.println(annonce.getContracteur());
             if (annonce.getType() == TypeAnnonce.DEMANDE) {
                 utilisateurFacade.addDakos(annonce.getAuteur(), -prix);
                 utilisateurFacade.addDakos(annonce.getContracteur(), prix);
@@ -123,7 +127,6 @@ public class AnnoncePublic implements Serializable {
                 utilisateurFacade.addDakos(annonce.getContracteur(), -prix);
             }
             beanID.update();
-            annonceFacade.remove(annonce);
         }
         return "laisserCommentaire.xhtml";
     }

@@ -69,8 +69,13 @@
                                             </p:link>
                                         </h:form>
                                     </p:column>
-                                </p:row>
+                                </p:row>                       
                             </p:panelGrid>
+                            <c:if test="#{(identification.identite.estAdmin eq true) || (identification.identite eq annoncePublic.getAnnonce(id).auteur)}">
+                                    <p:button value="Editer l'annonce" style="margin-top:20px" outcome="/modifierAnnonce.xhtml">
+                                        <f:param name="id" value="#{id}"/>
+                                    </p:button>
+                           </c:if>
                         </p:column>
                     </p:row> 
                 </p:panelGrid>
@@ -86,7 +91,7 @@
                     <c:if test="#{(annoncePublic.getAnnonce(id).postulants.get(0).id ne identification.identite.id)}">
                         <c:set var="dest" value ="#{annoncePublic.getAnnonce(id).postulants.get(0)}"/>
                     </c:if>
-                    <h:outputText value="Contractée avec #{dest.pseudo} : "/>
+                    <h:outputText value="Contractée avec #{annoncePublic.getAnnonce(id).getContracteur().pseudo} : "/>
                     <h:link value="Consulter le profil"  outcome="consulterUnProfil.xhtml">
                         <f:param name="pseudo" value="#{annoncePublic.getAnnonce(id).getContracteur().pseudo}"/>
                     </h:link>
@@ -94,9 +99,9 @@
                     <h:outputText value="Le service a été rendu:"/>
                     <p:button class="green" value="Oui" outcome="#{annoncePublic.serviceRendu()}">
                         <f:param name="annonceId" value="#{id}"/>
-                        <f:param name="destinataire" value="#{dest.pseudo}"/>
+                        <f:param name="destinataire" value="#{annoncePublic.getAnnonce(id).getContracteur().pseudo}"/>
                     </p:button>
-                    
+
                 </h:form>
 
 
@@ -120,7 +125,7 @@
                     </p:dataTable>
                 </h:form>
 
-                
+
                 <div id="validation">
                     <h:form rendered="#{((identification.identite eq annoncePublic.getAnnonce(id).auteur) eq false) and (annoncePublic.getAnnonce(id).estValidee eq false)}">
                         <p:growl id="growl" life="50" />
