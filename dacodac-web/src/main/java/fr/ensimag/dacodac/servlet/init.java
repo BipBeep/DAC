@@ -90,12 +90,17 @@ public class init extends HttpServlet {
 
         try {
             Utilisateur utilisateur1 = new Utilisateur(1000000000, "Trump", "secret00", "donald.trump@maison-blanche.gouv", "28312", 60, false);
-            Utilisateur utilisateur2 = new Utilisateur(100000, "Jonas", "secret00", "jonas.maubert@j-aime-elle.com", "38190", 22, true);
+            Utilisateur utilisateur2 = new Utilisateur(100, "Jonas", "secret00", "jonas.maubert@j-aime-elle.com", "38190", 22, true);
             Utilisateur utilisateur3 = new Utilisateur(100, "Leo", "secret00", "leo@gmail.com", "28300", 22, false);
-            Utilisateur utilisateur4 = new Utilisateur(100, "Nico", "secret00", "kamo@gmail.com", "28301", 22, false);
+            Utilisateur utilisateur4 = new Utilisateur(100, "Nico", "secret00", "kamo@gmail.com", "28301", 23, false);
             Utilisateur utilisateur5 = new Utilisateur(100, "Juju", "secret00", "juju@pl-s.com", "28302", 22, false);
-            Utilisateur utilisateur6 = new Utilisateur(400000, "Hillary", "JAimePasLesEmails", "hillary.clinton@defaite.seum", "52147", 98, false);
+            Utilisateur utilisateur6 = new Utilisateur(100, "Nathan", "secret00", "nathan@gmail.com", "38147", 21, false);
             utilisateur1.setDescription("It's going to be America FIRST, AMERICA FIRST!");
+            utilisateur2.setDescription("Description du compte de Jonas. Ce compte est administrateur");
+            utilisateur3.setDescription("Description du compte de Léo");
+            utilisateur4.setDescription("Description du compte de Nicolas");
+            utilisateur5.setDescription("Description du compte de Justine");
+            utilisateur6.setDescription("Description du compte de Nathan");
 
             utilisateurFacade.create(utilisateur1);
             utilisateurFacade.create(utilisateur2);

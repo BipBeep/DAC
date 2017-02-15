@@ -6,7 +6,6 @@
 package fr.ensimag.dacodac.stateless;
 
 import fr.ensimag.dacodac.Annonce;
-import fr.ensimag.dacodac.Commentaire;
 import fr.ensimag.dacodac.Tag;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.TypeAnnonce;

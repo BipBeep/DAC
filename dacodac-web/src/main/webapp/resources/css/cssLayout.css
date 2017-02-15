@@ -108,3 +108,25 @@ li.commentaire .infos {
     font-size: 12px;
     margin:0;
 }
+
+.green.ui-state-default{
+    background-color: #00CC00;
+    color: black;
+
+}
+
+.red.ui-state-default {
+    background-color: #CC0000;
+    color: black;
+
+}
+
+.postulant span{
+    width:40%;
+    display: flex;
+    justify-content: space-around;
+}
+.postulant {
+    display: flex;
+    justify-content: space-between;
+}

@@ -9,7 +9,7 @@
     <body>
 
         <ui:composition>
-            <h:link  value="#{utilisateur.pseudo}" outcome="consulterUnProfil.xhtml">
+            <h:link style="padding-left: 5%;" value="#{utilisateur.pseudo}" outcome="consulterUnProfil.xhtml">
                 <f:param name="pseudo" value="#{utilisateur.pseudo}"/>
                 <br></br>
                 <p:button value="consulter le profil" style="float:right" outcome="/consulterUnProfil.xhtml">

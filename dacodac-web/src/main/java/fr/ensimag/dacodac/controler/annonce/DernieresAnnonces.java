@@ -24,9 +24,6 @@ public class DernieresAnnonces {
     @EJB(name = "annonceFacade")
     private AnnonceFacadeLocal annonceFacade;
     
-    /**
-     * Creates a new instance of Index
-     */
     public DernieresAnnonces() {
     }
     
@@ -35,9 +32,6 @@ public class DernieresAnnonces {
     public List<Annonce> dernieresOffres() {
         int nbAnnoncesAffichees = 5;
         List<Annonce> list = annonceFacade.findLatest(nbAnnoncesAffichees, TypeAnnonce.OFFRE);
-     //   System.out.println("----------------------****----------------------------");
-     //   list.stream().forEach(e -> e.getTags().stream().forEach(t -> System.out.println("TAG : " + t)));
-    //    System.out.println("----------------------////----------------------------");
         return list;
     }
 

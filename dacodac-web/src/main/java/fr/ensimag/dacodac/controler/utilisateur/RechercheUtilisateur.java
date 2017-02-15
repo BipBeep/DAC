@@ -34,31 +34,15 @@ public class RechercheUtilisateur {
     @EJB
     private UtilisateurFacadeLocal utilisateurFacade;
     
+    private List<Utilisateur> utilisateurs = null;
+    
     private String nom;
     
-    Comparator<String> keyComparator = new Comparator<String>() {
-        @Override
-        public int compare(String s1, String s2) {
-            String[] sInt1 = s1.split(" ");
-            String[] sInt2 = s2.split(" ");
-            int int1 = Integer.parseInt(sInt1[0]);
-            int int2 = Integer.parseInt(sInt2[0]);
-            if (int1 < int2) {
-                return -1;
-            } else if (int1 == int2) {
-                return 0;
-            } else {
-                return 1;
-            }
-        }
-    };
 
     /**
      * Creates a new instance of Recherche
      */
     public RechercheUtilisateur() {
-        //Création de la liste des départements
-        //liste_departs = new TreeMap<String, String>(keyComparator);
      
     }
     
@@ -66,8 +50,28 @@ public class RechercheUtilisateur {
         return nom;
     }
     
-   Utilisateur findByPseudo(){
-      return utilisateurFacade.findByPseudo(nom);
+   public String findByPseudo(){
+      Utilisateur u = utilisateurFacade.findByPseudo(nom);
+      utilisateurs = new ArrayList<>();
+      utilisateurs.add(u);
+      return "utilisateurs.xhtml";
    }
+
+    /**
+     * @return the utilisateurs
+     */
+    public List<Utilisateur> getUtilisateurs() {
+        if (utilisateurs == null) {
+            return utilisateurFacade.findAll();
+        }
+        return utilisateurs;
+    }
+
+    /**
+     * @param utilisateurs the utilisateurs to set
+     */
+    public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+        this.utilisateurs = utilisateurs;
+    }
 
 }
