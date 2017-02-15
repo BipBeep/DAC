@@ -10,16 +10,20 @@
 
         <ui:composition template="./mainTemplate.xhtml">
             <ui:define name="content">
+                <f:metadata>
+                    <f:viewParam name="destinataire" value="#{destinataire}"/>
+                    <f:viewParam name="annonceId" value="#{annonceId}"/>
+                </f:metadata>
                 <h:form>
                     <p:panel header="Rediger un commentaire" style="text-align: center">
                         <p:fieldset  style="margin-bottom:20px" >
-                            <h>Vous avez fait affaire avec #{laisserCommentaire.destinataire.pseudo} !</h>
+                    <h:outputText value="Vous avez fait affaire avec #{laisserCommentaire.getDestinataire(destinataire).pseudo} !"/>
                         </p:fieldset>
                         <h:panelGrid columns="1" cellpadding="5">
-                            <h>Rappel de l'annonce</h>
+                            <h1>Rappel de l'annonce</h1>
                             <p:fieldset  style="margin-bottom:20px" >
                                 <ui:include src = "fragment.xhtml" >
-                                    <ui:param name="annonce" value="#{laisserCommentaire.annonce}" />
+                                    <ui:param name="annonce" value="#{laisserCommentaire.getAnnonce(annonceId)}"/>
                                 </ui:include>
                             </p:fieldset>
                             <h:outputLabel for="text" value="Votre commentaire" />
@@ -27,8 +31,8 @@
                                 <p:clientValidator event="keyup"/>
                             </p:inputTextarea>
                         </h:panelGrid>
-                        <p:commandButton value="Laisser un commentaire" action="#{laisserCommentaire.save()}" ajax="false" />
-                        <p:commandButton value="Ne pas laisser de commentaire"  ajax="false" icon="ui-icon-close" style="float:right"/>
+                        <h:commandButton value="Laisser un commentaire" action="#{laisserCommentaire.save()}" />
+                        <h:commandButton value="Ne pas laisser de commentaire" style="float:right"/>
                     </p:panel>
                 </h:form>
             </ui:define>

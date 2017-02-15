@@ -19,6 +19,8 @@ import javax.ejb.Local;
 public interface UtilisateurFacadeLocal {
 
     void create(Utilisateur utilisateur);
+    
+    void addDakos(Utilisateur u, int dakos);
 
     void edit(Utilisateur utilisateur);
 

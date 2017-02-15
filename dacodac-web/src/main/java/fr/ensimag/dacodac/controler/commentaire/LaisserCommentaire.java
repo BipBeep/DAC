@@ -9,6 +9,7 @@ import fr.ensimag.dacodac.Commentaire;
 import fr.ensimag.dacodac.Annonce;
 import fr.ensimag.dacodac.Utilisateur;
 import fr.ensimag.dacodac.controler.utilisateur.Identification;
+import fr.ensimag.dacodac.stateless.AnnonceFacadeLocal;
 import fr.ensimag.dacodac.stateless.CommentaireFacadeLocal;
 import fr.ensimag.dacodac.stateless.UtilisateurFacadeLocal;
 import java.time.LocalDate;
@@ -31,6 +32,8 @@ public class LaisserCommentaire {
     private UtilisateurFacadeLocal utilisateurFacade;
     @EJB
     private CommentaireFacadeLocal commentaireFacade;
+    @EJB
+    private AnnonceFacadeLocal annonceFacade;
 
     private String description = "Commentaire ...";
     private Utilisateur destinataire = null;
@@ -39,12 +42,6 @@ public class LaisserCommentaire {
     public LaisserCommentaire() {
     }
 
-    public String afficherVue(Utilisateur destinataire, Annonce annonce) {
-        this.destinataire = destinataire;
-        this.annonce = annonce;
-        return "laisserCommentaire.xhtml";
-    }
-    
     public void setIdentification(Identification identification) {
         this.beanID = identification;
     }
@@ -60,22 +57,21 @@ public class LaisserCommentaire {
     public String getDescription() {
         return description;
     }
-    
-    
-    public void setDestinataire(Utilisateur destinataire) {
-        this.destinataire = destinataire;
-    }
+   
 
-    public Utilisateur getDestinataire() {
+    public Utilisateur getDestinataire(String pseudo) {
+        if(destinataire==null){
+            destinataire = utilisateurFacade.findByPseudo(pseudo);
+        }
         return destinataire;
     }
     
-    
-    public void setAnnonce(Annonce annonce) {
-        this.annonce = annonce;
-    }
+   
 
-    public Annonce getAnnonce() {
+    public Annonce getAnnonce(long id) {
+        if(annonce == null){
+            annonce = annonceFacade.find(id);
+        }
         return annonce;
     }
 

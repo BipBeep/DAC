@@ -16,9 +16,10 @@
             <ui:define name="content">
 
                 <f:metadata>
-                    <f:viewParam name="pseudo" value="#{pseudo}"/>
+                    <f:viewParam name="pseudo" value="#{pseudo}" for="pseudo" id="pseudo"/>
                 </f:metadata>
-
+                
+                
                 <h:form>
                     <h1>Editer son profil</h1>
                     <h:panelGrid class="connexion_form" columns="3" cellpadding="5">
@@ -41,15 +42,15 @@
 
                             <h:outputLabel for="nouveauMotDePasse1" value="Nouveau mot de passe" />
                             <p:password id="nouveauMotDePasse1" value="#{modifierProfil.nouveauMotDePasse}" feedback="true">
-                                <f:validateLength minimum="8" />
-                                <f:validateRegex pattern="^[A-Za-z0-9]+$" />
+
+                                <f:validateRegex pattern="(^[A-Za-z0-9]+$)|(^$)" />
                             </p:password>
                             <p:message for="nouveauMotDePasse1"/>
 
                             <h:outputLabel for="nouveauMotDePasse2" value="Répéter nouveau mot de passe" />
                             <p:password id="nouveauMotDePasse2" value="#{modifierProfil.nouveauMotDePasse2}">
-                                <f:validateLength minimum="8" />
-                                <f:validateRegex pattern="^[A-Za-z0-9]+$" />
+
+                                <f:validateRegex pattern="(^[A-Za-z0-9]+$)|(^$)" />
                             </p:password>
                             <p:message for="nouveauMotDePasse2"/>
                         </h:panelGrid>
@@ -62,8 +63,7 @@
                                 <p:message for="dakos" />
                             </c:if>    
                         </c:if>
-
-                        <h:outputLabel for="text" value="Description :" />
+                        <h:outputLabel for="description" value="Description :" />
                         <p:inputTextarea id="description" value="#{modifierProfil.utilisateur.description}" rows = "6" cols ="33">
                             <p:clientValidator event="keyup"/>
                         </p:inputTextarea>
@@ -77,8 +77,8 @@
                         <h:inputText id = "date" value="#{modifierProfil.utilisateur.age}"/>
                         <p:message for="date" />
                     </h:panelGrid>
-
-                    <p:commandButton value="Valider la modification de profil" action="#{modifierProfil.modificationProfil()}" ajax="false" />
+                    <p:growl id="growl" life="3000" />
+                    <p:commandButton value="Valider la modification de profil" actionListener="#{modifierProfil.modificationProfil()}" update=":#{p:component('growl')}"/>
                 </h:form>
             </ui:define>
         </ui:composition>

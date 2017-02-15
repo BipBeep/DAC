@@ -47,7 +47,10 @@ public class Annonce implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Utilisateur auteur;
-
+    
+    @ManyToOne
+    private Utilisateur contracteur;
+    
     @Pattern(regexp="^(0[1-9]|[1-8][0-9]|9[1-5])[0-9]{3}$")
     @Column(nullable = false)
     private String codePostal;
@@ -232,6 +235,20 @@ public class Annonce implements Serializable {
 
     public void setServiceRendu_contracteur(boolean serviceRendu_contracteur) {
         this.serviceRendu_contracteur = serviceRendu_contracteur;
+    }
+
+    /**
+     * @return the contracteur
+     */
+    public Utilisateur getContracteur() {
+        return contracteur;
+    }
+
+    /**
+     * @param contracteur the contracteur to set
+     */
+    public void setContracteur(Utilisateur contracteur) {
+        this.contracteur = contracteur;
     }
 
 }

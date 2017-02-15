@@ -38,23 +38,22 @@ public class Administrateur {
 
     @Inject
     private Identification beanID;
-    
+
     @Inject
     private Connecteur connecteur;
-    
+
     @EJB
     private TagFacadeLocal tagFacade;
-    
-    private List<Annonce> offres = null;
-    
-    private List<Annonce> demandes = null;
-    
-    private List<Utilisateur> utilisateurs = null;
-    
-    private String tags;
-    
-    private String pseudo;
 
+    private List<Annonce> offres = null;
+
+    private List<Annonce> demandes = null;
+
+    private List<Utilisateur> utilisateurs = null;
+
+    private String tags;
+
+    private String pseudo;
 
     public Administrateur() {
     }
@@ -62,19 +61,19 @@ public class Administrateur {
     public void setIdentification(Identification identification) {
         this.beanID = identification;
     }
-    
-    public Identification getIdentification(){
+
+    public Identification getIdentification() {
         return beanID;
     }
-    
+
     public void setConnecteur(Connecteur connecteur) {
         this.connecteur = connecteur;
     }
-    
-    public Connecteur getConnecteur(){
+
+    public Connecteur getConnecteur() {
         return connecteur;
     }
-    
+
     public String supprimerUtilisateur(Utilisateur user) {
 
         List<Annonce> listAnnonce = annonceFacade.findAll();
@@ -91,8 +90,20 @@ public class Administrateur {
             }
         }
 
+        List<Commentaire> listCommAuteur = user.getCommentairesAuteur();
+        for (Commentaire c : listCommAuteur) {
+            c.getDestinataire().getCommentairesDest().remove(c);
+            utilisateurFacade.edit(c.getDestinataire());
+        }
+
+        List<Commentaire> listCommDest = user.getCommentairesDest();
+        for (Commentaire c : listCommDest) {
+            c.getAuteur().getCommentairesAuteur().remove(c);
+            utilisateurFacade.edit(c.getDestinataire());
+        }
+
         utilisateurFacade.remove(user);
-        
+
         // Auto-Banned
         if (user.equals(beanID.getIdentite())) {
             return connecteur.disconnect(beanID);
@@ -115,16 +126,16 @@ public class Administrateur {
             offres.remove(annonce);
         }
         annonceFacade.remove(annonce);
-        
+
     }
-    
+
     /* Renvoie les dernières offres */
     public List<Annonce> getOffres() {
         if (offres == null) {
             offres = annonceFacade.getOffres();
         }
         return offres;
-        
+
     }
 
     /* Renvoie les dernières demandes */
@@ -134,7 +145,7 @@ public class Administrateur {
         }
         return demandes;
     }
-    
+
     public String effectuer(String type) {
         TypeAnnonce typeA = TypeAnnonce.OFFRE;
         if (type.equals("Demandes")) {
@@ -143,7 +154,6 @@ public class Administrateur {
         String[] arrayTags = getTags().split(" ");
         List<Tag> listTags = new ArrayList<>();
 
-        
         for (String s : arrayTags) {
             Tag t = tagFacade.getTagByName(s);
             if (t != null) {
@@ -159,23 +169,24 @@ public class Administrateur {
             listTags = null;
         }
 
-
         if (type.equals("Demandes")) {
-            demandes = annonceFacade.findDemandesByTagsAndDepartement(listTags, "");            
+            demandes = annonceFacade.findDemandesByTagsAndDepartement(listTags, "");
         } else {
             offres = annonceFacade.findOffresByTagsAndDepartement(listTags, "");
         }
-        
+
         return "administrateur.xhtml";
 
     }
-    
-    public String findByPseudo(){
-      Utilisateur u = utilisateurFacade.findByPseudo(pseudo);
-      utilisateurs = new ArrayList<>();
-      utilisateurs.add(u);
-      return "administrateur.xhtml";
-   }
+
+    public String findByPseudo() {
+        Utilisateur u = utilisateurFacade.findByPseudo(pseudo);
+        if (u != null) {
+            utilisateurs = new ArrayList<>();
+            utilisateurs.add(u);
+        }
+        return "administrateur.xhtml";
+    }
 
     /**
      * @return the tags
@@ -204,4 +215,5 @@ public class Administrateur {
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
     }
+
 }

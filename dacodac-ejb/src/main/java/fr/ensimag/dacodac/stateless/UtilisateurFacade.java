@@ -65,5 +65,12 @@ public class UtilisateurFacade extends AbstractFacade<Utilisateur> implements Ut
         utilisateur.setAnnonces(annonces);
         edit(utilisateur);
     }
+    
+    @Override
+    public void addDakos(Utilisateur u, int dakos) {
+        int dakosUser = u.getDakos();
+        u.setDakos(dakosUser + dakos);
+        edit(u);
+    }
 
 }
