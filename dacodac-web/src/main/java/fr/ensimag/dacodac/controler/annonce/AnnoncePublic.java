@@ -125,7 +125,7 @@ public class AnnoncePublic implements Serializable {
             utilisateurFacade.edit(annonce.getPostulants().get(0));
             annonceFacade.remove(annonce);
         }
-        return "index.xhtml";
+        return "laisserCommentaire.xhtml";
     }
 
     public String save() {

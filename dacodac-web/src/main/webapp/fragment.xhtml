@@ -12,7 +12,6 @@
             <h:link class="titre" value="#{annonce.titre}" outcome="annonce.xhtml">
                 <f:param name="id" value="#{annonce.id}"/>
             </h:link>
-            <h:outputText value ="#{page}"/>
             <ul class="tagList">
                 <ui:repeat value="#{annonce.tags}" var="tag" >
                     <li class="tagElement"><h:outputText value="#{tag}, "/></li>
