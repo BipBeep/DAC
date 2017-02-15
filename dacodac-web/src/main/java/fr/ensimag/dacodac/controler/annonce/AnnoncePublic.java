@@ -73,34 +73,4 @@ public class AnnoncePublic implements Serializable {
         annonce.getPostulants().remove(postulant);
         annonceFacade.edit(annonce);
     }
-
-    public String serviceRendu() {
-        /*String destinataire;
-        if (beanID.getIdentite().equals(annonce.getAuteur())) {
-            annonce.setServiceRendu_auteur(true);
-            destinataire = annonce.getContracteur().getPseudo();
-        } else {
-            annonce.setServiceRendu_contracteur(true);
-            destinataire = annonce.getAuteur().getPseudo();
-        }
-        annonceFacade.edit(annonce);
-        if (annonce.getServiceRendu_auteur() && annonce.getServiceRendu_contracteur()) {
-            int prix = annonce.getPrix();
-            System.err.println("Auteur :");
-            System.err.println(annonce.getAuteur());
-            System.err.println("Contracteur :");
-            System.err.println(annonce.getContracteur());
-            if (annonce.getType() == TypeAnnonce.DEMANDE) {
-                utilisateurFacade.addDakos(annonce.getAuteur(), -prix);
-                utilisateurFacade.addDakos(annonce.getContracteur(), prix);
-            } else {
-                utilisateurFacade.addDakos(annonce.getAuteur(), prix);
-                utilisateurFacade.addDakos(annonce.getContracteur(), -prix);
-            }
-            beanID.update();
-        }*/
-        String ret = "laisserCommentaire.xhtml";
-        return ret;
-    }
-
 }
