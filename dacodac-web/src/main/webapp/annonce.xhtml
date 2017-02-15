@@ -98,10 +98,10 @@
                     </h:link>
                     <br/>
                     <h:outputText value="Le service a été rendu:"/>
-                    <p:commandButton class="green" value="Oui" action="#{annoncePublic.serviceRendu()}" ajax="">
+                    <p:button class="green" value="Oui" outcome="#{annoncePublic.serviceRendu()}">
                         <f:param name="annonceId" value="#{id}"/>
                         <f:param name="destinataire" value="#{annoncePublic.getAnnonce(id).getContracteur().pseudo}"/>
-                    </p:commandButton>
+                    </p:button>
 
                 </h:form>
 

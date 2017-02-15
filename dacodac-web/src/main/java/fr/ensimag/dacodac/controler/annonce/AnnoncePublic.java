@@ -75,10 +75,13 @@ public class AnnoncePublic implements Serializable {
     }
 
     public String serviceRendu() {
+        /*String destinataire;
         if (beanID.getIdentite().equals(annonce.getAuteur())) {
             annonce.setServiceRendu_auteur(true);
+            destinataire = annonce.getContracteur().getPseudo();
         } else {
             annonce.setServiceRendu_contracteur(true);
+            destinataire = annonce.getAuteur().getPseudo();
         }
         annonceFacade.edit(annonce);
         if (annonce.getServiceRendu_auteur() && annonce.getServiceRendu_contracteur()) {
@@ -95,8 +98,9 @@ public class AnnoncePublic implements Serializable {
                 utilisateurFacade.addDakos(annonce.getContracteur(), -prix);
             }
             beanID.update();
-        }
-        return "laisserCommentaire.xhtml";
+        }*/
+        String ret = "laisserCommentaire.xhtml";
+        return ret;
     }
 
 }
