@@ -79,14 +79,23 @@
                 <h:form rendered="#{(((identification.identite eq annoncePublic.getAnnonce(id).auteur) and annoncePublic.getAnnonce(id).serviceRendu_auteur eq false)
                                     or (identification.identite eq annoncePublic.getAnnonce(id).getContracteur()) and annoncePublic.getAnnonce(id).serviceRendu_contracteur eq false)
                                     and (annoncePublic.getAnnonce(id).estValidee eq true)}">
-                    
-                    <h:outputText value="Contractée avec #{annoncePublic.getAnnonce(id).getContracteur().pseudo} : " />
+
+                    <c:if test="#{(annoncePublic.getAnnonce(id).postulants.get(0).id eq identification.identite.id)}">
+                        <c:set var="dest" value ="#{annoncePublic.getAnnonce(id).auteur.pseudo}"/>
+                    </c:if>
+                    <c:if test="#{(annoncePublic.getAnnonce(id).postulants.get(0).id ne identification.identite.id)}">
+                        <c:set var="dest" value ="#{annoncePublic.getAnnonce(id).postulants.get(0)}"/>
+                    </c:if>
+                    <h:outputText value="Contractée avec #{dest.pseudo} : "/>
                     <h:link value="Consulter le profil"  outcome="consulterUnProfil.xhtml">
                         <f:param name="pseudo" value="#{annoncePublic.getAnnonce(id).getContracteur().pseudo}"/>
                     </h:link>
-                    <br />
+                    <br/>
                     <h:outputText value="Le service a été rendu:"/>
-                    <h:commandButton class="green" value="Oui" action="#{annoncePublic.serviceRendu()}" />
+                    <p:button class="green" value="Oui" outcome="#{annoncePublic.serviceRendu()}">
+                        <f:param name="annonceId" value="#{id}"/>
+                        <f:param name="destinataire" value="#{dest.pseudo}"/>
+                    </p:button>
                     
                 </h:form>
 

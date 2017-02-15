@@ -125,7 +125,7 @@ public class AnnoncePublic implements Serializable {
             beanID.update();
             annonceFacade.remove(annonce);
         }
-        return "index.xhtml";
+        return "laisserCommentaire.xhtml";
     }
 
     public String save() {

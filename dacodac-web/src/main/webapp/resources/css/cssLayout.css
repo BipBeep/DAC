@@ -130,3 +130,8 @@ li.commentaire .infos {
     display: flex;
     justify-content: space-between;
 }
+
+
+.hello{
+    display:none;
+}
