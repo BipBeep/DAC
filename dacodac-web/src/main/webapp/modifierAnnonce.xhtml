@@ -71,7 +71,7 @@
                 </h:panelGrid>
 
                 <p:growl id="growl" life="3000" />
-                <p:commandButton value="Valider la modification de l'annonce" actionListener="#{modifierAnnonce.modificationAnnonce(modifierAnnonce.getAnnonce(id))}" update=":#{p:component('growl')}"/>
+                <p:commandButton value="Valider la modification de l'annonce" actionListener="#{modifierAnnonce.modificationAnnonce()}" update=":#{p:component('growl')}"/>
                 </h:form>
             </ui:define>
         </ui:composition>
