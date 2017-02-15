@@ -89,8 +89,8 @@ public class init extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            Utilisateur utilisateur1 = new Utilisateur(10000, "Remi", "secret00", "remi.duclau@gmail.com", "73317", 60, false);
-            Utilisateur utilisateur2 = new Utilisateur(250, "Jonas", "secret00", "jonas.maubert@hotmail.fr", "38190", 22, true);
+            Utilisateur utilisateur1 = new Utilisateur(10000, "Remi", "secret00", "remi.duclau@gmail.com", "73317", 21, false);
+            Utilisateur utilisateur2 = new Utilisateur(250, "Jonas", "secret00", "jonas.maubert@hotmail.fr", "38190", 64, true);
             Utilisateur utilisateur3 = new Utilisateur(34, "Leo", "secret00", "leo@gmail.com", "28700", 22, false);
             Utilisateur utilisateur4 = new Utilisateur(80, "Nicolas", "secret00", "kamo@gmail.com", "65789", 23, false);
             Utilisateur utilisateur5 = new Utilisateur(50, "Justine", "secret00", "juju@wanadoo.com", "18302", 22, true);
@@ -187,7 +187,7 @@ public class init extends HttpServlet {
             annonceFacade.addPostulant(a1, utilisateur2);
             annonceFacade.addPostulant(a1, utilisateur3); //Des personnes ont postulé à a1
             annonceFacade.addPostulant(a2, utilisateur6);
-            annonceFacade.accepterPostulant(a2, utilisateur6); //Une personne est validé pour a2
+            annonceFacade.accepterPostulant(a2, utilisateur6); //Une personne est validée pour a2
             annonceFacade.addPostulant(a3, utilisateur1); //U1 postule a a3 et a4
             annonceFacade.addPostulant(a4, utilisateur1);
             annonceFacade.accepterPostulant(a3, utilisateur1); // U1 sera validé pour a3

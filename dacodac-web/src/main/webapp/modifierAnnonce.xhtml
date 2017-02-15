@@ -11,33 +11,36 @@
             <ui:define name="css">
                 <h:outputStylesheet name="css/modifierAnnonce.css"/>
             </ui:define>
-            
-            <f:metadata>
-                <f:viewParam name="id" value="#{id}"/>
-            </f:metadata>
-            
+
             <ui:define name="content">
-                <p:panelGrid style="text-align: center">
+
+                <f:metadata>
+                    <f:viewParam name="id" value="#{id}" for="id" id="id"/>
+                </f:metadata>
+
+                <h:form>
+                    <h1>Editer une annonce</h1>
+                <h:panelGrid style="text-align: center">
                     <p:row id="tableau">
                         <p:column id="annonce">
-                            <p:panelGrid>
+                            <h:panelGrid>
                                 <h:outputLabel for="titre" value="Titre" />
                                 <p:inputText id="titre" value="#{modifierAnnonce.getAnnonce(id).titre}" required="true"/>
                                 <p:message for="titre" />
-                                
+
                                 <h:outputLabel for="type" value="Type" />
                                 <h:outputText id="type" value="#{modifierAnnonce.getAnnonce(id).type}"/>
                                 <p:message for="type" />
-                                
+
                                 <h:outputLabel for="datePublication" value="Date de la publication" />
                                 <h:outputText id="datePublication" value="#{modifierAnnonce.getAnnonce(id).datePublication}"/>
                                 <p:message for="datePublication" />
-                                
+
                                 <h:outputLabel for="auteur" value="Auteur" />
-                                <h:outputText id="auteur" value="#{modifierAnnonce.getAnnonce(id).auteur}"/>
-                                <p:message for="auteur" />
-                                
-                                <p:row>
+                                <h:outputText id="auteur" value="#{modifierAnnonce.getAnnonce(id).auteur.pseudo}"/>
+                                <p:message for="auteur" />                             
+
+                                <!--<p:row>
                                     <p:column colspan="2" id="tags">
                                         <h:outputLabel for="tags" value="Tags" />
                                         <p:inputText  id="ti" value="Tags" required="true">
@@ -45,12 +48,12 @@
                                         <p:message for="tags" display="icon" />
                                         <h:outputText value="#{validationView.text}" />
                                     </p:column>
-                                </p:row>
-                                
+                                </p:row>-->
+
                                 <h:outputLabel for="prix" value="Prix" />
                                 <p:inputText id="prix" value="#{modifierAnnonce.getAnnonce(id).prix}" required="true"/>
                                 <p:message for="prix" />
-                                
+
                                 <h:outputLabel for="codePostal" value="Code Postal" />
                                 <p:inputText id="codePostal" value="#{modifierAnnonce.getAnnonce(id).codePostal}" required="true"/>
                                 <p:message for="codePostal" />
@@ -61,14 +64,15 @@
                                 </p:inputTextarea>
                                 <p:message for="description" />
 
-                            </p:panelGrid>
+                            </h:panelGrid>
                         </p:column>
 
                     </p:row> 
-                </p:panelGrid>
+                </h:panelGrid>
 
                 <p:growl id="growl" life="3000" />
-                <p:commandButton value="Valider la modification de l'annonce" actionListener="#{modifierAnnonce.modificationAnnonce}" update=":#{p:component('growl')}"/>
+                <p:commandButton value="Valider la modification de l'annonce" actionListener="#{modifierAnnonce.modificationAnnonce(modifierAnnonce.getAnnonce(id))}" update=":#{p:component('growl')}"/>
+                </h:form>
             </ui:define>
         </ui:composition>
     </body>

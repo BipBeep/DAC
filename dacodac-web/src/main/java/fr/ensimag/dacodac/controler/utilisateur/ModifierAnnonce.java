@@ -41,13 +41,16 @@ public class ModifierAnnonce {
     }
     
     public Annonce getAnnonce(long id) {
-        if (annonce == null) {
+        if (annonce == null)
+        {
             annonce = annonceFacade.find(id);
         }
         return annonce;
     }
     
-    public void modificationAnnonce() throws NoSuchAlgorithmException {
+    public void modificationAnnonce() {
+        //System.err.println("Annonce :");
+        //System.err.println(annonce);
         String msg = "L'annonce a été éditée";
         annonceFacade.edit(annonce);
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, null);

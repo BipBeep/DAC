@@ -38,7 +38,7 @@ public class LaisserCommentaire {
     private String description = "Commentaire ...";
     private Utilisateur destinataire = null;
     private Annonce annonce = null;
-    
+
     public LaisserCommentaire() {
     }
 
@@ -50,38 +50,71 @@ public class LaisserCommentaire {
         return beanID;
     }
 
-    public void setDescription(String description) {
+    /*public void setDescription(String description) {
         this.description = description;
-    }
-
+    }*/
     public String getDescription() {
         return description;
     }
-   
 
     public Utilisateur getDestinataire(String pseudo) {
-        if(destinataire==null){
+        if (destinataire == null) {
             destinataire = utilisateurFacade.findByPseudo(pseudo);
         }
         return destinataire;
     }
-    
-   
 
     public Annonce getAnnonce(long id) {
-        if(annonce == null){
+        if (annonce == null) {
             annonce = annonceFacade.find(id);
         }
         return annonce;
     }
 
-    public String save() {
+    public String save(long id, String description, String pseudoDest) {
         Utilisateur auteur = beanID.getIdentite();
+        Utilisateur destCom = null;
+        Annonce annonceCour = getAnnonce(id);               
 
-        Commentaire commentaire = new Commentaire(auteur, destinataire, LocalDate.now(), description, annonce.getTitre());
+        System.err.println("auteurAnnonce : ");
+        System.err.println(annonceCour.getAuteur());
+        System.err.println("auteurCom : ");
+        System.err.println(auteur.toString());
+        System.err.println("--------------------------------------------");
+
+        if (!auteur.equals(getAnnonce(id).getAuteur())) {
+            destCom = getAnnonce(id).getAuteur();
+        } else {
+            destCom = utilisateurFacade.findByPseudo(pseudoDest);
+        }
+
+        System.err.println("auteurCom : ");
+        System.err.println(auteur.toString());
+        System.err.println("dest : ");
+        System.err.println(destCom.toString());
+        System.err.println("description : " + description);
+        System.err.println("titre : " + annonceCour.getTitre());
+
+        Commentaire commentaire = new Commentaire(auteur, destCom, LocalDate.now(), description, annonceCour.getTitre());
         commentaireFacade.create(commentaire);
         utilisateurFacade.addCommentaire(commentaire);
+        
+        if (annonceCour.getServiceRendu_auteur() && annonceCour.getServiceRendu_contracteur())
+        {
+            annonceFacade.remove(annonceCour);
+        }
 
+        return "index.xhtml";
+    }
+    
+    public String retourneAccueil(long id)
+    {
+        Annonce annonceCour = getAnnonce(id);
+        if (annonceCour.getServiceRendu_auteur() && annonceCour.getServiceRendu_contracteur())
+        {
+            annonceFacade.remove(annonceCour);
+        }
+        
         return "index.xhtml";
     }
 

@@ -31,12 +31,12 @@
                                 </ui:include>
                             </p:fieldset>
                             <h:outputLabel for="text" value="Votre commentaire" />
-                            <p:inputTextarea id="integer" value="#{laisserCommentaire.description}" rows = "6" cols ="50">
+                            <p:inputTextarea id="description" value="#{inputDesc}" rows = "6" cols ="50">
                                 <p:clientValidator event="keyup"/>
                             </p:inputTextarea>
                         </h:panelGrid>
-                        <h:commandButton value="Laisser un commentaire" action="#{laisserCommentaire.save()}" />
-                        <h:commandButton value="Ne pas laisser de commentaire" style="float:right"/>
+                        <h:commandButton value="Laisser un commentaire" action="#{laisserCommentaire.save(annonceId, inputDesc, destinataire)}" />
+                        <h:commandButton value="Ne pas laisser de commentaire" action="#{laisserCommentaire.retourneAccueil(annonceId)}" style="float:right" />
                     </p:panel>
                 </h:form>
             </ui:define>
