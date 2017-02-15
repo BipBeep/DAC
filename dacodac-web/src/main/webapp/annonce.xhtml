@@ -85,11 +85,11 @@
                                     or (identification.identite eq annoncePublic.getAnnonce(id).getContracteur()) and annoncePublic.getAnnonce(id).serviceRendu_contracteur eq false)
                                     and (annoncePublic.getAnnonce(id).estValidee eq true)}">
 
-                    <c:if test="#{(annoncePublic.getAnnonce(id).postulants.get(0).id eq identification.identite.id)}">
+                    <c:if test="#{(identification.identite eq annoncePublic.getAnnonce(id).auteur)}">
                         <c:set var="dest" value ="#{annoncePublic.getAnnonce(id).auteur.pseudo}"/>
                     </c:if>
-                    <c:if test="#{(annoncePublic.getAnnonce(id).postulants.get(0).id ne identification.identite.id)}">
-                        <c:set var="dest" value ="#{annoncePublic.getAnnonce(id).postulants.get(0)}"/>
+                    <c:if test="#{(identification.identite ne annoncePublic.getAnnonce(id).auteur)}">
+                        <c:set var="dest" value ="#{annoncePublic.getAnnonce(id).getContracteur()}"/>
                     </c:if>
                     <h:outputText value="Contractée avec #{annoncePublic.getAnnonce(id).getContracteur().pseudo} : "/>
                     <h:link value="Consulter le profil"  outcome="consulterUnProfil.xhtml">
