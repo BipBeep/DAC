@@ -75,6 +75,7 @@ public class AnnonceFacade extends AbstractFacade<Annonce> implements AnnonceFac
         if (postulants.contains(utilisateur)) {
             postulants = new ArrayList<>();
             postulants.add(utilisateur);
+            annonce.setContracteur(utilisateur);
             annonce.setPostulants(postulants);
             annonce.setEstValidee(true);
         } else {

@@ -77,12 +77,12 @@
 
 
                 <h:form rendered="#{(((identification.identite eq annoncePublic.getAnnonce(id).auteur) and annoncePublic.getAnnonce(id).serviceRendu_auteur eq false)
-                                    or (identification.identite eq annoncePublic.getAnnonce(id).postulants.get(0)) and annoncePublic.getAnnonce(id).serviceRendu_contracteur eq false)
+                                    or (identification.identite eq annoncePublic.getAnnonce(id).getContracteur()) and annoncePublic.getAnnonce(id).serviceRendu_contracteur eq false)
                                     and (annoncePublic.getAnnonce(id).estValidee eq true)}">
                     
-                    <h:outputText value="Contractée avec #{annoncePublic.getAnnonce(id).postulants.get(0).pseudo} : " />
+                    <h:outputText value="Contractée avec #{annoncePublic.getAnnonce(id).getContracteur().pseudo} : " />
                     <h:link value="Consulter le profil"  outcome="consulterUnProfil.xhtml">
-                        <f:param name="pseudo" value="#{annoncePublic.getAnnonce(id).postulants.get(0).pseudo}"/>
+                        <f:param name="pseudo" value="#{annoncePublic.getAnnonce(id).getContracteur().pseudo}"/>
                     </h:link>
                     <br />
                     <h:outputText value="Le service a été rendu:"/>

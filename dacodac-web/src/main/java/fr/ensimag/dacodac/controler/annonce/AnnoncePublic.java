@@ -94,6 +94,7 @@ public class AnnoncePublic implements Serializable {
     public void validerAnnonce(Utilisateur postulant) {
         annonce.getPostulants().clear();
         annonce.getPostulants().add(postulant);
+        annonce.setContracteur(postulant);
         annonce.setEstValidee(true);
         annonceFacade.edit(annonce);
     }
@@ -109,20 +110,19 @@ public class AnnoncePublic implements Serializable {
             destinataire = annonce.getAuteur();
         } else {
             annonce.setServiceRendu_contracteur(true);
-            destinataire = annonce.getPostulants().get(0);
+            destinataire = annonce.getContracteur();
         }
         annonceFacade.edit(annonce);
         if (annonce.getServiceRendu_auteur() && annonce.getServiceRendu_contracteur()) {
             int prix = annonce.getPrix();
             if (annonce.getType() == TypeAnnonce.DEMANDE) {
-                annonce.getAuteur().setDakos(annonce.getAuteur().getDakos() - prix);
-                annonce.getPostulants().get(0).setDakos(annonce.getPostulants().get(0).getDakos() + prix);
+                utilisateurFacade.addDakos(annonce.getAuteur(), -prix);
+                utilisateurFacade.addDakos(annonce.getContracteur(), prix);
             } else {
-                annonce.getAuteur().setDakos(annonce.getAuteur().getDakos() + prix);
-                annonce.getPostulants().get(0).setDakos(annonce.getPostulants().get(0).getDakos() - prix);
+                utilisateurFacade.addDakos(annonce.getAuteur(), prix);
+                utilisateurFacade.addDakos(annonce.getContracteur(), -prix);
             }
-            utilisateurFacade.edit(annonce.getAuteur());
-            utilisateurFacade.edit(annonce.getPostulants().get(0));
+            beanID.update();
             annonceFacade.remove(annonce);
         }
         return "index.xhtml";

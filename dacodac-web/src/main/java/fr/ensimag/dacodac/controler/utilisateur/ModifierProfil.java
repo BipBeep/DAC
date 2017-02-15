@@ -54,18 +54,13 @@ public class ModifierProfil {
 // utilisateur = utilisateurFacade.findByPseudo(pseudo);
 // }
     public void modificationProfil() throws NoSuchAlgorithmException {
-//Gestion du mot de passe
-/*if ((!nouveauMotDePasse.equals(null)) && ancienMotDePasse.equals(utilisateur.getPassword())) {
-System.err.println("I'm in!");
-utilisateur.setPassword(nouveauMotDePasse);
-}*/
         String msg = "";
         if (ancienMotDePasse.equals("") && nouveauMotDePasse.equals("") && nouveauMotDePasse2.equals("")) {
-//Pas besoin de toucher aux mdp. mais on edit le reste.
+            //Pas besoin de toucher aux mdp. mais on edit le reste.
             msg = "Le profil a été édité";
             utilisateurFacade.edit(getUtilisateur());
         } else if (ancienMotDePasse.equals("") || nouveauMotDePasse.equals("") || nouveauMotDePasse2.equals("")) {
-//1 est null, on lui dit de recommencer.
+            //1 est null, on lui dit de recommencer.
             msg = "Il faut entrer les 3 mots de passe. Profil non modifié";
         } else //les 3 sont remplis. on edit peut etre le mdp.
         if (nouveauMotDePasse.length() < 8) {
@@ -74,7 +69,6 @@ utilisateur.setPassword(nouveauMotDePasse);
             ancienMotDePasse = Crypting.crypt(ancienMotDePasse);
             if (nouveauMotDePasse.equals(getNouveauMotDePasse2()) && (ancienMotDePasse.equals(getUtilisateur().getPassword()))) {
                 nouveauMotDePasse = Crypting.crypt(nouveauMotDePasse);
-                System.err.println("je set le mdp");
                 getUtilisateur().setPassword(nouveauMotDePasse);
                 msg = "Le profil a été édité";
                 utilisateurFacade.edit(getUtilisateur());

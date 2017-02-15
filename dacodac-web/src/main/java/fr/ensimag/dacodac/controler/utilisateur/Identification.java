@@ -37,6 +37,10 @@ public class Identification implements Serializable {
     public Utilisateur getIdentite() {
         return identite;
     }
+    
+    public void update() {
+        identite = utilisateurFacade.findByPseudo(identite.getPseudo());
+    }
 
     public void setIdentite(String pseudo, String mdp) throws NotConnectedException, NoSuchAlgorithmException {
         Utilisateur u = null;

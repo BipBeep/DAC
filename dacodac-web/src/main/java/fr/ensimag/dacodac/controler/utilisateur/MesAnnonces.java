@@ -103,9 +103,6 @@ public class MesAnnonces {
                 }
             }
         }
-        for(Annonce a: annoncesPostees){
-            System.err.println("\n \n \n a: "+ a.getId() + "\n \n \n");
-        }
     }
 
 }
